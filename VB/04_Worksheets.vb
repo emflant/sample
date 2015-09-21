@@ -1,13 +1,28 @@
-Sub 단추3_Click()
+Sub 단추4_Click()
 
-    Dim vCur(3) As Currency
+    ' 워크시트 인덱스 번호는 통합 문서의 탭 표시줄에서 워크시트의 위치를 가리킵니다.
+    ' Worksheets(1)은 통합 문서의 첫 번째(맨 왼쪽) 워크시트이고 Worksheets(Worksheets.Count)는 마지막 워크시트입니다.
+    ' 숨겨진 워크시트를 포함하여 모든 워크시트가 인덱스 개수에 포함됩니다.
+    ' Worksheets(1).Visible = False
+    ' Worksheets.Item(1).Visible = False ' 위와 같은 의미임.
     
-    vCur(0) = 100000
-    vCur(1) = 200000
-    vCur(2) = 300000
-    vCur(3) = 400000
-    vCur(4) = 500000 ' ERROR 3으로 정의하면 0~3 까지 4개 배열생성됨.
+    MsgBox "Worksheets.Count = " & Worksheets.Count
     
-    MsgBox vCur(3)
-
+    Dim vSheet As Worksheet
+    
+    'Set vSheet = Worksheets.Item(Worksheets.Count)
+    Set vSheet = Worksheets.Item("Sheet2")
+    
+    ' 마지막 sheet 가 숨겨져 있으면 보이게 한다.
+    If vSheet.Visible = False Then
+        vSheet.Visible = True
+    Else
+        vSheet.Visible = False
+    End If
+    
+    ' 개체를 해제합니다.
+    Set vSheet = Nothing
+    
+    ' MsgBox "vSheet.Visible = " & vSheet.Visible
+    
 End Sub
