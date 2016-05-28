@@ -1,0 +1,6 @@
+<pre class="brush: @shBrushPython.js;">
+a = 10
+b = 'return true'
+
+print(b + str(a))
+</pre>
