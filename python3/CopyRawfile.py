@@ -42,7 +42,7 @@ for child1 in p.iterdir() :
 	
 	target_path = Path(target_dir)
 	
-    # check if the target folder exists
+	# check if the target folder exists
 	if target_path.exists() == False :
 		print(target_dir + ' is not exists')
 		target_path.mkdir()
