@@ -1,0 +1,15 @@
+> nvm install node
+Downloading and installing node v9.5.0...
+Downloading https://nodejs.org/dist/v9.5.0/node-v9.5.0-darwin-x64.tar.xz...
+######################################################################## 100.0%
+Computing checksum with shasum -a 256
+Checksums matched!
+Now using node v9.5.0 (npm v5.6.0)
+Creating default alias: default -> node (-> v9.5.0)
+
+> node --version
+v9.5.0
+
+> nvm use node
+Now using node v9.5.0 (npm v5.6.0)
+
