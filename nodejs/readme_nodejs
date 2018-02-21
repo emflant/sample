@@ -13,3 +13,63 @@ v9.5.0
 > nvm use node
 Now using node v9.5.0 (npm v5.6.0)
 
+=============================================================================================
+> npm install -g create-react-app
+/Users/emflant/.nvm/versions/node/v9.5.0/bin/create-react-app -> /Users/emflant/.nvm/versions/node/v9.5.0/lib/node_modules/create-react-app/index.js
++ create-react-app@1.5.2
+added 111 packages in 6.314s
+
+=============================================================================================
+
+> create-react-app my-app
+Creating a new React app in /Volumes/PhotoDisk/30_workspace/sample/nodejs/my-app.
+
+Installing packages. This might take a couple of minutes.
+Installing react, react-dom, and react-scripts...
+
+
+> fsevents@1.1.3 install /Volumes/PhotoDisk/30_workspace/sample/nodejs/my-app/node_modules/fsevents
+> node install
+
+[fsevents] Success: "/Volumes/PhotoDisk/30_workspace/sample/nodejs/my-app/node_modules/fsevents/lib/binding/Release/node-v59-darwin-x64/fse.node" is installed via remote
+
+> uglifyjs-webpack-plugin@0.4.6 postinstall /Volumes/PhotoDisk/30_workspace/sample/nodejs/my-app/node_modules/uglifyjs-webpack-plugin
+> node lib/post_install.js
+
++ react-scripts@1.1.1
++ react-dom@16.2.0
++ react@16.2.0
+added 1269 packages in 52.823s
+
+Success! Created my-app at /Volumes/PhotoDisk/30_workspace/sample/nodejs/my-app
+Inside that directory, you can run several commands:
+
+ npm start
+   Starts the development server.
+
+ npm run build
+   Bundles the app into static files for production.
+
+ npm test
+   Starts the test runner.
+
+ npm run eject
+   Removes this tool and copies build dependencies, configuration files
+   and scripts into the app directory. If you do this, you can’t go back!
+
+We suggest that you begin by typing:
+
+ cd my-app
+ npm start
+
+Happy hacking!
+
+
+=============================================================================================
+
+
+> npm install mongodb --save
++ mongodb@3.0.2
+added 5 packages in 7.028s
+
+=============================================================================================
