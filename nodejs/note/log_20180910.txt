@@ -1,0 +1,11 @@
+
+$ npm init
+
+
+$ npm install --save solc web3 truffle-hdwallet-provider
+
+https://github.com/trufflesuite/truffle-hdwallet-provider
+
+var HDWalletProvider = require("truffle-hdwallet-provider");
+var mnemonic = "mountains supernatural bird..."; // 12 word mnemonic
+var provider = new HDWalletProvider(mnemonic, "http://localhost:8545");
