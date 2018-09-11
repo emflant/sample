@@ -20,12 +20,17 @@ const deploy = async () => {
     const balance = await web3.eth.getBalance(accounts[0]);
     console.log(balance);
 
-    // console.log(bytecode);
+    const instance = new web3.eth.Contract(
+        JSON.parse(interface),
+        '0x5CB6a2826e77156363369aba0b48f3e797CB0D9e'
+      );
 
-    // - new web3.eth.Contract().deploy().send()
-    const note = await new web3.eth.Contract(JSON.parse(interface))
-    .deploy({ data : '0x' + bytecode, arguments : ['Note']}) // web3 버전마다 달라서, 0x 는 넣어주는게 좋다.
-    .send({ from : accounts[0], gas : '3000000', gasPrice: web3.utils.toWei('2', 'gwei')});
-    // console.log(note);
-    console.log('options.address : ' + note.options.address);
+    await instance.methods.write('test message!!').send({
+        from: accounts[0]
+      });
+    const campaigns =  await instance.methods.showMessage().call();
+
+    console.log(campaigns);
 };
+
+deploy();

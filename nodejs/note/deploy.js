@@ -28,5 +28,5 @@ const deploy = async () => {
     console.log('options.address : ' + note.options.address);
 };
 
-
+// 0x5CB6a2826e77156363369aba0b48f3e797CB0D9e
 deploy();
