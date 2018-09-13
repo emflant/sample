@@ -4,7 +4,7 @@ contract Note {
 
     string public message;
 
-    function write(string _message) {
+    function write(string _message) public {
         message = _message;
     }
 
