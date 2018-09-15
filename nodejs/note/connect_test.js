@@ -1,11 +1,11 @@
-const HDWalletProvider = require('truffle-hdwallet-provider');
+const providers = require('./providers');
 const Web3 = require('web3');
 
-const provider = new HDWalletProvider(
-        'series ahead tree leisure history bag badge museum spot imitate primary improve', 
-        'http://127.0.0.1:9545');
+// const provider = new HDWalletProvider(
+//         'series ahead tree leisure history bag badge museum spot imitate primary improve',
+//         'http://127.0.0.1:9545');
 
-const web3 = new Web3(provider); // infura 를 통한 ropsten network 에 연결.
+const web3 = new Web3(providers.ganache_cli); // infura 를 통한 ropsten network 에 연결.
 
 const deploy = async () => {
 
