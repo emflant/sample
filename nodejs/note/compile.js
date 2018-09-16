@@ -13,11 +13,11 @@ console.log(notePath);
 const source = fs.readFileSync(notePath, 'UTF-8');
 // console.log(solc.compile(source,1));
 
-const result = solc.compile(source,1);
+const result = solc.compile(source, 1);
 // console.log("all : " + JSON.stringify(result));
-const interface = result.contracts[':Note'].interface;
-const bytecode = result.contracts[':Note'].bytecode;
+// const interfaceInfo = result.contracts[':Note'].interface;
+// const bytecode = result.contracts[':Note'].bytecode;
 // console.log("interface : " + interface);
 // console.log("bytecode : " + bytecode);
 
-module.exports = result['contracts'][':Note'];
+module.exports = result.contracts[':Note'];

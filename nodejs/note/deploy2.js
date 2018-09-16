@@ -1,6 +1,6 @@
 
-const providers = require('./providers');
 const Web3 = require('web3');
+const providers = require('./providers');
 
 const compliedContract = require('./build/Note.json');
 
@@ -15,15 +15,14 @@ const compliedContract = require('./build/Note.json');
 const web3 = new Web3(providers.ganache_local);
 
 const deploy = async () => {
-    const accounts = await web3.eth.getAccounts();
-    console.log('account[0] address : ' + accounts[0]);
+  const accounts = await web3.eth.getAccounts();
+  console.log(`account[0] address : ${accounts[0]}`);
 
-    const result = await new web3.eth.Contract(JSON.parse(compliedContract.interface)).
-        deploy({ data : '0x' + compliedContract.bytecode}).
-        send({ gas : '1000000', from : accounts[0]});
+  const result = await new web3.eth.Contract(JSON.parse(compliedContract.interface))
+    .deploy({ data: `0x${compliedContract.bytecode}` })
+    .send({ gas: '1000000', from: accounts[0] });
 
-    console.log('contract address : ' + result.options.address);
-
+  console.log(`contract address : ${result.options.address}`);
 };
 
 

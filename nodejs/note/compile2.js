@@ -13,7 +13,7 @@ const output = solc.compile(source, 1).contracts;
 fs.ensureDirSync(buildPath);
 
 
-// for 문사용하면 key 값만 나오게 됨. 
+// for 문사용하면 key 값만 나오게 됨.
 // [return]
 // :Campaign
 // :CampaignFactory
@@ -21,9 +21,18 @@ fs.ensureDirSync(buildPath);
 //     console.log(contract);
 // }
 
-for(let contractKey in output){
+for (const key in output) {
+    if(Object.prototype.hasOwnProperty.call(output, key)) {
+        console.error(key);
+    }
+
+}
+
+for (const contractKey in output) {
+  if (Object.prototype.hasOwnProperty.call(output, contractKey)) {
     fs.outputJsonSync(
-        path.resolve(buildPath, contractKey.replace(':', '')+ '.json'), // 1번째 인자 : 파일생성할 경로 + 파일명
-        output[contractKey]                                            // 2번째 인자 : contract 별 파일내용.
+      path.resolve(buildPath, `${contractKey.replace(':', '')}.json`), // 1번째 인자 : 파일생성할 경로 + 파일명
+      output[contractKey], // 2번째 인자 : contract 별 파일내용.
     );
+  }
 }

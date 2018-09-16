@@ -4,7 +4,7 @@ $ npm init
 
 $ npm install --save solc web3 truffle-hdwallet-provider mocha
 
-# 
+#
 $ npm install -g ganache-cli
 
 
@@ -30,3 +30,14 @@ $ ganache-cli --networkId "0658" --port "9928" --mnemonic "lamp kitten stone man
 
 (node:7672) MaxListenersExceededWarning: Possible EventEmitter memory leak detected. 11 data listeners added. Use emitter.setMaxListeners() to increase limit
 0x2Ce3F392DF2D2234495D32c379cda8b8853dcb54
+
+
+
+linter-eslint 설치한다(atom 에서)
+npm i -g eslint 설치한다. (global 영역에. 굳이 매 프로젝트에 설치할 필요가 없을듯)
+
+eslint --init (콘솔창에서 명령어 쳐서 대략 룰을 셋팅)
+그후 atom 재실행하면 linter 가 작동함
+
+
+line-ending-selector 를 LF 로 변경(CORE PACKAGE 임)

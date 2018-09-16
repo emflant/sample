@@ -1,5 +1,3 @@
-// 0x3Ef17167E158931b961F86f43c06bCE0FBbb4feA
-
 const providers = require('./providers');
 const Web3 = require('web3');
 const { bytecode, interface } = require('./compile');
