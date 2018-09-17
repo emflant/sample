@@ -10,14 +10,14 @@ const ropstenMnemonic = 'lamp kitten stone manage spell scene stay oxygen sherif
 
 const providers = {
 
-  // ganache_cli 사용시
-  ganache_cli: ganache.provider({ mnemonic: localMnemonic }),
+    // ganache_cli 사용시
+    ganache_cli: ganache.provider({ mnemonic: localMnemonic }),
 
-  // ganache window 프로그램 버전일때 사용. 포트 확인필요.
-  ganache_local: new HDWalletProvider(localMnemonic, 'http://127.0.0.1:9545'),
+    // ganache window 프로그램 버전일때 사용. 포트 확인필요.
+    ganache_local: new HDWalletProvider(localMnemonic, 'http://127.0.0.1:9545'),
 
-  // 테스트넷 접속할때, (ropsten 서버)
-  ropsten: new HDWalletProvider(ropstenMnemonic, 'https://ropsten.infura.io/v3/35024d84adab4e12b01d10aa6c8e89cd'),
+    // 테스트넷 접속할때, (ropsten 서버)
+    ropsten: new HDWalletProvider(ropstenMnemonic, 'https://ropsten.infura.io/v3/35024d84adab4e12b01d10aa6c8e89cd')
 };
 
 module.exports = providers;

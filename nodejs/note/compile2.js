@@ -22,17 +22,16 @@ fs.ensureDirSync(buildPath);
 // }
 
 for (const key in output) {
-    if(Object.prototype.hasOwnProperty.call(output, key)) {
+    if (Object.prototype.hasOwnProperty.call(output, key)) {
         console.error(key);
     }
-
 }
 
 for (const contractKey in output) {
-  if (Object.prototype.hasOwnProperty.call(output, contractKey)) {
-    fs.outputJsonSync(
-      path.resolve(buildPath, `${contractKey.replace(':', '')}.json`), // 1번째 인자 : 파일생성할 경로 + 파일명
-      output[contractKey], // 2번째 인자 : contract 별 파일내용.
-    );
-  }
+    if (Object.prototype.hasOwnProperty.call(output, contractKey)) {
+        fs.outputJsonSync(
+            path.resolve(buildPath, `${contractKey.replace(':', '')}.json`), // 1번째 인자 : 파일생성할 경로 + 파일명
+            output[contractKey], // 2번째 인자 : contract 별 파일내용.
+        );
+    }
 }
