@@ -26,7 +26,23 @@ npm install --save eslint
 ```sh
 ./node_modules/.bin/eslint *.js
 ```
-
+\
+airbnb linter 를 사용했더니, 몇가지 수정이 필요해 rules 를 추가 설정함. 
+```javascript
+module.exports = {
+    "extends": "airbnb-base",
+    "rules" : {
+        "linebreak-style" : "off", // 윈도우에서 개발하다보니, 제외
+        "indent": ["error", 4], // indent 는 스페이스 4자리로 체크하도록
+        "no-console" : "off",   // console.log 가 다 warning 으로 떠서 제외토록.
+        "comma-dangle": ["error", "never"]  // json, function 등 comma 관련 체크 제외
+    },
+    "env": {
+        "node": true,
+        "mocha": true   // mocha 의 테스트코드 작성시, describe, it 등 에러를 막기위한 환경설정
+    }
+};
+```
 
 
 
