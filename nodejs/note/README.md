@@ -33,13 +33,16 @@ $ ganache-cli --networkId "0658" --port "9928" --mnemonic "lamp kitten stone man
 
 
 
-linter-eslint 설치한다(atom 에서)
-npm i -g eslint 설치한다. (global 영역에. 굳이 매 프로젝트에 설치할 필요가 없을듯)
---> 아님.. 로컬에 설치하는게 나을듯 각 설정파일등 셋팅이 다를수 있음. 그리고
-추가 패키지가 설치되는 등 추가 작업이 필요.
-
-eslint --init (콘솔창에서 명령어 쳐서 대략 룰을 셋팅)
-그후 atom 재실행하면 linter 가 작동함
 
 
-line-ending-selector 를 LF 로 변경(CORE PACKAGE 임)
+
+npm install --save eslint 설치한다.
+
+./node_modules/.bin/eslint --init  (콘솔창에서 명령어 쳐서 대략 룰을 셋팅)
+Use a popular style guide
+Airbnb (https://github.com/airbnb/javascript)
+
+./node_modules/.bin/eslint *.js
+
+
+atom 에서 linter-eslint 설치한다(atom 에서)
