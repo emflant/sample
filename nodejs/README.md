@@ -42,3 +42,11 @@ npm install --save ganache-cli
 package.json 파일을 수정한다.
 scripts.test 부문은 mocha 로 셋팅
 
+
+
+next.js [https://nextjs.org/]  
+typescript [https://www.typescriptlang.org]
+
+
+https://codesandbox.io/
+
