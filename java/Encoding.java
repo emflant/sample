@@ -23,7 +23,7 @@ public class Encoding {
 	}
 	
 	public byte[] getSHA256(byte[] bytes) throws NoSuchAlgorithmException {
-		
+
 		MessageDigest sh = MessageDigest.getInstance("SHA-256");
 		sh.update(bytes);
 		
