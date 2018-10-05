@@ -22,9 +22,7 @@ get_pv <- function (p_n, i, n) {
 get_bond_pv <- function(f, c, i, n){
     c_amt = f * c # 이자지급액
     c_pv_list <- get_pv(c_amt, i, seq(1, n))
-    print(c_pv_list)
+    # print(c_pv_list)
     result <- sum(c_pv_list) + get_pv(f, i, n)
     result
 }
-
-
