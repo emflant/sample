@@ -45,6 +45,6 @@ get_bond_pv <- function(f, c, i, n){
     result
 }
 
-get_irr <- function () {
+get_irr <- function (f, c, n, pv) {
     
 }
