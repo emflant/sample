@@ -1,0 +1,58 @@
+---
+title: "R Notebook"
+output:
+  html_notebook: default
+  pdf_document: default
+---
+
+### ris3.R 파일을 import 처리.
+```{r}
+source('D:/workspace/sample/R/risk3.R', encoding = 'UTF-8')
+options("scipen" = 100)
+# options("digits" = 7) 숫자 자리수 표현 늘일때. 
+```
+
+
+
+### 채권의 현재가치(PV)
+f : 액면가(face value)  
+c : 표면이자율(coupon rate)  
+i : 할인율(시장이자율)  
+n : 기간  
+채권가격 = 이자의 현재가치(C x pvifa(i,n)) + 액면가의 현재가치(F x pvif(i,n))
+
+```{r}
+get_bond_pv(10000000, 0.07, 0.1, 5)
+```
+
+
+```{r}
+sum(get_bond_pv(10000000, 0.07, 0.1, 5)$pv)
+```
+  
+  
+
+### 무이표채(zero-coupon bond)
+```{r}
+get_bond_pv(10000000, 0, 0.1, 5)
+```
+
+
+```{r}
+sum(get_bond_pv(10000000, 0.07, 0.1, 5)$pv)
+```
+
+
+
+### 내부수익률(IRR, internal rate of return)
+
+```{r}
+get_irr(100000, 0.07, 10, 80000)
+```
+
+
+### 도움말
+link : [R Markdown](http://rmarkdown.rstudio.com)  
+Insert Chunk : *Ctrl+Alt+I*  
+Preview : *Ctrl+Shift+K*
+

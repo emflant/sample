@@ -46,5 +46,31 @@ get_bond_pv <- function(f, c, i, n){
 }
 
 get_irr <- function (f, c, n, pv) {
+    i = 10 # 1,000 % 에서부터 search
+    i_gap = i
+    count = 0
+    limit = 2 # 0.01 원 차이까지 구함
     
+    while(TRUE){
+        # print(i)
+        count <- count + 1
+        i_gap <- i_gap / 2
+        bond_pv_temp = sum(get_bond_pv(f, c, i, n)$pv)
+        gap <- pv - bond_pv_temp
+        # print(bond_pv_temp)
+        if(abs(gap) < 1 / 10 ** limit){ # 1억분의 1 의 오차.
+            break;
+        } else if (count > 1000) {
+            print("limit over")
+            break;
+        } else if(gap > 0) {
+            i <- i - i_gap
+        } else {
+            i <- i + i_gap
+        }
+    }
+    
+    data.frame(internal_rate = i, loop_count = count, 
+               face_amount=f, coupon_rate = c, 
+               period = n, present_value = pv)
 }
