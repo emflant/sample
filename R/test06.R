@@ -1,6 +1,7 @@
 source('D:/workspace/sample/R/risk3.R', encoding = 'UTF-8')
 options("scipen" = 100)
-options("digits" = 7)
+# options("digits" = 7)
+
 get_bond_pv(10000000, 0.07, 0.1, 5)
 sum(get_bond_pv(10000000, 0.07, 0.1, 5)$pv)  # 8862764
 
