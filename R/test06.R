@@ -17,3 +17,6 @@ sum(get_bond_pv(10000000, 0.07, 0.1, 5)$pv)
 get_irr(10000000, 0.05, 10, 11000000)
 
 
+get_duration(100, 0.08, 0.08, 6)
+
+sum(get_duration(100, 0.08, 0.08, 6)$pv_n) / sum(get_duration(100, 0.08, 0.08, 6)$pv)

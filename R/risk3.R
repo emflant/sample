@@ -1,3 +1,5 @@
+options("scipen" = 100)
+
 # 복리이자요소. CVIF
 get_cvif <- function (i, n) {
     data.frame(i = i, n = n, cvif = (1 + i) ^ n)
@@ -45,6 +47,15 @@ get_bond_pv <- function(f, c, i, n){
     result
 }
 
+get_duration <- function(f, c, i, n){
+    bond_list <- get_bond_pv(f,c,i,n)
+    bond_list$pv_n <- bond_list$pv * bond_list$n
+    duration = sum(bond_list$pv_n) / sum(bond_list$pv)
+    modified_duration = duration / (1 + i)
+    result = list(d = duration, md = modified_duration, list = bond_list)
+    result
+}
+
 get_irr <- function (f, c, n, pv) {
     i = 10 # 1,000 % 에서부터 search
     i_gap = i
@@ -70,13 +81,15 @@ get_irr <- function (f, c, n, pv) {
         }
     }
     
-    data.frame(internal_rate = i, loop_count = count, 
+    data.frame(internal_rate = i,
                face_amount=f, coupon_rate = c, 
-               period = n, present_value = pv)
+               period = n, input_present_value = pv,
+               # calculate_present_value = bond_pv_temp,
+               gap = gap,loop_count = count)
 }
 
 
-norm_graph <- function (mean=0, sd=1, lb=NA, ub=NA){
+norm_graph <- function (mean=0, sd=1, lb=NA, ub=NA, xpos = -0.02){
     
     x <- seq(-4,4,length=1000) * sd + mean
     hx <- dnorm(x,mean,sd)
@@ -88,15 +101,15 @@ norm_graph <- function (mean=0, sd=1, lb=NA, ub=NA){
     if(!is.na(lb) && !is.na(ub)){
         i <- x >= lb & x <= ub
         
-        polygon(c(lb,x[i],ub), c(0,hx[i],0), col="gray")
+        polygon(c(lb,x[i],ub), c(xpos,hx[i],xpos), col="gray")
         
         area <- pnorm(ub, mean, sd) - pnorm(lb, mean, sd)
         result <- paste("P(",lb,"< u <",ub,") =",
                         signif(area, digits=3) * 100, "%")
         mtext(result,3)
-        axis(1, at=c(-4, 0, lb, ub), pos=0) 
+        axis(1, at=c(-4, 0, lb, ub), pos=xpos) 
     } else {
-        axis(1, at=seq(-4, 4, 1), pos=0) 
+        axis(1, at=seq(-4, 4, 1), pos=xpos) 
     }
     
 }

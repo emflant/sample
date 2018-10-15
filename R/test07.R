@@ -9,9 +9,11 @@ plot(x)
 # https://thebook.io/006723/ch07/01-1/
 # http://hsm-edu.tistory.com/263
 # https://www.statmethods.net/advgraphs/probability.html
+# https://brunch.co.kr/magazine/studymoney
 
 # 평균 0, 표준 편차 10인 정규 분포로부터 난수 100개
 rnorm(100, 0, 10)
+d <- density(rnorm(100, 0, 10))
 
 # 밀도 그림(density)
 plot(density(rnorm(100, 0, 10)))
@@ -208,3 +210,4 @@ norm_graph(lb = 1.96, ub=4)
 qnorm(0.99) # 2.326348 = 2.33
 norm_graph(lb = 2.33, ub=4)
 
+norm_graph(lb = -4, ub=4)
