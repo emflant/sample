@@ -1,5 +1,5 @@
-install.packages("mlbench")
-library(help="mlbench")
+# install.packages("mlbench")
+# library(help="mlbench")  ,.m, C
 library(mlbench)
 data(Ozone)
 plot(Ozone$V8, Ozone$V9, type = "p")
@@ -30,6 +30,7 @@ curve(sin, 0, 2*pi)
 
 # 
 m <- lm(dist ~ speed, data = cars) # Linear Models
+m
 plot(cars, xlim = c(0,30))
 abline(m)
 # interval=c("none", "confidence", "prediction")
