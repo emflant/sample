@@ -5,6 +5,10 @@
 # Sys.setlocale(category = "LC_CTYPE", locale = "ko_KR.UTF-8")
 # par(family="NanumGothic")
 
+Sys.setlocale(category = "LC_CTYPE", locale = "ko_KR.UTF-8")
+
+
+
 library(readr)
 apart <- rbind(read_csv(paste0(getwd(), "/data/apart_201801.csv")), 
                read_csv(paste0(getwd(), "/data/apart_201802.csv")),
@@ -15,28 +19,31 @@ apart <- rbind(read_csv(paste0(getwd(), "/data/apart_201801.csv")),
                ) 
 
 
+korean_names <- names(apart)
 
+names(apart) <- c("city", "address_number", "1st_number", "2nd_number", "apart_name", "area", "contract_date",
+  "contract_day", "trade_amount", "floor", "build_year", "street_name")
 
 library(dplyr)
 library(stringr)
-filter(apart, 시군구 == "강원도 강릉시 견소동")
-filter(apart, str_detect(시군구,"장안동"))
-r1 <- filter(apart, str_detect(단지명,"^은마") & str_detect(시군구,"대치동"))
+filter(apart, city == "강원도 강릉시 견소동")
+filter(apart, str_detect(city,"장안동"))
+r1 <- filter(apart, str_detect(apart_name,"^은마") & str_detect(city,"대치동"))
 
 r1 <- apart %>%
-    filter(str_detect(단지명,"^은마") & 
-               str_detect(시군구,"대치동") &
-               `전용면적(㎡)` == 76.79)
+    filter(str_detect(apart_name,"^은마") & 
+               str_detect(city,"대치동") &
+               area == 76.79)
 
-r1$계약년월 <- factor(r1$계약년월)
+r1$contract_date <- factor(r1$contract_date)
 
-boxplot(`거래금액(만원)` ~ 계약년월, data = r1)
+boxplot(trade_amount ~ contract_date, data = r1)
 r1
 
 r2 <- apart %>%
-    group_by(시군구) %>%
-    summarise(count = n(), trade = mean(`거래금액(만원)`)) %>%
-    arrange(desc(trade))
+    group_by(city) %>%
+    summarise(count = n(), trade_mean = mean(trade_amount)) %>%
+    arrange(desc(trade_mean))
 
 warnings()
 apart
