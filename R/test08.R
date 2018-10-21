@@ -10,6 +10,8 @@ Sys.setlocale(category = "LC_CTYPE", locale = "ko_KR.UTF-8")
 
 
 library(readr)
+library(dplyr)
+library(stringr)
 apart <- rbind(read_csv(paste0(getwd(), "/data/apart_201801.csv")), 
                read_csv(paste0(getwd(), "/data/apart_201802.csv")),
                read_csv(paste0(getwd(), "/data/apart_201803.csv")),
@@ -21,11 +23,15 @@ apart <- rbind(read_csv(paste0(getwd(), "/data/apart_201801.csv")),
 
 korean_names <- names(apart)
 
-names(apart) <- c("city", "address_number", "1st_number", "2nd_number", "apart_name", "area", "contract_date",
+names(apart) <- c("address", "address_number", "1st_number", "2nd_number", "apart_name", "area", "contract_date",
   "contract_day", "trade_amount", "floor", "build_year", "street_name")
 
-library(dplyr)
-library(stringr)
+
+saveRDS(apart, paste0(getwd(), "/data/apart.rds"))
+
+apart <- read_rds(paste0(getwd(), "/data/apart.rds"))
+
+
 filter(apart, city == "강원도 강릉시 견소동")
 filter(apart, str_detect(city,"장안동"))
 r1 <- filter(apart, str_detect(apart_name,"^은마") & str_detect(city,"대치동"))
@@ -41,7 +47,7 @@ boxplot(trade_amount ~ contract_date, data = r1)
 r1
 
 r2 <- apart %>%
-    group_by(city) %>%
+    group_by(address) %>%
     summarise(count = n(), trade_mean = mean(trade_amount)) %>%
     arrange(desc(trade_mean))
 
@@ -55,7 +61,7 @@ trimws(str_extract("서울특별시 동대문구 답십리동", "^[가-힣]+\\s"
 
 result <- apart %>%
     # filter(str_detect(시군구,"대치동")) %>%
-    mutate(대분류 = trimws(str_extract(시군구, "^[가-힣]+\\s")))
+    mutate(city = trimws(str_extract(address, "^[가-힣]+\\s")))
 
 
 result <- apart %>%
