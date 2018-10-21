@@ -1,0 +1,7 @@
+library(shiny)
+runExample("04_mpg")
+
+
+
+# runGist
+runGist("eb3470beb1c0252bd0289cbc89bcf36f")

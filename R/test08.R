@@ -6,12 +6,12 @@
 # par(family="NanumGothic")
 
 library(readr)
-apart <- rbind(read_csv("D:/workspace/data/apart_201801.csv"), 
-               read_csv("D:/workspace/data/apart_201802.csv"), 
-               read_csv("D:/workspace/data/apart_201803.csv"),
-               read_csv("D:/workspace/data/apart_201804.csv"),
-               read_csv("D:/workspace/data/apart_201805.csv"),
-               read_csv("D:/workspace/data/apart_201806.csv")
+apart <- rbind(read_csv(paste0(getwd(), "/data/apart_201801.csv")), 
+               read_csv(paste0(getwd(), "/data/apart_201802.csv")),
+               read_csv(paste0(getwd(), "/data/apart_201803.csv")),
+               read_csv(paste0(getwd(), "/data/apart_201804.csv")),
+               read_csv(paste0(getwd(), "/data/apart_201805.csv")),
+               read_csv(paste0(getwd(), "/data/apart_201806.csv"))
                ) 
 
 
