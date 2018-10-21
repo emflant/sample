@@ -6,12 +6,16 @@
 # par(family="NanumGothic")
 
 library(readr)
-apart_201801 <- read_csv("D:/workspace/data/apart_201801.csv")
+apart <- rbind(read_csv("D:/workspace/data/apart_201801.csv"), 
+               read_csv("D:/workspace/data/apart_201802.csv"), 
+               read_csv("D:/workspace/data/apart_201803.csv"),
+               read_csv("D:/workspace/data/apart_201804.csv"),
+               read_csv("D:/workspace/data/apart_201805.csv"),
+               read_csv("D:/workspace/data/apart_201806.csv")
+               ) 
 
-apart_201802 <- read_csv("D:/workspace/data/apart_201802.csv")
-#apart_201802
-apart <- rbind(apart_201801, apart_201802) 
-apart
+
+
 
 library(dplyr)
 library(stringr)
@@ -37,3 +41,34 @@ r2 <- apart %>%
 warnings()
 apart
 r2
+
+names(apart)
+str_view("서울특별시 동대문구 답십리동", "^[가-힣]+\\s");
+trimws(str_extract("서울특별시 동대문구 답십리동", "^[가-힣]+\\s"))
+
+result <- apart %>%
+    # filter(str_detect(시군구,"대치동")) %>%
+    mutate(대분류 = trimws(str_extract(시군구, "^[가-힣]+\\s")))
+
+
+result <- apart %>%
+    mutate(대분류 = trimws(str_extract(시군구, "^[가-힣]+\\s"))) %>%
+    group_by(대분류, 계약년월) %>%
+    summarise(count = n()) %>%
+    arrange(desc(count))
+dim(result)
+result
+
+result$대분류 <- factor(result$대분류)
+# result$계약년월 <- factor(result$계약년월)
+summary(result)
+
+
+
+result_seoul <- result %>%
+    filter(대분류 == "서울특별시") %>%
+    arrange(계약년월)
+result_seoul
+summary(result_seoul)
+
+plot(result_seoul$계약년월, result_seoul$count, type = "l")
