@@ -17,8 +17,7 @@ apart <- rbind(read_csv(paste0(getwd(), "/data/apart_201801.csv")),
                read_csv(paste0(getwd(), "/data/apart_201803.csv")),
                read_csv(paste0(getwd(), "/data/apart_201804.csv")),
                read_csv(paste0(getwd(), "/data/apart_201805.csv")),
-               read_csv(paste0(getwd(), "/data/apart_201806.csv"))
-               ) 
+               read_csv(paste0(getwd(), "/data/apart_201806.csv"))) 
 
 
 korean_names <- names(apart)
