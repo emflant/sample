@@ -1,0 +1,82 @@
+---
+title: "공분산(Covariance)과 상관계수(Correlation Coeffcient)"
+output: html_notebook
+---
+
+
+
+상태 |1|2|3|4|5
+-|--:|-:|-:|-:|-:
+확률|0.10|0.15|0.25|0.35|0.15
+수익률A|-0.40|-0.10|0.20|0.50|0.80
+수익률B|-0.15|-0.05|0.20|0.25|0.15
+\
+\
+
+위의 표를 데이터로 구조화하면,
+
+```{r}
+example1 <- data.frame(n = 1:5, probability = c(0.10, 0.15, 0.25, 0.35, 0.15), 
+           return_rate_a = c(-0.40, -0.10, 0.20, 0.50, 0.80),
+           return_rate_b = c(-0.15, -0.05, 0.20, 0.25, 0.15))
+example1
+```
+\
+\
+
+주식 A 와 B에 대하여 예상되는 기대수익률(Expected rate of return)은 각각 아래와 같다.
+
+```{r}
+expected_rate_a <- sum(example1$probability * example1$return_rate_a)
+expected_rate_b <- sum(example1$probability * example1$return_rate_b)
+print(paste0("A - Expected rate = ", expected_rate_a, ", B - Expected rate = ", expected_rate_b))
+```
+\
+\
+두 주식의 표준편차(Standard deviation)는 각각 아래와 같다.  
+1. 기대수익률을 중심으로 편차를 구하여 제곱한다.  
+2. 편차의 제곱에 각 편차가 실현될 확률을 곱한다.  
+3. 모든 상황에 대하여 합을 구하고 제곱근을 구한다.
+```{r}
+sd_a <- sqrt(sum(example1$probability * (example1$return_rate_a - expected_rate_a)^2))
+sd_b <- sqrt(sum(example1$probability * (example1$return_rate_b - expected_rate_b)^2))
+print(paste0("A - sd = ", sd_a, ", B - sd = ", sd_b))
+```
+\
+\
+
+
+확률분포를 알고 있을때, 공분산(Covariance)은 아래식으로구함.
+
+```{r}
+data.frame(calculrate = paste0(example1$probability, " (", example1$return_rate_a, -expected_rate_a, ") (",
+                               example1$return_rate_b, -expected_rate_b, ")"))
+cov_ab <- sum(example1$probability * (example1$return_rate_a - expected_rate_a) * (example1$return_rate_b - expected_rate_b))
+```
+
+\
+\
+주식 a 와 B사이의 상관계수는 다음과 같이 계산된다.
+```{r}
+cov_ab / (sd_a * sd_b)
+```
+언제나 1과 -1 사이의 값을 가지며, 수익률이 완전히 비례적인 관계일때 1, 완전히 반비례관계를 갖고 변동하는 경우 -1 이다.
+두 확률변수가 밀접한 비례관계일수록 1에 가깝고, 밀접한 반비례 관계일수록 -1 에 가깝다.
+\
+\
+
+실무적으로 관측자료를 통하여, 공분산(Covariance)은 아래식으로구함.
+
+
+
+
+
+
+
+
+
+
+
+
+
+

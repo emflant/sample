@@ -6,3 +6,4 @@ basel3.capital <- function () {
     print("Elements of capital")
     data.frame(elements_of_capital, limit_and_minima)
 }
+
