@@ -3,6 +3,10 @@ title: "공분산(Covariance)과 상관계수(Correlation Coeffcient)"
 output: html_notebook
 ---
 
+```{r include=FALSE}
+# knitr::kable 에서 한글 컬럼명 셋팅시 warning 메시지를 없애기 위한 셋팅.
+Sys.setlocale("LC_ALL","C")
+```
 
 
 상태 |1|2|3|4|5
@@ -16,9 +20,11 @@ output: html_notebook
 위의 표를 데이터로 구조화하면,
 
 ```{r}
-example1 <- data.frame(n = 1:5, probability = c(0.10, 0.15, 0.25, 0.35, 0.15), 
-           return_rate_a = c(-0.40, -0.10, 0.20, 0.50, 0.80),
-           return_rate_b = c(-0.15, -0.05, 0.20, 0.25, 0.15))
+# Sys.setlocale(category = "LC_CTYPE", locale = "ko_KR.UTF-8")
+example1 <- data.frame(n = 1:5, 
+            probability = c(0.10, 0.15, 0.25, 0.35, 0.15), 
+            return_rate_a = c(-0.40, -0.10, 0.20, 0.50, 0.80),
+            return_rate_b = c(-0.15, -0.05, 0.20, 0.25, 0.15))
 example1
 ```
 \
@@ -33,7 +39,8 @@ print(paste0("A - Expected rate = ", expected_rate_a, ", B - Expected rate = ", 
 ```
 \
 \
-두 주식의 표준편차(Standard deviation)는 각각 아래와 같다.  
+두 주식의 표준편차(Standard deviation)는 각각 아래와 같다.
+
 1. 기대수익률을 중심으로 편차를 구하여 제곱한다.  
 2. 편차의 제곱에 각 편차가 실현될 확률을 곱한다.  
 3. 모든 상황에 대하여 합을 구하고 제곱근을 구한다.
@@ -45,8 +52,15 @@ print(paste0("A - sd = ", sd_a, ", B - sd = ", sd_b))
 \
 \
 
+두개의 확률변수의 관계를 파악할 필요가 있는 경우, 공분산 및 상관계수를 구한다.
+확률분포를 알고 있을때, 공분산(Covariance)은 아래식으로 구하며,그 의미는 아래와 같다. 
 
-확률분포를 알고 있을때, 공분산(Covariance)은 아래식으로구함.
+* 공분산 > 0 이면, 두 확률변수가 비례적인 관계. 
+* 공분산이 0 에 가까우면, 관련성이 없음.
+* 공분산 < 0 이면, 두 확률변수가 반비례 관계.
+
+단점은 공분산은 측정단위의 영향을 받기 때문에, 공분산이 크다고해서
+두 확률변수간 연관성이 높은 것은 아님. (그래서 상대적 척도로 바꾼 상관계수를 산출한다.)
 
 ```{r}
 data.frame(calculrate = paste0(example1$probability, " (", example1$return_rate_a, -expected_rate_a, ") (",
@@ -56,7 +70,18 @@ cov_ab <- sum(example1$probability * (example1$return_rate_a - expected_rate_a) 
 
 \
 \
+
+상관계수는 공분산을 두 확률변수의 표준편차의 곱으로 나눈 값이며, 공분산을 상대적 척도로 변환한 값이라고 생각하면 된다. 항상 1 과 -1 사이의 값을 갖는다. 
+
+* 상관계수 = 1, 완벽한 비례적인 관계(1차함수의 직선의 관계)
+* 0 < 상관계수 < 1, 두 확률변수는 비례적인 관계
+* 상관계수 = 0, 아무런 관련없이 독립적인 변동관계
+* -1 < 상관계수 < 0, 두 확률변수는 반비례적인 관계
+* 상관계수 = -1, 완벽한 반비례적인 관계(1차함수의 직선의 관계)
+
 주식 a 와 B사이의 상관계수는 다음과 같이 계산된다.
+
+
 ```{r}
 cov_ab / (sd_a * sd_b)
 ```
@@ -68,15 +93,32 @@ cov_ab / (sd_a * sd_b)
 실무적으로 관측자료를 통하여, 공분산(Covariance)은 아래식으로구함.
 
 
+$$Cov(R_{i},R_{j}) = \frac{1}{T-1}\{(R_{i1}-\bar{R})(R_{j1}-\bar{R})+(R_{i2}-\bar{R})(R_{j2}-\bar{R})+\cdots+(R_{iT}-\bar{R})(R_{jT}-\bar{R}) \}$$
 
 
 
+```{r include=FALSE}
+ex2 <- data.frame(bas_ym = c("2007.07","2007.08","2007.09","2007.10","2007.11","2007.12","2008.01","2008.02","2008.03","2008.04"), return_rate_a = c(0.2238, -0.0456, 0.0956, -0.0131,-0.0442, -0.0509,0.0487,-0.1534, -0.1208, 0.0875), return_rate_b = c(0, -0.0545,-0.0128, -0.0389,-0.0337,0.0279,0.3244,0.0169,0.1944,-0.0697))
+
+mean_a2 <- mean(ex2$return_rate_a)
+sd_a2 <- sd(ex2$return_rate_a)
+mean_b2 <- mean(ex2$return_rate_b)
+sd_b2 <- sd(ex2$return_rate_b)
+cov_ab2 <- cov(ex2$return_rate_a, ex2$return_rate_b)
+cor_ab2 <- cor(ex2$return_rate_a, ex2$return_rate_b)
+```
 
 
 
+```{r echo=FALSE}
+# https://haozhu233.github.io/kableExtra/
+knitr::kable(ex2, caption = 'A caption', col.names = c("월", "A주식 수익률", "B주식 수익률"))
+```
 
+ 구분 | 주식A |주식B
+-|-|-
+평균수익률 | $\bar{R}_A=`r mean_a2`$ | $\bar{R}_B=`r mean_b2`$   
+표준편차 | $S_A=`r sd_a2`$ | $S_B=`r sd_b2`$    
 
-
-
-
-
+공분산 `r cov_ab2`  
+상관계수 `r cor_ab2`
