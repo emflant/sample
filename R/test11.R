@@ -15,7 +15,9 @@ var(return_rate)
 sd(return_rate)
 sum(return_rate)
 
+ex2 <- data.frame(bas_ym = c("2007.07","2007.08","2007.09","2007.10","2007.11","2007.12","2008.01","2008.02","2008.03","2008.04"), return_rate_a = c(0.2238, -0.0456, 0.0956, -0.0131,-0.0442, -0.0509,0.0487,-0.1534, -0.1208, 0.0875), return_rate_b = c(0, -0.0545,-0.0128, -0.0389,-0.0337,0.0279,0.3244,0.0169,0.1944,-0.0697))
+plot(ex2$return_rate_a, ex2$return_rate_b)
 
+l <- lm(ex2$return_rate_a ~ ex2$return_rate_b)
 
-
-# 기대수익률(Expected rate of return)
+abline(l)

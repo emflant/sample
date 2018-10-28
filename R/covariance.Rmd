@@ -114,7 +114,14 @@ cor_ab2 <- cor(ex2$return_rate_a, ex2$return_rate_b)
 # https://haozhu233.github.io/kableExtra/
 knitr::kable(ex2, caption = 'A caption', col.names = c("월", "A주식 수익률", "B주식 수익률"))
 ```
-
+```{r echo=FALSE}
+plot(ex2$return_rate_a, ex2$return_rate_b,
+     xlab = "주식A 수익률",
+     ylab = "주식B 수익률",
+     main = "두 주식간 수익률 관계")
+m2 <- lm(ex2$return_rate_a ~ ex2$return_rate_b)
+abline(m2)
+```
  구분 | 주식A |주식B
 -|-|-
 평균수익률 | $\bar{R}_A=`r mean_a2`$ | $\bar{R}_B=`r mean_b2`$   
@@ -122,3 +129,5 @@ knitr::kable(ex2, caption = 'A caption', col.names = c("월", "A주식 수익률
 
 공분산 `r cov_ab2`  
 상관계수 `r cor_ab2`
+
+
