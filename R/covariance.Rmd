@@ -4,8 +4,11 @@ output: html_notebook
 ---
 
 ```{r include=FALSE}
+# install.packages("kableExtra")
 # knitr::kable 에서 한글 컬럼명 셋팅시 warning 메시지를 없애기 위한 셋팅.
 Sys.setlocale("LC_ALL","C")
+Sys.setlocale(category = "LC_CTYPE", locale = "ko_KR.UTF-8")
+library(magrittr)
 ```
 
 
@@ -112,13 +115,14 @@ cor_ab2 <- cor(ex2$return_rate_a, ex2$return_rate_b)
 
 ```{r echo=FALSE}
 # https://haozhu233.github.io/kableExtra/
-knitr::kable(ex2, caption = 'A caption', col.names = c("월", "A주식 수익률", "B주식 수익률"))
+knitr::kable(ex2, caption = 'A caption', col.names = c("월", "A주식 수익률", "B주식 수익률")) %>%
+   kableExtra::kable_styling(bootstrap_options = c("striped", "hover", "condensed"))
 ```
 ```{r echo=FALSE}
 plot(ex2$return_rate_a, ex2$return_rate_b,
      xlab = "주식A 수익률",
      ylab = "주식B 수익률",
-     main = "두 주식간 수익률 관계")
+     main = "두 주식간 수익률 관계", family="NanumGothic") # family="AppleGothic"
 m2 <- lm(ex2$return_rate_a ~ ex2$return_rate_b)
 abline(m2)
 ```

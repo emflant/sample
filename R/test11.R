@@ -21,3 +21,7 @@ plot(ex2$return_rate_a, ex2$return_rate_b)
 l <- lm(ex2$return_rate_a ~ ex2$return_rate_b)
 
 abline(l)
+
+install.packages("pryr")
+library(pryr)
+mem_used()

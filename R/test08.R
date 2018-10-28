@@ -4,7 +4,7 @@
 
 # Sys.setlocale(category = "LC_CTYPE", locale = "ko_KR.UTF-8")
 # par(family="NanumGothic")
-
+# par(family="AppleGothic")
 Sys.setlocale(category = "LC_CTYPE", locale = "ko_KR.UTF-8")
 
 
