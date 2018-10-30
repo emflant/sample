@@ -22,6 +22,33 @@ l <- lm(ex2$return_rate_a ~ ex2$return_rate_b)
 
 abline(l)
 
+<<<<<<< HEAD
+
+library(tibble)
+t_ex2 <- as_tibble(ex2)
+t_ex2
+
+summary(t_ex2)
+
+head(t_ex2)
+
+library(magrittr )
+library(tidyr)
+install.packages("tidyr")
+t_ex2_gather <- t_ex2 %>%
+    gather(`return_rate_a`, `return_rate_b`, key = "stock", value = "rate")
+head(t_ex2_gather)
+
+t_ex2_gather %>%
+    spread(key = stock, value = rate)
+
+
+t_ex4 <- t_ex2_gather %>%
+    spread(key = bas_ym, value = rate)
+
+table5
+=======
 install.packages("pryr")
 library(pryr)
 mem_used()
+>>>>>>> 4cd459773d0e88614f8d98190cf26847c9e4eaa8
