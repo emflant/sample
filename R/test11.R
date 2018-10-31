@@ -22,7 +22,6 @@ l <- lm(ex2$return_rate_a ~ ex2$return_rate_b)
 
 abline(l)
 
-<<<<<<< HEAD
 
 library(tibble)
 t_ex2 <- as_tibble(ex2)
@@ -32,9 +31,10 @@ summary(t_ex2)
 
 head(t_ex2)
 
-library(magrittr )
-library(tidyr)
-install.packages("tidyr")
+# install.packages("tidyverse")
+
+library(tidyverse)
+
 t_ex2_gather <- t_ex2 %>%
     gather(`return_rate_a`, `return_rate_b`, key = "stock", value = "rate")
 head(t_ex2_gather)
@@ -47,8 +47,29 @@ t_ex4 <- t_ex2_gather %>%
     spread(key = bas_ym, value = rate)
 
 table5
-=======
+
 install.packages("pryr")
 library(pryr)
 mem_used()
->>>>>>> 4cd459773d0e88614f8d98190cf26847c9e4eaa8
+
+
+x1 <- c("Dec", "Apr", "Jan", "Mar")
+x2 <- c("Dec", "Apr", "Jam", "Mar")
+
+sort(x1)
+month_levels <- c(
+    "Jan", "Feb", "Mar", "Apr", "May", "Jun", 
+    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+)
+y1 <- factor(x1, levels = month_levels)
+y1
+sort(y1)
+y2 <- factor(x2, levels = month_levels)
+y2
+y2 <- parse_factor(x2, levels = month_levels)
+
+
+factor(x1)
+unique(x1)
+factor(x1, levels = unique(x1))
+x1 %>% factor() %>% fct_inorder(ordered = TRUE)
