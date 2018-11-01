@@ -1,0 +1,28 @@
+---
+title: "금리리스크(Interest Rate Risk)"
+output: html_notebook
+---
+
+
+## 갭모형(GAP Model)
+
+순이자수입(net interest income, NII)  
+- net inerest margin 이라고도 함.
+
+$$ GAP = RSA - RSL$$
+$$GAP\ ratio = \frac{RSA}{RSL}$$
+금리민감형자산(rate sensitive asset, RSA)  
+금리민감형부채(rate sensitive liability, RSL)  
+\
+\
+
+순이자 수입 변화
+$$\Delta NI = (RSA - RSL)\Delta i = (GAP)\Delta i$$
+
+$\Delta NI$ = 순이자수입의 변화, $\Delta i$ = 이자율의 변화  
+
+
+
+### 다기간 갭분석
+
+

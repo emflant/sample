@@ -4,11 +4,11 @@ output: html_notebook
 ---
 
 ```{r include=FALSE}
+library(tidyverse)
 # install.packages("kableExtra")
 # knitr::kable 에서 한글 컬럼명 셋팅시 warning 메시지를 없애기 위한 셋팅.
 Sys.setlocale("LC_ALL","C")
 Sys.setlocale(category = "LC_CTYPE", locale = "ko_KR.UTF-8")
-library(magrittr)
 ```
 
 
@@ -95,7 +95,9 @@ cov_ab / (sd_a * sd_b)
 
 실무적으로 관측자료를 통하여, 공분산(Covariance)은 아래식으로구함.
 
-
+```{r}
+# http://web.ift.uib.no/Teori/KURS/WRK/TeX/symALL.html
+```
 $$Cov(R_{i},R_{j}) = \frac{1}{T-1}\{(R_{i1}-\bar{R})(R_{j1}-\bar{R})+(R_{i2}-\bar{R})(R_{j2}-\bar{R})+\cdots+(R_{iT}-\bar{R})(R_{jT}-\bar{R}) \}$$
 
 
