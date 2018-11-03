@@ -176,23 +176,139 @@ $(document).ready(function () {
 
 
 <!-- rnb-text-begin -->
+<p>순이자수입(net interest income, NII)<br />
+- 순이자마진(net inerest margin, NIM) 이라고도 함.</p>
 <div id="gap-model" class="section level2">
 <h2>갭모형(GAP Model)</h2>
-<p>순이자수입(net interest income, NII)<br />
-- net inerest margin 이라고도 함.</p>
 <p><span class="math display">\[ GAP = RSA - RSL\]</span> <span class="math display">\[GAP\ ratio = \frac{RSA}{RSL}\]</span> 금리민감형자산(rate sensitive asset, RSA)<br />
 금리민감형부채(rate sensitive liability, RSL)<br />
 <br />
 <br />
 순이자 수입 변화 <span class="math display">\[\Delta NI = (RSA - RSL)\Delta i = (GAP)\Delta i\]</span></p>
 <p><span class="math inline">\(\Delta NI\)</span> = 순이자수입의 변화, <span class="math inline">\(\Delta i\)</span> = 이자율의 변화</p>
-<div id="-" class="section level3">
-<h3>다기간 갭분석</h3>
+<div id="-" class="section level4">
+<h4>다기간 갭분석</h4>
+<!-- rnb-text-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+
+<!-- rnb-html-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImtuaXRfYXNpcyJdLCJzaXppbmdQb2xpY3kiOltdfX0= -->
+
+<table>
+<thead>
+<tr class="header">
+<th align="left">만기</th>
+<th align="right">자산</th>
+<th align="right">부채</th>
+<th align="right">갭</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">1D</td>
+<td align="right">20</td>
+<td align="right">30</td>
+<td align="right">-10</td>
+</tr>
+<tr class="even">
+<td align="left">3M</td>
+<td align="right">30</td>
+<td align="right">40</td>
+<td align="right">-10</td>
+</tr>
+<tr class="odd">
+<td align="left">6M</td>
+<td align="right">70</td>
+<td align="right">85</td>
+<td align="right">-15</td>
+</tr>
+<tr class="even">
+<td align="left">12M</td>
+<td align="right">90</td>
+<td align="right">70</td>
+<td align="right">20</td>
+</tr>
+<tr class="odd">
+<td align="left">5Y</td>
+<td align="right">40</td>
+<td align="right">30</td>
+<td align="right">10</td>
+</tr>
+<tr class="even">
+<td align="left">10Y</td>
+<td align="right">5</td>
+<td align="right">5</td>
+<td align="right">0</td>
+</tr>
+</tbody>
+</table>
+
+
+<!-- rnb-html-end -->
+
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>누적갭(cumulative gap, CGAP)<br />
+1년간의 누적갭을 구하면 아래와 같다.</p>
+<p><span class="math display">\[ CGAP = (-10억원) + (-10억원) + (-15억원) + 20억원 = -15억원\]</span></p>
+<p>만일 1년이내에 평균이자율이 1% 상승한다면, <span class="math display">\[\Delta NI = (GAP)\Delta i = (-15억원) \times 0.01 = -1,500 만원\]</span></p>
+</div>
+</div>
+<div id="maturity-model" class="section level2">
+<h2>만기모형(Maturity Model)</h2>
+<p>금리 상승시에는 자산과 부채의 가치가 모두하락한다. 그러나 자산의 만기가 부채보다 길다면 자산의 가치 하락이 부채가치의 하락보다 상대적으로 크므로 자기자본 가치가 감소한다.</p>
+<table>
+<thead>
+<tr class="header">
+<th>금리변동</th>
+<th>만기구성</th>
+<th>자산가치</th>
+<th>부채가치</th>
+<th>자기자본가치</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>금리상승</td>
+<td>자산만기 &gt; 부채만기</td>
+<td>대폭감소</td>
+<td>소폭감소</td>
+<td>감소</td>
+</tr>
+<tr class="even">
+<td>금리상승</td>
+<td>자산만기 &lt; 부채만기</td>
+<td>소폭감소</td>
+<td>대폭감소</td>
+<td>증가</td>
+</tr>
+<tr class="odd">
+<td>금리하락</td>
+<td>자산만기 &gt; 부채만기</td>
+<td>대폭증가</td>
+<td>소폭증가</td>
+<td>증가</td>
+</tr>
+<tr class="even">
+<td>금리하락</td>
+<td>자산만기 &lt; 부채만기</td>
+<td>소폭증가</td>
+<td>대폭증가</td>
+<td>감소</td>
+</tr>
+</tbody>
+</table>
+<p>자산과 부채가의 만기차이가 클수록 자기자본 가치의 변동은 더욱 심하다. 따라서 이자율 변화에 따른 자기자본 가치의 변화정도를 측정하기 위하여 다음과 같은 만기갭(maturity gap)을 정의한다. <span class="math display">\[만기갭 = 자산의 만기 - 부채의 만기\]</span></p>
+<p>만기갭을 실무적으로 사용할 때는 가중평균만기를 사용하게 된다. <span class="math display">\[M_i = W_{i1}M_{i1} + W_{i2}M_{i2} + \cdots + W_{in}M_{in}\]</span> <span class="math inline">\(M_i\)</span> = 금융기관 자산(부채의 가중평균만기, i=A 또는 L)<br />
+<span class="math inline">\(W_{ij}\)</span> = j번째 자산(부채)의 총 시장가치 대비 해당 자산(부채)의 시가로 측정한 비중<br />
+<span class="math inline">\(M_{ij}\)</span> = j번째 자산(부채)의 만기, j = 1,2,…,n</p>
+<p><br />
+금융기관의 자산과 부채의 만기를 일치시키는 전략은 금리리스크를 줄여주기는 하지만 그것을 완전히 없애주지는 못한다. 자산과 부채의 만기가 같다고 하더라도 금액이 불일치 하기 때문이다. 그러나 자산과 부채의 금액과 만기가 모두 일치한다 하더라도 현금흐름의 발생시점이 완전히 일치하지 않는 한, 금융기관은 여전히 금리리스크에 노출된다.</p>
 <!-- rnb-text-end -->
 </div>
-</div>
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIuq4iOumrOumrOyKpO2BrChJbnRlcmVzdCBSYXRlIFJpc2spIg0Kb3V0cHV0OiBodG1sX25vdGVib29rDQotLS0NCg0KDQojIyDqsK3rqqjtmJUoR0FQIE1vZGVsKQ0KDQrsiJzsnbTsnpDsiJjsnoUobmV0IGludGVyZXN0IGluY29tZSwgTklJKSAgDQotIG5ldCBpbmVyZXN0IG1hcmdpbiDsnbTrnbzqs6Drj4Qg7ZWoLg0KDQokJCBHQVAgPSBSU0EgLSBSU0wkJA0KJCRHQVBcIHJhdGlvID0gXGZyYWN7UlNBfXtSU0x9JCQNCuq4iOumrOuvvOqwkO2YleyekOyCsChyYXRlIHNlbnNpdGl2ZSBhc3NldCwgUlNBKSAgDQrquIjrpqzrr7zqsJDtmJXrtoDssYQocmF0ZSBzZW5zaXRpdmUgbGlhYmlsaXR5LCBSU0wpICANClwNClwNCg0K7Iic7J207J6QIOyImOyehSDrs4DtmZQNCiQkXERlbHRhIE5JID0gKFJTQSAtIFJTTClcRGVsdGEgaSA9IChHQVApXERlbHRhIGkkJA0KDQokXERlbHRhIE5JJCA9IOyInOydtOyekOyImOyeheydmCDrs4DtmZQsICRcRGVsdGEgaSQgPSDsnbTsnpDsnKjsnZgg67OA7ZmUICANCg0KDQoNCiMjIyDri6TquLDqsIQg6rCt67aE7ISdDQoNCg0K</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIuq4iOumrOumrOyKpO2BrChJbnRlcmVzdCBSYXRlIFJpc2spIg0Kb3V0cHV0OiBodG1sX25vdGVib29rDQotLS0NCg0KDQoNCuyInOydtOyekOyImOyehShuZXQgaW50ZXJlc3QgaW5jb21lLCBOSUkpICANCi0g7Iic7J207J6Q66eI7KeEKG5ldCBpbmVyZXN0IG1hcmdpbiwgTklNKSDsnbTrnbzqs6Drj4Qg7ZWoLg0KDQoNCiMjIOqwreuqqO2YlShHQVAgTW9kZWwpDQoNCg0KJCQgR0FQID0gUlNBIC0gUlNMJCQNCiQkR0FQXCByYXRpbyA9IFxmcmFje1JTQX17UlNMfSQkDQrquIjrpqzrr7zqsJDtmJXsnpDsgrAocmF0ZSBzZW5zaXRpdmUgYXNzZXQsIFJTQSkgIA0K6riI66as66+86rCQ7ZiV67aA7LGEKHJhdGUgc2Vuc2l0aXZlIGxpYWJpbGl0eSwgUlNMKSAgDQpcDQpcDQoNCuyInOydtOyekCDsiJjsnoUg67OA7ZmUDQokJFxEZWx0YSBOSSA9IChSU0EgLSBSU0wpXERlbHRhIGkgPSAoR0FQKVxEZWx0YSBpJCQNCg0KJFxEZWx0YSBOSSQgPSDsiJzsnbTsnpDsiJjsnoXsnZgg67OA7ZmULCAkXERlbHRhIGkkID0g7J207J6Q7Jyo7J2YIOuzgO2ZlCAgDQoNCg0KDQojIyMjIOuLpOq4sOqwhCDqsK3rtoTshJ0NCg0KYGBge3IgaW5jbHVkZT1GQUxTRX0NCmxpYnJhcnkodGlkeXZlcnNlKQ0KZXhfbXVsdGlfZ2FwIDwtIGRhdGEuZnJhbWUobWF0dXJpdHkgPSBjKCIxRCIsICIzTSIsICI2TSIsICIxMk0iLCI1WSIsICIxMFkiKSwNCiAgICAgICAgICAgICAgICAgICAgICAgICAgIGFzc2V0ID0gYygyMCwzMCw3MCw5MCw0MCw1KSwgbGlhYmlsaXR5ID0gYygzMCw0MCw4NSw3MCwzMCw1KSkNCmV4X211bHRpX2dhcCRnYXAgPC0gZXhfbXVsdGlfZ2FwJGFzc2V0IC0gZXhfbXVsdGlfZ2FwJGxpYWJpbGl0eQ0KU3lzLnNldGxvY2FsZSgiTENfQUxMIiwiQyIpDQpgYGANCg0KYGBge3IgZWNobz1GQUxTRX0NCmtuaXRyOjprYWJsZShleF9tdWx0aV9nYXAsIA0KICAgICAgICAgICAgIGNhcHRpb24gPSAnQSBjYXB0aW9uJywgDQogICAgICAgICAgICAgY29sLm5hbWVzID0gYygi66eM6riwIiwgIuyekOyCsCIsICLrtoDssYQiLCAi6rCtIikpDQoNCmBgYA0KDQoNCg0K64iE7KCB6rCtKGN1bXVsYXRpdmUgZ2FwLCBDR0FQKSAgDQox64WE6rCE7J2YIOuIhOyggeqwreydhCDqtaztlZjrqbQg7JWE656Y7JmAIOqwmeuLpC4NCg0KJCQgQ0dBUCA9ICgtMTDslrXsm5ApICsgKC0xMOyWteybkCkgKyAoLTE17Ja17JuQKSArIDIw7Ja17JuQID0gLTE17Ja17JuQJCQNCg0KDQrrp4zsnbwgMeuFhOydtOuCtOyXkCDtj4nqt6DsnbTsnpDsnKjsnbQgMSUg7IOB7Iq57ZWc64uk66m0LCANCiQkXERlbHRhIE5JID0gKEdBUClcRGVsdGEgaSA9ICgtMTXslrXsm5ApIFx0aW1lcyAwLjAxID0gLTEsNTAwIOunjOybkCQkDQoNCg0KIyMg66eM6riw66qo7ZiVKE1hdHVyaXR5IE1vZGVsKQ0KDQrquIjrpqwg7IOB7Iq57Iuc7JeQ64qUIOyekOyCsOqzvCDrtoDssYTsnZgg6rCA7LmY6rCAIOuqqOuRkO2VmOudve2VnOuLpC4g6re465+s64KYIOyekOyCsOydmCDrp4zquLDqsIAg67aA7LGE67O064ukIOq4uOuLpOuptCDsnpDsgrDsnZgg6rCA7LmYIO2VmOudveydtCDrtoDssYTqsIDsuZjsnZgg7ZWY652967O064ukIOyDgeuMgOyggeycvOuhnCDtgazrr4DroZwg7J6Q6riw7J6Q67O4IOqwgOy5mOqwgCDqsJDshoztlZzri6QuIA0KDQrquIjrpqzrs4Drj5l866eM6riw6rWs7ISxfOyekOyCsOqwgOy5mHzrtoDssYTqsIDsuZh87J6Q6riw7J6Q67O46rCA7LmYDQotfC18LXwtfC0NCuq4iOumrOyDgeyKuXzsnpDsgrDrp4zquLAgPiDrtoDssYTrp4zquLAgfOuMgO2PreqwkOyGjHzshoztj63qsJDshox86rCQ7IaMDQrquIjrpqzsg4Hsirl87J6Q7IKw66eM6riwIDwg67aA7LGE66eM6riwIHzshoztj63qsJDshox864yA7Y+t6rCQ7IaMfOymneqwgA0K6riI66as7ZWY6529fOyekOyCsOunjOq4sCA+IOu2gOyxhOunjOq4sCB864yA7Y+t7Kad6rCAfOyGjO2PreymneqwgHzspp3qsIANCuq4iOumrO2VmOudvXzsnpDsgrDrp4zquLAgPCDrtoDssYTrp4zquLAgfOyGjO2PreymneqwgHzrjIDtj63spp3qsIB86rCQ7IaMDQoNCuyekOyCsOqzvCDrtoDssYTqsIDsnZgg66eM6riw7LCo7J206rCAIO2BtOyImOuhnSDsnpDquLDsnpDrs7gg6rCA7LmY7J2YIOuzgOuPmeydgCDrjZTsmrEg7Ius7ZWY64ukLiDrlLDrnbzshJwg7J207J6Q7JyoIOuzgO2ZlOyXkCDrlLDrpbgg7J6Q6riw7J6Q67O4IOqwgOy5mOydmCDrs4DtmZTsoJXrj4Trpbwg7Lih7KCV7ZWY6riwIOychO2VmOyXrCDri6TsnYzqs7wg6rCZ7J2AIOunjOq4sOqwrShtYXR1cml0eSBnYXAp7J2EIOygleydmO2VnOuLpC4gDQokJOunjOq4sOqwrSA9IOyekOyCsOydmCDrp4zquLAgLSDrtoDssYTsnZgg66eM6riwJCQNCg0K66eM6riw6rCt7J2EIOyLpOustOyggeycvOuhnCDsgqzsmqntlaAg65WM64qUIOqwgOykke2Pieq3oOunjOq4sOulvCDsgqzsmqntlZjqsowg65Cc64ukLiANCiQkTV9pID0gV197aTF9TV97aTF9ICsgV197aTJ9TV97aTJ9ICsgXGNkb3RzICsgV197aW59TV97aW59JCQNCiRNX2kkID0g6riI7Jy16riw6rSAIOyekOyCsCjrtoDssYTsnZgg6rCA7KSR7Y+J6reg66eM6riwLCBpPUEg65iQ64qUIEwpICANCiRXX3tpan0kID0gauuyiOynuCDsnpDsgrAo67aA7LGEKeydmCDstJ0g7Iuc7J6l6rCA7LmYIOuMgOu5hCDtlbTri7kg7J6Q7IKwKOu2gOyxhCnsnZgg7Iuc6rCA66GcIOy4oeygle2VnCDruYTspJEgIA0KJE1fe2lqfSQgPSBq67KI7Ke4IOyekOyCsCjrtoDssYQp7J2YIOunjOq4sCwgaiA9IDEsMiwuLi4sbiAgDQoNClwNCuq4iOycteq4sOq0gOydmCDsnpDsgrDqs7wg67aA7LGE7J2YIOunjOq4sOulvCDsnbzsuZjsi5ztgqTripQg7KCE65617J2AIOq4iOumrOumrOyKpO2BrOulvCDspITsl6zso7zquLDripQg7ZWY7KeA66eMIOq3uOqyg+ydhCDsmYTsoITtnogg7JeG7JWg7KO87KeA64qUIOuqu+2VnOuLpC4g7J6Q7IKw6rO8IOu2gOyxhOydmCDrp4zquLDqsIAg6rCZ64uk6rOgIO2VmOuNlOudvOuPhCDquIjslaHsnbQg67aI7J287LmYIO2VmOq4sCDrlYzrrLjsnbTri6QuIOq3uOufrOuCmCDsnpDsgrDqs7wg67aA7LGE7J2YIOq4iOyVoeqzvCDrp4zquLDqsIAg66qo65GQIOydvOy5mO2VnOuLpCDtlZjrjZTrnbzrj4Qg7ZiE6riI7Z2Q66aE7J2YIOuwnOyDneyLnOygkOydtCDsmYTsoITtnogg7J287LmY7ZWY7KeAIOyViuuKlCDtlZwsIOq4iOycteq4sOq0gOydgCDsl6zsoITtnogg6riI66as66as7Iqk7YGs7JeQIOuFuOy2nOuQnOuLpC4gDQoNCg0KDQoNCg==</div>
 
 
 
