@@ -1,5 +1,5 @@
 ---
-title: "정규분포(Normal Distribution)"
+title: "R Notebook"
 output:
   html_document:
     df_print: paged
@@ -7,11 +7,14 @@ output:
 
 This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
 
+- [covariance](./covariance.nb.html)
+- [interest rate risk](./interest_rate_risk.nb.html)
+- [normal distribution](./normal_distribution.nb.html)
+
 Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Ctrl+Shift+Enter*. 
 
 ```{r}
-source('D:/workspace/sample/R/risk3.R', encoding = 'UTF-8')
-norm_graph()
+plot(cars)
 ```
 
 Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Ctrl+Alt+I*.
