@@ -108,12 +108,12 @@ $D_m$ : 수정듀레이션
 \
 액면가 100만원인 채권이자율(이표율, 쿠폰금리)가 8%이고 6년만기인 어떤채권의 만기수익율은 8%라고 한다. 현재가치는 아래와 같다.
 ```{r}
-sum(get_duration(1000000, 0.08, 0.08, 6)$list$pv)
+get_duration(1000000, 0.08, 0.08, 6)$pv
 ```
 
 만약 만기수익률(시장이자율) 8.01% 로 상승한다면, 채권의 가격은 아래와 같이 변한다.
 ```{r}
-sum(get_duration(1000000, 0.08, 0.0801, 6)$list$pv)
+get_duration(1000000, 0.08, 0.0801, 6)$pv
 ```
 
 
@@ -121,3 +121,21 @@ sum(get_duration(1000000, 0.08, 0.0801, 6)$list$pv)
 ```{r}
 1000000 - get_duration(1000000, 0.08, 0.08, 6)$md * 0.0001 * 1000000
 ```
+
+
+
+```{r}
+
+# get_duration(1000000, 0.08, 0.0801, 6)$pv
+rates <- seq(0.6:1, by = 0.01)
+# get_bond_pv(1000000, 0.08,0.081,6)
+pv_list <- c()
+for(r in rates){
+    pv_list <- c(pv_list, sum(get_bond_pv(1000000, 0.08, r,6)$pv))
+}
+data.frame(r = rates, pv = pv_list)
+# print(append)
+# append(1:5, 0:1, after = 3)
+plot(x = rates, y = pv_list, type = "l")
+```
+

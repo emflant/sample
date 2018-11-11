@@ -52,7 +52,11 @@ get_duration <- function(f, c, i, n){
     bond_list$pv_n <- bond_list$pv * bond_list$n
     duration = sum(bond_list$pv_n) / sum(bond_list$pv)
     modified_duration = duration / (1 + i)
-    result = list(d = duration, md = modified_duration, list = bond_list)
+    pv <- sum(bond_list$pv)
+    result = list(d = duration, 
+                  md = modified_duration, 
+                  pv = pv, 
+                  list = bond_list)
     result
 }
 
