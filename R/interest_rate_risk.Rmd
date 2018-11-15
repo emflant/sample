@@ -125,17 +125,18 @@ get_duration(1000000, 0.08, 0.0801, 6)$pv
 
 
 ```{r}
-
-# get_duration(1000000, 0.08, 0.0801, 6)$pv
-rates <- seq(0.6:1, by = 0.01)
-# get_bond_pv(1000000, 0.08,0.081,6)
+rates <- seq(0.06, 0.1,by = 0.0001)
+md <- get_duration(1000000, 0.08, 0.08, 6)$md
 pv_list <- c()
+pv_list2 <- c()
 for(r in rates){
     pv_list <- c(pv_list, sum(get_bond_pv(1000000, 0.08, r,6)$pv))
+    pv_list2 <- c(pv_list2, 1000000 - md * (r - 0.08) * 1000000)
 }
-data.frame(r = rates, pv = pv_list)
-# print(append)
-# append(1:5, 0:1, after = 3)
-plot(x = rates, y = pv_list, type = "l")
+
+plot(range(rates), range(pv_list), type = "n")
+lines(x = rates, y = pv_list, col = "red")
+lines(x= rates, y= pv_list2, col = "blue")
+
 ```
 
