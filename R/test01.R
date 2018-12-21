@@ -21,7 +21,7 @@ par(family="NanumGothic")
 x <- c(80, 85, 30)
 x <- x + 1
 x
-x <- c("A", 1,2)
+x <- c(1,"A", 2)
 x
 x <- x + 1
 

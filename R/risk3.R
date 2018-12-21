@@ -60,6 +60,8 @@ get_duration <- function(f, c, i, n){
     result
 }
 
+# get_irr2 <- function
+
 get_irr <- function (f, c, n, pv) {
     i = 10 # 1,000 % 에서부터 search
     i_gap = i
