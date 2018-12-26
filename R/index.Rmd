@@ -10,6 +10,7 @@ This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute
 - [covariance](./covariance.nb.html)
 - [interest rate risk](./interest_rate_risk.nb.html)
 - [normal distribution](./normal_distribution.nb.html)
+- [credit card](./credit_card.nb.html)
 
 Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Ctrl+Shift+Enter*. 
 

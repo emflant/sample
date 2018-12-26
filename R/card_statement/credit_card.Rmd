@@ -1,0 +1,108 @@
+---
+title: "credit card statement"
+output: html_notebook
+---
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+
+Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Cmd+Shift+Enter*. 
+
+```{r warning=TRUE, include=FALSE}
+Sys.setlocale(category = "LC_CTYPE", locale = "ko_KR.UTF-8")
+par(family="NanumGothic")
+library(tidyverse)
+library(readxl)
+library(lubridate)
+
+# get_tran_date("01/07", "2017-12-01", "2018-01-31")
+get_tran_date <- function (month_day, f_dt, t_dt){
+  if(as.double(str_extract(month_day, '\\d{2}')) == month(f_dt)){
+    str_c(year(f_dt), "-", str_replace_all(month_day, '/', '-'))
+  } else {
+    str_c(year(t_dt), "-", str_replace_all(month_day, '/', '-'))
+  }
+}
+
+kakko <- read_excel("/Users/emflant/Downloads/kakko_card.xlsx")
+hana <- read_excel("/Users/emflant/Downloads/hana_card.xlsx")
+```
+
+Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Cmd+Option+I*.
+
+When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Cmd+Shift+K* to preview the HTML file). 
+
+The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike *Knit*, *Preview* does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.
+
+
+```{r}
+hana_ex1 <- str_extract_all(hana[1][[1]], '\\d{4}\\.\\s*\\d{2}\\.\\s*\\d{2}')
+hana_ex2 <- unlist(hana_ex1)
+hana_ex3 <- str_replace_all(hana_ex2, c('\\s' = '', '\\.' =  '-'))
+hana_ex4 <- as_tibble(matrix(hana_ex3, ncol = 2, byrow = T))
+names(hana_ex4) = c('이용시작일', '이용종료일')
+hana_ex5 <- select(hana, c(2,3,4,7)) %>%
+  bind_cols(hana_ex4)
+```
+
+```{r}
+kakko_sub1 <- kakko %>%
+  select(이용일, 가맹점명, 금액)
+kakko_sub1$이용일 <- as.character(kakko_sub1$이용일)
+```
+
+
+```{r}
+hana_sub1 <- list(hana_ex5$이용일자, hana_ex5$이용시작일, hana_ex5$이용종료일)
+hana_sub2 <- pmap(hana_sub1, get_tran_date)
+hana_sub3 <- as_tibble(unlist(hana_sub2))
+names(hana_sub3) <- c('거래일자')
+hana_sub4 <- bind_cols(hana_ex5, hana_sub3)
+
+
+hana_sub5 <- hana_sub4 %>%
+  select(거래일자, 이용가맹점, 원금) %>%
+  arrange(거래일자, 이용가맹점, 원금)
+
+names(hana_sub5) <- c('이용일', '가맹점명', '금액')
+
+card_details <- bind_rows(kakko_sub1, hana_sub5)
+
+
+
+card_details_sum <- card_details %>%
+  mutate(년월 = floor_date(ymd(이용일), "month")) %>%
+  group_by(년월) %>%
+  summarise(월_이용금액 = sum(금액, na.rm = TRUE))
+card_details_sum
+```
+
+```{r}
+hana_final <- hana_sub5 %>%
+  mutate(년월 = floor_date(ymd(이용일), "month")) %>%
+  summarise(월_이용금액 = sum(금액, na.rm = TRUE))
+names(hana_final) <- c('hana')
+
+kakko_final <- kakko_sub1 %>%
+  mutate(년월 = floor_date(ymd(이용일), "month")) %>%
+  summarise(월_이용금액 = sum(금액, na.rm = TRUE))
+names(kakko_final) <- c('kakko')
+
+bind_cols(hana_final, kakko_final)
+
+```
+
+
+```{r}
+plot(card_details_sum, type = 'l')
+```
+
+
+
+
+
+
+
+
+
+
+
