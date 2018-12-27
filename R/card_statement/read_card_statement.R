@@ -165,3 +165,6 @@ tz(yy) # "UTC"
 tz(yy) <- "Asia/Seoul"
 OlsonNames()
 OlsonNames()[str_detect(OlsonNames(), 'Seoul')]
+
+fwf_sample <- readr_example("fwf-sample.txt")
+cat(read_lines(fwf_sample))
