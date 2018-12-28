@@ -1,0 +1,84 @@
+---
+title: "file system"
+output: html_notebook
+---
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+
+Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Cmd+Shift+Enter*. 
+
+```{r}
+file.path("F:", "git", "roxygen2", "roxygen2", "README.md" )
+```
+
+```{r}
+file.path("..", c("A", "B"), c("tmp.txt","123.txt"))
+```
+\
+\
+\
+
+
+#### 파일 생성하기
+```{r}
+cat("file A\n", file = "A.txt") # file A 내용의 파일 생성
+cat("file B\n", file = "B.txt")
+```
+\
+\
+\
+
+
+#### A.txt 파일에 B.txt 파일내용을 덧붙일때,
+```{r}
+file.append("A.txt", "B.txt")
+```
+\
+\
+\
+
+
+#### 여러번 파일내용을 동일하게 붙여넣기.
+```{r}
+file.create("A.txt") # 빈 파일 생성.
+file.append("A.txt", c("B.txt", "B.txt")) # B.txt 파일내용 2번 붙여넣기.
+file.append("A.txt", rep("B.txt", 10)) # 10번 반복 붙여넣기.
+```
+\
+\
+\
+
+
+#### 파일내용 확인. (r studio에서)
+```{r}
+if(interactive()) file.show("A.txt")
+
+```
+\
+\
+\
+
+
+#### 파일 copy 
+```{r}
+file.copy("A.txt", "C.txt", overwrite = T, copy.date = T) # 동일한 파일 생성/수정/접근일시까지 복사.
+file.info(c("A.txt", "C.txt"))
+
+dir.create("tmp")
+list.files("tmp")
+
+# 두개파일을 tmp 폴더하위에 복사.
+file.copy(c("A.txt", "B.txt"), "tmp") # overwrite = F, copy.date = F
+list.files("tmp")
+
+```
+\
+\
+
+
+
+#### 파일 삭제
+```{r}
+file.remove("B.txt")
+```
+
