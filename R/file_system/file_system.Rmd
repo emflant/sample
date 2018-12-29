@@ -81,4 +81,6 @@ list.files("tmp")
 ```{r}
 file.remove("B.txt")
 ```
+\
+\
 

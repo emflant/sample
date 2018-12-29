@@ -66,3 +66,9 @@ R.home()
 ### default time zone
 # TZ="Asia/Seoul"
 ############################
+
+
+Sys.time()
+Sys.timezone()
+Sys.Date()
+Sys.getenv()
