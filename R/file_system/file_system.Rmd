@@ -115,6 +115,19 @@ file_text <- get_file_text()
 file_text %>%
   filter(str_detect(source, "get_file_text"))
 ```
+\
+\
 
+
+#### 복사할 파일 검색후, 특정파일에 붙여넣기.
+```{r}
+# [1] "covariance.nb.html|credit_card.nb.html|file_system.nb.html|..."
+str_c(list.files('../docs', '\\.html$'), collapse = "|")
+
+search_file <- str_detect(list.files(full.names = T, recursive = T), 
+                          str_c(list.files('../docs', '\\.html$'), collapse = "|"))
+copy_origin <- list.files(full.names = T, recursive = T)[search_file]
+file.copy(copy_origin, "../docs/", overwrite = T, copy.date = T)
+```
 
 
