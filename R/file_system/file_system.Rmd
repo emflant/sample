@@ -84,3 +84,37 @@ file.remove("B.txt")
 \
 \
 
+
+#### 특정 파일 검색후, 임의의 폴더에 복사.
+```{r}
+copy_origin <- list.files(Sys.getenv('R_WD'), full.names = T)[str_detect(list.files(), '^index.html$')]
+file.copy(copy_origin, "../docs/index.html", overwrite = T, copy.date = T)
+```
+\
+\
+\
+
+
+
+#### 특정폴더 하위의 파일들의 파일내용을 tibble 로 리턴.
+```{r}
+get_file_text <- function (p = "."){
+  dd <- list.files(p, full.names = T, recursive = T)
+  t_lines <- tibble(file = character(), line_number = double(), source = character())
+  
+  for(f_name in dd){
+    d1 <- read_lines(f_name)
+    t_file_source = tibble(file = rep(f_name, length(d1)), line_number = seq(length(d1)), source = d1)
+    t_lines <- bind_rows(t_lines, t_file_source)
+  }
+  t_lines # return
+}
+
+# 사용시, filter 로 특정 텍스트를 찾는다. str_detect 은 정규식을 사용가능함.
+file_text <- get_file_text()
+file_text %>%
+  filter(str_detect(source, "get_file_text"))
+```
+
+
+
