@@ -124,12 +124,15 @@ dd_t[c(31:40),]
 
 library(tidyverse)
 
+install.packages("tidyverse")
+
 t_lines
 getwd()
 
 dd <- list.files(full.names = T, recursive = T) # 61
 dd
 
+Sys.setlocale(category = "LC_CTYPE", locale = "ko_KR.UTF-8")
 
 ### 특정폴더 하위의 파일들의 파일내용을 tibble 로 리턴.
 get_file_text <- function (p = "."){
@@ -146,5 +149,9 @@ get_file_text <- function (p = "."){
 
 ddd <- get_file_text()
 d1 <- ddd %>%
-  filter(str_detect(source, "encoding"))
+  filter(str_detect(source, "local"))
 View(d1)
+
+R.home()
+R
+R.Version()
