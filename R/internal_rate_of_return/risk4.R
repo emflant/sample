@@ -119,25 +119,14 @@ norm_graph <- function (mean=0, sd=1, lb=NA, ub=NA, xpos = -0.02){
   }
   
 }
-.Machine$double.eps^0.25
+
+
 min.get_irr <- function (face, c, n, pv, i) {
   bond_pv_temp = sum(get_bond_pv(face, c, i, n)$pv)
   abs(pv - bond_pv_temp)
 }
 
 
-# $minimum
-# [1] 0.08417389
-# 
-# $objective
-# [1] 0.0001118496
-optimize(min.get_irr, 
-         interval = c(0,100), 
-         face = 80000, c = 0.1, n = 5, pv = 85000, 
-         tol = 1e-12)
 
-nlm(min.get_irr, 0, ndigit = 30, steptol = 1e-12,
-    face = 80000, c = 0.1, n = 5, pv = 85000)
 
-get_irr(f = 80000, c = 0.1, n = 5, pv = 85000) # 0.08417389
 

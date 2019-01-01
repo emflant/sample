@@ -24,7 +24,7 @@ list.files(R.home(), full.names = T)
 
 library(tidyverse)
 str_c(c("a", NA, "b"), "-d")
-
+search_file
 # [1] "covariance.nb.html|credit_card.nb.html|file_system.nb.html|index.html|interest_rate_risk.nb.html|normal_distribution.nb.html"
 str_c(list.files('../docs', '\\.html$'), collapse = "|")
 search_file <- str_detect(list.files(full.names = T, recursive = T), 

@@ -1,0 +1,105 @@
+---
+title: "Interest rate of return"
+output: html_notebook
+---
+
+
+```{r include = FALSE}
+### ris3.R 파일을 import 처리.
+source(file.path(getwd(), 'risk4.R')) # working directroy 
+options("scipen" = 100)
+# options("digits" = 7) 숫자 자리수 표현 늘일때.
+```
+
+### 채권의 현재가치(PV)
+
+input|description
+----|------
+f | 액면가(face value)  
+c | 표면이자율(coupon rate)  
+i | 할인율(시장이자율)  
+n | 기간  
+>채권가격 = 이자의 현재가치(C x pvifa(i,n)) + 액면가의 현재가치(F x pvif(i,n))
+
+```{r }
+get_bond_pv(10000000, 0.07, 0.1, 5)
+```
+
+
+```{r}
+sum(get_bond_pv(10000000, 0.07, 0.1, 5)$pv)
+```
+\
+\
+\
+
+
+### 무이표채(zero-coupon bond)
+```{r}
+get_bond_pv(10000000, 0, 0.1, 5)
+```
+
+
+```{r}
+sum(get_bond_pv(10000000, 0.07, 0.1, 5)$pv)
+```
+\
+\
+\
+
+
+### 내부수익률(IRR, internal rate of return)
+
+```{r}
+get_irr(100000, 0.07, 10, 80000)
+```
+\
+\
+
+
+
+### One Dimensional Optimization
+
+
+```{r}
+optimize(min.get_irr,
+         interval = c(0,100),
+         face = 100000, c = 0.07, n = 10, pv = 80000,
+         tol = 1e-12)
+```
+\
+\
+
+
+
+### Non-Linear Minimization  
+p 는 시작하는 파라메터 값인데, irr 구할때, coupon rate 와 동일하게 넣어서 찾는게 효율적일듯. 
+```{r}
+nlm(min.get_irr, p = 0.07, ndigit = 30, steptol = 1e-12,
+    face = 100000, c = 0.07, n = 10, pv = 80000)
+```
+
+
+
+
+
+
+```{r}
+# 0.1029648
+i_seq <- seq(0.102964, 0.102965, length.out = 1000)
+
+result = double()
+
+for (i in i_seq){
+  result = c(result, min.get_irr(face = 100000, c = 0.07, n = 10, pv = 80000, i = i))
+}
+
+t <- tibble(x = i_seq, y = result)
+plot(t, type = 'l')
+
+```
+### 도움말
+link : [R Markdown](http://rmarkdown.rstudio.com)  
+Insert Chunk : *Ctrl+Alt+I*  
+Preview : *Ctrl+Shift+K*
+

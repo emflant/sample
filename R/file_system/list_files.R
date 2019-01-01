@@ -149,7 +149,7 @@ get_file_text <- function (p = "."){
 
 ddd <- get_file_text()
 d1 <- ddd %>%
-  filter(str_detect(source, "local"))
+  filter(str_detect(source, "for"))
 View(d1)
 
 R.home()
