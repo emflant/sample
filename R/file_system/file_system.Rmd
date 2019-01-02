@@ -98,14 +98,21 @@ file.copy(copy_origin, "../docs/index.html", overwrite = T, copy.date = T)
 
 #### 특정폴더 하위의 파일들의 파일내용을 tibble 로 리턴.
 ```{r}
+library(tidyverse)
 get_file_text <- function (p = "."){
   dd <- list.files(p, full.names = T, recursive = T)
+  dd <- dd[!str_detect(dd, '/node_modules/')] # node_modules 제외
+  
   t_lines <- tibble(file = character(), line_number = double(), source = character())
   
   for(f_name in dd){
     d1 <- read_lines(f_name)
-    t_file_source = tibble(file = rep(f_name, length(d1)), line_number = seq(length(d1)), source = d1)
-    t_lines <- bind_rows(t_lines, t_file_source)
+    
+    # 파일 내용이 없으면 skip
+    if(length(d1) != 0){
+      t_file_source = tibble(file = rep(f_name, length(d1)), line_number = seq(length(d1)), source = d1)
+      t_lines <- bind_rows(t_lines, t_file_source)
+    }
   }
   t_lines # return
 }

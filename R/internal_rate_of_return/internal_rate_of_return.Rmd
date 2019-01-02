@@ -8,6 +8,7 @@ output: html_notebook
 ### ris3.R 파일을 import 처리.
 source(file.path(getwd(), 'risk4.R')) # working directroy 
 options("scipen" = 100)
+options(digits=12)
 # options("digits" = 7) 숫자 자리수 표현 늘일때.
 ```
 
@@ -65,17 +66,16 @@ get_irr(100000, 0.07, 10, 80000)
 optimize(min.get_irr,
          interval = c(0,100),
          face = 100000, c = 0.07, n = 10, pv = 80000,
-         tol = 1e-12)
+         tol = .Machine$double.eps)
 ```
 \
 \
 
 
-
 ### Non-Linear Minimization  
 p 는 시작하는 파라메터 값인데, irr 구할때, coupon rate 와 동일하게 넣어서 찾는게 효율적일듯. 
 ```{r}
-nlm(min.get_irr, p = 0.07, ndigit = 30, steptol = 1e-12,
+nlm(min.get_irr, p = 0.07, ndigit = 30, steptol = 1e-12, gradtol= 1e-20, 
     face = 100000, c = 0.07, n = 10, pv = 80000)
 ```
 
