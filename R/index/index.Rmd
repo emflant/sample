@@ -20,7 +20,16 @@ Try executing this chunk by clicking the *Run* button within the chunk or by pla
 plot(cars)
 ```
 
-Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Ctrl+Alt+I*.
+R books
+
+- [R for Data Science](https://r4ds.had.co.nz)
+- [Advanced R](https://adv-r.hadley.nz)
+- [Efficient R programming](https://csgillespie.github.io/efficientR/)
+
+R packages
+
+- [DiagrammeR](http://rich-iannone.github.io/DiagrammeR/index.html)
+
 
 When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Ctrl+Shift+K* to preview the HTML file).
 
