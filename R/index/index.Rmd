@@ -13,6 +13,7 @@ This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute
 - [normal distribution](./normal_distribution.nb.html)
 - [credit card](./credit_card.nb.html)
 - [file system](./file_system.nb.html)
+- [efficient programming](./efficient_programming.nb.html)
 
 Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Ctrl+Shift+Enter*. 
 

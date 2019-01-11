@@ -1,0 +1,125 @@
+---
+title: "Efficient programming"
+output: html_notebook
+---
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+
+Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Cmd+Shift+Enter*. 
+
+```{r}
+library(benchmarkme)
+library(microbenchmark)
+library(tidyverse)
+# benchmark_std()
+```
+
+
+##### Programming benchmarks (5 tests):
+	3,500,000 Fibonacci numbers calculation (vector calc): 0.282 (sec).
+	Grand common divisors of 1,000,000 pairs (recursion): 0.89 (sec).
+	Creation of a 3500x3500 Hilbert matrix (matrix calc): 0.389 (sec).
+	Creation of a 3000x3000 Toeplitz matrix (loops): 1.47 (sec).
+	Escoufier's method on a 60x60 matrix (mixed): 1.13 (sec).
+
+##### Matrix calculation benchmarks (5 tests):
+	Creation, transp., deformation of a 5000x5000 matrix: 0.683 (sec).
+	2500x2500 normal distributed random matrix ^1000: 0.144 (sec).
+	Sorting of 7,000,000 random values: 0.589 (sec).
+	2500x2500 cross-product matrix (b = a' * a): 7.22 (sec).
+	Linear regr. over a 3000x3000 matrix (c = a \ b'): 4.56 (sec).
+
+##### Matrix function benchmarks (5 tests):
+	Cholesky decomposition of a 3000x3000 matrix: 3.79 (sec).
+	Determinant of a 2500x2500 random matrix: 2.92 (sec).
+	Eigenvalues of a 640x640 random matrix: 0.658 (sec).
+	FFT over 2,500,000 random values: 0.326 (sec).
+	Inverse of a 1600x1600 random matrix: 2.56 (sec).
+
+
+```{r}
+method1 = function (n){
+  vec = NULL
+  for(i in seq_len(n)){
+    vec = c(vec, i)
+  }
+  vec
+}
+
+method2 = function(n){
+  vec = numeric(n)
+  for(i in seq_len(n)){
+    vec[i] = i
+  }
+  vec
+}
+
+method3 = function(n){
+  seq_len(n)
+}
+n = 10000
+microbenchmark(times = 100, unit = "s", method1(n), method2(n), method3(n))
+```
+
+
+
+```{r}
+sum(1:5)
+sum(1:5 < 2:6)
+1:5 < 2:6
+```
+
+
+```{r}
+data(movies, package = "ggplot2movies")
+ratings = movies[, 7:16]
+head(ratings)
+```
+
+
+```{r}
+popular = apply(ratings, 1, nnet::which.is.max)
+head(popular)
+```
+
+
+```{r}
+table(popular)
+```
+
+```{r}
+plot(table(popular))
+```
+
+
+```{r}
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
