@@ -17,10 +17,10 @@ library(lubridate)
 
 # get_tran_date("01/07", "2017-12-01", "2018-01-31")
 get_tran_date <- function (month_day, f_dt, t_dt){
-  if(as.double(str_extract(month_day, '\\d{2}')) == month(f_dt)){
-    str_c(year(f_dt), "-", str_replace_all(month_day, '/', '-'))
-  } else {
+  if(as.double(str_extract(month_day, '\\d{2}')) == month(t_dt)){
     str_c(year(t_dt), "-", str_replace_all(month_day, '/', '-'))
+  } else {
+    str_c(year(f_dt), "-", str_replace_all(month_day, '/', '-'))
   }
 }
 
@@ -43,32 +43,26 @@ hana_ex4 <- as_tibble(matrix(hana_ex3, ncol = 2, byrow = T))
 names(hana_ex4) = c('이용시작일', '이용종료일')
 hana_ex5 <- select(hana, c(2,3,4,7)) %>%
   bind_cols(hana_ex4)
-```
 
-```{r}
 kakko_sub1 <- kakko %>%
-  select(이용일, 가맹점명, 금액)
+  mutate(거래종류 = 'kakko') %>%
+  select(이용일, 가맹점명, 금액, 거래종류)
 kakko_sub1$이용일 <- as.character(kakko_sub1$이용일)
-```
 
-
-```{r}
 hana_sub1 <- list(hana_ex5$이용일자, hana_ex5$이용시작일, hana_ex5$이용종료일)
 hana_sub2 <- pmap(hana_sub1, get_tran_date)
 hana_sub3 <- as_tibble(unlist(hana_sub2))
 names(hana_sub3) <- c('거래일자')
 hana_sub4 <- bind_cols(hana_ex5, hana_sub3)
 
-
 hana_sub5 <- hana_sub4 %>%
-  select(거래일자, 이용가맹점, 원금) %>%
+  mutate(거래종류 = 'hana') %>%
+  select(거래일자, 이용가맹점, 원금, 거래종류) %>%
   arrange(거래일자, 이용가맹점, 원금)
 
-names(hana_sub5) <- c('이용일', '가맹점명', '금액')
+names(hana_sub5) <- c('이용일', '가맹점명', '금액', '거래종류')
 
 card_details <- bind_rows(kakko_sub1, hana_sub5)
-
-
 
 card_details_sum <- card_details %>%
   mutate(년월 = floor_date(ymd(이용일), "month")) %>%
