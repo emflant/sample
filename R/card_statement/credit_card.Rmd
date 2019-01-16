@@ -91,6 +91,20 @@ bind_cols(hana_final, kakko_final)
 plot(card_details_sum, type = 'l')
 ```
 
+```{r, echo=FALSE, cache=T, results='asis', comment=NA}
+hair_eye_male <- subset(as.data.frame(HairEyeColor), Sex == "Male")
+n1 <- nPlot(Freq ~ Hair, group = "Eye", data = hair_eye_male, # width = 600, 
+  type = 'multiBarChart')
+n1$print('iframesrc', cdn =TRUE, include_assets=TRUE)
+```
+
+```{r}
+theme_set(theme_gray(base_family="AppleGothic"))
+ggplot(card_details_sum, aes(년월, 월_이용금액)) + 
+  geom_col()
+
+```
+
 
 ```{r}
 fwf_sample <- readr_example("fwf-sample.txt")
@@ -124,7 +138,6 @@ read_fwf(fwf_sample, fwf_cols(name = c(1, 10), ssn = c(30, 42)))
 # 5. Named arguments with column widths
 read_fwf(fwf_sample, fwf_cols(name = 20, state = 10, ssn = 12))
 ```
-
 
 
 
