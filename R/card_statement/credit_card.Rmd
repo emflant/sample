@@ -99,7 +99,8 @@ n1$print('iframesrc', cdn =TRUE, include_assets=TRUE)
 ```
 
 ```{r}
-theme_set(theme_gray(base_family="AppleGothic"))
+# theme_set(theme_gray(base_family="AppleGothic"))
+theme_set(theme_bw(base_family="AppleGothic"))
 ggplot(card_details_sum, aes(년월, 월_이용금액)) + 
   geom_col()
 
