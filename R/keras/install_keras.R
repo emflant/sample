@@ -1,4 +1,4 @@
-install.packages("keras")
+# install.packages("keras")
 
 library(keras)
 library(tidyverse)
@@ -6,16 +6,12 @@ library(tidyverse)
 # install_keras()
 
 
-file_text <- get_file_text(getwd())
-r1 = file_text %>%
-  filter(str_detect(source, "saveRDS"))
 
 
 matrix(1:6, dim = c(2,3,1))
 
-array(rep(0, 2*3*4), dim = c(2,3,4))
+str(array(rep(0, 2*3*4), dim = c(2,3,4)))
 
-getwd()
 
 # http 로 가져오는 거라 많이 느림.
 # mnist = dataset_mnist()
