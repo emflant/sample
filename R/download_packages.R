@@ -17,12 +17,12 @@ getDependencies <- function(packs){
 # Calculate dependencies
 packages <- getDependencies(c("tidyverse", "mangoTraining"))
 
-
+getwd()
 
 
 # Download the packages to the working directory.
 # Package names and filenames are returned in a matrix.
-setwd("D:/my_usb/packages/")
+# setwd("D:/my_usb/packages/")
 pkgInfo <- download.packages(pkgs = packages, destdir = getwd(), type = "win.binary")
 # Save just the package file names (basename() strips off the full paths leaving just the filename)
 write.csv(file = "pkgFilenames.csv", basename(pkgInfo[, 2]), row.names = FALSE)

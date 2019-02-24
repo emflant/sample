@@ -38,7 +38,7 @@ as.POSIXct(Sys.time())
 
 as.POSIXlt(Sys.time(), tz = "Asia/Seoul")
 
-
+Sys.time()
 
 OlsonNames()
 
