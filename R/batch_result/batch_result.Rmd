@@ -8,12 +8,47 @@ This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute
 Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Cmd+Shift+Enter*. 
 
 ```{r}
-library(keras)
-library(tidyverse)
-Sys.setlocale("LC_CTYPE","ko_KR.UTF-8")
-Sys.setlocale(category = "LC_CTYPE", locale = "ko_KR.UTF-8")
-par(family="NanumGothic")
-getwd()
+library(lubridate)
+
+Sys.timezone()
+
+a = hms("03:45:08")
+
+a
+c = ymd("20190102") + days(1)
+c - ymd("20190101")
+as.duration()
+as.numeric(a, "seconds")
+as.numeric(a, "year")
+seconds(a)
+boundary = ymd_hms("2009-03-08 01:59:59",  tz="America/Chicago")
+boundary
+with_tz(boundary, tz = "UTC")
+x <- ymd_hms("2009-08-07 00:00:01", tz = "America/New_York")
+x
+tz(with_tz(x, "GMT"))
+
+tz(ymd_hms("2009-03-08 01:59:59"))
+OlsonNames()
+grepl("/", OlsonNames())
+table(sl <- grepl("/", OlsonNames()))
+sl <- grepl("/", OlsonNames())
+OlsonNames()[ !sl ]
+
+boundary + days(1)  # period
+boundary + ddays(1) # duration
+c
+b
+c - boundary
+
+a = ymd_hms("2019-01-02 01:59:59", tz="America/Chicago")
+a + days(1)
+
+a + ddays(1)
+
+ymd("2019-01-01") - days(17897)
+
+as.numeric(ymd("2019-01-01"), "hours")
 
 ```
 

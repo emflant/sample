@@ -1,0 +1,50 @@
+---
+title: "Dates and times with lubridate"
+output: html_notebook
+---
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+
+Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Cmd+Shift+Enter*. 
+
+```{r}
+hms("01:24:57")
+as.numeric(hms("01:24:57"), "hours")
+as.numeric(hms("01:24:57"), "minutes")
+as.numeric(hms("01:24:57"), "seconds")
+```
+
+
+
+```{r}
+gap <- ymd_hms("2018-03-11 01:30:00",tz="US/Eastern")
+gap + minutes(10) 
+gap + minutes(20) 
+gap + minutes(30) # 30~89분사이는 NA 결과로 산출.
+gap + minutes(90) 
+
+gap <- ymd_hms("2018-03-11 01:30:00",tz="US/Eastern")
+gap + dminutes(10)
+gap + dminutes(20)
+gap + dminutes(30)
+
+# 시간의 연속성상 기간. 써머타임(일광절약시간, daylight saving time)같은 경우가 고려됨.
+as.duration(interval(gap, gap + dminutes(30)))
+
+# 분으로 변환
+as.numeric(as.duration(interval(gap, gap + dminutes(30))), "minute")
+
+# 단순시간계산
+as.period(interval(gap, gap + dminutes(30)))
+
+# 분으로 변환
+as.numeric(as.period(interval(gap, gap + dminutes(30))), "minute")
+
+```
+
+Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Cmd+Option+I*.
+
+When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Cmd+Shift+K* to preview the HTML file). 
+
+The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike *Knit*, *Preview* does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.
+
