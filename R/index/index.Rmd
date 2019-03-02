@@ -15,11 +15,6 @@ This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute
 - [file system](./file_system.nb.html)
 - [efficient programming](./efficient_programming.nb.html)
 - [Dates and times with lubridate](./dates_and_times.nb.html)
-Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Ctrl+Shift+Enter*. 
-
-```{r}
-plot(cars)
-```
 
 R books
 
@@ -32,6 +27,23 @@ R packages
 - [DiagrammeR](http://rich-iannone.github.io/DiagrammeR/index.html)
 
 
-When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Ctrl+Shift+K* to preview the HTML file).
 
-The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike *Knit*, *Preview* does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.
+```{r include=FALSE}
+library(tidyverse)
+# show html files
+list.files('../../docs', pattern = '\\.html$', full.names = T)
+str_c(list.files('../../docs', pattern = '\\.html$'), collapse = "|")
+```
+
+```{r}
+# start copy html files
+search_file = str_detect(list.files(path = '..', 
+  full.names = T, recursive = T), 
+  str_c(list.files('../../docs', '\\.html$'), collapse = "|"))
+copy_origin = list.files(path = '..', 
+  full.names = T, recursive = T)[search_file]
+copy_index = file.copy(copy_origin, "../../docs/", overwrite = T, copy.date = T)
+
+# 복사완료 파일
+copy_origin[copy_index]
+```
