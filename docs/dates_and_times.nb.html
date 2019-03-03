@@ -243,8 +243,10 @@ $(document).ready(function () {
 <p>Try executing this chunk by clicking the <em>Run</em> button within the chunk or by placing your cursor inside it and pressing <em>Cmd+Shift+Enter</em>.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuaG1zKFwiMDE6MjQ6NTdcIilcbmBgYCJ9 -->
-<pre class="r"><code>hms(&quot;01:24:57&quot;)</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShsdWJyaWRhdGUpXG5saWJyYXJ5KHN0cmluZ3IpXG5obXMoXCIwMToyNDo1N1wiKVxuYGBgIn0= -->
+<pre class="r"><code>library(lubridate)
+library(stringr)
+hms(&quot;01:24:57&quot;)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiMUggMjRNIDU3U1wiXG4ifQ== -->
 <pre><code>[1] &quot;1H 24M 57S&quot;</code></pre>
@@ -322,8 +324,9 @@ as.duration(interval(gap, gap + dminutes(30)))</code></pre>
 <!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiMTgwMHMgKH4zMCBtaW51dGVzKVwiXG4ifQ== -->
 <pre><code>[1] &quot;1800s (~30 minutes)&quot;</code></pre>
 <!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYXMubnVtZXJpYyhhcy5kdXJhdGlvbihpbnRlcnZhbChnYXAsIGdhcCArIGRtaW51dGVzKDMwKSkpLCBcIm1pbnV0ZVwiKVxuYGBgIn0= -->
-<pre class="r"><code>as.numeric(as.duration(interval(gap, gap + dminutes(30))), &quot;minute&quot;)</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyDrtoTsnLzroZwg67OA7ZmYXG5hcy5udW1lcmljKGFzLmR1cmF0aW9uKGludGVydmFsKGdhcCwgZ2FwICsgZG1pbnV0ZXMoMzApKSksIFwibWludXRlXCIpXG5gYGAifQ== -->
+<pre class="r"><code># 분으로 변환
+as.numeric(as.duration(interval(gap, gap + dminutes(30))), &quot;minute&quot;)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-output-begin eyJkYXRhIjoiWzFdIDMwXG4ifQ== -->
 <pre><code>[1] 30</code></pre>
@@ -335,11 +338,35 @@ as.period(interval(gap, gap + dminutes(30)))</code></pre>
 <!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiMUggMzBNIDBTXCJcbiJ9 -->
 <pre><code>[1] &quot;1H 30M 0S&quot;</code></pre>
 <!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYXMubnVtZXJpYyhhcy5wZXJpb2QoaW50ZXJ2YWwoZ2FwLCBnYXAgKyBkbWludXRlcygzMCkpKSwgXCJtaW51dGVcIilcbmBgYCJ9 -->
-<pre class="r"><code>as.numeric(as.period(interval(gap, gap + dminutes(30))), &quot;minute&quot;)</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyDrtoTsnLzroZwg67OA7ZmYXG5hcy5udW1lcmljKGFzLnBlcmlvZChpbnRlcnZhbChnYXAsIGdhcCArIGRtaW51dGVzKDMwKSkpLCBcIm1pbnV0ZVwiKVxuYGBgIn0= -->
+<pre class="r"><code># 분으로 변환
+as.numeric(as.period(interval(gap, gap + dminutes(30))), &quot;minute&quot;)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-output-begin eyJkYXRhIjoiWzFdIDkwXG4ifQ== -->
 <pre><code>[1] 90</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyDsi5zqsITrjIAg67OA6rK9IO2FjOyKpO2KuFxuYm91bmRhcnkgPSB5bWRfaG1zKFwiMjAwOS0wMy0wOCAwMTo1OTo1OVwiLCAgdHo9XCJBc2lhL1Nlb3VsXCIpXG5ib3VuZGFyeVxuYGBgIn0= -->
+<pre class="r"><code># 시간대 변경 테스트
+boundary = ymd_hms(&quot;2009-03-08 01:59:59&quot;,  tz=&quot;Asia/Seoul&quot;)
+boundary</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiMjAwOS0wMy0wOCAwMTo1OTo1OSBLU1RcIlxuIn0= -->
+<pre><code>[1] &quot;2009-03-08 01:59:59 KST&quot;</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyDsi5zqsITrjIAg67OA6rK9IO2FjOyKpO2KuFxud2l0aF90eihib3VuZGFyeSwgdHogPSBcIlVDVFwiKVxuYGBgIn0= -->
+<pre class="r"><code># 시간대 변경 테스트
+with_tz(boundary, tz = &quot;UCT&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiMjAwOS0wMy0wNyAxNjo1OTo1OSBVQ1RcIlxuIn0= -->
+<pre><code>[1] &quot;2009-03-07 16:59:59 UCT&quot;</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuaW5keCA9IE9sc29uTmFtZXMoKSAlPiUgXG4gIHN0cl9kZXRlY3QoJ1Nlb3VsJykgIFxuT2xzb25OYW1lcygpW2luZHhdXG5gYGAifQ== -->
+<pre class="r"><code>indx = OlsonNames() %&gt;% 
+  str_detect('Seoul')  
+OlsonNames()[indx]</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiQXNpYS9TZW91bFwiXG4ifQ== -->
+<pre><code>[1] &quot;Asia/Seoul&quot;</code></pre>
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
@@ -348,7 +375,7 @@ as.period(interval(gap, gap + dminutes(30)))</code></pre>
 <p>The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike <em>Knit</em>, <em>Preview</em> does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.</p>
 <!-- rnb-text-end -->
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiRGF0ZXMgYW5kIHRpbWVzIHdpdGggbHVicmlkYXRlIgpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sKLS0tCgpUaGlzIGlzIGFuIFtSIE1hcmtkb3duXShodHRwOi8vcm1hcmtkb3duLnJzdHVkaW8uY29tKSBOb3RlYm9vay4gV2hlbiB5b3UgZXhlY3V0ZSBjb2RlIHdpdGhpbiB0aGUgbm90ZWJvb2ssIHRoZSByZXN1bHRzIGFwcGVhciBiZW5lYXRoIHRoZSBjb2RlLiAKClRyeSBleGVjdXRpbmcgdGhpcyBjaHVuayBieSBjbGlja2luZyB0aGUgKlJ1biogYnV0dG9uIHdpdGhpbiB0aGUgY2h1bmsgb3IgYnkgcGxhY2luZyB5b3VyIGN1cnNvciBpbnNpZGUgaXQgYW5kIHByZXNzaW5nICpDbWQrU2hpZnQrRW50ZXIqLiAKCmBgYHtyfQpobXMoIjAxOjI0OjU3IikKYXMubnVtZXJpYyhobXMoIjAxOjI0OjU3IiksICJob3VycyIpCmFzLm51bWVyaWMoaG1zKCIwMToyNDo1NyIpLCAibWludXRlcyIpCmFzLm51bWVyaWMoaG1zKCIwMToyNDo1NyIpLCAic2Vjb25kcyIpCmBgYAoKCgpgYGB7cn0KZ2FwIDwtIHltZF9obXMoIjIwMTgtMDMtMTEgMDE6MzA6MDAiLHR6PSJVUy9FYXN0ZXJuIikKZ2FwICsgbWludXRlcygxMCkgCmdhcCArIG1pbnV0ZXMoMjApIApnYXAgKyBtaW51dGVzKDMwKSAjIDMwfjg567aE7IKs7J2064qUIE5BIOqysOqzvOuhnCDsgrDstpwuCmdhcCArIG1pbnV0ZXMoOTApIAoKZ2FwIDwtIHltZF9obXMoIjIwMTgtMDMtMTEgMDE6MzA6MDAiLHR6PSJVUy9FYXN0ZXJuIikKZ2FwICsgZG1pbnV0ZXMoMTApCmdhcCArIGRtaW51dGVzKDIwKQpnYXAgKyBkbWludXRlcygzMCkKCiMg7Iuc6rCE7J2YIOyXsOyGjeyEseyDgSDquLDqsIQuIOyNqOuouO2DgOyehCjsnbzqtJHsoIjslb3si5zqsIQsIGRheWxpZ2h0IHNhdmluZyB0aW1lKeqwmeydgCDqsr3smrDqsIAg6rOg66Ck65CoLgphcy5kdXJhdGlvbihpbnRlcnZhbChnYXAsIGdhcCArIGRtaW51dGVzKDMwKSkpCgojIOu2hOycvOuhnCDrs4DtmZgKYXMubnVtZXJpYyhhcy5kdXJhdGlvbihpbnRlcnZhbChnYXAsIGdhcCArIGRtaW51dGVzKDMwKSkpLCAibWludXRlIikKCiMg64uo7Iic7Iuc6rCE6rOE7IKwCmFzLnBlcmlvZChpbnRlcnZhbChnYXAsIGdhcCArIGRtaW51dGVzKDMwKSkpCgojIOu2hOycvOuhnCDrs4DtmZgKYXMubnVtZXJpYyhhcy5wZXJpb2QoaW50ZXJ2YWwoZ2FwLCBnYXAgKyBkbWludXRlcygzMCkpKSwgIm1pbnV0ZSIpCgpgYGAKCkFkZCBhIG5ldyBjaHVuayBieSBjbGlja2luZyB0aGUgKkluc2VydCBDaHVuayogYnV0dG9uIG9uIHRoZSB0b29sYmFyIG9yIGJ5IHByZXNzaW5nICpDbWQrT3B0aW9uK0kqLgoKV2hlbiB5b3Ugc2F2ZSB0aGUgbm90ZWJvb2ssIGFuIEhUTUwgZmlsZSBjb250YWluaW5nIHRoZSBjb2RlIGFuZCBvdXRwdXQgd2lsbCBiZSBzYXZlZCBhbG9uZ3NpZGUgaXQgKGNsaWNrIHRoZSAqUHJldmlldyogYnV0dG9uIG9yIHByZXNzICpDbWQrU2hpZnQrSyogdG8gcHJldmlldyB0aGUgSFRNTCBmaWxlKS4gCgpUaGUgcHJldmlldyBzaG93cyB5b3UgYSByZW5kZXJlZCBIVE1MIGNvcHkgb2YgdGhlIGNvbnRlbnRzIG9mIHRoZSBlZGl0b3IuIENvbnNlcXVlbnRseSwgdW5saWtlICpLbml0KiwgKlByZXZpZXcqIGRvZXMgbm90IHJ1biBhbnkgUiBjb2RlIGNodW5rcy4gSW5zdGVhZCwgdGhlIG91dHB1dCBvZiB0aGUgY2h1bmsgd2hlbiBpdCB3YXMgbGFzdCBydW4gaW4gdGhlIGVkaXRvciBpcyBkaXNwbGF5ZWQuCgo=</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiRGF0ZXMgYW5kIHRpbWVzIHdpdGggbHVicmlkYXRlIgpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sKLS0tCgpUaGlzIGlzIGFuIFtSIE1hcmtkb3duXShodHRwOi8vcm1hcmtkb3duLnJzdHVkaW8uY29tKSBOb3RlYm9vay4gV2hlbiB5b3UgZXhlY3V0ZSBjb2RlIHdpdGhpbiB0aGUgbm90ZWJvb2ssIHRoZSByZXN1bHRzIGFwcGVhciBiZW5lYXRoIHRoZSBjb2RlLiAKClRyeSBleGVjdXRpbmcgdGhpcyBjaHVuayBieSBjbGlja2luZyB0aGUgKlJ1biogYnV0dG9uIHdpdGhpbiB0aGUgY2h1bmsgb3IgYnkgcGxhY2luZyB5b3VyIGN1cnNvciBpbnNpZGUgaXQgYW5kIHByZXNzaW5nICpDbWQrU2hpZnQrRW50ZXIqLiAKCmBgYHtyfQpsaWJyYXJ5KGx1YnJpZGF0ZSkKbGlicmFyeShzdHJpbmdyKQoKaG1zKCIwMToyNDo1NyIpCmFzLm51bWVyaWMoaG1zKCIwMToyNDo1NyIpLCAiaG91cnMiKQphcy5udW1lcmljKGhtcygiMDE6MjQ6NTciKSwgIm1pbnV0ZXMiKQphcy5udW1lcmljKGhtcygiMDE6MjQ6NTciKSwgInNlY29uZHMiKQpgYGAKCgoKYGBge3J9CmdhcCA8LSB5bWRfaG1zKCIyMDE4LTAzLTExIDAxOjMwOjAwIix0ej0iVVMvRWFzdGVybiIpCmdhcCArIG1pbnV0ZXMoMTApIApnYXAgKyBtaW51dGVzKDIwKSAKZ2FwICsgbWludXRlcygzMCkgIyAzMH44Oeu2hOyCrOydtOuKlCBOQSDqsrDqs7zroZwg7IKw7LacLgpnYXAgKyBtaW51dGVzKDkwKSAKCmdhcCA8LSB5bWRfaG1zKCIyMDE4LTAzLTExIDAxOjMwOjAwIix0ej0iVVMvRWFzdGVybiIpCmdhcCArIGRtaW51dGVzKDEwKQpnYXAgKyBkbWludXRlcygyMCkKZ2FwICsgZG1pbnV0ZXMoMzApCgojIOyLnOqwhOydmCDsl7Dsho3shLHsg4Eg6riw6rCELiDsjajrqLjtg4DsnoQo7J286rSR7KCI7JW97Iuc6rCELCBkYXlsaWdodCBzYXZpbmcgdGltZSnqsJnsnYAg6rK97Jqw6rCAIOqzoOugpOuQqC4KYXMuZHVyYXRpb24oaW50ZXJ2YWwoZ2FwLCBnYXAgKyBkbWludXRlcygzMCkpKQoKIyDrtoTsnLzroZwg67OA7ZmYCmFzLm51bWVyaWMoYXMuZHVyYXRpb24oaW50ZXJ2YWwoZ2FwLCBnYXAgKyBkbWludXRlcygzMCkpKSwgIm1pbnV0ZSIpCgojIOuLqOyInOyLnOqwhOqzhOyCsAphcy5wZXJpb2QoaW50ZXJ2YWwoZ2FwLCBnYXAgKyBkbWludXRlcygzMCkpKQoKIyDrtoTsnLzroZwg67OA7ZmYCmFzLm51bWVyaWMoYXMucGVyaW9kKGludGVydmFsKGdhcCwgZ2FwICsgZG1pbnV0ZXMoMzApKSksICJtaW51dGUiKQoKIyDsi5zqsITrjIAg67OA6rK9IO2FjOyKpO2KuApib3VuZGFyeSA9IHltZF9obXMoIjIwMDktMDMtMDggMDE6NTk6NTkiLCAgdHo9IkFzaWEvU2VvdWwiKQpib3VuZGFyeQojIOyLnOqwhOuMgCDrs4Dqsr0g7YWM7Iqk7Yq4CndpdGhfdHooYm91bmRhcnksIHR6ID0gIlVDVCIpCgoKaW5keCA9IE9sc29uTmFtZXMoKSAlPiUgCiAgc3RyX2RldGVjdCgnU2VvdWwnKSAgCk9sc29uTmFtZXMoKVtpbmR4XQoKYGBgCgpBZGQgYSBuZXcgY2h1bmsgYnkgY2xpY2tpbmcgdGhlICpJbnNlcnQgQ2h1bmsqIGJ1dHRvbiBvbiB0aGUgdG9vbGJhciBvciBieSBwcmVzc2luZyAqQ21kK09wdGlvbitJKi4KCldoZW4geW91IHNhdmUgdGhlIG5vdGVib29rLCBhbiBIVE1MIGZpbGUgY29udGFpbmluZyB0aGUgY29kZSBhbmQgb3V0cHV0IHdpbGwgYmUgc2F2ZWQgYWxvbmdzaWRlIGl0IChjbGljayB0aGUgKlByZXZpZXcqIGJ1dHRvbiBvciBwcmVzcyAqQ21kK1NoaWZ0K0sqIHRvIHByZXZpZXcgdGhlIEhUTUwgZmlsZSkuIAoKVGhlIHByZXZpZXcgc2hvd3MgeW91IGEgcmVuZGVyZWQgSFRNTCBjb3B5IG9mIHRoZSBjb250ZW50cyBvZiB0aGUgZWRpdG9yLiBDb25zZXF1ZW50bHksIHVubGlrZSAqS25pdCosICpQcmV2aWV3KiBkb2VzIG5vdCBydW4gYW55IFIgY29kZSBjaHVua3MuIEluc3RlYWQsIHRoZSBvdXRwdXQgb2YgdGhlIGNodW5rIHdoZW4gaXQgd2FzIGxhc3QgcnVuIGluIHRoZSBlZGl0b3IgaXMgZGlzcGxheWVkLgoK</div>
 
 
 
