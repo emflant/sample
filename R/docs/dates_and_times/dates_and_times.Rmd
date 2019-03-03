@@ -8,6 +8,7 @@ This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute
 Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Cmd+Shift+Enter*. 
 
 ```{r}
+library(lubridate)
 hms("01:24:57")
 as.numeric(hms("01:24:57"), "hours")
 as.numeric(hms("01:24:57"), "minutes")
@@ -40,6 +41,16 @@ as.period(interval(gap, gap + dminutes(30)))
 # 분으로 변환
 as.numeric(as.period(interval(gap, gap + dminutes(30))), "minute")
 
+# 시간대 변경 테스트
+boundary = ymd_hms("2009-03-08 01:59:59",  tz="Asia/Seoul")
+boundary
+# 시간대 변경 테스트
+with_tz(boundary, tz = "UTC")
+
+library(stringr)
+
+OlsonNames() %>% 
+  str_detect('^Asia')  
 ```
 
 Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Cmd+Option+I*.

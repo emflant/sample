@@ -1,12 +1,12 @@
 library(tidyverse)
 library(lubridate)
 
-
-
-getwd()
 batch_result = read.delim(file.path( "..", "..", "data", "batch_201901.txt"), stringsAsFactors = F)
 batch_result = as.tibble(batch_result)
 str(batch_result)
+
+batch_result %>% 
+  print(n = 5, width = Inf)
 
 work_date = batch_result %>% 
   filter(JOB명 == "IMSRSAH0000-자산건전성매일배치", 실행시간 != "") %>% 
@@ -32,4 +32,26 @@ r1 = result %>%
   mutate(duration = as.numeric(as.duration(interval(ymd_hms(start_time), ymd_hms(end_time))), "hours"))
 
 mean(r1$duration)
+
+
+
+
+batch_result %>% 
+  group_by(JOB명) %>% 
+  mutate(n()) %>% 
+  View
+
+n_batch  = batch_result %>% 
+  group_by(JOB명) %>% 
+  nest()
+
+n_batch %>% 
+  filter(JOB명 == "EDW_ODS_JOB") %>% 
+  mutate(n1 = nrow(data))
+
+n_batch %>% 
+  mutate(n1 = map(data, function(df) nrow(df)))
+
+n_batch %>% 
+  mutate(n1 = map_dbl(data, function(df) nrow(df)))
 
