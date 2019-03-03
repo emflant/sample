@@ -9,6 +9,8 @@ Try executing this chunk by clicking the *Run* button within the chunk or by pla
 
 ```{r}
 library(lubridate)
+library(stringr)
+
 hms("01:24:57")
 as.numeric(hms("01:24:57"), "hours")
 as.numeric(hms("01:24:57"), "minutes")
@@ -45,12 +47,13 @@ as.numeric(as.period(interval(gap, gap + dminutes(30))), "minute")
 boundary = ymd_hms("2009-03-08 01:59:59",  tz="Asia/Seoul")
 boundary
 # 시간대 변경 테스트
-with_tz(boundary, tz = "UTC")
+with_tz(boundary, tz = "UCT")
 
-library(stringr)
 
-OlsonNames() %>% 
-  str_detect('^Asia')  
+indx = OlsonNames() %>% 
+  str_detect('Seoul')  
+OlsonNames()[indx]
+
 ```
 
 Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Cmd+Option+I*.

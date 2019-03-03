@@ -31,18 +31,18 @@ R packages
 ```{r include=FALSE}
 library(tidyverse)
 # show html files
-list.files('../../docs', pattern = '\\.html$', full.names = T)
-str_c(list.files('../../docs', pattern = '\\.html$'), collapse = "|")
+list.files('../../../docs', pattern = '\\.html$', full.names = T)
+str_c(list.files('../../../docs', pattern = '\\.html$'), collapse = "|")
 ```
 
 ```{r}
 # start copy html files
 search_file = str_detect(list.files(path = '..', 
   full.names = T, recursive = T), 
-  str_c(list.files('../../docs', '\\.html$'), collapse = "|"))
+  str_c(list.files('../../../docs', '\\.html$'), collapse = "|"))
 copy_origin = list.files(path = '..', 
   full.names = T, recursive = T)[search_file]
-copy_index = file.copy(copy_origin, "../../docs/", overwrite = T, copy.date = T)
+copy_index = file.copy(copy_origin, "../../../docs/", overwrite = T, copy.date = T)
 
 # 복사완료 파일
 copy_origin[copy_index]
