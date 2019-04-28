@@ -155,3 +155,14 @@ View(d1)
 R.home()
 R
 R.Version()
+
+
+
+library(tidyverse)
+dd <- as_tibble(system('ps -ef', intern = T))
+dd
+dd %>%
+  filter(str_detect(value, 'login'))
+
+filter(dd, str_detect('login'))  
+dd[str_detect(dd, 'selenium')]
