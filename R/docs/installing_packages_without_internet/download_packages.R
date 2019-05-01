@@ -15,17 +15,18 @@ getDependencies <- function(packs){
   packageNames
 }
 # Calculate dependencies
-packages <- getDependencies(c("tidyverse", "mangoTraining"))
+packages <- getDependencies(c("tidyverse", "rmarkdown", "lubridate", "mongolite", "DBI", "readxl", 
+                              "jsonlite", "xml2", "httr", "rvest"))
 
-getwd()
-
+# file.path(getwd(), "lib", "pkgFilenames.csv")
 
 # Download the packages to the working directory.
 # Package names and filenames are returned in a matrix.
 # setwd("D:/my_usb/packages/")
-pkgInfo <- download.packages(pkgs = packages, destdir = getwd(), type = "win.binary")
+pkgInfo <- download.packages(pkgs = packages, destdir = file.path(getwd(), "lib"), type = "win.binary")
 # Save just the package file names (basename() strips off the full paths leaving just the filename)
-write.csv(file = "pkgFilenames.csv", basename(pkgInfo[, 2]), row.names = FALSE)
+write.csv(file = file.path(getwd(), "lib", "pkgFilenames.csv"), 
+          basename(pkgInfo[, 2]), row.names = FALSE)
 
 
 # Set working directory to the location of the package files
