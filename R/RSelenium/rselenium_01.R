@@ -1,5 +1,7 @@
 install.packages("RSelenium")
 library(RSelenium)
+library(ps)
+ps()
 
 # java -jar $WORKSPACE/sample/R/RSelenium/selenium-server-standalone-3.9.1.jar
 remDr <- remoteDriver(

@@ -15,8 +15,10 @@ getDependencies <- function(packs){
   packageNames
 }
 # Calculate dependencies
-packages <- getDependencies(c("tidyverse", "rmarkdown", "lubridate", "mongolite", "DBI", "readxl", 
-                              "jsonlite", "xml2", "httr", "rvest"))
+packages <- getDependencies(c("tidyverse", "rmarkdown", "lubridate", 
+                              "mongolite", "DBI", "readxl", 
+                              "jsonlite", "xml2", "httr", 
+                              "rvest"))
 
 # file.path(getwd(), "lib", "pkgFilenames.csv")
 
