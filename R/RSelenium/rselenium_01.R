@@ -1,7 +1,12 @@
 install.packages("RSelenium")
 library(RSelenium)
 library(ps)
+library(tidyverse)
+
 ps()
+ps() %>%
+  str_detect(name, "123r")
+  
 
 # java -jar $WORKSPACE/sample/R/RSelenium/selenium-server-standalone-3.9.1.jar
 remDr <- remoteDriver(

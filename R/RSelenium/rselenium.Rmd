@@ -1,0 +1,19 @@
+---
+title: "R Selenium"
+output:
+  html_document:
+    df_print: paged
+---
+#### Running Selenium Server
+If I intend to drive a browser on the machine that RSelenium is running on, I need to have a ***Selenium Server*** running on the machine. The Selenium Server is needed in order to run Remote Selenium WebDriver.
+
+- Selenium RC (Remote Control)
+
+- Download Selenium Standalone Server file. Click  [here](https://www.seleniumhq.org/download/).
+
+- Open a console in my mashine and navigate to where the selenium Standalone Server jar file is located and run this code:
+
+```{text}
+java -jar selenium-server-standalone-x.xx.x.jar
+```
+
