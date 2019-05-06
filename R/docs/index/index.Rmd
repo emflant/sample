@@ -22,11 +22,23 @@ R books
 - [R for Data Science](https://r4ds.had.co.nz)
 - [Advanced R](https://adv-r.hadley.nz)
 - [Efficient R programming](https://csgillespie.github.io/efficientR/)
+- [R Graphics Cookbook](https://r-graphics.org)
+- [Geocomputation with R](https://geocompr.robinlovelace.net)
+- [Text Mining with R](https://www.tidytextmining.com)
+- [R Markdown: The Definitive Guide](https://bookdown.org/yihui/rmarkdown/)
+- [blogdown: Creating Websites with R Markdown](https://bookdown.org/yihui/blogdown/)
+- [bookdown: Authoring Books and Technical Documents with R Markdown](https://bookdown.org/yihui/bookdown/)
+- [Data Science at the Command Line](https://www.datascienceatthecommandline.com)
+- [R Programming for Data Science](https://bookdown.org/rdpeng/rprogdatascience/)
+- [Data Visualization](https://socviz.co)
+- [Fundamentals of Data Visualization](https://serialmentor.com/dataviz/)
+- [Statistical Inference via Data Science](https://moderndive.com)
+- [Hands-On Programming with R](https://rstudio-education.github.io/hopr/)
 
 R packages
 
 - [DiagrammeR](http://rich-iannone.github.io/DiagrammeR/index.html)
-
+- [bookdown](https://bookdown.org)
 
 
 ```{r include=FALSE}
