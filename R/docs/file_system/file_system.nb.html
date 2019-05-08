@@ -243,15 +243,17 @@ $(document).ready(function () {
 <p>Try executing this chunk by clicking the <em>Run</em> button within the chunk or by placing your cursor inside it and pressing <em>Cmd+Shift+Enter</em>.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZmlsZS5wYXRoKFwiRjpcIiwgXCJnaXRcIiwgXCJyb3h5Z2VuMlwiLCBcInJveHlnZW4yXCIsIFwiUkVBRE1FLm1kXCIgKVxuYGBgIn0= -->
-<pre class="r"><code>file.path(&quot;F:&quot;, &quot;git&quot;, &quot;roxygen2&quot;, &quot;roxygen2&quot;, &quot;README.md&quot; )</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxuZmlsZS5wYXRoKFxcRjpcXCwgXFxnaXRcXCwgXFxyb3h5Z2VuMlxcLCBcXHJveHlnZW4yXFwsIFxcUkVBRE1FLm1kXFwgKVxuYGBgXG5gYGAifQ== -->
+<p><code>r</code>r file.path(:, , 2, 2, .md )</p>
+<pre><code></code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZmlsZS5wYXRoKFwiLi5cIiwgYyhcIkFcIiwgXCJCXCIpLCBjKFwidG1wLnR4dFwiLFwiMTIzLnR4dFwiKSlcbmBgYCJ9 -->
-<pre class="r"><code>file.path(&quot;..&quot;, c(&quot;A&quot;, &quot;B&quot;), c(&quot;tmp.txt&quot;,&quot;123.txt&quot;))</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxuZmlsZS5wYXRoKFxcLi5cXCwgYyhcXEFcXCwgXFxCXFwpLCBjKFxcdG1wLnR4dFxcLFxcMTIzLnR4dFxcKSlcbmBgYFxuYGBgIn0= -->
+<p><code>r</code>r file.path(.., c(, ), c(.txt,23.txt))</p>
+<pre><code></code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
@@ -263,9 +265,9 @@ $(document).ready(function () {
 <h4>파일 생성하기</h4>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY2F0KFwiZmlsZSBBXFxuXCIsIGZpbGUgPSBcIkEudHh0XCIpICMgZmlsZSBBIOuCtOyaqeydmCDtjIzsnbwg7IOd7ISxXG5jYXQoXCJmaWxlIEJcXG5cIiwgZmlsZSA9IFwiQi50eHRcIilcbmBgYCJ9 -->
-<pre class="r"><code>cat(&quot;file A\n&quot;, file = &quot;A.txt&quot;) # file A 내용의 파일 생성
-cat(&quot;file B\n&quot;, file = &quot;B.txt&quot;)</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxuY2F0KFxcZmlsZSBBXFxuXFwsIGZpbGUgPSBcXEEudHh0XFwpICMgZmlsZSBBIOuCtOyaqeydmCDtjIzsnbwg7IOd7ISxXG5jYXQoXFxmaWxlIEJcXG5cXCwgZmlsZSA9IFxcQi50eHRcXClcbmBgYFxuYGBgIn0= -->
+<p><code>r</code>r cat(A, file = .txt) # file A 내용의 파일 생성 cat(B, file = .txt)</p>
+<pre><code></code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
@@ -278,8 +280,9 @@ cat(&quot;file B\n&quot;, file = &quot;B.txt&quot;)</code></pre>
 <h4>A.txt 파일에 B.txt 파일내용을 덧붙일때,</h4>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZmlsZS5hcHBlbmQoXCJBLnR4dFwiLCBcIkIudHh0XCIpXG5gYGAifQ== -->
-<pre class="r"><code>file.append(&quot;A.txt&quot;, &quot;B.txt&quot;)</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxuZmlsZS5hcHBlbmQoXFxBLnR4dFxcLCBcXEIudHh0XFwpXG5gYGBcbmBgYCJ9 -->
+<p><code>r</code>r file.append(.txt, .txt)</p>
+<pre><code></code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
@@ -292,10 +295,9 @@ cat(&quot;file B\n&quot;, file = &quot;B.txt&quot;)</code></pre>
 <h4>여러번 파일내용을 동일하게 붙여넣기.</h4>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZmlsZS5jcmVhdGUoXCJBLnR4dFwiKSAjIOu5iCDtjIzsnbwg7IOd7ISxLlxuZmlsZS5hcHBlbmQoXCJBLnR4dFwiLCBjKFwiQi50eHRcIiwgXCJCLnR4dFwiKSkgIyBCLnR4dCDtjIzsnbzrgrTsmqkgMuuyiCDrtpnsl6zrhKPquLAuXG5maWxlLmFwcGVuZChcIkEudHh0XCIsIHJlcChcIkIudHh0XCIsIDEwKSkgIyAxMOuyiCDrsJjrs7Ug67aZ7Jes64Sj6riwLlxuYGBgIn0= -->
-<pre class="r"><code>file.create(&quot;A.txt&quot;) # 빈 파일 생성.
-file.append(&quot;A.txt&quot;, c(&quot;B.txt&quot;, &quot;B.txt&quot;)) # B.txt 파일내용 2번 붙여넣기.
-file.append(&quot;A.txt&quot;, rep(&quot;B.txt&quot;, 10)) # 10번 반복 붙여넣기.</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxuZmlsZS5jcmVhdGUoXFxBLnR4dFxcKSAjIOu5iCDtjIzsnbwg7IOd7ISxLlxuZmlsZS5hcHBlbmQoXFxBLnR4dFxcLCBjKFxcQi50eHRcXCwgXFxCLnR4dFxcKSkgIyBCLnR4dCDtjIzsnbzrgrTsmqkgMuuyiCDrtpnsl6zrhKPquLAuXG5maWxlLmFwcGVuZChcXEEudHh0XFwsIHJlcChcXEIudHh0XFwsIDEwKSkgIyAxMOuyiCDrsJjrs7Ug67aZ7Jes64Sj6riwLlxuYGBgXG5gYGAifQ== -->
+<p><code>r</code>r file.create(.txt) # 빈 파일 생성. file.append(.txt, c(.txt, .txt)) # B.txt 파일내용 2번 붙여넣기. file.append(.txt, rep(.txt, 10)) # 10번 반복 붙여넣기.</p>
+<pre><code></code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
@@ -308,9 +310,9 @@ file.append(&quot;A.txt&quot;, rep(&quot;B.txt&quot;, 10)) # 10번 반복 붙여
 <h4>파일내용 확인. (r studio에서)</h4>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuaWYoaW50ZXJhY3RpdmUoKSkgZmlsZS5zaG93KFwiQS50eHRcIilcblxuYGBgIn0= -->
-<pre class="r"><code>if(interactive()) file.show(&quot;A.txt&quot;)
-</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxuaWYoaW50ZXJhY3RpdmUoKSkgZmlsZS5zaG93KFxcQS50eHRcXClcblxuYGBgXG5gYGAifQ== -->
+<p><code>r</code>r if(interactive()) file.show(.txt)</p>
+<pre><code></code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
@@ -323,30 +325,27 @@ file.append(&quot;A.txt&quot;, rep(&quot;B.txt&quot;, 10)) # 10번 반복 붙여
 <h4>파일 copy</h4>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZmlsZS5jb3B5KFwiQS50eHRcIiwgXCJDLnR4dFwiLCBvdmVyd3JpdGUgPSBULCBjb3B5LmRhdGUgPSBUKSAjIOuPmeydvO2VnCDtjIzsnbwg7IOd7ISxL+yImOyglS/soJHqt7zsnbzsi5zquYzsp4Ag67O17IKsLlxuZmlsZS5pbmZvKGMoXCJBLnR4dFwiLCBcIkMudHh0XCIpKVxuXG5kaXIuY3JlYXRlKFwidG1wXCIpXG5saXN0LmZpbGVzKFwidG1wXCIpXG5cbiMg65GQ6rCc7YyM7J287J2EIHRtcCDtj7TrjZTtlZjsnITsl5Ag67O17IKsLlxuZmlsZS5jb3B5KGMoXCJBLnR4dFwiLCBcIkIudHh0XCIpLCBcInRtcFwiKSAjIG92ZXJ3cml0ZSA9IEYsIGNvcHkuZGF0ZSA9IEZcbmxpc3QuZmlsZXMoXCJ0bXBcIilcblxuYGBgIn0= -->
-<pre class="r"><code>file.copy(&quot;A.txt&quot;, &quot;C.txt&quot;, overwrite = T, copy.date = T) # 동일한 파일 생성/수정/접근일시까지 복사.
-file.info(c(&quot;A.txt&quot;, &quot;C.txt&quot;))
-
-dir.create(&quot;tmp&quot;)
-list.files(&quot;tmp&quot;)
-
-# 두개파일을 tmp 폴더하위에 복사.
-file.copy(c(&quot;A.txt&quot;, &quot;B.txt&quot;), &quot;tmp&quot;) # overwrite = F, copy.date = F
-list.files(&quot;tmp&quot;)
-</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxuZmlsZS5jb3B5KFxcQS50eHRcXCwgXFxDLnR4dFxcLCBvdmVyd3JpdGUgPSBULCBjb3B5LmRhdGUgPSBUKSAjIOuPmeydvO2VnCDtjIzsnbwg7IOd7ISxL+yImOyglS/soJHqt7zsnbzsi5zquYzsp4Ag67O17IKsLlxuZmlsZS5pbmZvKGMoXFxBLnR4dFxcLCBcXEMudHh0XFwpKVxuXG5kaXIuY3JlYXRlKFxcdG1wXFwpXG5saXN0LmZpbGVzKFxcdG1wXFwpXG5cbiMg65GQ6rCc7YyM7J287J2EIHRtcCDtj7TrjZTtlZjsnITsl5Ag67O17IKsLlxuZmlsZS5jb3B5KGMoXFxBLnR4dFxcLCBcXEIudHh0XFwpLCBcXHRtcFxcKSAjIG92ZXJ3cml0ZSA9IEYsIGNvcHkuZGF0ZSA9IEZcbmxpc3QuZmlsZXMoXFx0bXBcXClcblxuYGBgXG5gYGAifQ== -->
+<p><code>r</code>r file.copy(.txt, .txt, overwrite = T, copy.date = T) # 동일한 파일 생성/수정/접근일시까지 복사. file.info(c(.txt, .txt))</p>
+<p>dir.create() list.files()</p>
+</div>
+<div id="-tmp--." class="section level1">
+<h1>두개파일을 tmp 폴더하위에 복사.</h1>
+<p>file.copy(c(.txt, .txt), ) # overwrite = F, copy.date = F list.files()</p>
+<pre><code></code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p><br />
 <br />
 </p>
-</div>
 <div id="-" class="section level4">
 <h4>파일 삭제</h4>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZmlsZS5yZW1vdmUoXCJCLnR4dFwiKVxuYGBgIn0= -->
-<pre class="r"><code>file.remove(&quot;B.txt&quot;)</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxuZmlsZS5yZW1vdmUoXFxCLnR4dFxcKVxuYGBgXG5gYGAifQ== -->
+<p><code>r</code>r file.remove(.txt)</p>
+<pre><code></code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
@@ -358,9 +357,9 @@ list.files(&quot;tmp&quot;)
 <h4>특정 파일 검색후, 임의의 폴더에 복사.</h4>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY29weV9vcmlnaW4gPC0gbGlzdC5maWxlcyhTeXMuZ2V0ZW52KCdSX1dEJyksIGZ1bGwubmFtZXMgPSBUKVtzdHJfZGV0ZWN0KGxpc3QuZmlsZXMoKSwgJ15pbmRleC5odG1sJCcpXVxuZmlsZS5jb3B5KGNvcHlfb3JpZ2luLCBcIi4uL2RvY3MvaW5kZXguaHRtbFwiLCBvdmVyd3JpdGUgPSBULCBjb3B5LmRhdGUgPSBUKVxuYGBgIn0= -->
-<pre class="r"><code>copy_origin &lt;- list.files(Sys.getenv('R_WD'), full.names = T)[str_detect(list.files(), '^index.html$')]
-file.copy(copy_origin, &quot;../docs/index.html&quot;, overwrite = T, copy.date = T)</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxuY29weV9vcmlnaW4gPC0gbGlzdC5maWxlcyhTeXMuZ2V0ZW52KCdSX1dEJyksIGZ1bGwubmFtZXMgPSBUKVtzdHJfZGV0ZWN0KGxpc3QuZmlsZXMoKSwgJ15pbmRleC5odG1sJCcpXVxuZmlsZS5jb3B5KGNvcHlfb3JpZ2luLCBcXC4uL2RvY3MvaW5kZXguaHRtbFxcLCBvdmVyd3JpdGUgPSBULCBjb3B5LmRhdGUgPSBUKVxuYGBgXG5gYGAifQ== -->
+<p><code>r</code>r copy_origin &lt;- list.files(Sys.getenv(‘R_WD’), full.names = T)[str_detect(list.files(), ‘^index.html$’)] file.copy(copy_origin, ../docs/index.html, overwrite = T, copy.date = T)</p>
+<pre><code></code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
@@ -373,9 +372,9 @@ file.copy(copy_origin, &quot;../docs/index.html&quot;, overwrite = T, copy.date 
 <h4>특정폴더 하위의 파일들의 파일내용을 tibble 로 리턴.</h4>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeSh0aWR5dmVyc2UpXG5cbmBgYCJ9 -->
-<pre class="r"><code>library(tidyverse)
-</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxubGlicmFyeSh0aWR5dmVyc2UpXG5cbmBgYFxuYGBgIn0= -->
+<p><code>r</code>r library(tidyverse)</p>
+<pre><code></code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-output-begin eyJkYXRhIjoiXHUwMDFiWzM3beKUgOKUgCBcdTAwMWJbMW1BdHRhY2hpbmcgcGFja2FnZXNcdTAwMWJbMjJtIOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgCB0aWR5dmVyc2UgMS4yLjEg4pSA4pSAXHUwMDFiWzM5bVxuXHUwMDFiWzM3bVx1MDAxYlszMm3inJRcdTAwMWJbMzdtIFx1MDAxYlszNG1nZ3Bsb3QyXHUwMDFiWzM3bSAzLjEuMCAgICAgXHUwMDFiWzMybeKclFx1MDAxYlszN20gXHUwMDFiWzM0bXB1cnJyICBcdTAwMWJbMzdtIDAuMi41XG5cdTAwMWJbMzJt4pyUXHUwMDFiWzM3bSBcdTAwMWJbMzRtdGliYmxlIFx1MDAxYlszN20gMS40LjIgICAgIFx1MDAxYlszMm3inJRcdTAwMWJbMzdtIFx1MDAxYlszNG1kcGx5ciAgXHUwMDFiWzM3bSAwLjcuOFxuXHUwMDFiWzMybeKclFx1MDAxYlszN20gXHUwMDFiWzM0bXRpZHlyICBcdTAwMWJbMzdtIDAuOC4yICAgICBcdTAwMWJbMzJt4pyUXHUwMDFiWzM3bSBcdTAwMWJbMzRtc3RyaW5nclx1MDAxYlszN20gMS4zLjFcblx1MDAxYlszMm3inJRcdTAwMWJbMzdtIFx1MDAxYlszNG1yZWFkciAgXHUwMDFiWzM3bSAxLjMuMSAgICAgXHUwMDFiWzMybeKclFx1MDAxYlszN20gXHUwMDFiWzM0bWZvcmNhdHNcdTAwMWJbMzdtIDAuMy4wXHUwMDFiWzM5bVxuXHUwMDFiWzM3beKUgOKUgCBcdTAwMWJbMW1Db25mbGljdHNcdTAwMWJbMjJtIOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgCB0aWR5dmVyc2VfY29uZmxpY3RzKCkg4pSA4pSAXG5cdTAwMWJbMzFt4pyWXHUwMDFiWzM3bSBcdTAwMWJbMzRtZHBseXJcdTAwMWJbMzdtOjpcdTAwMWJbMzJtZmlsdGVyKClcdTAwMWJbMzdtIG1hc2tzIFx1MDAxYlszNG1zdGF0c1x1MDAxYlszN206OmZpbHRlcigpXG5cdTAwMWJbMzFt4pyWXHUwMDFiWzM3bSBcdTAwMWJbMzRtZHBseXJcdTAwMWJbMzdtOjpcdTAwMWJbMzJtbGFnKClcdTAwMWJbMzdtICAgIG1hc2tzIFx1MDAxYlszNG1zdGF0c1x1MDAxYlszN206OmxhZygpXHUwMDFiWzM5bVxuIn0= -->
 <pre><code>[37m── [1mAttaching packages[22m ────────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──[39m
@@ -397,21 +396,34 @@ file.copy(copy_origin, &quot;../docs/index.html&quot;, overwrite = T, copy.date 
 <h4>복사할 파일 검색후, 특정파일에 붙여넣기.</h4>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBbMV0gXCJjb3ZhcmlhbmNlLm5iLmh0bWx8Y3JlZGl0X2NhcmQubmIuaHRtbHxmaWxlX3N5c3RlbS5uYi5odG1sfC4uLlwiXG5zdHJfYyhsaXN0LmZpbGVzKCcuLi9kb2NzJywgJ1xcXFwuaHRtbCQnKSwgY29sbGFwc2UgPSBcInxcIilcblxuc2VhcmNoX2ZpbGUgPC0gc3RyX2RldGVjdChsaXN0LmZpbGVzKGZ1bGwubmFtZXMgPSBULCByZWN1cnNpdmUgPSBUKSwgXG4gICAgICAgICAgICAgICAgICAgICAgICAgIHN0cl9jKGxpc3QuZmlsZXMoJy4uL2RvY3MnLCAnXFxcXC5odG1sJCcpLCBjb2xsYXBzZSA9IFwifFwiKSlcbmNvcHlfb3JpZ2luIDwtIGxpc3QuZmlsZXMoZnVsbC5uYW1lcyA9IFQsIHJlY3Vyc2l2ZSA9IFQpW3NlYXJjaF9maWxlXVxuZmlsZS5jb3B5KGNvcHlfb3JpZ2luLCBcIi4uL2RvY3MvXCIsIG92ZXJ3cml0ZSA9IFQsIGNvcHkuZGF0ZSA9IFQpXG5gYGAifQ== -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBbMV0gXCJjb3ZhcmlhbmNlLm5iLmh0bWx8Y3JlZGl0X2NhcmQubmIuaHRtbHxmaWxlX3N5c3RlbS5uYi5odG1sfC4uLlwiXG5zdHJfYyhsaXN0LmZpbGVzKCcuLi9kb2NzJywgJ1xcXFwuaHRtbCQnKSwgY29sbGFwc2UgPSBcInxcIilcblxuYGBgIn0= -->
 <pre class="r"><code># [1] &quot;covariance.nb.html|credit_card.nb.html|file_system.nb.html|...&quot;
 str_c(list.files('../docs', '\\.html$'), collapse = &quot;|&quot;)
-
-search_file &lt;- str_detect(list.files(full.names = T, recursive = T), 
-                          str_c(list.files('../docs', '\\.html$'), collapse = &quot;|&quot;))
-copy_origin &lt;- list.files(full.names = T, recursive = T)[search_file]
-file.copy(copy_origin, &quot;../docs/&quot;, overwrite = T, copy.date = T)</code></pre>
+</code></pre>
 <!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiY2hhcmFjdGVyKDApXG4ifQ== -->
+<pre><code>character(0)</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
+</div>
+<div id="-2" class="section level4">
+<h4>파일서치 버전2</h4>
+<p>파일별로 정규식을 찾아 매칭되는게 있으면 결과 set 에 add 한다.</p>
 <!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbInRibF9kZiIsInRibCIsImRhdGEuZnJhbWUiXSwibmNvbCI6MywibnJvdyI6NH0sInJkZiI6Ikg0c0lBQUFBQUFBQUE1MVN6VTdDUUJCZStxT2hCdFFZNzVzZUNDU3dKTDJDaElOUFFEeHdhOHAyZ2NaMlczZTNFZlRpby9oSVBvSVBZcWk3N1RhQkpocmpIRHJUK1RyZk56T2R4ZjNTYzVZT0FNQUFwbTBBdzVTaFpjaEhDMWlncmZ3T0FQTkdCZ3E1VXFnR2J0RjRIY1hFNTNzdVNJTG9DbTFGRXY4RnZENEZGMG40TXdCQVYybk85eDlBMmZ6bHZmTEJaK1h4RzlCMjNOdkROR01FNGpqZy9NNWw3bXlLMDVETU5rVDRKYjhnTytIQlhpd21JN2pPS1JaUlNtR2ZrNERoYlFrT1lRYnZZTzhwVDhVRVZXN3dxcm5IVUp1a0VvVDF1V0IrU0FUQm9zL1RuR0V5aEVkTWc0RXU4eHJxMDErbFhlVCtYL0QwQjlvMFNBalhDekoxMGxLZDZQZ2lqaWp4YVo2c0NOT3BzNHE0d2RSbTZUT3EyVHJxWnRUeWk2TDRha3FXbTllU2RkSUpBeEdnTlpQMTh1M1FLRGxQTTdVS1dXU29ZN01ieFMzV1NGem1WSFVTanZBMnA0OGpUd21VY0dVZEhWdEhzVmxKR29XbXN1dGhDZDNJRGRTOXg4R0sxSmZhbFJPWEE2T01SVlRVazhnc1J5SVZRZjJkZzlPNHpwU3pnY00zVENybHoxb0RBQUE9In0= -->
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["file"],"name":[1],"type":["chr"],"align":["left"]},{"label":["line_number"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["source"],"name":[3],"type":["chr"],"align":["left"]}],"data":[{"1":"./file_system.nb.html","2":"413","3":"<pre class=\"r\"><code>get_file_text2 &lt;- function (search_text, p = &quot;.&quot;){"},{"1":"./file_system.nb.html","2":"426","3":"filter(str_detect(source, search_text))"},{"1":"./file_system.Rmd","2":"143","3":"get_file_text2 <- function (search_text, p = \".\"){"},{"1":"./file_system.Rmd","2":"156","3":"filter(str_detect(source, search_text))"}],"options":{"columns":{"min":{},"max":[10],"total":[3]},"rows":{"min":[10],"max":[10],"total":[4]},"pages":{}}}
+  </script>
+</div>
+<!-- rnb-frame-end -->
+<!-- rnb-chunk-end -->
+</div>
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiZmlsZSBzeXN0ZW0iCm91dHB1dDogaHRtbF9ub3RlYm9vawotLS0KClRoaXMgaXMgYW4gW1IgTWFya2Rvd25dKGh0dHA6Ly9ybWFya2Rvd24ucnN0dWRpby5jb20pIE5vdGVib29rLiBXaGVuIHlvdSBleGVjdXRlIGNvZGUgd2l0aGluIHRoZSBub3RlYm9vaywgdGhlIHJlc3VsdHMgYXBwZWFyIGJlbmVhdGggdGhlIGNvZGUuIAoKVHJ5IGV4ZWN1dGluZyB0aGlzIGNodW5rIGJ5IGNsaWNraW5nIHRoZSAqUnVuKiBidXR0b24gd2l0aGluIHRoZSBjaHVuayBvciBieSBwbGFjaW5nIHlvdXIgY3Vyc29yIGluc2lkZSBpdCBhbmQgcHJlc3NpbmcgKkNtZCtTaGlmdCtFbnRlciouIAoKYGBge3J9CmZpbGUucGF0aCgiRjoiLCAiZ2l0IiwgInJveHlnZW4yIiwgInJveHlnZW4yIiwgIlJFQURNRS5tZCIgKQpgYGAKCmBgYHtyfQpmaWxlLnBhdGgoIi4uIiwgYygiQSIsICJCIiksIGMoInRtcC50eHQiLCIxMjMudHh0IikpCmBgYApcClwKXAoKCiMjIyMg7YyM7J28IOyDneyEse2VmOq4sApgYGB7cn0KY2F0KCJmaWxlIEFcbiIsIGZpbGUgPSAiQS50eHQiKSAjIGZpbGUgQSDrgrTsmqnsnZgg7YyM7J28IOyDneyEsQpjYXQoImZpbGUgQlxuIiwgZmlsZSA9ICJCLnR4dCIpCmBgYApcClwKXAoKCiMjIyMgQS50eHQg7YyM7J287JeQIEIudHh0IO2MjOydvOuCtOyaqeydhCDrjafrtpnsnbzrlYwsCmBgYHtyfQpmaWxlLmFwcGVuZCgiQS50eHQiLCAiQi50eHQiKQpgYGAKXApcClwKCgojIyMjIOyXrOufrOuyiCDtjIzsnbzrgrTsmqnsnYQg64+Z7J287ZWY6rKMIOu2meyXrOuEo+q4sC4KYGBge3J9CmZpbGUuY3JlYXRlKCJBLnR4dCIpICMg67mIIO2MjOydvCDsg53shLEuCmZpbGUuYXBwZW5kKCJBLnR4dCIsIGMoIkIudHh0IiwgIkIudHh0IikpICMgQi50eHQg7YyM7J2864K07JqpIDLrsogg67aZ7Jes64Sj6riwLgpmaWxlLmFwcGVuZCgiQS50eHQiLCByZXAoIkIudHh0IiwgMTApKSAjIDEw67KIIOuwmOuztSDrtpnsl6zrhKPquLAuCmBgYApcClwKXAoKCiMjIyMg7YyM7J2864K07JqpIO2ZleyduC4gKHIgc3R1ZGlv7JeQ7IScKQpgYGB7cn0KaWYoaW50ZXJhY3RpdmUoKSkgZmlsZS5zaG93KCJBLnR4dCIpCgpgYGAKXApcClwKCgojIyMjIO2MjOydvCBjb3B5IApgYGB7cn0KZmlsZS5jb3B5KCJBLnR4dCIsICJDLnR4dCIsIG92ZXJ3cml0ZSA9IFQsIGNvcHkuZGF0ZSA9IFQpICMg64+Z7J287ZWcIO2MjOydvCDsg53shLEv7IiY7KCVL+ygkeq3vOydvOyLnOq5jOyngCDrs7XsgqwuCmZpbGUuaW5mbyhjKCJBLnR4dCIsICJDLnR4dCIpKQoKZGlyLmNyZWF0ZSgidG1wIikKbGlzdC5maWxlcygidG1wIikKCiMg65GQ6rCc7YyM7J287J2EIHRtcCDtj7TrjZTtlZjsnITsl5Ag67O17IKsLgpmaWxlLmNvcHkoYygiQS50eHQiLCAiQi50eHQiKSwgInRtcCIpICMgb3ZlcndyaXRlID0gRiwgY29weS5kYXRlID0gRgpsaXN0LmZpbGVzKCJ0bXAiKQoKYGBgClwKXAoKCgojIyMjIO2MjOydvCDsgq3soJwKYGBge3J9CmZpbGUucmVtb3ZlKCJCLnR4dCIpCmBgYApcClwKCgojIyMjIO2KueyglSDtjIzsnbwg6rKA7IOJ7ZuELCDsnoTsnZjsnZgg7Y+0642U7JeQIOuzteyCrC4KYGBge3J9CmNvcHlfb3JpZ2luIDwtIGxpc3QuZmlsZXMoU3lzLmdldGVudignUl9XRCcpLCBmdWxsLm5hbWVzID0gVClbc3RyX2RldGVjdChsaXN0LmZpbGVzKCksICdeaW5kZXguaHRtbCQnKV0KZmlsZS5jb3B5KGNvcHlfb3JpZ2luLCAiLi4vZG9jcy9pbmRleC5odG1sIiwgb3ZlcndyaXRlID0gVCwgY29weS5kYXRlID0gVCkKYGBgClwKXApcCgoKCiMjIyMg7Yq57KCV7Y+0642UIO2VmOychOydmCDtjIzsnbzrk6TsnZgg7YyM7J2864K07Jqp7J2EIHRpYmJsZSDroZwg66as7YS0LgpgYGB7cn0KbGlicmFyeSh0aWR5dmVyc2UpCmdldF9maWxlX3RleHQgPC0gZnVuY3Rpb24gKHAgPSAiLiIpewogIGRkIDwtIGxpc3QuZmlsZXMocCwgZnVsbC5uYW1lcyA9IFQsIHJlY3Vyc2l2ZSA9IFQpCiAgZGQgPC0gZGRbIXN0cl9kZXRlY3QoZGQsICcvbm9kZV9tb2R1bGVzLycpXSAjIG5vZGVfbW9kdWxlcyDsoJzsmbgKICAKICB0X2xpbmVzIDwtIHRpYmJsZShmaWxlID0gY2hhcmFjdGVyKCksIGxpbmVfbnVtYmVyID0gZG91YmxlKCksIHNvdXJjZSA9IGNoYXJhY3RlcigpKQogIAogIGZvcihmX25hbWUgaW4gZGQpewogICAgZDEgPC0gcmVhZF9saW5lcyhmX25hbWUpCiAgICAKICAgICMg7YyM7J28IOuCtOyaqeydtCDsl4bsnLzrqbQgc2tpcAogICAgaWYobGVuZ3RoKGQxKSAhPSAwKXsKICAgICAgdF9maWxlX3NvdXJjZSA9IHRpYmJsZShmaWxlID0gcmVwKGZfbmFtZSwgbGVuZ3RoKGQxKSksIGxpbmVfbnVtYmVyID0gc2VxKGxlbmd0aChkMSkpLCBzb3VyY2UgPSBkMSkKICAgICAgdF9saW5lcyA8LSBiaW5kX3Jvd3ModF9saW5lcywgdF9maWxlX3NvdXJjZSkKICAgIH0KICB9CiAgdF9saW5lcyAjIHJldHVybgp9CgojIOyCrOyaqeyLnCwgZmlsdGVyIOuhnCDtirnsoJUg7YWN7Iqk7Yq466W8IOywvuuKlOuLpC4gc3RyX2RldGVjdCDsnYAg7KCV6rec7Iud7J2EIOyCrOyaqeqwgOuKpe2VqC4KZmlsZV90ZXh0IDwtIGdldF9maWxlX3RleHQoKQpmaWxlX3RleHQgJT4lCiAgZmlsdGVyKHN0cl9kZXRlY3Qoc291cmNlLCAiZ2V0X2ZpbGVfdGV4dCIpKQpgYGAKXApcCgoKIyMjIyDrs7XsgqztlaAg7YyM7J28IOqygOyDie2bhCwg7Yq57KCV7YyM7J287JeQIOu2meyXrOuEo+q4sC4KYGBge3J9CiMgWzFdICJjb3ZhcmlhbmNlLm5iLmh0bWx8Y3JlZGl0X2NhcmQubmIuaHRtbHxmaWxlX3N5c3RlbS5uYi5odG1sfC4uLiIKc3RyX2MobGlzdC5maWxlcygnLi4vZG9jcycsICdcXC5odG1sJCcpLCBjb2xsYXBzZSA9ICJ8IikKCnNlYXJjaF9maWxlIDwtIHN0cl9kZXRlY3QobGlzdC5maWxlcyhmdWxsLm5hbWVzID0gVCwgcmVjdXJzaXZlID0gVCksIAogICAgICAgICAgICAgICAgICAgICAgICAgIHN0cl9jKGxpc3QuZmlsZXMoJy4uL2RvY3MnLCAnXFwuaHRtbCQnKSwgY29sbGFwc2UgPSAifCIpKQpjb3B5X29yaWdpbiA8LSBsaXN0LmZpbGVzKGZ1bGwubmFtZXMgPSBULCByZWN1cnNpdmUgPSBUKVtzZWFyY2hfZmlsZV0KZmlsZS5jb3B5KGNvcHlfb3JpZ2luLCAiLi4vZG9jcy8iLCBvdmVyd3JpdGUgPSBULCBjb3B5LmRhdGUgPSBUKQpgYGAKCgo=</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiZmlsZSBzeXN0ZW0iCm91dHB1dDogaHRtbF9ub3RlYm9vawotLS0KClRoaXMgaXMgYW4gW1IgTWFya2Rvd25dKGh0dHA6Ly9ybWFya2Rvd24ucnN0dWRpby5jb20pIE5vdGVib29rLiBXaGVuIHlvdSBleGVjdXRlIGNvZGUgd2l0aGluIHRoZSBub3RlYm9vaywgdGhlIHJlc3VsdHMgYXBwZWFyIGJlbmVhdGggdGhlIGNvZGUuIAoKVHJ5IGV4ZWN1dGluZyB0aGlzIGNodW5rIGJ5IGNsaWNraW5nIHRoZSAqUnVuKiBidXR0b24gd2l0aGluIHRoZSBjaHVuayBvciBieSBwbGFjaW5nIHlvdXIgY3Vyc29yIGluc2lkZSBpdCBhbmQgcHJlc3NpbmcgKkNtZCtTaGlmdCtFbnRlciouIAoKYGBge3J9CmZpbGUucGF0aCgiRjoiLCAiZ2l0IiwgInJveHlnZW4yIiwgInJveHlnZW4yIiwgIlJFQURNRS5tZCIgKQpgYGAKCmBgYHtyfQpmaWxlLnBhdGgoIi4uIiwgYygiQSIsICJCIiksIGMoInRtcC50eHQiLCIxMjMudHh0IikpCmBgYApcClwKXAoKCiMjIyMg7YyM7J28IOyDneyEse2VmOq4sApgYGB7cn0KY2F0KCJmaWxlIEFcbiIsIGZpbGUgPSAiQS50eHQiKSAjIGZpbGUgQSDrgrTsmqnsnZgg7YyM7J28IOyDneyEsQpjYXQoImZpbGUgQlxuIiwgZmlsZSA9ICJCLnR4dCIpCmBgYApcClwKXAoKCiMjIyMgQS50eHQg7YyM7J287JeQIEIudHh0IO2MjOydvOuCtOyaqeydhCDrjafrtpnsnbzrlYwsCmBgYHtyfQpmaWxlLmFwcGVuZCgiQS50eHQiLCAiQi50eHQiKQpgYGAKXApcClwKCgojIyMjIOyXrOufrOuyiCDtjIzsnbzrgrTsmqnsnYQg64+Z7J287ZWY6rKMIOu2meyXrOuEo+q4sC4KYGBge3J9CmZpbGUuY3JlYXRlKCJBLnR4dCIpICMg67mIIO2MjOydvCDsg53shLEuCmZpbGUuYXBwZW5kKCJBLnR4dCIsIGMoIkIudHh0IiwgIkIudHh0IikpICMgQi50eHQg7YyM7J2864K07JqpIDLrsogg67aZ7Jes64Sj6riwLgpmaWxlLmFwcGVuZCgiQS50eHQiLCByZXAoIkIudHh0IiwgMTApKSAjIDEw67KIIOuwmOuztSDrtpnsl6zrhKPquLAuCmBgYApcClwKXAoKCiMjIyMg7YyM7J2864K07JqpIO2ZleyduC4gKHIgc3R1ZGlv7JeQ7IScKQpgYGB7cn0KaWYoaW50ZXJhY3RpdmUoKSkgZmlsZS5zaG93KCJBLnR4dCIpCgpgYGAKXApcClwKCgojIyMjIO2MjOydvCBjb3B5IApgYGB7cn0KZmlsZS5jb3B5KCJBLnR4dCIsICJDLnR4dCIsIG92ZXJ3cml0ZSA9IFQsIGNvcHkuZGF0ZSA9IFQpICMg64+Z7J287ZWcIO2MjOydvCDsg53shLEv7IiY7KCVL+ygkeq3vOydvOyLnOq5jOyngCDrs7XsgqwuCmZpbGUuaW5mbyhjKCJBLnR4dCIsICJDLnR4dCIpKQoKZGlyLmNyZWF0ZSgidG1wIikKbGlzdC5maWxlcygidG1wIikKCiMg65GQ6rCc7YyM7J287J2EIHRtcCDtj7TrjZTtlZjsnITsl5Ag67O17IKsLgpmaWxlLmNvcHkoYygiQS50eHQiLCAiQi50eHQiKSwgInRtcCIpICMgb3ZlcndyaXRlID0gRiwgY29weS5kYXRlID0gRgpsaXN0LmZpbGVzKCJ0bXAiKQoKYGBgClwKXAoKCgojIyMjIO2MjOydvCDsgq3soJwKYGBge3J9CmZpbGUucmVtb3ZlKCJCLnR4dCIpCmBgYApcClwKCgojIyMjIO2KueyglSDtjIzsnbwg6rKA7IOJ7ZuELCDsnoTsnZjsnZgg7Y+0642U7JeQIOuzteyCrC4KYGBge3J9CmNvcHlfb3JpZ2luIDwtIGxpc3QuZmlsZXMoU3lzLmdldGVudignUl9XRCcpLCBmdWxsLm5hbWVzID0gVClbc3RyX2RldGVjdChsaXN0LmZpbGVzKCksICdeaW5kZXguaHRtbCQnKV0KZmlsZS5jb3B5KGNvcHlfb3JpZ2luLCAiLi4vZG9jcy9pbmRleC5odG1sIiwgb3ZlcndyaXRlID0gVCwgY29weS5kYXRlID0gVCkKYGBgClwKXApcCgoKCiMjIyMg7Yq57KCV7Y+0642UIO2VmOychOydmCDtjIzsnbzrk6TsnZgg7YyM7J2864K07Jqp7J2EIHRpYmJsZSDroZwg66as7YS0LgpgYGB7cn0KbGlicmFyeSh0aWR5dmVyc2UpCmdldF9maWxlX3RleHQgPC0gZnVuY3Rpb24gKHAgPSAiLiIpewogIGRkIDwtIGxpc3QuZmlsZXMocCwgZnVsbC5uYW1lcyA9IFQsIHJlY3Vyc2l2ZSA9IFQpCiAgZGQgPC0gZGRbIXN0cl9kZXRlY3QoZGQsICcvbm9kZV9tb2R1bGVzLycpXSAjIG5vZGVfbW9kdWxlcyDsoJzsmbgKICAKICB0X2xpbmVzIDwtIHRpYmJsZShmaWxlID0gY2hhcmFjdGVyKCksIGxpbmVfbnVtYmVyID0gZG91YmxlKCksIHNvdXJjZSA9IGNoYXJhY3RlcigpKQogIAogIGZvcihmX25hbWUgaW4gZGQpewogICAgZDEgPC0gcmVhZF9saW5lcyhmX25hbWUpCiAgICAKICAgICMg7YyM7J28IOuCtOyaqeydtCDsl4bsnLzrqbQgc2tpcAogICAgaWYobGVuZ3RoKGQxKSAhPSAwKXsKICAgICAgdF9maWxlX3NvdXJjZSA9IHRpYmJsZShmaWxlID0gcmVwKGZfbmFtZSwgbGVuZ3RoKGQxKSksIGxpbmVfbnVtYmVyID0gc2VxKGxlbmd0aChkMSkpLCBzb3VyY2UgPSBkMSkKICAgICAgdF9saW5lcyA8LSBiaW5kX3Jvd3ModF9saW5lcywgdF9maWxlX3NvdXJjZSkKICAgIH0KICB9CiAgdF9saW5lcyAjIHJldHVybgp9CgojIOyCrOyaqeyLnCwgZmlsdGVyIOuhnCDtirnsoJUg7YWN7Iqk7Yq466W8IOywvuuKlOuLpC4gc3RyX2RldGVjdCDsnYAg7KCV6rec7Iud7J2EIOyCrOyaqeqwgOuKpe2VqC4KZmlsZV90ZXh0IDwtIGdldF9maWxlX3RleHQoKQpmaWxlX3RleHQgJT4lCiAgZmlsdGVyKHN0cl9kZXRlY3Qoc291cmNlLCAiZ2V0X2ZpbGVfdGV4dCIpKQpgYGAKXApcCgoKIyMjIyDrs7XsgqztlaAg7YyM7J28IOqygOyDie2bhCwg7Yq57KCV7YyM7J287JeQIOu2meyXrOuEo+q4sC4KYGBge3J9CiMgWzFdICJjb3ZhcmlhbmNlLm5iLmh0bWx8Y3JlZGl0X2NhcmQubmIuaHRtbHxmaWxlX3N5c3RlbS5uYi5odG1sfC4uLiIKc3RyX2MobGlzdC5maWxlcygnLi4vZG9jcycsICdcXC5odG1sJCcpLCBjb2xsYXBzZSA9ICJ8IikKCnNlYXJjaF9maWxlIDwtIHN0cl9kZXRlY3QobGlzdC5maWxlcyhmdWxsLm5hbWVzID0gVCwgcmVjdXJzaXZlID0gVCksIAogICAgICAgICAgICAgICAgICAgICAgICAgIHN0cl9jKGxpc3QuZmlsZXMoJy4uL2RvY3MnLCAnXFwuaHRtbCQnKSwgY29sbGFwc2UgPSAifCIpKQpjb3B5X29yaWdpbiA8LSBsaXN0LmZpbGVzKGZ1bGwubmFtZXMgPSBULCByZWN1cnNpdmUgPSBUKVtzZWFyY2hfZmlsZV0KZmlsZS5jb3B5KGNvcHlfb3JpZ2luLCAiLi4vZG9jcy8iLCBvdmVyd3JpdGUgPSBULCBjb3B5LmRhdGUgPSBUKQpgYGAKCgojIyMjIO2MjOydvOyEnOy5mCDrsoTsoIQyCu2MjOydvOuzhOuhnCDsoJXqt5zsi53snYQg7LC+7JWEIOunpOy5reuQmOuKlOqyjCDsnojsnLzrqbQg6rKw6rO8IHNldCDsl5AgYWRkIO2VnOuLpC4KYGBge3J9CmdldF9maWxlX3RleHQyIDwtIGZ1bmN0aW9uIChzZWFyY2hfdGV4dCwgcCA9ICIuIil7CiAgZGQgPC0gbGlzdC5maWxlcyhwLCBmdWxsLm5hbWVzID0gVCwgcmVjdXJzaXZlID0gVCkKICBkZCA8LSBkZFshc3RyX2RldGVjdChkZCwgJy9saWIvJyldICMgbm9kZV9tb2R1bGVzIOygnOyZuAogIAogIHRfbGluZXMgPC0gdGliYmxlKGZpbGUgPSBjaGFyYWN0ZXIoKSwgbGluZV9udW1iZXIgPSBkb3VibGUoKSwgc291cmNlID0gY2hhcmFjdGVyKCkpCiAgCiAgZm9yKGZfbmFtZSBpbiBkZCl7CiAgICBkMSA8LSByZWFkX2xpbmVzKGZfbmFtZSkKICAgIAogICAgIyDtjIzsnbwg64K07Jqp7J20IOyXhuycvOuptCBza2lwCiAgICBpZihsZW5ndGgoZDEpICE9IDApewogICAgICB0X2ZpbGVfc291cmNlID0gdGliYmxlKGZpbGUgPSByZXAoZl9uYW1lLCBsZW5ndGgoZDEpKSwgbGluZV9udW1iZXIgPSBzZXEobGVuZ3RoKGQxKSksIHNvdXJjZSA9IGQxKQogICAgICBmaW5kX3RleHQgPSB0X2ZpbGVfc291cmNlICU+JQogICAgICAgIGZpbHRlcihzdHJfZGV0ZWN0KHNvdXJjZSwgc2VhcmNoX3RleHQpKQogICAgICAKICAgICAgdF9saW5lcyA8LSBiaW5kX3Jvd3ModF9saW5lcywgZmluZF90ZXh0KQogICAgfQogIH0KICB0X2xpbmVzICMgcmV0dXJuCn0KZ2V0X2ZpbGVfdGV4dDIoInNlYXJjaF90ZXh0IikKYGBg</div>
 
 
 

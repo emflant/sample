@@ -138,3 +138,28 @@ file.copy(copy_origin, "../docs/", overwrite = T, copy.date = T)
 ```
 
 
+#### 파일서치 버전2
+파일별로 정규식을 찾아 매칭되는게 있으면 결과 set 에 add 한다.
+```{r}
+get_file_text2 <- function (search_text, p = "."){
+  dd <- list.files(p, full.names = T, recursive = T)
+  dd <- dd[!str_detect(dd, '/lib/')] # node_modules 제외
+  
+  t_lines <- tibble(file = character(), line_number = double(), source = character())
+  
+  for(f_name in dd){
+    d1 <- read_lines(f_name)
+    
+    # 파일 내용이 없으면 skip
+    if(length(d1) != 0){
+      t_file_source = tibble(file = rep(f_name, length(d1)), line_number = seq(length(d1)), source = d1)
+      find_text = t_file_source %>%
+        filter(str_detect(source, search_text))
+      
+      t_lines <- bind_rows(t_lines, find_text)
+    }
+  }
+  t_lines # return
+}
+get_file_text2("search_text")
+```
