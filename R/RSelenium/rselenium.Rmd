@@ -3,8 +3,11 @@ title: "R Selenium"
 output:
   html_document:
     df_print: paged
+    theme: united # https://bootswatch.com/3/
+    highlight: tango # default, tango, pygments, kate, monochrome, espresso, zenburn, haddock, and textmate
 ---
-#### Running Selenium Server
+  
+### Running Selenium Server
 If I intend to drive a browser on the machine that RSelenium is running on, I need to have a ***Selenium Server*** running on the machine. The Selenium Server is needed in order to run Remote Selenium WebDriver.  
 
 - Selenium RC [^1]
@@ -13,8 +16,23 @@ If I intend to drive a browser on the machine that RSelenium is running on, I ne
 
 - Download Selenium Standalone Server file. Click  [here](https://www.seleniumhq.org/download/).
 
-- Open a console in my mashine and navigate to where the selenium Standalone Server jar file is located and run this code:
+- Open a console in my mashine and navigate to where the selenium Standalone Server jar file is located and run this code : `java -jar selenium-server-standalone-x.xx.x.jar`
+\
 
-```{text}
-java -jar selenium-server-standalone-x.xx.x.jar
+### Connecting to a Running Server
+`RSelenium` has a main reference class named `remoteDriver`. To connect to a server, I need to instantiate a new `remoteDriver` with appropriate options.
+```{r eval=FALSE}
+library(RSelenium)
+remDr <- remoteDriver(
+  remoteServerAddr = "localhost",
+  port = 4444L,
+  browserName = "chrome"
+)
 ```
+To connect to the server, user the `open` method:
+```{r eval=FALSE}
+remDr$open()
+```
+
+
+
