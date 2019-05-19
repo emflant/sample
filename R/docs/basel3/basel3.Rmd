@@ -1,0 +1,63 @@
+---
+title: "BASEL3"
+output:
+  html_document:
+    df_print: paged
+    theme: united # https://bootswatch.com/3/
+    highlight: tango # default, tango, pygments, kate, monochrome, espresso, zenburn, haddock, and textmate
+---
+```{r include=FALSE}
+library(readxl)
+library(knitr)
+library(kableExtra)
+library(stringr)
+```
+
+
+
+
+```{r}
+basel3_1 = read_xlsx(path = "./basel3.xlsx", sheet = 1)
+kable(basel3_1, col.names = c("바젤III", "", "")) %>% 
+  kable_styling() %>% 
+  column_spec(1, width = "2cm") %>% 
+  column_spec(2, width = "4cm") %>%  
+  collapse_rows(columns = 1:2, valign = "top")
+```
+
+```{r}
+basel3_3 = read_xlsx(path = "./basel3.xlsx", sheet = 3)
+
+basel3_3[4,1] = str_c(basel3_3[4,1] , footnote_marker_symbol(1))
+
+kable(basel3_3, escape = F) %>% # I need to put escape = F in your kable function to avoid escaping of special characters.
+  kable_styling() %>% 
+  row_spec(3, bold = T, color = "white", background = "#56911b") %>% 
+  footnote(symbol = ": 변동목표로 은행이 신용을 과도하게 팽창할 경우 감독당국은 추가적으로 0~2.5%의 자본을 부과할 수 있다.",
+           symbol_title = "경기대응완충자본",
+           footnote_as_chunk = T)
+```
+\
+
+
+#### LCR(Liquidity Coverage Ratio, 유동성커버리지비율)
+
+단기적(1개월)으로 은행이 순현금유출에 버틸 수 있는 유동성 자산 보유정도를 측정하는 지표. 고유동성자산은 금, 한은 예치금, 위험가중치 0%국채/통안체/공사채(레벨1), AA- 이상 우량 회사채(레벨1의 40% 이내) 등을 말한다.
+
+$$
+LCR = \frac{고유동성자산}{순현금유출(30일간)} \geq 100%
+$$
+\
+
+
+
+```{r eval=FALSE, include=FALSE}
+# http://web.ift.uib.no/Teori/KURS/WRK/TeX/symALL.html
+```
+
+#### NSFR(Net Stable Funding Ratio, 순안정자금조달)
+1년간의 일반적 위기상황이 지속되더라도 필요한 자금을 충당할 수 있는 가용자금을 확보하기 위한 규제.  
+$$
+NSFR = \frac{가용\enspace안정적\enspace자금조달}{필요\enspace안정적\enspace자금조달} \geq 100%
+$$
+

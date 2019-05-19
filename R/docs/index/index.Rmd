@@ -16,6 +16,7 @@ This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute
 - [efficient programming](./efficient_programming.nb.html)
 - [Dates and times with lubridate](./dates_and_times.nb.html)
 - [R Selenium](./rselenium.html)
+- [basel3](./basel3.html)
 
 R books
 
