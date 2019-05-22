@@ -1,6 +1,10 @@
 ---
 title: "금리리스크(Interest Rate Risk)"
-output: html_notebook
+output:
+  html_document:
+    df_print: paged
+    theme: united # https://bootswatch.com/3/
+    highlight: tango # default, tango, pygments, kate, monochrome, espresso, zenburn, haddock, and textmate
 ---
 
 
@@ -78,13 +82,14 @@ $M_{ij}$ = j번째 자산(부채)의 만기, j = 1,2,...,n
 \
 금융기관의 자산과 부채의 만기를 일치시키는 전략은 금리리스크를 줄여주기는 하지만 그것을 완전히 없애주지는 못한다. 자산과 부채의 만기가 같다고 하더라도 금액이 불일치 하기 때문이다. 그러나 자산과 부채의 금액과 만기가 모두 일치한다 하더라도 현금흐름의 발생시점이 완전히 일치하지 않는 한, 금융기관은 여전히 금리리스크에 노출된다. 
 
-## 듀레이셔 갭모형
+## 듀레이션 갭모형
 
 듀레이션갭은 자산의 부채의 만기는 물론 각각으로부터 발생하는 현금흐름의 크기뿐만 아니라 더 나아가서 각 현금흐름의 발생시점까지도 고려하여 금리리스크를 측정하는 기법이다.
 
 
 ```{r}
-source('D:/workspace/sample/R/risk3.R', encoding = 'UTF-8')
+# source(file.path(getwd(),'risk3.R'))
+source('./risk3.R')
 get_duration(1000000, 0.1, 0.12, 2)$list
 ```
 

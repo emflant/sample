@@ -1,0 +1,33 @@
+---
+title: 유동성리스크(Liquidity Risk)
+output:
+  html_document:
+    df_print: paged
+    theme: united # https://bootswatch.com/3/
+    highlight: tango # default, tango, pygments, kate, monochrome, espresso, zenburn, haddock, and textmate
+---
+\
+
+
+### 유동성리스크(Liquidity Risk)
+금융기관의 자금조달과 운용기간이 불일치하거나 예기치 않은 자금의 유출 등으로 유동성 부족이 발생하여 보통 때보다 현저히 높은 금리를 지불하고도 자금조달이 어려운 경우를 말한다.
+\
+\
+
+
+### 유동성비율(Liquidity Ratio)
+유동성비율은 정해진 일정기간 동안 발생할 현금유입과 현금유출의 비율로 측정된다. 금융자산과 부채가 대부분을 차지하는 금융회사는 예정된 만기일까지의 잔존기간(잔존만기)이 일정기간 이내인 자산과 부채로 유동성비율을 계산한다. 부외 파생상품의 경우에도 통화관련 파생상품과 같이 명목금액의 현금유출입이 발생하는 경우에는 이를 포함하여 유동성비율을 산출하며, 통상 원금만을 대상으로 하지만 이자를 포함하여 유동성비율을 계산할 수도 있다.
+
+$$
+유동성비율 = \frac{유동성자산}{유동성부채}\times100
+$$
+
+
+
+### 유동성갭(Liquidity Gap)
+
+만기에 따라 자산과 부채를 분류하여 유동성리스크를 측정하는 방법이다. 이 방법은 모든 자산을 유동성 자산(liquid asset)과 비유동성자산(illiquid asset)으로 구분하고, 또한 모든 부채를 안정성부채(stable liability)와 변동성부채(volatile liability)로 구분한다. 유동성자산에서 변동성부채를 뺀 것을 순유동자산(net liquid asset)이라 하며, 이를 ***유동성갭(liquidity gap)***이라고도 한다.(실무적으로 자금갭이라고도 한다.)
+$$
+순유동자산(유동성갭) = 유동성자산금액 - 변동성부채금액
+$$
+
