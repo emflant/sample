@@ -1,0 +1,168 @@
+library(readxl)
+library(tidyverse)
+library(lubridate)
+
+# options(digits = 10)
+
+file.path(getwd(), 'docs', 'apart', 'data', '아파트(매매)_실거래가_서울_2017.xlsx')
+
+apart_2017 = read_xlsx(path = file.path(getwd(), 'docs', 'apart', 'data', '아파트(매매)_실거래가_서울_2017.xlsx'))
+apart_2018 = read_xlsx(path = file.path(getwd(), 'docs', 'apart', 'data', '아파트(매매)_실거래가_서울_2018.xlsx'))
+apart_2019 = read_xlsx(path = file.path(getwd(), 'docs', 'apart', 'data', '아파트(매매)_실거래가_서울_2019.xlsx'))
+
+apart_2017
+apart_2018
+apart_2019
+
+# 3개 data 하나로 바인딩.
+apart = bind_rows(apart_2017, apart_2018, apart_2019)
+
+# 나머지3개 데이터 삭제.
+rm(list = c("apart_2017", "apart_2018", "apart_2019"))
+ls()
+
+# 전용면적 chr --> dbl 로 변환
+apart$`전용면적(㎡)` = as.numeric(apart$`전용면적(㎡)`)
+
+# 평형 변환 및 10/20/30/40 평형대인지 코드성 필드 추가.
+apart = apart %>% 
+  mutate(평수 = `전용면적(㎡)` * 0.3025) %>% 
+  mutate(평형대 = 평수 %/% 10 * 10) %>% 
+  mutate(거래가 = as.numeric(str_remove(`거래금액(만원)`, ','))) %>% 
+  mutate(계약일자 = ymd(paste0(계약년월, '01'))) %>% # 계약년월에 01 일자로만 셋팅.
+  mutate(계약년도 = year(계약일자)) %>% 
+  mutate(계약분기 = quarter(계약일자))
+apart
+
+monthly_trade_count = apart %>% 
+  group_by(계약년월) %>% 
+  summarise(counts = n())
+monthly_trade_count
+# 월별 아파트 매매 추이.
+ggplot(monthly_trade_count, aes(x = 계약년월, y = counts)) + 
+  geom_col()
+
+# 월별 아파트 매매 추이. (동일한 뷰)
+ggplot(apart, aes(계약년월)) + 
+  geom_bar()
+
+# 래미안위브라는 단지가 한지역에만 있는지 확인.
+apart %>%
+  filter(단지명 == '래미안위브') %>% 
+  group_by(`시군구`) %>% 
+  summarise(counts = n())
+
+# 단순한 중복건수 확인은 group by 없이 count 로 가능.
+apart %>%
+  filter(str_detect(단지명, '래미안')) %>%  # like 검색.
+  count(시군구, 단지명) %>% 
+  arrange(desc(n)) 
+
+# 아파트 단지내 평형단위별 평균가/최저가/최고가
+dap_apart1 = apart %>%
+  filter(단지명 == '래미안위브') %>% 
+  group_by(평형대) %>% 
+  summarise(건수 = n(), 
+              평균가 = mean(거래가, na.rm = T), 
+              하한가 = min(거래가, na.rm = T),
+              최고가 = max(거래가, na.rm = T)) %>% 
+  arrange(평형대)
+dap_apart1
+apart
+dap_apart2 = apart %>%
+  filter(단지명 == '래미안위브') %>% 
+  group_by(계약년도, 계약분기, 평형대) %>% 
+  summarise(건수 = n(), 
+              평균가 = mean(거래가, na.rm = T), 
+              하한가 = min(거래가, na.rm = T),
+              최고가 = max(거래가, na.rm = T)) %>% 
+  arrange(계약년도, 계약분기, 평형대)
+
+dap_apart2
+
+#################################################
+
+x <- ymd(c("2012-03-26", "2012-05-04", "2012-09-23", "2012-12-31", "2013-12-31"))
+str(quarter(x, with_year = T)) # 분기
+semester(x, with_year = T) # 반기
+yq("2001: Q1")
+
+quarter(ymd("2012-03-26"), with_year = T) - 0.2
+
+apart = apart %>% 
+  mutate(계약분기 = quarter(ymd(str_c(계약년월, '01')), with_year = T))
+
+apart
+
+  
+dap_apart
+
+dap_apart = apart %>%
+  filter(단지명 == '래미안위브') %>% 
+  filter(`전용면적(㎡)` > 80 , `전용면적(㎡)` < 90  ) %>% # 30평대.
+  group_by(`계약년월`) %>% 
+  summarise(건수 = n()) %>% 
+  arrange(`계약년월` )
+dap_apart
+dap_apart = apart %>%
+  filter(단지명 == '래미안위브') %>% 
+  group_by(`전용면적(㎡)`) %>% 
+  summarise(실거래가 = mean(`거래금액(만원)`, na.rm = T))
+
+dap_apart = apart %>%
+  filter(단지명 == '래미안위브') %>% 
+  group_by(`전용면적(㎡)`, `계약년월`) %>% 
+  summarise(건수 = n()) %>% 
+  arrange(`전용면적(㎡)`, `계약년월`)
+  # filter(`전용면적(㎡)` %in% c('84.99', '84.98'))
+
+dap_apart
+ggplot(dap_apart, aes(x = 계약년월, y = 건수, group = `전용면적(㎡)`, colour = `전용면적(㎡)`)) +
+  geom_line() 
+
+mean(c(NA, 1,4,2), na.rm = T)
+
+# install.packages("gcookbook")
+library(gcookbook)
+
+tg
+ggplot(tg, aes(x = dose, y = length, fill = supp)) +
+  geom_line() +
+  geom_point(size = 4, shape = 21)
+
+apart_2019 %>% 
+  filter(단지명 == '래미안위브') %>% 
+  count(`계약년월`, `전용면적(㎡)`)
+
+apart_2019 %>% count(`전용면적(㎡)`)
+apart %>% 
+  filter(단지명 == '래미안위브') %>% 
+  group_by( `전용면적(㎡)`) %>% 
+  summarise(n = n()) %>% 
+  mutate(py = aa(`전용면적(㎡)`)) %>% 
+  mutate(py_cd = py %/% 10 * 10)
+apart %>% 
+  filter(단지명 == '래미안위브') %>% 
+  group_by( `전용면적(㎡)`) %>% 
+  summarise(n = n()) 
+
+# 20/30/40평형대로 출력
+aa = function(mm){
+  mm * 0.3025
+}
+(122.23 * 0.3025) %/% 10 * 10
+24 %/% 10 * 10
+24 %% 10
+
+
+levels(gss_cat$relig)
+
+options(tibble.sigfig = 100)
+
+gss_cat %>%
+  count(race)
+ggplot(gss_cat, aes(race)) +
+  geom_bar()
+ggplot(gss_cat, aes(race)) +
+  geom_bar() +
+  scale_x_discrete(drop = FALSE)
