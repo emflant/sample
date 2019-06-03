@@ -3,9 +3,11 @@ library(tidyverse)
 library(lubridate)
 
 # options(digits = 10)
-
-file.path(getwd(), 'docs', 'apart', 'data', '아파트(매매)_실거래가_서울_2017.xlsx')
-
+# file.path(getwd(), 'docs', 'apart', 'data', '아파트(매매)_실거래가_서울_2017.xlsx')
+apart_2013 = read_xlsx(path = file.path(getwd(), 'docs', 'apart', 'data', '아파트(매매)_실거래가_서울_2013.xlsx'))
+apart_2014 = read_xlsx(path = file.path(getwd(), 'docs', 'apart', 'data', '아파트(매매)_실거래가_서울_2014.xlsx'))
+apart_2015 = read_xlsx(path = file.path(getwd(), 'docs', 'apart', 'data', '아파트(매매)_실거래가_서울_2015.xlsx'))
+apart_2016 = read_xlsx(path = file.path(getwd(), 'docs', 'apart', 'data', '아파트(매매)_실거래가_서울_2016.xlsx'))
 apart_2017 = read_xlsx(path = file.path(getwd(), 'docs', 'apart', 'data', '아파트(매매)_실거래가_서울_2017.xlsx'))
 apart_2018 = read_xlsx(path = file.path(getwd(), 'docs', 'apart', 'data', '아파트(매매)_실거래가_서울_2018.xlsx'))
 apart_2019 = read_xlsx(path = file.path(getwd(), 'docs', 'apart', 'data', '아파트(매매)_실거래가_서울_2019.xlsx'))
@@ -15,10 +17,12 @@ apart_2018
 apart_2019
 
 # 3개 data 하나로 바인딩.
-apart = bind_rows(apart_2017, apart_2018, apart_2019)
+apart = bind_rows(apart_2013, apart_2014, apart_2015, apart_2016, 
+                  apart_2017, apart_2018, apart_2019)
 
 # 나머지3개 데이터 삭제.
-rm(list = c("apart_2017", "apart_2018", "apart_2019"))
+rm(list = c("apart_2013", "apart_2014", "apart_2015", "apart_2016", 
+            "apart_2017", "apart_2018", "apart_2019"))
 ls()
 
 # 전용면적 chr --> dbl 로 변환
@@ -33,6 +37,8 @@ apart = apart %>%
   mutate(계약년도 = year(계약일자)) %>% 
   mutate(계약분기 = quarter(계약일자))
 apart
+nrow(apart)
+ncol(apart)
 
 monthly_trade_count = apart %>% 
   group_by(계약년월) %>% 
@@ -41,6 +47,9 @@ monthly_trade_count
 # 월별 아파트 매매 추이.
 ggplot(monthly_trade_count, aes(x = 계약년월, y = counts)) + 
   geom_col()
+
+ggplot(monthly_trade_count, aes(x = 계약년월, y = counts, group = 1)) + 
+  geom_line()
 
 # 월별 아파트 매매 추이. (동일한 뷰)
 ggplot(apart, aes(계약년월)) + 
@@ -58,7 +67,7 @@ apart %>%
   count(시군구, 단지명) %>% 
   arrange(desc(n)) 
 
-# 아파트 단지내 평형단위별 평균가/최저가/최고가
+# 특정 아파트 단지내 평형단위별 평균가/최저가/최고가
 dap_apart1 = apart %>%
   filter(단지명 == '래미안위브') %>% 
   group_by(평형대) %>% 
@@ -68,8 +77,21 @@ dap_apart1 = apart %>%
               최고가 = max(거래가, na.rm = T)) %>% 
   arrange(평형대)
 dap_apart1
-apart
+colnames(apart)
+# 특정 아파트 단지내 년도별/평형단위별 평균가/최저가/최고가
 dap_apart2 = apart %>%
+  filter(단지명 == '래미안위브') %>% 
+  group_by(계약년도, 평형대) %>% 
+  summarise(건수 = n(), 
+              평균가 = mean(거래가, na.rm = T), 
+              하한가 = min(거래가, na.rm = T),
+              최고가 = max(거래가, na.rm = T)) %>% 
+  arrange(계약년도, 평형대)
+dap_apart2
+
+
+# 특정 아파트 단지내 분기별/평형단위별 평균가/최저가/최고가
+dap_apart3 = apart %>%
   filter(단지명 == '래미안위브') %>% 
   group_by(계약년도, 계약분기, 평형대) %>% 
   summarise(건수 = n(), 
@@ -78,18 +100,18 @@ dap_apart2 = apart %>%
               최고가 = max(거래가, na.rm = T)) %>% 
   arrange(계약년도, 계약분기, 평형대)
 
-dap_apart2
+dap_apart3
 
 #################################################
 
 x <- ymd(c("2012-03-26", "2012-05-04", "2012-09-23", "2012-12-31", "2013-12-31"))
-str(quarter(x, with_year = T)) # 분기
+quarter(x, with_year = T) # 분기
 semester(x, with_year = T) # 반기
 yq("2001: Q1")
 
 quarter(ymd("2012-03-26"), with_year = T) - 0.2
 
-apart = apart %>% 
+apart %>% 
   mutate(계약분기 = quarter(ymd(str_c(계약년월, '01')), with_year = T))
 
 apart
