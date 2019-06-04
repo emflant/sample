@@ -40,10 +40,27 @@ apart
 nrow(apart)
 ncol(apart)
 
+
 monthly_trade_count = apart %>% 
   group_by(계약년월) %>% 
   summarise(counts = n())
-monthly_trade_count
+length(monthly_trade_count$counts)
+
+monthly_trade_count$counts
+
+# 마지막 vector 삭제시. 음수를 활용하면 뒤에서부터 갯수만큼 제거.
+head(1:10, n = -1)
+
+# 맨앞의 vector 삭제시. 음수를 활용하면 뒤에서부터 갯수만큼 제거.
+tail(1:10, n = -1)
+
+c(0, monthly_trade_count$counts)[-2]
+monthly_trade_count %>% 
+  mutate(nxt = c(tail(counts, n = -1), 0)) %>% 
+  mutate(cals = counts - nxt) %>% 
+  filter(cals < 0)
+
+rep
 # 월별 아파트 매매 추이.
 ggplot(monthly_trade_count, aes(x = 계약년월, y = counts)) + 
   geom_col()
