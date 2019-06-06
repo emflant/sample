@@ -102,4 +102,3 @@ plot(t, type = 'l')
 link : [R Markdown](http://rmarkdown.rstudio.com)  
 Insert Chunk : *Ctrl+Alt+I*  
 Preview : *Ctrl+Shift+K*
-

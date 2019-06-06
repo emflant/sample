@@ -20,6 +20,7 @@ This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute
 - [basel3](./basel3.html)
 - [interest rate risk](./interest_rate_risk.nb.html)
 - [liquidity risk](./liquidity_risk.html)
+- [bar graphs](./bar_graphs.html)
 
 R books
 

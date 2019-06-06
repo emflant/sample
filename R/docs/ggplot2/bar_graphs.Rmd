@@ -1,0 +1,105 @@
+---
+title: "Bar Graphs"
+output:
+  html_document:
+    df_print: paged
+    theme: united # https://bootswatch.com/3/
+    highlight: tango # default, tango, pygments, kate, monochrome, espresso, zenburn, haddock, and textmate
+---
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+
+Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Cmd+Shift+Enter*. 
+
+```{r include=FALSE}
+library(gcookbook)
+library(tidyverse)
+library(ggthemes)
+```
+
+```{r}
+# I’ll use the uspopchange data set for this example. It contains the percentage change in population for the US states from 2000 to 2010. I’ll take the top 10 fastest-growing states and graph their percentage change. 
+upc <- uspopchange %>%
+  arrange(desc(Change)) %>%
+  slice(1:10) %>% 
+  select(State, Abb, Region, Change)
+upc
+```
+
+
+```{r}
+ggplot(upc, aes(x = Abb, y = Change, fill = Region)) +
+  geom_col()
+```
+
+
+
+
+```{r}
+ggplot(upc, aes(x = reorder(Abb, Change), y = Change, fill = Region)) +
+  geom_col(colour = "black") +
+  scale_fill_manual(values = c("#669933", "#FFCC66")) +
+  theme_wsj()
+```
+
+
+
+```{r}
+climate_sub <- climate %>%
+  filter(Source == "Berkeley" & Year >= 1900) %>%
+  mutate(pos = Anomaly10y >= 0) %>% 
+  select(Year, Anomaly10y, pos)
+
+climate_sub
+```
+
+
+
+```{r}
+ggplot(climate_sub, aes(x = Year, y = Anomaly10y, fill = pos)) +
+  geom_col(position = "identity") +
+  theme_wsj()
+```
+
+
+```{r}
+ggplot(climate_sub, aes(x = Year, y = Anomaly10y, fill = pos)) +
+  geom_col(position = "identity", colour = "black", size = 0.25) +
+  scale_fill_manual(values = c("#CCEEFF", "#FFDDDD"), guide = FALSE)+
+  theme_wsj()
+```
+
+
+```{r}
+ggplot(cabbage_exp, aes(x = Date, y = Weight, fill = Cultivar)) +
+  geom_col() + theme_wsj()
+```
+```{r}
+ggplot(cabbage_exp, aes(x = Date, y = Weight, fill = Cultivar)) +
+  geom_col(position = position_dodge2()) + theme_wsj()
+```
+```{r}
+ggplot(cabbage_exp, aes(x = Date, y = Weight, fill = Cultivar)) +
+  geom_col(position = "fill") + 
+  scale_y_continuous(labels = scales::percent) +
+  theme_wsj()
+```
+
+
+```{r}
+ggplot(cabbage_exp, aes(x = Date, y = Weight, fill = Cultivar)) +
+  geom_col(colour = "black", position = "fill") +
+  scale_y_continuous(labels = scales::percent) +
+  scale_fill_brewer(palette = "Pastel3") + theme_wsj()
+```
+
+```{r}
+
+```
+
+
+
+
+
+
+

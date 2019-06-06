@@ -1,52 +1,55 @@
 library(readxl)
 library(tidyverse)
 library(lubridate)
+library(ggthemes)
 
-# options(digits = 10)
-# file.path(getwd(), 'docs', 'apart', 'data', '아파트(매매)_실거래가_서울_2017.xlsx')
-apart_2013 = read_xlsx(path = file.path(getwd(), 'docs', 'apart', 'data', '아파트(매매)_실거래가_서울_2013.xlsx'))
-apart_2014 = read_xlsx(path = file.path(getwd(), 'docs', 'apart', 'data', '아파트(매매)_실거래가_서울_2014.xlsx'))
-apart_2015 = read_xlsx(path = file.path(getwd(), 'docs', 'apart', 'data', '아파트(매매)_실거래가_서울_2015.xlsx'))
-apart_2016 = read_xlsx(path = file.path(getwd(), 'docs', 'apart', 'data', '아파트(매매)_실거래가_서울_2016.xlsx'))
-apart_2017 = read_xlsx(path = file.path(getwd(), 'docs', 'apart', 'data', '아파트(매매)_실거래가_서울_2017.xlsx'))
-apart_2018 = read_xlsx(path = file.path(getwd(), 'docs', 'apart', 'data', '아파트(매매)_실거래가_서울_2018.xlsx'))
-apart_2019 = read_xlsx(path = file.path(getwd(), 'docs', 'apart', 'data', '아파트(매매)_실거래가_서울_2019.xlsx'))
-
-apart_2017
-apart_2018
-apart_2019
-
-# 3개 data 하나로 바인딩.
-apart = bind_rows(apart_2013, apart_2014, apart_2015, apart_2016, 
-                  apart_2017, apart_2018, apart_2019)
-
-# 나머지3개 데이터 삭제.
-rm(list = c("apart_2013", "apart_2014", "apart_2015", "apart_2016", 
-            "apart_2017", "apart_2018", "apart_2019"))
-ls()
-
-# 전용면적 chr --> dbl 로 변환
-apart$`전용면적(㎡)` = as.numeric(apart$`전용면적(㎡)`)
-
-# 평형 변환 및 10/20/30/40 평형대인지 코드성 필드 추가.
-apart = apart %>% 
-  mutate(평수 = `전용면적(㎡)` * 0.3025) %>% 
-  mutate(평형대 = 평수 %/% 10 * 10) %>% 
-  mutate(거래가 = as.numeric(str_remove(`거래금액(만원)`, ','))) %>% 
-  mutate(계약일자 = ymd(paste0(계약년월, '01'))) %>% # 계약년월에 01 일자로만 셋팅.
-  mutate(계약년도 = year(계약일자)) %>% 
-  mutate(계약분기 = quarter(계약일자))
+get_apart_data = function (){
+  # options(digits = 10)
+  # file.path(getwd(), 'docs', 'apart', 'data', '아파트(매매)_실거래가_서울_2017.xlsx')
+  apart_2013 = read_xlsx(path = file.path(getwd(), 'docs', 'apart', 'data', '아파트(매매)_실거래가_서울_2013.xlsx'))
+  apart_2014 = read_xlsx(path = file.path(getwd(), 'docs', 'apart', 'data', '아파트(매매)_실거래가_서울_2014.xlsx'))
+  apart_2015 = read_xlsx(path = file.path(getwd(), 'docs', 'apart', 'data', '아파트(매매)_실거래가_서울_2015.xlsx'))
+  apart_2016 = read_xlsx(path = file.path(getwd(), 'docs', 'apart', 'data', '아파트(매매)_실거래가_서울_2016.xlsx'))
+  apart_2017 = read_xlsx(path = file.path(getwd(), 'docs', 'apart', 'data', '아파트(매매)_실거래가_서울_2017.xlsx'))
+  apart_2018 = read_xlsx(path = file.path(getwd(), 'docs', 'apart', 'data', '아파트(매매)_실거래가_서울_2018.xlsx'))
+  apart_2019 = read_xlsx(path = file.path(getwd(), 'docs', 'apart', 'data', '아파트(매매)_실거래가_서울_2019.xlsx'))
+  
+  # 3개 data 하나로 바인딩.
+  apart = bind_rows(apart_2013, apart_2014, apart_2015, apart_2016, 
+                    apart_2017, apart_2018, apart_2019)
+  
+  # 나머지3개 데이터 삭제.
+  rm(list = c("apart_2013", "apart_2014", "apart_2015", "apart_2016", 
+              "apart_2017", "apart_2018", "apart_2019"))
+  ls()
+  
+  # 전용면적 chr --> dbl 로 변환
+  apart$`전용면적(㎡)` = as.numeric(apart$`전용면적(㎡)`)
+  
+  # 평형 변환 및 10/20/30/40 평형대인지 코드성 필드 추가.
+  apart = apart %>% 
+    mutate(평수 = `전용면적(㎡)` * 0.3025) %>% 
+    mutate(평형대 = 평수 %/% 10 * 10) %>% 
+    mutate(거래가 = as.numeric(str_remove(`거래금액(만원)`, ','))) %>% 
+    mutate(계약일자 = ymd(paste0(계약년월, '01'))) %>% # 계약년월에 01 일자로만 셋팅.
+    mutate(계약년도 = year(계약일자)) %>% 
+    mutate(계약분기 = quarter(계약일자))
+  apart
+}
+apart = get_apart_data()
 apart
+
+# dataframe 컬럼수, row수
 nrow(apart)
 ncol(apart)
 
 
 monthly_trade_count = apart %>% 
   group_by(계약년월) %>% 
-  summarise(counts = n())
+  summarise(월별거래건수 = n())
 length(monthly_trade_count$counts)
 
-monthly_trade_count$counts
+monthly_trade_count
 
 # 마지막 vector 삭제시. 음수를 활용하면 뒤에서부터 갯수만큼 제거.
 head(1:10, n = -1)
@@ -54,19 +57,23 @@ head(1:10, n = -1)
 # 맨앞의 vector 삭제시. 음수를 활용하면 뒤에서부터 갯수만큼 제거.
 tail(1:10, n = -1)
 
-c(0, monthly_trade_count$counts)[-2]
-monthly_trade_count %>% 
-  mutate(nxt = c(tail(counts, n = -1), 0)) %>% 
-  mutate(cals = counts - nxt) %>% 
-  filter(cals < 0)
 
+monthly_trade_count %>% 
+  mutate(전월거래건수 = c(0, head(월별거래건수, n = -1))) %>% 
+  mutate(익월거래건수 = c(tail(월별거래건수, n = -1), 0)) %>% 
+  mutate(전월대비 = 월별거래건수 - 전월거래건수) %>% 
+  mutate(익월대비 = 익월거래건수 - 월별거래건수) %>% 
+  filter(전월대비 < 0, 익월대비 > 0)
+
+args(rep)
 rep
 # 월별 아파트 매매 추이.
-ggplot(monthly_trade_count, aes(x = 계약년월, y = counts)) + 
-  geom_col()
+ggplot(monthly_trade_count, aes(x = 계약년월, y = 월별거래건수)) + 
+  geom_col()  +
+  theme_wsj()
 
-ggplot(monthly_trade_count, aes(x = 계약년월, y = counts, group = 1)) + 
-  geom_line()
+ggplot(monthly_trade_count, aes(x = 계약년월, y = 월별거래건수, group = 1)) + 
+  geom_line() + geom_point()+ theme_wsj()
 
 # 월별 아파트 매매 추이. (동일한 뷰)
 ggplot(apart, aes(계약년월)) + 
@@ -205,3 +212,17 @@ ggplot(gss_cat, aes(race)) +
 ggplot(gss_cat, aes(race)) +
   geom_bar() +
   scale_x_discrete(drop = FALSE)
+
+
+cabbage_exp
+
+ggplot(cabbage_exp, aes(x = Date, y = Weight, fill = Cultivar)) +
+  geom_col(position = "stack") # stack 이 default option.
+ggplot(cabbage_exp, aes(x = Date, y = Weight, fill = Cultivar)) +
+  geom_col(position = "dodge")
+ggplot(cabbage_exp, aes(x = Date, y = Weight, fill = Cultivar)) +
+  geom_col(position = position_dodge2())
+
+
+ggplot(cabbage_exp, aes(x = Date, y = Weight, fill = Cultivar)) +
+  geom_col(position = position_fill())
