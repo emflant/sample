@@ -7,42 +7,51 @@ output:
     highlight: tango # default, tango, pygments, kate, monochrome, espresso, zenburn, haddock, and textmate
 ---
 
-This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
-
-Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Cmd+Shift+Enter*. 
-
 ```{r include=FALSE}
 library(gcookbook)
 library(tidyverse)
 library(ggthemes)
 ```
 
+### `upc` Data
+
+I’ll use the `uspopchange` data set for this example. It contains the percentage change in population for the US states from 2000 to 2010. I’ll take the top 10 fastest-growing states and graph their percentage change. 
 ```{r}
-# I’ll use the uspopchange data set for this example. It contains the percentage change in population for the US states from 2000 to 2010. I’ll take the top 10 fastest-growing states and graph their percentage change. 
 upc <- uspopchange %>%
   arrange(desc(Change)) %>%
   slice(1:10) %>% 
   select(State, Abb, Region, Change)
 upc
 ```
+\
+\
 
+
+### Grouping Bars Together
+
+If I want to group bars together, I need to map a variable to `fill`, and use `geom_col(position="dodge")`.
 
 ```{r}
 ggplot(upc, aes(x = Abb, y = Change, fill = Region)) +
-  geom_col()
+  geom_col(position = "dodge") + theme_wsj()
 ```
+\
+\
 
 
+### Sorting the bars
 
+This example uses the `reorder()` function to reorder the levels of the factor `Abb` based on the values of `Change`
 
 ```{r}
-ggplot(upc, aes(x = reorder(Abb, Change), y = Change, fill = Region)) +
+ggplot(upc, aes(x = reorder(Abb, -Change), y = Change, fill = Region)) +
   geom_col(colour = "black") +
   scale_fill_manual(values = c("#669933", "#FFCC66")) +
   theme_wsj()
 ```
 
-
+### `climate_sub` Data
+I'll use a subset of `climate` data and create a new column called `pos`, which indicates whether the value is positive or negative.
 
 ```{r}
 climate_sub <- climate %>%
@@ -90,7 +99,7 @@ ggplot(cabbage_exp, aes(x = Date, y = Weight, fill = Cultivar)) +
 ggplot(cabbage_exp, aes(x = Date, y = Weight, fill = Cultivar)) +
   geom_col(colour = "black", position = "fill") +
   scale_y_continuous(labels = scales::percent) +
-  scale_fill_brewer(palette = "Pastel3") + theme_wsj()
+  scale_fill_brewer(palette = "Pastel2") + theme_wsj()
 ```
 
 ```{r}
