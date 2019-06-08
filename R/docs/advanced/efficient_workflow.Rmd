@@ -1,16 +1,22 @@
 ---
 title: "Efficient workflow"
-output: html_notebook
+output:
+  html_document:
+    df_print: paged
+    theme: united # https://bootswatch.com/3/
+    highlight: tango # default, tango, pygments, kate, monochrome, espresso, zenburn, haddock, and textmate
 ---
 
 This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
 
 Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Cmd+Shift+Enter*. 
 
-```{r}
+```{r include=FALSE}
 library("DiagrammeR")
-install.packages("swirl")
 library("swirl")
+```
+
+```{r}
 mermaid("gantt Section Initiation
         Planning : a, 2016-01-01, 10d
         Data processing : after a, 30d

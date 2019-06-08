@@ -13,9 +13,9 @@ This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute
 - [interest rate of return](./internal_rate_of_return.nb.html)
 - [normal distribution](./normal_distribution.nb.html)
 - [credit card](./credit_card.nb.html)
-- [file system](./file_system.nb.html)
+- [file system](./file_system.html)
 - [efficient programming](./efficient_programming.nb.html)
-- [Dates and times with lubridate](./dates_and_times.nb.html)
+- [Dates and times with lubridate](./dates_and_times.html)
 - [R Selenium](./rselenium.html)
 - [basel3](./basel3.html)
 - [interest rate risk](./interest_rate_risk.nb.html)
@@ -49,19 +49,15 @@ R packages
 ```{r include=FALSE}
 library(tidyverse)
 # show html files
-list.files('../../../docs', pattern = '\\.html$', full.names = T)
-str_c(list.files('../../../docs', pattern = '\\.html$'), collapse = "|")
+# list.files('/Volumes/PhotoDisk/30_workspace/emflant.github.io')
+# list.files('/Volumes/PhotoDisk/30_workspace/sample/docs')
+# list.files('/Volumes/PhotoDisk/30_workspace/sample/R/docs')
+
+origin_files = list.files(path = '/Volumes/PhotoDisk/30_workspace/sample/R/docs', recursive = T, full.names = T, pattern = '\\.html$')
+file.copy(origin_files, '/Volumes/PhotoDisk/30_workspace/sample/docs', overwrite = T, copy.date = T)
+file.copy(origin_files, '/Volumes/PhotoDisk/30_workspace/emflant.github.io', overwrite = T, copy.date = T)
+
+
 ```
 
-```{r}
-# start copy html files
-search_file = str_detect(list.files(path = '..', 
-  full.names = T, recursive = T), 
-  str_c(list.files('../../../docs', '\\.html$'), collapse = "|"))
-copy_origin = list.files(path = '..', 
-  full.names = T, recursive = T)[search_file]
-copy_index = file.copy(copy_origin, "../../../docs/", overwrite = T, copy.date = T)
 
-# 복사완료 파일
-copy_origin[copy_index]
-```

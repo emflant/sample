@@ -1,11 +1,12 @@
 ---
 title: "R Notebook"
-output: html_notebook
+output:
+  html_document:
+    df_print: paged
+    theme: united # https://bootswatch.com/3/
+    highlight: tango # default, tango, pygments, kate, monochrome, espresso, zenburn, haddock, and textmate
 ---
 
-This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
-
-Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Cmd+Shift+Enter*. 
 
 ```{r}
 library(lubridate)
@@ -17,7 +18,6 @@ a = hms("03:45:08")
 a
 c = ymd("20190102") + days(1)
 c - ymd("20190101")
-as.duration()
 as.numeric(a, "seconds")
 as.numeric(a, "year")
 seconds(a)
@@ -29,7 +29,7 @@ x
 tz(with_tz(x, "GMT"))
 
 tz(ymd_hms("2009-03-08 01:59:59"))
-OlsonNames()
+OlsonNames() 
 grepl("/", OlsonNames())
 table(sl <- grepl("/", OlsonNames()))
 sl <- grepl("/", OlsonNames())
@@ -38,7 +38,6 @@ OlsonNames()[ !sl ]
 boundary + days(1)  # period
 boundary + ddays(1) # duration
 c
-b
 c - boundary
 
 a = ymd_hms("2019-01-02 01:59:59", tz="America/Chicago")
