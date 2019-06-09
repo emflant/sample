@@ -48,16 +48,14 @@ R packages
 
 ```{r include=FALSE}
 library(tidyverse)
-# show html files
-# list.files('/Volumes/PhotoDisk/30_workspace/emflant.github.io')
-# list.files('/Volumes/PhotoDisk/30_workspace/sample/docs')
-# list.files('/Volumes/PhotoDisk/30_workspace/sample/R/docs')
+source_files = list.files('/Volumes/PhotoDisk/30_workspace/sample/R/docs', recursive = T, full.names = T, pattern = '\\.html$')
+target_folder1 = '/Volumes/PhotoDisk/30_workspace/sample/docs'
+target_folder2 = '/Volumes/PhotoDisk/30_workspace/emflant.github.io'
+```
 
-origin_files = list.files(path = '/Volumes/PhotoDisk/30_workspace/sample/R/docs', recursive = T, full.names = T, pattern = '\\.html$')
-file.copy(origin_files, '/Volumes/PhotoDisk/30_workspace/sample/docs', overwrite = T, copy.date = T)
-file.copy(origin_files, '/Volumes/PhotoDisk/30_workspace/emflant.github.io', overwrite = T, copy.date = T)
-
-
+```{r}
+file.copy(from = source_files, to = target_folder1, overwrite = T, copy.date = T)
+file.copy(from = source_files, to = target_folder2, overwrite = T, copy.date = T)
 ```
 
 
