@@ -14,13 +14,13 @@ const myPasswordHash = [
 ];
 
 bcrypt.compare(myPlaintextPassword,
-    myPasswordHash[1], // saltRounds 크기가 클수록 compare 시간도 그만큼 늘어난다.
+    myPasswordHash[5], // saltRounds 크기가 클수록 compare 시간도 그만큼 늘어난다.
     (err, res) => {
         console.log(`${myPlaintextPassword} : ${res}`);
     });
 
 bcrypt.compare(someOtherPlainTextPassword,
-    myPasswordHash[3],
+    myPasswordHash[1],
     (err, res) => {
         console.log(`${someOtherPlainTextPassword} : ${res}`);
     });
