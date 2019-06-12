@@ -8,3 +8,7 @@ var data = { foo : 'world' };
 
 console.log(render(data));
 console.log(render({ foo : 'there'}));
+
+
+
+
