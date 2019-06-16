@@ -126,6 +126,32 @@ dap_apart3 = apart %>%
 
 dap_apart3
 
+
+dap_apart4 = apart %>%
+  filter(단지명 == '래미안위브', 
+            시군구 == '서울특별시 동대문구 답십리동', 
+            # 계약년도 == 2019,
+            평형대 == 20) %>% 
+  select(평형대, 계약일자, 층, 거래가) %>% 
+  arrange(평형대, 계약일자, 층)
+
+dap_apart4
+ggplot(dap_apart4, aes(계약일자, 거래가)) +
+  geom_point() + 
+  geom_line() +
+  theme_wsj()
+
+dap_apart5 = apart %>%
+  filter(단지명 == '래미안위브', 
+            시군구 == '서울특별시 동대문구 답십리동', 
+            평형대 == 20) %>% 
+  group_by(계약일자) %>% 
+  summarise(평균가 = mean(거래가, na.rm = T)) %>% 
+  select(계약일자, 평균가)
+
+ggplot(dap_apart5, aes(계약일자, 평균가)) + 
+  geom_line()+ theme_wsj()
+
 #################################################
 
 x <- ymd(c("2012-03-26", "2012-05-04", "2012-09-23", "2012-12-31", "2013-12-31"))
