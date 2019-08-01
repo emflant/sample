@@ -1,0 +1,17 @@
+zlib1g
+libattr1
+libacl1
+tar
+libpcre3
+libselinux1
+multiarch-support
+liblzma5
+libbz2-1.0
+dpkg
+zsh-common
+libtinfo5
+libcap2
+gcc-6-base
+libgcc1
+libc6
+zsh
