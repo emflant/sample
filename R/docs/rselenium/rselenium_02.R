@@ -1,6 +1,8 @@
 library(RSelenium)
 library(lubridate)
 library(tidyverse)
+library(rvest)
+#java -jar /Volumes/PhotoDisk/30_workspace/sample/R/docs/rselenium/selenium-server-standalone-3.9.1.jar
 
 gmail.connect = function(){
   remDr <- remoteDriver(
@@ -81,4 +83,69 @@ gmail.downloadfiles = function (){
   remDr$close()
 }
 
-gmail.downloadfiles()
+# gmail.downloadfiles()
+
+
+
+kakko.readMail = function(remDr, birth, file_name) {
+  remDr$navigate(str_c("file://", file_name))
+  
+  webElem = remDr$findElement(using = "xpath", value = '//*[@id="pwd1"]')
+  webElem$sendKeysToElement(list(birth, key = "enter"))
+  
+  Sys.sleep(1)
+  
+  trade_list = read_html(remDr$getPageSource()[[1]]) %>% 
+    html_nodes(xpath = '//*[@id="mArticle"]/div[3]/table/tbody/tr/td') %>% 
+    html_text() %>% 
+    str_trim() %>% 
+    matrix(ncol = 6, byrow = T) %>% 
+    as_tibble(.name_repair = "minimal")
+  
+  row_name = read_html(remDr$getPageSource()[[1]]) %>% 
+    html_nodes(xpath = '//*[@id="mArticle"]/div[3]/table/thead/tr/th') %>% 
+    html_text()
+  
+  colnames(trade_list) = row_name
+  trade_list
+}
+# Warning message:
+#   `as_tibble.matrix()` requires a matrix with column names or a `.name_repair` argument. Using compatibility `.name_repair`.
+# This warning is displayed once per session. 
+
+
+kakko.getTradeDetail = function(){
+  birth = readline("What is your birth date?(6 digit, ex. 950310) : ")
+  
+  file_list = list.files(path = "/Users/emflant/Downloads", full.names = T) %>% 
+    enframe(name = NULL) %>% 
+    filter(str_detect(value , 'KB_.+\\.html'))
+  remDr <- remoteDriver(
+    remoteServerAddr = "localhost",
+    port = 4444L,
+    browserName = "chrome"
+  )
+  remDr$open()
+  result = tibble()
+  for(f in file_list$value){
+    trade_list = kakko.readMail(remDr, birth, f)
+    result = bind_rows(result, trade_list)
+  }
+  remDr$closeWindow()
+  remDr$close()
+  result
+}
+result = kakko.getTradeDetail()
+result
+
+list.files(path = "/Users/emflant/Downloads", full.names = T) %>% 
+  enframe(name = NULL) %>% 
+  filter(str_detect(value , 'KB_.+\\.html'))
+
+
+
+
+
+
+
+

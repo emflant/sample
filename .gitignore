@@ -6,4 +6,5 @@ node_modules/
 .Rhistory
 *.csv
 .RData
-
+.vagrant/
+*.bson

@@ -2,6 +2,7 @@ library(readxl)
 library(tidyverse)
 library(lubridate)
 library(ggthemes)
+library(jsonlite)
 
 get_apart_data = function (){
   # options(digits = 10)
@@ -34,10 +35,41 @@ get_apart_data = function (){
     mutate(계약일자 = ymd(paste0(계약년월, '01'))) %>% # 계약년월에 01 일자로만 셋팅.
     mutate(계약년도 = year(계약일자)) %>% 
     mutate(계약분기 = quarter(계약일자))
+  
+  colnames(apart)[6] = "전용면적"
+  colnames(apart)[9] = "거래금액"
+  
   apart
 }
 apart = get_apart_data()
 apart
+colnames(apart)[6] = "전용면적"
+colnames(apart)[9] = "거래금액"
+apart %>% 
+  head(2)
+apart %>% 
+  head(1)%>% 
+  toJSON(pretty = T)
+apart_n2 = apart %>% 
+  head(2)
+getwd()
+
+# mongodb에 import 하기전에 json 파일로 변환. 너무큼..
+write_json(apart, path = file.path(getwd(), 'docs', 'apart', 'data', 'apart_all.json'))
+
+# 대략 90mb
+write_csv(apart, path = file.path(getwd(), 'docs', 'apart', 'data', 'apart_all.csv'))
+write_tsv(apart, path = file.path(getwd(), 'docs', 'apart', 'data', 'apart_all.tsv'))
+
+# 
+library(mongolite)
+
+conn = mongo(collection = "apart", db = "test")
+
+apart2 = conn$find() %>% 
+  as_tibble()
+apart2
+
 
 # dataframe 컬럼수, row수
 nrow(apart)

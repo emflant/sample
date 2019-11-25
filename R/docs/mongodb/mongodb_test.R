@@ -7,11 +7,11 @@ library(mongolite)
 ?mongo
 
 m <- mongo("restaurants")
-
+m
 dd <- m$find()
 
 cd <- mongo("card_details")
-card_details
+cd
 
 # cd$insert(card_details)
 cd$drop()
@@ -19,4 +19,4 @@ cd$drop()
 
 cd$count('{ "거래종류" : "hana" }') + cd$count('{ "거래종류" : "kakko" }')
 cd$count()
-
+cd$find()
