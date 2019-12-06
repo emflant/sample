@@ -1,1 +1,1 @@
-docker start mariadb
+docker start my-mariadb

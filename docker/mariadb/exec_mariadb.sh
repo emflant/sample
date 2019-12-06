@@ -1,1 +1,1 @@
-docker exec -it mariadb bash
+docker exec -it my-mariadb zsh
