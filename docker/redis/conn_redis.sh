@@ -1,1 +1,1 @@
-docker run -it --network redis-net --rm redis:alpine redis-cli -h my-redis
+docker run -it --network redis-net --rm redis-1 redis-cli -h my-redis
