@@ -1,1 +1,1 @@
-docker run -it --network mongo-net --rm mongo mongo --host my-mongo test
+docker run -it --network mongo-net --rm mongo-1 mongo --host my-mongo test
