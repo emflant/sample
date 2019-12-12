@@ -1,5 +1,3 @@
 FROM node:lts-alpine
-
-RUN echo "alias ll=\"ls -alh\"" >> ~/.ashrc
-RUN ash -c "source ~/.ashrc"
-
+ENV ENV="/root/.ashrc"
+RUN echo "alias ll=\"ls -alh\"" >> "$ENV"
