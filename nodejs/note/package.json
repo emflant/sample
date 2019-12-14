@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "eslint-utils": "^1.4.3",
     "fs-extra": "^7.0.0",
     "ganache-cli": "^6.1.8",
     "mocha": "^5.2.0",
