@@ -1,1 +1,1 @@
-docker exec -it my-mongo zsh
+docker exec -it my-mongo bash
