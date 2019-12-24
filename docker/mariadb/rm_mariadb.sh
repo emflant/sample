@@ -1,1 +1,1 @@
-docker rm -v my-mariadb
+docker container rm -v my-mariadb

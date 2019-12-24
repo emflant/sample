@@ -3,8 +3,11 @@ FROM ubuntu:bionic
 RUN sed -i 's/archive.ubuntu.com/mirror.kakao.com/g' /etc/apt/sources.list
 RUN sed -i 's/security.ubuntu.com/mirror.kakao.com/g' /etc/apt/sources.list
 
+# to avoid user interaction with tzdata
+ENV DEBIAN_FRONTEND noninteractive
+
 RUN apt-get update \
-		&& apt-get install -y --no-install-recommends locales vim tzdata
+		&& apt-get install -y locales tzdata vim r-base
 
 RUN locale-gen ko_KR.UTF-8
 ENV LC_ALL ko_KR.UTF-8
@@ -12,7 +15,7 @@ ENV LC_ALL ko_KR.UTF-8
 # localtime 에 링크할 시간대를 링크.
 RUN ln -sf /usr/share/zoneinfo/Asia/Seoul /etc/localtime
 
-# 원하는 시간대 링크후 아래 수행시, /etc/timezone 파일변경됨.
-RUN dpkg-reconfigure -f noninteractive tzdata
+# 원하는 시간대 링크후, /etc/timezone 파일변경.
+RUN echo "Asia/Seoul" > /etc/timezone 
 
-
+RUN echo "alias ll=\"ls -alFh\"" >> /root/.bashrc

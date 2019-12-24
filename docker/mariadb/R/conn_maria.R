@@ -12,7 +12,7 @@ con = dbConnect(RMariaDB::MariaDB(), host = "127.0.0.1",
                 password = "root_pw", port = 3306)
 dbListTables(con)
 dbWriteTable(con, "mtcars", mtcars)
-
+dbDisconnect(con)
 
 # res = dbSendQuery(con, "select * from mtcars where cyl = 4")
 # dbFetch(res)
