@@ -4,7 +4,7 @@ RUN sed -i 's/archive.ubuntu.com/mirror.kakao.com/g' /etc/apt/sources.list
 RUN sed -i 's/security.ubuntu.com/mirror.kakao.com/g' /etc/apt/sources.list
 
 RUN apt-get update \
-		&& apt-get install -y --no-install-recommends locales vim tzdata
+		&& apt-get install -y --no-install-recommends locales vim tzdata systemd
 
 RUN locale-gen ko_KR.UTF-8
 ENV LC_ALL ko_KR.UTF-8
