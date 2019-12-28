@@ -19,3 +19,7 @@ RUN ln -sf /usr/share/zoneinfo/Asia/Seoul /etc/localtime
 RUN echo "Asia/Seoul" > /etc/timezone 
 
 RUN echo "alias ll=\"ls -alFh\"" >> /root/.bashrc
+RUN echo 'export PS1="\[\033[38;5;6m\][\w]$\[$(tput sgr0)\] "' >> /root/.bashrc
+
+VOLUME /data
+WORKDIR /data
