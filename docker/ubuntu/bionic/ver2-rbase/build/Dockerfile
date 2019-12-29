@@ -7,10 +7,20 @@ RUN sed -i 's/security.ubuntu.com/mirror.kakao.com/g' /etc/apt/sources.list
 ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update \
-		&& apt-get install -y locales tzdata vim r-base
+	&& apt-get install -y locales \
+		tzdata \
+		vim \
+		r-base \
+		man \
+		man-db
+			
+RUN apt-get install -y \
+	python3-venv python3-pip \
+	&& pip3 install -U pip \
+	&& pip install ipython
 
-RUN locale-gen ko_KR.UTF-8
-ENV LC_ALL ko_KR.UTF-8
+# RUN locale-gen ko_KR.UTF-8
+# ENV LC_ALL ko_KR.UTF-8
 
 # localtime 에 링크할 시간대를 링크.
 RUN ln -sf /usr/share/zoneinfo/Asia/Seoul /etc/localtime
