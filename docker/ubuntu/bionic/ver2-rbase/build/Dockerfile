@@ -6,19 +6,28 @@ RUN sed -i 's/security.ubuntu.com/mirror.kakao.com/g' /etc/apt/sources.list
 # to avoid user interaction with tzdata
 ENV DEBIAN_FRONTEND noninteractive
 
-RUN apt-get update \
-	&& apt-get install -y locales \
-		tzdata \
-		vim \
-		r-base \
-		man \
-		man-db
+RUN apt-get update && \
+	apt-get install -y locales \
+	tzdata \
+	vim \
+	r-base \
+	man \
+	man-db
 			
 RUN apt-get install -y \
-	python3-venv python3-pip \
-	&& pip3 install -U pip \
-	&& pip install ipython
+	python3-venv python3-pip && \
+	pip3 install -U pip && \
+	pip install \
+	ipython \
+	csvkit
 
+RUN apt-get install -y git
+
+RUN cd /tmp && \
+	git clone https://github.com/jeroenjanssens/data-science-at-the-command-line.git && \
+	cp -rv data-science-at-the-command-line/data /root/commandline-data/
+			
+# locale 설정. 한글로만 나와서 그냥 주석처리함. 필요할때 아래2줄로 실행가능.
 # RUN locale-gen ko_KR.UTF-8
 # ENV LC_ALL ko_KR.UTF-8
 
