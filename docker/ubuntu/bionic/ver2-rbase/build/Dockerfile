@@ -28,6 +28,9 @@ RUN echo "install.packages(c('tidyverse'))" | \
 RUN echo "install.packages(c('readxl', 'jsonlite', 'lubridate'))" | \
 	R --slave --no-save --no-restore-history
 
+RUN echo "install.packages(c('gmailr'))" | \
+	R --slave --no-save --no-restore-history
+
 #RUN apt-get install -y git
 #RUN cd /tmp && \
 #	git clone https://github.com/jeroenjanssens/data-science-at-the-command-line.git && \
@@ -36,6 +39,7 @@ RUN echo "install.packages(c('readxl', 'jsonlite', 'lubridate'))" | \
 # locale 설정. 한글로만 나와서 그냥 주석처리함. 필요할때 아래2줄로 실행가능.
 # RUN locale-gen ko_KR.UTF-8
 # ENV LC_ALL ko_KR.UTF-8
+ENV LC_ALL C.UTF-8
 
 # localtime 에 링크할 시간대를 링크.
 RUN ln -sf /usr/share/zoneinfo/Asia/Seoul /etc/localtime
