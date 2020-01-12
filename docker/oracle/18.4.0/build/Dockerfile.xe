@@ -53,6 +53,7 @@ RUN chmod ug+x $INSTALL_DIR/*.sh && \
     $INSTALL_DIR/$CHECK_SPACE_FILE && \
     cd $INSTALL_DIR && \
     yum -y install openssl oracle-database-preinstall-18c && \
+    yum -y install vi && \
     yum -y install $INSTALL_FILE_1 && \
     rm -rf /var/cache/yum && \
     mkdir -p $ORACLE_BASE/scripts/setup && \
