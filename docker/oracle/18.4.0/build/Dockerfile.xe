@@ -53,7 +53,8 @@ RUN chmod ug+x $INSTALL_DIR/*.sh && \
     $INSTALL_DIR/$CHECK_SPACE_FILE && \
     cd $INSTALL_DIR && \
     yum -y install openssl oracle-database-preinstall-18c && \
-    yum -y install vi && \
+    yum -y install vi && \ 
+    yum -y install vim && \ 
     yum -y install $INSTALL_FILE_1 && \
     rm -rf /var/cache/yum && \
     mkdir -p $ORACLE_BASE/scripts/setup && \
@@ -70,7 +71,14 @@ RUN chmod ug+x $INSTALL_DIR/*.sh && \
     rm -rf $INSTALL_DIR && \
     chmod ug+x $ORACLE_BASE/*.sh
 
-VOLUME ["$ORACLE_BASE/oradata"]
+# my-setting start
+ENV ENV=/root/.bashrc
+RUN echo 'alias ll="ls -alFh"' >> $ENV
+
+VOLUME ["$ORACLE_BASE/oradata", "/sql"]
+WORKDIR /sql
+# my-setting end
+
 EXPOSE 1521 8080 5500
 HEALTHCHECK --interval=1m --start-period=5m \
    CMD "$ORACLE_BASE/$CHECK_DB_FILE" >/dev/null || exit 1
