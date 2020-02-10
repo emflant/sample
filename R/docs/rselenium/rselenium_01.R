@@ -9,8 +9,8 @@ ps()
 # java -jar $WORKSPACE/sample/R/docs/RSelenium/selenium-server-standalone-3.9.1.jar
 remDr <- remoteDriver(
   remoteServerAddr = "localhost",
-  port = 4444L,
-  browserName = "chrome"
+  port = 4445L,
+  browserName = "firefox"
 )
 exists("remDr")
 
@@ -19,7 +19,7 @@ remDr$open()
 # remDr$getStatus()
 
 remDr$navigate("https://mail.google.com")
-
+remDr$getStatus()
 remDr$goBack()
 remDr$getCurrentUrl()
 
@@ -86,6 +86,10 @@ colnames(trade_list) = row_name
 
 
 
-
-
+remDr$navigate("http://www.google.com/ncr")
+webElem <- remDr$findElement(using = "name", value = "q")
+webElem$getElementAttribute("name")
+webElem <- remDr$findElement(using = "class", "gsfi")
+webElem$getElementAttribute("class")
+webElem$getElementAttribute("type")
 

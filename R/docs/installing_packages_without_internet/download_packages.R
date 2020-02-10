@@ -18,7 +18,8 @@ getDependencies <- function(packs){
 packages <- getDependencies(c("tidyverse", "rmarkdown", "lubridate", 
                               "mongolite", "DBI", "readxl", 
                               "jsonlite", "xml2", "httr", 
-                              "rvest", "odbc", "RMariaDB"))
+                              "rvest", "RJDBC", "RMariaDB", 
+                              "RSelenium", "ps", "odbc"))
 
 # file.path(getwd(), "lib", "pkgFilenames.csv")
 
