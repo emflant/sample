@@ -12,11 +12,8 @@
 # Sys.setenv(JAVA_HOME = '/Library/Java/JavaVirtualMachines/jdk-13.0.2.jdk/Contents/Home/')
 # dyn.load('/Library/Java/JavaVirtualMachines/jdk-13.0.2.jdk/Contents/Home/lib/server/libjvm.dylib')
 
-
 library(RJDBC)
-
-jdbc_driver = JDBC("oracle.jdbc.OracleDriver", classPath = "/Volumes/PhotoDisk/30_workspace/sample/docker/oracle/18.4.0/r/ojdbc8.jar")
-
+jdbc_driver = JDBC("oracle.jdbc.OracleDriver", classPath = "../docker/oracle/18.4.0/r/ojdbc8.jar")
 con = dbConnect(jdbc_driver, "jdbc:oracle:thin:@//localhost:1521/xepdb1", "sys as sysdba", "1")
 
 jobs = dbReadTable(con, "hr.jobs")
