@@ -1,4 +1,4 @@
-FROM mariadb
+FROM mariadb:10.4.12-bionic
 
 RUN sed -i 's/archive.ubuntu.com/mirror.kakao.com/g' /etc/apt/sources.list
 RUN sed -i 's/security.ubuntu.com/mirror.kakao.com/g' /etc/apt/sources.list
