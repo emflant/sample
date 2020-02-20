@@ -7,4 +7,5 @@ docker run --name my-mariadb \
 	-e MYSQL_PASSWORD=maria_pw \
 	-v $PWD/mount/data:/var/lib/mysql \
 	-v $PWD/mount/config:/etc/mysql/conf.d \
+	-v $PWD/mount/doc:/doc \
 	-d mariadb-1
