@@ -11,3 +11,4 @@ default-character-set=utf8
 
 [mysql]
 default-character-set=utf8
+auto-rehash
