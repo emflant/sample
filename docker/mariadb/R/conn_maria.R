@@ -1,13 +1,12 @@
-install.packages("DBI")
 library(readxl)
 library(tidyverse)
 library(lubridate)
 library(ggthemes)
 library(jsonlite)
-
 library(RMariaDB)
 library(DBI)
-Sys.getenv()
+
+# Sys.getenv()
 con = dbConnect(RMariaDB::MariaDB(), host = "127.0.0.1",
                 dbname = "test", username = "root", 
                 password = "root_pw", port = 3306)
@@ -15,10 +14,12 @@ dbListTables(con)
 dbWriteTable(con, "mtcars", mtcars)
 dbDisconnect(con)
 
+dbReadTable(con, "employees")
+
 # res = dbSendQuery(con, "select * from mtcars where cyl = 4")
 # dbFetch(res)
 # dbClearResult(res)
-
+samsungcard_201912
 samsungcard_201912 = read_excel("/Volumes/PhotoDisk/30_workspace/data/samsungcard_20191222.xlsx")
 samsungcard_201912 = samsungcard_201912 %>% 
   # rename("총할부금액" = `총 할부금액`) %>%

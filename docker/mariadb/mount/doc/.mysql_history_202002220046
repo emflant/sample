@@ -3,3 +3,4 @@ system zsh
 show databases;
 system zsh
 l;
+select 13434 * 30948;
