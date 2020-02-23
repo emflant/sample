@@ -29,7 +29,7 @@ train_images = train_images / 255
 
 test_images = array_reshape(test_images, c(10000, 28 * 28))
 test_images = test_images / 255
-
+train_labels
 train_labels = to_categorical(train_labels)
 test_labels = to_categorical(test_labels)
 
@@ -61,6 +61,7 @@ sweep(data.matrix(attitude), 1, med.att, "+")
 
 
 a1 = array(1, dim = c(3,4))
+a1
 sweep(a1, 1, c(10,100,1000), "+")
 sweep(a1, 2, c(50,500,5000,50000), "+")
 
