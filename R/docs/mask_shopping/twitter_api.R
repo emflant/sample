@@ -1,39 +1,31 @@
 # install.packages("rtweet")
 library(rtweet)
-
-# rt %>% head %>% View
-# colnames(rt)
-
-
-# rt %>% 
-#   filter(!str_detect(urls_url, "youtu.be")) 
-# 
-# aa = rt %>% 
-#   filter(!is.na(urls_url)) %>% 
-#   head %>% 
-#   mutate(text = str_sub(text, 0, 30)) %>% 
-#   select(text, urls_url)
-
+library(lubridate)
+gks
 rt <- search_tweets(
-  "kf94", type = "recent", n = 1000, include_rts = FALSE
+  "마스크", type = "recent", n = 500, include_rts = FALSE
 )
 
-rt %>% head(10)  %>% 
-  select(created_at) %>% 
-  filter(created_at > ymd("2020-02-29"))
+first_ele = function (argss){
+  argss[[1]]
+}
 
+rt %>% select(created_at, urls_url) %>% 
+  mutate(p1 = unlist(purrr::map(urls_url, dplyr::first))) %>% 
+  mutate(p2 = purrr::map_chr(urls_url, dplyr::first)) %>% 
+  mutate(p3 = sapply(urls_url, dplyr::first))
 
-rt %>% 
-  filter(lang == "ko") %>% 
-  filter(!is.na(urls_url)) %>% 
-  filter(!str_detect(urls_url, "youtu.be")) %>% View
-
+str_extract("수출길 막히자 국내 유통하려 한 ‘마스크 사재기’ 판매자 2명 적발 https://t.co/zmMA0sOHs2", "http\\.+")
+rt$urls_url
+rt$created_at
 rt %>% 
   filter(lang == "ko") %>% 
   filter(!is.na(urls_url)) %>% 
   filter(!str_detect(urls_url, "youtu.be")) %>% 
   filter(created_at > ymd("2020-02-28")) %>%
-  select(created_at, text)
+  mutate(murl = str_extract(text, 'http[:graph:]+')) %>% 
+  mutate(urls_url_first = map(urls_url, dplyr::first)) %>% 
+  select(created_at, murl, text, urls_url_first)
 
 rt %>%
   filter(lang == "ko") %>% 
@@ -45,7 +37,7 @@ str(aa)
 aa$text
 length(aa$urls_url)
 aa$urls_url[2]
-
+ffffff
 identity
 
 array()
@@ -61,3 +53,12 @@ ff = function(v_list){
 }
 
 lapply(b, ff)
+
+
+# ctrl/window/alt/space/alt/fn/?/ctrl
+# control/command/option/space/option/?/?/control
+
+# lapply()
+
+
+

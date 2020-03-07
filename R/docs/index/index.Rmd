@@ -21,6 +21,7 @@ This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute
 - [interest rate risk](./interest_rate_risk.nb.html)
 - [liquidity risk](./liquidity_risk.html)
 - [bar graphs](./bar_graphs.html)
+- [list column type in data.frame](./dataframe_list_column.html)
 
 R books
 

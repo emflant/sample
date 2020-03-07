@@ -1,6 +1,6 @@
 # curl "https://openapi.naver.com/v1/search/shop.xml?query=%EB%A7%88%EC%8A%A4%ED%81%AC&display=10&start=1&sort=sim" \
-# -H "X-Naver-Client-Id: 6An8vcWeL6KiEbtHVtVs" \
-# -H "X-Naver-Client-Secret: WCDfuTUsrC" -v
+# -H "X-Naver-Client-Id: xxxxxx" \
+# -H "X-Naver-Client-Secret: xxxxxx" -v
 library(tidyverse)
 library(xml2)
 library(curl)
@@ -49,11 +49,12 @@ mask.shopping_list = function(text = "마스크", sort = "sim"){
 }
 mask.shopping_page = function (){
   result = mask.shopping_list(text = "kf94", sort = "date") %>%
-    filter(str_detect(title, "대형|숨쉬고|매일편한|더이룸|메디|뉴네퓨어|휴안청플러스|매직브라이트|깨끗한나라|르에어|더존|톡톡버디|숨프리|내츄럴하모니|블루인더스|에어퀸|늘푸른|제로베이|메디쉴드|애니쉴드|퓨리어스|PURIOUS|이지팜|크린탑|동아")) %>%
+    filter(str_detect(title, "대형|하이가드|건영|숨쉬고|매일편한|더이룸|메디|뉴네퓨어|휴안청플러스|매직브라이트|깨끗한나라|르에어|더존|톡톡버디|숨프리|내츄럴하모니|블루인더스|에어퀸|늘푸른|제로베이|메디쉴드|애니쉴드|퓨리어스|PURIOUS|이지팜|크린탑|동아")) %>%
     filter(!str_detect(title, "유아용|기저귀|어린이")) %>% 
     mutate(count_word = str_extract(title, "\\d+(매|p|P|장|개)")) %>% 
     mutate(count = ifelse(is.na(count_word), 1, as.numeric(str_extract(count_word, "\\d+")))) %>%
     mutate(price_per_one_mask = round(lprice / count)) %>%
+    filter(price_per_one_mask <= 5000) %>% 
     select(title, lprice, count, price_per_one_mask, link, image) %>% 
     arrange(price_per_one_mask, lprice) %>% 
     mutate(url = paste0("![](", image, ")<br/>[", title, "](", link, ") 전체 : ", lprice, "원 (" ,
