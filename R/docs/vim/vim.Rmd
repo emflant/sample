@@ -1,0 +1,44 @@
+---
+title: "vim shortcut"
+# output: html_notebook
+output:
+  html_document:
+    df_print: paged
+    theme: united # https://bootswatch.com/3/
+    highlight: tango # default, tango, pygments, kate, monochrome, espresso, zenburn, haddock, and textmate
+---
+
+```{r include=FALSE}
+library(tidyverse)
+library(knitr)
+library(kableExtra)
+```
+
+##### List of motions
+```{r include=FALSE}
+shortcut = tribble(
+  ~Motion, ~Explanation,
+  "0", "Moves cursor to the start of the line",
+  "^", "Moves cursor to the start of the line",
+  "$", "Moves cursor to the end of the line(inclusive of newline)",
+  "g_", "Moves cursor to the end of the line(exclusive of newline)",
+  "b", "Moves cursor backward through each word",
+  "e", "Moves cursor to the end of the word",
+  "w", "Moves cursor to the start of the next word",
+  "gg", "Move cursor to the start of the buffer",
+  "G", "Move cursor tho the end of the buffer",
+  "(", "Move cursor to the previous sentence",
+  ")", "Move cursor to the next sentence", 
+  "{", "Move cursor to the start of a paragraph", 
+  "}", "Move cursor to the end of a paragraph"
+)
+```
+
+
+```{r}
+kable(shortcut) %>% 
+  kable_styling(bootstrap_options = c("striped", "hover"))
+```
+
+
+

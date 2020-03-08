@@ -3,7 +3,7 @@ library(rtweet)
 library(lubridate)
 gks
 rt <- search_tweets(
-  "마스크", type = "recent", n = 500, include_rts = FALSE
+  "", n = 500, include_rts = FALSE
 )
 
 first_ele = function (argss){
