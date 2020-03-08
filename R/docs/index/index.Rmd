@@ -22,6 +22,7 @@ This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute
 - [liquidity risk](./liquidity_risk.html)
 - [bar graphs](./bar_graphs.html)
 - [list column type in data.frame](./dataframe_list_column.html)
+- [vim shortcut](./vim.html)
 
 R books
 
