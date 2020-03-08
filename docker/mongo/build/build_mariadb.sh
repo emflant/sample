@@ -1,1 +1,1 @@
-docker build -t mongo-1 .
+docker build -t mongo-1:4.2.3-bionic .
