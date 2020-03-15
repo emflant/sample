@@ -1,14 +1,9 @@
 # install.packages("rtweet")
 library(rtweet)
 library(lubridate)
-gks
 rt <- search_tweets(
-  "", n = 500, include_rts = FALSE
+  "마스크", n = 5, include_rts = FALSE
 )
-
-first_ele = function (argss){
-  argss[[1]]
-}
 
 rt %>% select(created_at, urls_url) %>% 
   mutate(p1 = unlist(purrr::map(urls_url, dplyr::first))) %>% 

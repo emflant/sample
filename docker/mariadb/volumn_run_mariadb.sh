@@ -7,4 +7,4 @@ docker run --name my-mariadb \
 	-e MYSQL_PASSWORD=maria_pw \
 	-v mariadb-data-vol:/var/lib/mysql \
 	-v $PWD/mount/config:/etc/mysql/conf.d \
-	-d mariadb-1
+	-d mariadb-1:10.4.12-bionic
