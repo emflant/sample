@@ -5,10 +5,12 @@ library(tidyverse)
 library(lobstr)
 
 rt <- search_tweets(
-  "마스크", n = 10000, include_rts = FALSE
+  "마스크", n = 1000, include_rts = FALSE
 )
 
 rt %>% head
+nrow(rt)
+Sys.getenv()
 
 # install.packages("mongolite")
 # con$insert(rt)
@@ -24,6 +26,8 @@ Sys.getenv("MONGODB_CRUD_ID")
 mask_tweets$insert(rt)
 mask_tweets$count()
 # rm(mask_tweets)
+aa = mask_tweets$find()
+mask_tweets$insert(aa)
 
 # 필요한 필드만 추출.
 aa = mask_tweets$find(fields = '{ "user_id" : 1, "status_id" : 1, "created_at" : 1, "screen_name" : 1, "text" : 1}') %>% as_tibble()

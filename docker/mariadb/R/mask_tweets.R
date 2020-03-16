@@ -13,20 +13,43 @@ con = dbConnect(RMariaDB::MariaDB(), host = "127.0.0.1",
 
 dbDisconnect(con)
 
-aa1 = aa[1,]
-
-aa1$text = "@____m__oo__n_02 문월님ㅠㅠㅠ 어떻게 그렇게 말을 아름답게 하시는 거에요?? 마스크를 끼라는 흔하디흔한 말이 정말 특별해진 듯한 느낌이에요.\n내일 마스크 끼고! 시내에 나가서! 투게더 바닐라맛을 들고 돌아와! 맛있게 먹고 있다는 트윗을 작성할 수 있기를!"
-
-aa1
-
 dbListTables(con)
 dbRemoveTable(con, "mask_tweets")
-aa$text[1]
+
 dbWriteTable(con, "mask_tweets", aa, append = T)
-dbWriteTable(con, "mask_tweets", aa1, append = T)
-dbReadTable(con, "mask_tweets")
+# dbWriteTable(con, "mask_tweets", aa1, append = T)
+bb = dbReadTable(con, "mask_tweets")
 
-dbremo
+bb = bb %>% as_tibble()
+
+lobstr::obj_size(bb)
+
+###############################################
+aa1 = aa %>% count(status_id)
+bb1 = bb %>% count(status_id)
+
+aa1 %>% 
+  full_join(bb1, by = "status_id")
+
+aa1 %>% 
+  full_join(bb1, by = "status_id") %>% 
+  filter(is.na(n.y)) %>% 
+  inner_join(aa, by = "status_id")
+
+###############################################
 
 
-select * from 
+aa = aa %>% group_by(status_id) %>% 
+  mutate(rn = row_number()) %>% 
+  ungroup()
+
+bb = bb %>% group_by(status_id) %>% 
+  mutate(rn = row_number()) %>% 
+  ungroup()
+
+aa %>% 
+  full_join(bb, by = c("status_id", "rn")) %>% 
+  filter(rn == 1) %>% 
+  filter(is.na(user_id.y))
+###############################################
+
