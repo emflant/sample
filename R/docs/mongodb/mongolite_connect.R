@@ -31,8 +31,7 @@ mask_tweets$insert(aa)
 
 # 필요한 필드만 추출.
 aa = mask_tweets$find(fields = '{ "user_id" : 1, "status_id" : 1, "created_at" : 1, "screen_name" : 1, "text" : 1}') %>% as_tibble()
-lobstr::obj_size(aa)
-
+aa
 aa = aa %>% group_by(status_id) %>% 
   mutate(rn = row_number()) %>% 
   ungroup()
@@ -43,22 +42,40 @@ aa %>% group_by(status_id) %>%
   filter(rn == 2) %>% 
   select(user_id, status_id, created_at)
 
+
+
+aa = mask_tweets$find(fields = '{ "user_id" : 1, "status_id" : 1, "created_at" : 1, "_id": 0}') %>% as_tibble()
+lobstr::obj_size(aa)
+
+aa %>% unite(all) %>% 
+  mutate(all_sha = digest::digest(object=all, algo="sha256")) 
+
+aa %>% unite(all) %>% 
+  mutate(all_sha = map_chr(all, digest::digest, algo="sha256")) 
+
+
+
+digest::digest(object="1222854300444921856_1237387137835651076_2020-03-10 23:37:37", algo="sha256")
+data = "1234"
+digest::digest(object=data, algo="sha256")
+
+
 # install.packages('devtools')
 # devtools::install_github('haven-jeon/KoNLP')
 # https://brunch.co.kr/@mapthecity/9
 # https://github.com/SKTBrain/KoBERT#why
-library(KoNLP)
-
-str = "학교종이땡땡땡어서모이자선생님이학교에서우리를기다리신다."
-str = aa$text[1]
-str
-useSejongDic()
-
-
-extractNoun(aa$text[1])
-
-MorphAnalyzer(str)
-
-SimplePos09(str)
-
-SimplePos22(str)
+# library(KoNLP)
+# 
+# str = "학교종이땡땡땡어서모이자선생님이학교에서우리를기다리신다."
+# str = aa$text[1]
+# str
+# useSejongDic()
+# 
+# 
+# extractNoun(aa$text[1])
+# 
+# MorphAnalyzer(str)
+# 
+# SimplePos09(str)
+# 
+# SimplePos22(str)
