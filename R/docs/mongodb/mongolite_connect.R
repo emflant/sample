@@ -36,6 +36,12 @@ aa = aa %>% group_by(status_id) %>%
   mutate(rn = row_number()) %>% 
   ungroup()
 
+aa %>% group_by(status_id) %>% 
+  summarise(cnt = n()) %>% 
+  filter(cnt > 1)
+
+aa %>% filter(status_id == "1237259520780283904")
+
 aa %>% filter(rn == 2)
 aa %>% group_by(status_id) %>% 
   mutate(rn = row_number()) %>% 
@@ -46,16 +52,17 @@ aa %>% group_by(status_id) %>%
 
 aa = mask_tweets$find(fields = '{ "user_id" : 1, "status_id" : 1, "created_at" : 1, "_id": 0}') %>% as_tibble()
 lobstr::obj_size(aa)
+aa
+aa %>% unite(all) %>% 
+  mutate(all_sha = digest::digest(object=all, algo="md5")) 
 
 aa %>% unite(all) %>% 
-  mutate(all_sha = digest::digest(object=all, algo="sha256")) 
-
-aa %>% unite(all) %>% 
-  mutate(all_sha = map_chr(all, digest::digest, algo="sha256")) 
-
+  mutate(all_sha = map_chr(all, digest::digest, algo="md5")) 
 
 
 digest::digest(object="1222854300444921856_1237387137835651076_2020-03-10 23:37:37", algo="sha256")
+data = c("1234", "5678")
+data = c("1234")
 data = "1234"
 digest::digest(object=data, algo="sha256")
 
@@ -79,3 +86,23 @@ digest::digest(object=data, algo="sha256")
 # SimplePos09(str)
 # 
 # SimplePos22(str)
+
+df <- tibble(
+  grp = rep(1:2, each = 5), 
+  x = c(rnorm(5, -0.25, 1), rnorm(5, 0, 1.5)),
+  y = c(rnorm(5, 0.25, 1), rnorm(5, 0, 0.5)),
+)
+df
+df %>% 
+  group_by(grp) %>% 
+  summarise(cnt = n())
+df2 = df %>% 
+  group_by(grp) %>% 
+  summarise(rng = list(range(x)), cnt = n())
+
+df3 = df %>% 
+  group_by(grp) %>% 
+  summarise(rng = str_c(range(x), collapse = "/"), remarks = "min/max")
+
+df3 %>% separate_rows(rng, remarks, sep = "/")
+
