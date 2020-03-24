@@ -106,3 +106,40 @@ df3 = df %>%
 
 df3 %>% separate_rows(rng, remarks, sep = "/")
 
+
+relig_income %>% 
+  pivot_longer(-religion, names_to = "income", values_to = "count")
+
+family1 <- tribble(
+  ~family,  ~dob_child1,  ~dob_child2, ~gender_child1, ~gender_child2,
+  1L, "1998-11-26", "2000-01-29",             1L,             2L,
+  2L, "1996-06-22",           NA,             2L,             NA,
+  3L, "2002-07-11", "2004-04-05",             2L,             2L,
+  4L, "2004-10-10", "2009-08-27",             1L,             1L,
+  5L, "2000-12-05", "2005-02-28",             2L,             1L,
+)
+
+family2 <- tribble(
+  ~family,  ~dob_child1,  ~dob_child2, ~gender_child1, ~gender_child2,
+  1L, "1998-11-26", "2000-01-29",             1L,             2L,
+  2L, "1996-06-22",           NA,             2L,             NA,
+  3L, "2001-07-11", "2004-04-05",             3L,             2L,
+  4L, "2004-10-10", "2009-08-27",             1L,             1L,
+  5L, "2000-12-05", "2005-02-28",             2L,             1L,
+)
+
+family1_longer = family1 %>% mutate_all(str_replace_na) %>% 
+  pivot_longer(cols = -family, names_to = "column", values_to = "dev_value", values_drop_na = F)
+family1_longer
+family2_longer = family2 %>% mutate_all(str_replace_na) %>% 
+  pivot_longer(cols = -family, names_to = "column", values_to = "prd_value")
+
+family1_longer %>% bind_cols(family2_longer[,3]) %>% 
+  mutate(same = dev_value == prd_value) %>% 
+  mutate(nums = abs(as.numeric(dev_value) - as.numeric(prd_value))) %>% 
+  filter(same == F)
+
+  
+
+
+
