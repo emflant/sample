@@ -151,6 +151,7 @@ get_file_text2 <- function (search_text, p = "."){
   t_lines <- tibble(file = character(), line_number = double(), source = character())
   
   for(f_name in dd){
+    if(file.size(f_name) > 1024*1024) next #1mb 초과건은 안찾음.
     d1 <- read_lines(f_name)
     
     # 파일 내용이 없으면 skip

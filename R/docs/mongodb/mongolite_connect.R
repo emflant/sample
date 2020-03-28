@@ -49,6 +49,10 @@ aa %>% group_by(status_id) %>%
   select(user_id, status_id, created_at)
 
 
+aa %>% setdiff(aa %>% top_n(100000))
+aa %>% top_n(100000)%>% setdiff(aa)
+aa %>% setdiff(aa)
+
 
 aa = mask_tweets$find(fields = '{ "user_id" : 1, "status_id" : 1, "created_at" : 1, "_id": 0}') %>% as_tibble()
 lobstr::obj_size(aa)
@@ -141,5 +145,51 @@ family1_longer %>% bind_cols(family2_longer[,3]) %>%
 
   
 
+df <- data.frame(x = c(1:4))
+scale_num <- ggplot(df, aes(x)) + 
+  geom_point(size = 3, color = "#0072B2", y = 1) + 
+  scale_y_continuous(limits = c(0.8, 1.2), expand = c(0, 0), breaks = 1, label = "position  ") +
+  scale_x_continuous(limits = c(.7, 4.4), breaks = 1:5, labels = c("1", "2", "3", "4", "5"), name = NULL, position = "top") +
+  theme_dviz_grid() +
+  theme(axis.ticks.length = grid::unit(0, "pt"),
+        axis.text = element_text(size = 14),
+        axis.title.y = element_blank(),
+        axis.ticks.y = element_blank())
 
 
+c(1, 3, 6, 8, 6, 5, 3, 1, 5, 2)
+a = tibble(x = c(1, 3, 6, 8, 6, 5, 3, 1, 5, 2))
+a %>% mutate(cummax_x = cummax(x),
+             cummin_x = cummin(x),
+             cumsum_x = cumsum(x),
+             cumsum_x2 = cumsum(x %in% c(3,6,9)),
+             cume_dist_x = cume_dist(x), 
+             dense_rank_x = dense_rank(x), 
+             min_rank_x = min_rank(x), 
+             ntile_x = ntile(x, 3),
+             percent_rank_x = percent_rank(x), 
+             lead_x = lead(x), 
+             lag_x = lag(x)
+             )
+
+
+aa = mask_tweets$find(fields = '{ "_id":0, "text" : 1}') %>% as_tibble()
+aa
+library(tidytext)
+install.packages("tidytext")
+
+
+aa1 = aa %>% mutate(line = row_number()) %>% select(line, text) %>% 
+  filter(!str_detect(text, "사모님|미녀"))
+aa1
+
+aa2 = aa1 %>% unnest_tokens(word, text)
+
+aa2 %>% count(word) %>% arrange(desc(n))
+
+aa3 = aa2 %>% group_by(word) %>% summarise(n = n(), min_line = min(line)) %>% arrange(desc(n))
+aa3 %>% head(50)
+
+aa4 = aa2 %>% group_by(word) %>% summarise(n = n(), min_line = list(line)) %>% arrange(desc(n))
+aa4 %>% head %>% view
+aa1 %>%  filter(line == 31)
