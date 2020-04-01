@@ -55,3 +55,45 @@ all_lotte = get_lottecard("20200123.xls") %>%
 
 
 all_lotte
+
+get_hanacard = function(){
+  
+}
+
+file_path = file.path(getwd(), "docs", "account_management", "data", "hanacard", "hanacard_detail_20200121.html")
+file_path
+hanacard_html = read_html(file_path)
+hanacard_html
+
+hanacard_html %>% html_node(xpath = "/html/body/div[1]/div[1]/table/tbody/tr[2]/td/table/tbody/tr[2]/td/table/tbody/tr/td[3]/table/tbody/tr[4]/td/table/tbody/tr[5]/td/table/tbody/tr[2]/td/table/tbody/tr[1]") %>% 
+  html_children() %>% html_text()
+col_name = hanacard_html %>% html_node(xpath = "/html/body/div[1]/div[1]/table/tbody/tr[2]/td/table/tbody/tr[2]/td/table/tbody/tr/td[3]/table/tbody/tr[4]/td/table/tbody/tr[5]/td/table/tbody/tr[2]/td/table/tbody/tr[1]") %>% 
+  html_children() %>% html_text()
+col_name = c(col_name[1:4], c("회차", "원금", "수수료"), col_name[6:9])
+col_name
+
+
+aa = hanacard_html %>% html_node(xpath = "/html/body/div[1]/div[1]/table/tbody/tr[2]/td/table/tbody/tr[2]/td/table/tbody/tr/td[3]/table/tbody/tr[4]/td/table/tbody/tr[5]/td/table/tbody/tr[2]/td/table/tbody") %>% 
+  html_children() %>% as.character() %>% enframe(name = NULL)
+
+trd1 = aa$value[5]
+trd1
+trd1 %>% read_html() 
+trd1 %>% read_html() %>% html_node(xpath = "/html/body/tr")
+trd1 %>% read_html() %>% html_node(xpath = "/html/body/tr") %>% html_children() %>% html_text(trim = T) %>% str_c(collapse = "|")
+
+
+  
+hanacard_html %>% html_node(xpath = "/html/body/div[1]/div[1]/table/tbody/tr[2]/td/table/tbody/tr[2]/td/table/tbody/tr/td[3]/table/tbody/tr[4]/td/table/tbody/tr[5]/td/table/tbody/tr[2]/td/table/tbody") %>% 
+  html_children() %>% as.character() %>% enframe(name = NULL) %>% 
+  mutate(count = str_count(value, "</td>")) %>% 
+  filter(count == 11) %>% 
+  mutate(html = map(value, read_html)) %>% 
+  mutate(html_node = map(html, html_node, xpath = "/html/body/tr")) %>% 
+  mutate(html_children = map(html_node, html_children)) %>% 
+  mutate(html_text = map(html_children, html_text, trim = T)) %>% 
+  mutate(text = map_chr(html_text, str_c, collapse = "|")) %>% 
+  select(text) %>% 
+  separate(text, into = col_name, sep = "\\|")
+  
+
