@@ -15,7 +15,8 @@ get_samsungcard = function(file_name){
     matrix(ncol = 14, byrow  = T) %>% as_tibble(.name_repair = ~ col_name) %>% 
     mutate_all(str_trim) %>% 
     mutate_all(na_if, "") %>% 
-    mutate(파일명 = file_name)
+    mutate(파일명 = file_name) %>% 
+    filter(!is.na(이용금액))
   
   # colnames(samsungcard) = col_name
   samsungcard
@@ -36,7 +37,8 @@ get_lottecard = function(file_name){
     matrix(ncol = 13, byrow  = T) %>% as_tibble(.name_repair = ~ col_name) %>% 
     mutate_all(str_trim) %>% 
     mutate_all(na_if, "") %>% 
-    mutate(파일명 = file_name)
+    mutate(파일명 = file_name) %>% 
+    filter(!is.na(이용총액))
 }
 
 get_hanacard = function(file_name){
@@ -67,7 +69,8 @@ get_hanacard = function(file_name){
   hanacard %>% 
     mutate_all(str_trim) %>% 
     mutate_all(na_if, "") %>% 
-    mutate(파일명 = file_name)
+    mutate(파일명 = file_name) %>% 
+    filter(!is.na(이용금액))
 }
 
 get_cards = function(){
@@ -101,12 +104,13 @@ get_cards = function(){
                 mutate(결제일 = ymd(str_extract(파일명, '\\d{8}')), 카드종류 = "lotte") %>% 
                 mutate(이용일 = ymd(이용일)) %>% 
                 rename(가맹점 = `이용가맹점`) %>% 
-                select(카드종류, 결제일, 이용일, 이용금액, 가맹점))
+                select(카드종류, 결제일, 이용일, 이용금액, 가맹점)) %>% 
+    mutate(결제년도 = year(결제일), 결제월 = month(결제일)) %>% 
+    rename(card_name = 카드종류, issue_year = 결제년도,
+           issue_month = 결제월, issue_date = 결제일, 
+           pay_date = 이용일, amount = 이용금액, remarks = 가맹점) %>% 
+    select(card_name, issue_year, issue_month, issue_date, pay_date, amount, remarks)
+    
+  
   return(e)  
 }
-e$all %>% filter(is.na(이용금액))
-
-
-e$all %>% 
-  summarise(n = n(), sum = sum(이용금액))
-
