@@ -1,4 +1,5 @@
 
+source(file = file.path(getwd(), "docs/account_management/01_import_tidy.R"), encoding = "UTF-8")
 
 daily_sms_raw = read_lines(file = file.path(getwd(), "docs/account_management/data/daily_sms/hana_20200404")) %>% 
   enframe(name = NULL) %>% 
@@ -20,6 +21,16 @@ daily_sms %>%
   filter(!is.na(hashtag)) %>% 
   group_by(seq) %>% 
   mutate(cnt = row_number()) %>% 
-  select(seq, msg, cnt, hashtag)
+  select(seq, msg, cnt, hashtag) %>% 
+  ungroup() %>% 
+  distinct(hashtag)
 
 
+read_delim(file = file.path(getwd(), "docs/account_management/data/daily_sms/hashtag_class"), delim = "|", col_types = "cc") %>% 
+  mutate_all(str_trim) %>% 
+  separate(class, into = letters[1:5], sep = "#", extra = "merge", fill = "right") 
+  
+  
+  
+
+             
