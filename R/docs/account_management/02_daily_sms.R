@@ -23,7 +23,8 @@ daily_sms %>%
   mutate(cnt = row_number()) %>% 
   select(seq, msg, cnt, hashtag) %>% 
   ungroup() %>% 
-  distinct(hashtag)
+  distinct(hashtag) %>% 
+  print(n = Inf)
 
 
 read_delim(file = file.path(getwd(), "docs/account_management/data/daily_sms/hashtag_class"), delim = "|", col_types = "cc") %>% 
