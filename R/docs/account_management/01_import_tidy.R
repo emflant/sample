@@ -1,6 +1,8 @@
 library(tidyverse)
 library(rvest)
 library(lubridate)
+library(mongolite)
+
 # "samsungcard_20200122.xls" 엑셀파일인거 같지만, 내용은 html 임. 그래서 rvest 로 데이터 추출.
 get_samsungcard = function(file_name){
   
@@ -15,7 +17,7 @@ get_samsungcard = function(file_name){
     matrix(ncol = 14, byrow  = T) %>% as_tibble(.name_repair = ~ col_name) %>% 
     mutate_all(str_trim) %>% 
     mutate_all(na_if, "") %>% 
-    mutate(파일명 = file_name) %>% 
+    mutate(파일명 = file_name, seq = row_number()) %>% 
     filter(!is.na(이용금액))
   
   # colnames(samsungcard) = col_name
@@ -37,7 +39,7 @@ get_lottecard = function(file_name){
     matrix(ncol = 13, byrow  = T) %>% as_tibble(.name_repair = ~ col_name) %>% 
     mutate_all(str_trim) %>% 
     mutate_all(na_if, "") %>% 
-    mutate(파일명 = file_name) %>% 
+    mutate(파일명 = file_name, seq = row_number()) %>% 
     filter(!is.na(이용총액))
 }
 
@@ -69,7 +71,7 @@ get_hanacard = function(file_name){
   hanacard %>% 
     mutate_all(str_trim) %>% 
     mutate_all(na_if, "") %>% 
-    mutate(파일명 = file_name) %>% 
+    mutate(파일명 = file_name, seq = row_number()) %>% 
     filter(!is.na(이용금액))
 }
 
@@ -91,26 +93,60 @@ get_cards = function(){
   e$all = (e$sscard %>% 
              mutate(이용금액 = as.numeric(str_replace_all(이용금액, '[:punct:]', ''))) %>% 
              mutate(결제일 = ymd(str_extract(파일명, '\\d{8}')), 이용일 = ymd(이용일), 카드종류 = "samsung") %>% 
-             select(카드종류, 결제일, 이용일, 이용금액, 가맹점)) %>% 
+             select(카드종류, 결제일, 이용일, 이용금액, 가맹점, seq)) %>% 
     union_all(e$hncard %>% 
                 mutate(이용금액 = as.numeric(str_replace_all(이용금액, '[:punct:]', ''))) %>% 
                 mutate(결제일 = ymd(str_extract(파일명, '\\d{8}')), 카드종류 = "hana") %>% 
                 mutate(이용일 = ymd(paste0(str_sub(결제일,1,4), '/', 이용일자))) %>% 
                 mutate(이용일 = if_else(결제일 < 이용일, 이용일 - years(1), 이용일)) %>% 
                 rename(가맹점 = `이용가맹점(은행)`) %>% 
-                select(카드종류, 결제일, 이용일, 이용금액, 가맹점)) %>% 
+                select(카드종류, 결제일, 이용일, 이용금액, 가맹점, seq)) %>% 
     union_all(e$ltcard %>% 
                 mutate(이용금액 = as.numeric(str_replace_all(이용총액, '[,원]', ''))) %>% 
                 mutate(결제일 = ymd(str_extract(파일명, '\\d{8}')), 카드종류 = "lotte") %>% 
                 mutate(이용일 = ymd(이용일)) %>% 
                 rename(가맹점 = `이용가맹점`) %>% 
-                select(카드종류, 결제일, 이용일, 이용금액, 가맹점)) %>% 
+                select(카드종류, 결제일, 이용일, 이용금액, 가맹점, seq)) %>% 
     mutate(결제년도 = year(결제일), 결제월 = month(결제일)) %>% 
     rename(card_name = 카드종류, issue_year = 결제년도,
            issue_month = 결제월, issue_date = 결제일, 
            pay_date = 이용일, amount = 이용금액, remarks = 가맹점) %>% 
-    select(card_name, issue_year, issue_month, issue_date, pay_date, amount, remarks)
+    select(card_name, issue_year, issue_month, seq, issue_date, pay_date, amount, remarks)
     
   
   return(e)  
 }
+
+# 마지막이력기준으로 조회.
+act.select = function(){
+  account_details_hist = mongo("account_details_hist", db = "account", url = "mongodb://localhost:27017")
+  
+  result = account_details_hist$find() %>% as_tibble() %>% 
+    group_by(card_name, issue_year, issue_month, seq) %>% 
+    arrange(desc(timestamp)) %>% 
+    mutate(hist_seq = row_number()) %>% 
+    ungroup() %>% 
+    filter(hist_seq == 1) %>% 
+    arrange(card_name, issue_year, issue_month, seq) %>% 
+    select(timestamp:seq, issue_date:cls2)
+  
+  account_details_hist$disconnect()
+  return(result)
+}
+
+act.all = function(){
+  account_details_hist = mongo("account_details_hist", db = "account", url = "mongodb://localhost:27017")
+  result = account_details_hist$find() %>% as_tibble()
+  account_details_hist$disconnect()
+  return(result)
+}
+
+
+act.update = function(aft_hist){
+  account_details_hist = mongo("account_details_hist", db = "account", url = "mongodb://localhost:27017")
+  ts = as.numeric(Sys.time())
+  account_details_hist$insert(aft_hist %>% mutate(timestamp = ts))
+  account_details_hist$disconnect()
+  return(ts)
+}
+
