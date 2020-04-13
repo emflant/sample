@@ -4,14 +4,20 @@ e = get_cards()
 e$all_add = e$all %>% left_join(read_csv(file = file.path(getwd(), "docs/account_management/data/remarks_mapping_add.csv"), col_types = "icc")  , by = "remarks") %>% 
   select(card_name:amount, class, remarks)
 e$all_add
+
+
+act.update(act.select())
+act.all()
 act.select()
 act.select() %>% 
   arrange(desc(amount)) %>% 
   filter(amount > 10000) %>% 
   print(n = 50)
-
-b = as.numeric(Sys.time())
-b == 1586621750
+round(1.7)
+floor(1.7)
+b = floor(as.numeric(Sys.time()))
+b
+b == 1586790122
 act.select() %>% 
   filter(str_detect(remarks, '풀무원푸드앤컬처'), !(amount %in% c(5000, 15000))) %>% print(n = Inf)
 act.select() %>% 
@@ -22,7 +28,7 @@ aa = act.select() %>%
   mutate(cls1 = "주유비")
 aa = act.select() %>% 
   filter(str_detect(remarks, '(주)서울에너지')) %>% 
-  mutate(cls1 = "롯데마트", cls2 = "코로나대비 먹을걸 사러갔으나 동난게 하나도 없어서 민망")
+  mutate(cls1 = "롯데마트", cls2 = "")
 act.update(aa)
 act.select() %>% 
   filter(str_detect(remarks, '서울에너지'))

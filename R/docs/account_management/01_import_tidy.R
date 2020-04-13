@@ -144,7 +144,7 @@ act.all = function(){
 
 act.update = function(aft_hist){
   account_details_hist = mongo("account_details_hist", db = "account", url = "mongodb://localhost:27017")
-  ts = as.numeric(Sys.time())
+  ts = floor(as.numeric(Sys.time()))
   account_details_hist$insert(aft_hist %>% mutate(timestamp = ts))
   account_details_hist$disconnect()
   return(ts)
