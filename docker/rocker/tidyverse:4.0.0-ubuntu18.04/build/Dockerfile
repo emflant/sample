@@ -1,10 +1,4 @@
-FROM rocker/rstudio:4.0.0-ubuntu18.04
+FROM rocker/tidyverse:4.0.0-ubuntu18.04
 
-LABEL org.label-schema.license="GPL-2.0" \
-      org.label-schema.vcs-url="https://github.com/rocker-org/rocker-versioned" \
-      org.label-schema.vendor="Rocker Project" \
-      maintainer="Carl Boettiger <cboettig@ropensci.org>"
-
-
-
-RUN /rocker_scripts/install_tidyverse.sh
+COPY scripts /rocker_scripts
+RUN /rocker_scripts/install_mypackages.sh
