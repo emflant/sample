@@ -1,2 +1,2 @@
-docker rmi rocker/tidyverse-1:4.0.0-ubuntu18.04
-docker build -t rocker/tidyverse-1:4.0.0-ubuntu18.04 .
+docker rmi tidyverse-1
+docker build -t tidyverse-1 .
