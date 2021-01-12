@@ -5,3 +5,5 @@
 1609073423623:library(rvest)
 1609073466922:library(lubridate)
 1609073468746:library(mongolite)
+1610421648042:library(tidyverse)
+1610422157864:library(readxl)
