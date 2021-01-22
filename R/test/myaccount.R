@@ -1,8 +1,13 @@
 library(tidyverse)
 library(readxl)
+# library(sloop)
+# install.packages("sloop")
 
 
 woori_2020 = read_excel(path = "~/data/woori_2020.xlsx", skip = 3)
+
+
+# woori_account = structure(
 
 code = woori_2020 %>% group_by(기재내용) %>% 
   count(기재내용) %>% 
@@ -41,6 +46,8 @@ woori_2020 %>%
   mutate(수익합계 = map(data, ~ .x %>% summarise(sum(맡기신금액))) %>% unlist()) %>% 
   arrange(desc(비용합계))
 
+(209811+6489) * 0.03
+
 
 woori_2020 %>% 
   group_by(분류) %>% nest() %>% arrange(분류) %>% 
@@ -53,6 +60,7 @@ nest_data = woori_2020 %>%
   nest() %>% 
   arrange(기재내용)
   
+nest_data
 nest_data %>% filter(str_detect(기재내용, "SKT")) 
 nest_data %>% filter(str_detect(기재내용, "SKT")) %>% 
   mutate(sumamt = map(data, ~ .x %>% summarise(sum(찾으신금액))) %>% unlist()) 
@@ -71,4 +79,15 @@ c(1,2,3) %>% keep(is_even)
 c(1,2,3) %>% keep(~ .x %% 2 == 0)
 
 
-list(c(1), c(2,3,4), c(7,8,9)) %>% keep(~ .x[2] %% 2 == 0)
+list(c(1), c(2,3,4), c(7,8,9)) %>% keep(~ .x[1] %% 2 == 0)
+
+
+
+library(rvest)
+
+read_html("~/data/samsungcard_20210122.html") %>% 
+  html_nodes(xpath = "/html/body/table/tbody/tr") %>% 
+  html_children() %>% html_text() %>% 
+  matrix(ncol = 14, byrow  = T) %>% as_tibble(.name_repair = "unique") %>%
+  filter(str_trim(...1) != "") %>% 
+  select(...1, ...3, ...10) 
