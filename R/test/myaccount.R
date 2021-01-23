@@ -83,11 +83,5 @@ list(c(1), c(2,3,4), c(7,8,9)) %>% keep(~ .x[1] %% 2 == 0)
 
 
 
-library(rvest)
 
-read_html("~/data/samsungcard_20210122.html") %>% 
-  html_nodes(xpath = "/html/body/table/tbody/tr") %>% 
-  html_children() %>% html_text() %>% 
-  matrix(ncol = 14, byrow  = T) %>% as_tibble(.name_repair = "unique") %>%
-  filter(str_trim(...1) != "") %>% 
-  select(...1, ...3, ...10) 
+
