@@ -37,20 +37,54 @@ re1$path2 %>%
   mutate(dir_date = str_sub(dir_name, 1, 43)) %>% 
   distinct(dir_date)
 
-#
+# OUTPUT 폴더에서는 불필요한 raw 파일을 지우기때문에 차이가 나는 케이스가 있음.
+# 이런 건은 다시 복사할 필요가 없는 날짜 폴더이므로 제외한다.
+re1$path2 %>% 
+  mutate(dir_date = str_sub(dir_name, 1, 43)) %>% 
+  mutate(file_ext = str_sub(file_name, -3)) %>% 
+  filter(file_ext != "RW2") %>% 
+  distinct(dir_date)
 
 ##################################################################################
 # seagate <--> SAMSUNG 외장하드로 동기화
 # 파일체크 (파일명, 파일사이즈 기준)
 re1 = file_compare("/Volumes/seagate/02_photo", "/Volumes/SAMSUNG/02_photo") 
+re1 = file_compare("/Volumes/seagate/02_photo/2021", "/Volumes/SAMSUNG/02_photo/2021") 
 re1
+
+re1$path1 %>% 
+  mutate(dir_date = str_sub(dir_name, 1, 50)) %>% 
+  distinct(dir_date)
+
 # 파일비교2 (파일경로, 파일명 기준)
 re2 = file_compare2("/Volumes/seagate/02_photo", "/Volumes/SAMSUNG/02_photo") 
 re2
 
 # 2개 폴더 동기화. 서로 없는거 copy
-copy_sync("/Volumes/seagate/02_photo", "/Volumes/SAMSUNG/02_photo")
+copy_sync("/Volumes/seagate/02_photo/2021", "/Volumes/SAMSUNG/02_photo/2021")
 ##################################################################################
+
+
+
+##################################################################################
+# seagate <--> SAMSUNG 외장하드로 동기화
+# 파일체크 (파일명, 파일사이즈 기준)
+re1 = file_compare("/Volumes/seagate/02_photo", "/Volumes/SAMSUNG2/02_photo") 
+re1 = file_compare("/Volumes/seagate/02_photo/2021", "/Volumes/SAMSUNG2/02_photo/2021") 
+re1
+
+re1$path1 %>% 
+  mutate(dir_date = str_sub(dir_name, 1, 50)) %>% 
+  distinct(dir_date)
+
+# 파일비교2 (파일경로, 파일명 기준)
+re2 = file_compare2("/Volumes/seagate/02_photo", "/Volumes/SAMSUNG2/02_photo") 
+re2
+
+# 2개 폴더 동기화. 서로 없는거 copy
+copy_sync("/Volumes/seagate/02_photo/2021", "/Volumes/SAMSUNG2/02_photo/2021")
+##################################################################################
+
 
 
 
@@ -80,3 +114,11 @@ re2$path2 %>%
 # 2개 폴더 동기화. 서로 없는거 copy
 copy_sync("/Volumes/seagate/02_photo", "/Volumes/PhotoDisk/02_photo")
 ##################################################################################
+
+
+
+
+flist = file_list(path = "/Volumes/seagate/02_photo/")
+
+flist %>% 
+  filter(file_name == "DSC06296.JPG")
