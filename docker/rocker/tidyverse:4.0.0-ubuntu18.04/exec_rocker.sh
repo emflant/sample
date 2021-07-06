@@ -1,1 +1,1 @@
-docker exec -it my-rocker bash 
+docker exec -it my-rocker /bin/bash 

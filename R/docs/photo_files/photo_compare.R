@@ -5,6 +5,7 @@ library(furrr)
 library(tictoc)
 library(exifr)
 
+
 # 특정 경로의 파일 리스트 생성. 
 file_list = function(path){
   list.files(path = path, full.names = T, recursive = T) %>% 
