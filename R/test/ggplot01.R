@@ -1,9 +1,14 @@
+install.packages("gcookbook")
 library(tidyverse)
 library(gcookbook)
+uspopchange
 
 upc = uspopchange %>% arrange(desc(Change)) %>% 
   slice(1:10)
 upc
+
+ggplot(upc, aes(Abb, Change, fill=Region))+
+  geom_col() + theme_minimal()
 
 ggplot(upc, aes(Abb, Change, fill=Region))+
   geom_col() + theme_minimal()+
@@ -21,3 +26,4 @@ ggplot(upc, aes(Abb, Change, fill=Region))+
   )+ 
   scale_y_continuous(expand = c(0,0), breaks = seq(0, 40, 3)) +
   scale_x_discrete(expand = c(0,0.7)) +xlab("State") 
+
