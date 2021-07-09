@@ -46,8 +46,7 @@ This example uses the `reorder()` function to reorder the levels of the factor `
 ```{r}
 ggplot(upc, aes(x = reorder(Abb, -Change), y = Change, fill = Region)) +
   geom_col(colour = "black") +
-  scale_fill_manual(values = c("#669933", "#FFCC66")) +
-  theme_wsj()
+  scale_fill_manual(values = c("#669933", "#FFCC66")) 
 ```
 
 ### `climate_sub` Data
