@@ -1,4 +1,3 @@
-install.packages("gcookbook")
 library(tidyverse)
 library(gcookbook)
 uspopchange
