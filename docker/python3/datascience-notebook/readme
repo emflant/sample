@@ -1,0 +1,9 @@
+
+# java jdk 를 설치하기 위한 저장소 추가 및 install 명령어
+# https://github.com/AdoptOpenJDK/homebrew-openjdk
+brew tap AdoptOpenJDK/openjdk
+brew install --cask adoptopenjdk14
+
+java -jar selenium-server-4.0.0-beta-4.jar standalone
+
+docker network inspect bridge
