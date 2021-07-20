@@ -1,4 +1,10 @@
 
+- docker 설치 : docker desktop version 3.2.2 (mac)
+- jupyter docker 이미지 : jupyter/datascience-notebook:python-3.8.8
+- firefox webdriver 다운 : geckodriver-v0.29.1-macos.tar.gz
+- java 설치 : openjdk 14.0.2
+- selenium standalone server 다운 : selenium-server-4.0.0-beta-4.jar
+
 # java jdk 를 설치하기 위한 저장소 추가 및 install 명령어
 # https://github.com/AdoptOpenJDK/homebrew-openjdk
 brew tap AdoptOpenJDK/openjdk

@@ -13,5 +13,5 @@ webdriver.Remote(command_executor='http://192.168.25.2:4444/', desired_capabilit
 firefox_options = webdriver.FirefoxOptions()
 
 driver = webdriver.Remote(command_executor='http://localhost:4444', options=firefox_options)
-driver = webdriver.Remote(command_executor='http://192.168.25.2:4444', options=firefox_options)
+driver = webdriver.Remote(command_executor='http://172.19.0.2:4444', options=firefox_options)
 driver.get("http://www.google.com")

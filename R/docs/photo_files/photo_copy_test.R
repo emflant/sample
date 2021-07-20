@@ -45,6 +45,13 @@ re1$path2 %>%
   filter(file_ext != "RW2") %>% 
   distinct(dir_date)
 
+# 
+re1$path2 %>% 
+  mutate(dir_date = str_sub(dir_name, 1, 43)) %>% 
+  mutate(file_ext = str_sub(file_name, -3)) %>% 
+  filter(dir_date == "/Users/imac/Desktop/photo/output/2021-07-02") 
+
+
 ##################################################################################
 # seagate <--> SAMSUNG 외장하드로 동기화
 # 파일체크 (파일명, 파일사이즈 기준)
@@ -78,7 +85,7 @@ re1$path1 %>%
   distinct(dir_date)
 
 # 파일비교2 (파일경로, 파일명 기준)
-re2 = file_compare2("/Volumes/seagate/02_photo", "/Volumes/SAMSUNG2/02_photo") 
+re2 = file_compare2("/Volumes/seagate/02_photo/2021", "/Volumes/SAMSUNG2/02_photo/2021") 
 re2
 
 # 2개 폴더 동기화. 서로 없는거 copy
