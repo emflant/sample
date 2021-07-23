@@ -9,4 +9,5 @@ docker run --name my-mariadb \
 	-v $PWD/mount/data:/var/lib/mysql \
 	-v $PWD/mount/config:/etc/mysql/conf.d \
 	-v $PWD/mount/doc:/doc \
+	-v ~/data:/data \
 	-d mariadb-1:10.4.12-bionic
