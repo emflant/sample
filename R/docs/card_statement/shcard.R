@@ -3,7 +3,6 @@
 library(tidyverse)
 library(rvest)
 
-?slice
 sh_card_202102 = read_html("~/data/card/result_html_202103.html")
 
 sh_card_202102 %>% html_elements(xpath =  "/html/body/div[2]/div[2]/div[3]/table[2]/tbody/tr") 
@@ -24,8 +23,6 @@ sh_card_202102 %>% html_elements(xpath =  "/html/body/div[2]/div[2]/div[3]/table
   mutate(V12 = as.numeric(str_replace(V6, ",", ""))) %>% 
   select(V1, V3, V12) 
 
-
-  
   
 # "html_table()" can convert html text to tibble 
 sh_card_202102 %>% html_element(xpath =  "/html/body/div[2]/div[2]/div[3]/table[2]") %>% 
