@@ -1,38 +1,28 @@
-
-
 library(tidyverse)
 library(rvest)
 
-sh_card_202102 = read_html("~/data/card/result_html_202103.html")
 
-sh_card_202102 %>% html_elements(xpath =  "/html/body/div[2]/div[2]/div[3]/table[2]/tbody/tr") 
+sh_card_list = function(input_list){
+  input_list %>% html_elements(xpath =  "/html/body/div[2]/div[2]/div[3]/table[2]/tbody/tr") %>% 
+    map_chr(toString) %>% 
+    enframe(name = NULL) %>% 
+    filter(str_detect(value, "^<tr>\\n<td>\\d{2}\\.\\d{2}\\.\\d{2}")) %>% 
+    mutate(value2 = map(value, read_html)) %>% 
+    select (value2) %>% 
+    mutate(value3 = map(value2, html_elements, "td")) %>% 
+    mutate(value4 = map(value3, html_text2)) %>% 
+    mutate(value5 = map_chr(value4, str_c, collapse = "|")) %>% 
+    separate(value5, sep = "\\|", into = paste0("v",as.character(c(1:11)))) %>% 
+    select(v1, v3, v6)
+}
 
-# 제외해야할 대상파악
-sh_card_202102 %>% html_elements(xpath =  "/html/body/div[2]/div[2]/div[3]/table[2]/tbody/tr") %>% 
-  map_chr(toString) %>% 
-  enframe(name = NULL) %>% 
-  print(n = Inf)
+sh_care_result = map(list(read_html("~/data/card/result_html_202102.html"),
+     read_html("~/data/card/result_html_202103.html"),
+     read_html("~/data/card/result_html_202104.html"),
+     read_html("~/data/card/result_html_202105.html"),
+     read_html("~/data/card/result_html_202106.html")), sh_card_list) %>% 
+  reduce(union_all)
 
-sh_card_202102 %>% html_elements(xpath =  "/html/body/div[2]/div[2]/div[3]/table[2]/tbody/tr") %>% 
-  head(-4) %>% 
-  html_elements('td') %>% 
-  html_text2() %>% 
-  str_trim() %>% 
-  matrix(ncol = 11, byrow = T) %>% 
-  as_tibble() %>% 
-  mutate(V12 = as.numeric(str_replace(V6, ",", ""))) %>% 
-  select(V1, V3, V12) 
-
-  
-# "html_table()" can convert html text to tibble 
-sh_card_202102 %>% html_element(xpath =  "/html/body/div[2]/div[2]/div[3]/table[2]") %>% 
-  html_table() %>% print(n = Inf)
-  
-
-sh_card_202102 %>% html_element("tbody") %>% 
-  html_elements("td") %>% 
-  html_text() %>% 
-  str_trim() %>% 
-  matrix(ncol=11, byrow = T)
-  
-?html_nodes
+sh_care_result %>% 
+  mutate(v7 = as.numeric(str_replace(v6, ",", ""))) %>% 
+  select(v1,v3,v7)
