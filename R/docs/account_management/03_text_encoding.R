@@ -16,6 +16,10 @@ print(x) # [1] "\\xed\\x95\\x9c\\xea\\xb8\\x80"
 Encoding(x) <- "UTF-8"
 print(x) # [1] "한글"
 
+
+Encoding(x) <- "euc-kr"
+print(x) # [1] "한글"
+
 Encoding(x) <- "latin1"
 print(x) # [1] "í•œê¸€"
 
@@ -37,11 +41,16 @@ Encoding(x) # [1] "unknown"
 print(x) # [1] "abc"
 
 
+length('abc')
+nchar('abc')
 
 # 한글 바이트수, 
 x <- "한글"
 charToRaw(x) # [1] ed 95 9c ea b8 80
+nchar(x)
+
 length(charToRaw(x)) # [1] 6
+length()
 
 lengthb = function(chr){
   length(charToRaw(chr))

@@ -20,9 +20,19 @@ sh_care_result = map(list(read_html("~/data/card/result_html_202102.html"),
      read_html("~/data/card/result_html_202103.html"),
      read_html("~/data/card/result_html_202104.html"),
      read_html("~/data/card/result_html_202105.html"),
-     read_html("~/data/card/result_html_202106.html")), sh_card_list) %>% 
-  reduce(union_all)
+     read_html("~/data/card/result_html_202106.html"),
+     read_html("~/data/card/result_html_202107.html")), sh_card_list) %>% 
+  reduce(union_all) %>% 
+  mutate(v7 = as.numeric(str_replace(v6, ",", ""))) %>% 
+  select(v1,v3,v7) 
+
+sh_care_result
 
 sh_care_result %>% 
-  mutate(v7 = as.numeric(str_replace(v6, ",", ""))) %>% 
-  select(v1,v3,v7)
+  group_by(v3) %>% 
+  summarise(cnt = n(), sum_amt = sum(v7)) %>% 
+  arrange(desc(sum_amt))
+
+
+
+
