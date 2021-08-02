@@ -1,5 +1,7 @@
 library(tidyverse)
 library(rvest)
+library(lubridate)
+library(RMariaDB)
 
 
 sh_card_list = function(input_list){
@@ -16,7 +18,7 @@ sh_card_list = function(input_list){
     select(v1, v3, v6)
 }
 
-sh_care_result = map(list(read_html("~/data/card/result_html_202102.html"),
+sh_card_result = map(list(read_html("~/data/card/result_html_202102.html"),
      read_html("~/data/card/result_html_202103.html"),
      read_html("~/data/card/result_html_202104.html"),
      read_html("~/data/card/result_html_202105.html"),
@@ -24,15 +26,25 @@ sh_care_result = map(list(read_html("~/data/card/result_html_202102.html"),
      read_html("~/data/card/result_html_202107.html")), sh_card_list) %>% 
   reduce(union_all) %>% 
   mutate(v7 = as.numeric(str_replace(v6, ",", ""))) %>% 
-  select(v1,v3,v7) 
+  mutate(v8 = ymd(v1)) %>%
+  mutate(v9 = 'SH') %>% # sin-han card
+  select(v9, v8, v3, v7)
 
-sh_care_result
+sh_card_result
 
-sh_care_result %>% 
+sh_card_result %>% 
   group_by(v3) %>% 
   summarise(cnt = n(), sum_amt = sum(v7)) %>% 
   arrange(desc(sum_amt))
 
+############################################################
 
+con = dbConnect(RMariaDB::MariaDB(), host = "my-mariadb",
+                dbname = "test", username = "root", 
+                password = "root_pw", port = 3306)
 
+dbListTables(con)
+dbWriteTable(con, "CARD_DTL", sh_card_result)
+dbDisconnect(con)
 
+############################################################

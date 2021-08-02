@@ -1,0 +1,22 @@
+show databases;
+\h
+\. show_databases.sql
+show_databases.sql
+;
+\! vim aa
+\! whereami
+\! echo $PWD
+\. /data/test_db/employees.sql
+\! cd /data/test_db
+\! echo $PWD
+\system cd /data/test_db
+;
+\! cd /data/test
+\! cd /data/test_db
+\. employees.sql
+echo $PWD
+;
+\! echo $PWD
+\. employees.sql
+show databases;
+show tables;

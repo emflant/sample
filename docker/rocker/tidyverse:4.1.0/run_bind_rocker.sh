@@ -1,4 +1,5 @@
 docker run --rm --name my-rocker \
+	--network mariadb-net \
 	-v ~/sample/R:/home/rstudio/source \
 	-v ~/data:/home/rstudio/data \
 	-v /Volumes:/home/rstudio/mount \
