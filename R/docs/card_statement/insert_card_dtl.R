@@ -10,6 +10,8 @@ con = dbConnect(RMariaDB::MariaDB(), host = "my-mariadb",
 card_result = sh_card_result() %>% 
   union_all(ss_card_result())
 
+sh_card_result()
+
 # 소문자만 허용되는가?
 dbWriteTable(con, "card_dtl", card_result, overwrite = T)
 dbDisconnect(con)

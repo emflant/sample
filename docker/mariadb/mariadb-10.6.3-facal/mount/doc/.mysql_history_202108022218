@@ -4,3 +4,93 @@ show databases
 ;
 show databases;
 show tables;
+select * from card_dtl;
+desc card_dtl;
+\! ll
+\! ls -al
+vim aa.
+;
+system vim card_dtl1.sql
+help
+source card_dtl.sql
+system ll -al
+system ls -al
+source card_dtl1.sql
+system vim card_dtl1.sql
+source card_dtl1.sql
+system vim card_dtl1.sql
+source card_dtl1.sql
+system vim card_dtl1.sql
+source card_dtl1.sql
+system vim card_dtl1.sql
+source card_dtl1.sql
+system vim card_dtl1.sql
+source card_dtl1.sql
+system vim card_dtl1.sql
+source card_dtl1.sql
+select * from card_dtl where pay_date = '2021-03-20';
+select * from card_dtl where details like '%서울에너지%';
+select * from card_dtl where details like '%에너지%';
+select sum(pay_amt)  from card_dtl where details like '%에너지%';
+system cp card_dtl1.sql card_dtl2.sql
+system vim card_dtl2.sql
+select to_date(pay_date, 'yyyymm') from card_dtl ;
+select date_format(sysdate(), '%Y-%m-%d')
+;
+select date_format(sysdate(), '%Y%m')
+select date_format(sysdate(), '%Y-%m')
+;
+system vim card_dtl2.sql
+source card_dtl2.sql
+system vim card_dtl2.sql
+source card_dtl2.sql
+system vim card_dtl2.sql
+source card_dtl2.sql
+system vim card_dtl2.sql
+source card_dtl2.sql
+system vim card_dtl2.sql
+source card_dtl2.sql
+system vim card_dtl2.sql
+source card_dtl2.sql
+system cp card_dtl2.sql card_dtl3.sql
+system vim card_dtl3.sql
+source card_dtl3.sql
+system vim card_dtl3.sql
+source card_dtl3.sql
+show tables;
+select count(*) from card_dtl;
+source card_dtl3.sql
+select count(*) from card_dtl;
+source card_dtl3.sql
+system vim card_dtl3.sql
+source card_dtl3.sql
+select count(*) from card_dtl;
+insert into card_dtl select * from card_dtl;
+commit;
+select count(*) from card_dtl;
+insert into card_dtl select * from card_dtl;
+select count(*) from card_dtl;
+commit;
+insert into card_dtl select * from card_dtl;
+commit;
+source card_dtl3.sql
+explain select card_cd, sum(pay_amt) from card_dtl group by card_cd;
+select count(*) from card_dtl;
+insert into card_dtl select * from card_dtl;
+select count(*) from card_dtl;
+create table bd_card_dtl as select * from card_dtl;
+show tables;
+select count(*) from bd_card_dtl;
+select count(*) from card_dtl;
+select count(*) from bd_card_dtl;
+select * from bd_card_dtl where card_cd = 'ss';
+select * from bd_card_dtl where card_cd = 'ss' limit 10;
+select * from bd_card_dtl where card_cd = 'ss' limit 1;
+select * from card_dtl where pay_amt > 100000;
+show history;
+system ls -al
+system vim .mysql_history_202108022218
+system vim rehash.sql
+rehash
+system vim create_as.sql
+select count(*) cnt from card_dtl;
