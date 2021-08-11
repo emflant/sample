@@ -94,3 +94,112 @@ system vim rehash.sql
 rehash
 system vim create_as.sql
 select count(*) cnt from card_dtl;
+system ls -al
+ㅣㅣ
+;
+ll
+;
+system vim select_outfile.sql
+source select_outfile.sql
+system vim ./select_outfile.sql
+source select_outfile.sql
+source outfile.sql
+source outfile1.sql
+desc card_dtl;
+source outfile1.sql
+system rm card_dtl.csv
+system vim outfile1.sql
+system vim outfile1.sql
+source outfile1.sql
+system vim outfile1.sql
+source outfile1.sql
+system vim outfile1.sql
+source outfile1.sql
+system vim outfile1.sql
+source outfile1.sql
+system vim outfile1.sql
+source outfile1.sql
+system vim outfile1.sql
+source outfile1.sql
+system vim outfile1.sql
+source outfile1.sql
+show tables;
+drop bd_card_dtl;
+drop table bd_card_dtl;
+show tables;
+source create_as.sql
+ll
+;
+show tables;
+select count(*) from bd_card_dtl;
+delete from bd_card_dtl;
+commit;
+select * from bd_card_dtl;
+system vim load_data.sql
+source load_data.sql
+system vim load_data.sql
+source load_data.sql
+system echo $PWD
+source load_data.sql
+select * from bd_card_dtl limit 10;
+delete from bd_c
+select * from bd_card_dtl limit 10;
+commit;
+select * from bd_card_dtl limit 10;
+system ls -al
+ll
+;
+show databases;
+use mysql
+show tables;
+select * from innodb_table_stats;
+use test
+select count(*) from bd_card_dtl;
+select * from bd_card_dtl;
+system ll;
+system ls -al;
+system vim table_stats.sql
+system ls -al;
+source table_stats.sql
+system ls -al
+system cat load_data.sql
+! ls -al
+;
+\! ls -al
+system vim outfile1.sql
+system cat outfile1.sql
+system vim load_data.sql
+source load_data.sql
+select * from bd_card_dtl where card_cd = 'card_cd';
+select * from bd_card_dtl limit 5;
+truncate table bd_card_dtl;
+select * from bd_card_dtl;
+source table_stats.sql
+select * from bd_card_dtl limit 5;
+system ls -al
+system vim load_data.sql
+source load_data.sql
+source table_stats.sql
+select count(*) from bd_card_dtl;
+ll
+;
+rehash
+select * from card_dtl;
+..
+;
+system ls -al
+system cat outfile1.sql
+source outfile1.sql
+select count(*) from bd_card_dtl;
+truncate table bd_card_dtl;
+select count(*) from bd_card_dtl;
+source load_data.sql
+system cat load_data.sql
+source load_data.sql
+ll
+;'
+;
+show tables;
+select count(*) from test.bd_card_dtl
+;
+select * from card_dtl;;
