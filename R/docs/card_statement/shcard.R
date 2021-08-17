@@ -24,7 +24,8 @@ sh_card_result = function (){
            read_html("~/data/card/result_html_202104.html"),
            read_html("~/data/card/result_html_202105.html"),
            read_html("~/data/card/result_html_202106.html"),
-           read_html("~/data/card/result_html_202107.html")), sh_card_list) %>% 
+           read_html("~/data/card/result_html_202107.html"),
+           read_html("~/data/card/result_html_202108.html")), sh_card_list) %>% 
     reduce(union_all) %>% 
     mutate(v7 = as.numeric(str_replace(v6, ",", ""))) %>% 
     mutate(v8 = ymd(v1)) %>%

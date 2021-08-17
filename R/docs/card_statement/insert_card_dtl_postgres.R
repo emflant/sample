@@ -15,7 +15,7 @@ con <- dbConnect(RPostgres::Postgres(),dbname = 'mydb',
 card_result = sh_card_result() %>% 
   union_all(ss_card_result())
 card_result
-sh_card_result()
+# sh_card_result()
 
 # 소문자만 허용되는가?
 dbWriteTable(con, "card_dtl", card_result, overwrite = T)

@@ -24,12 +24,13 @@ RUN ln -sf /usr/share/zoneinfo/Asia/Seoul /etc/localtime
 RUN dpkg-reconfigure -f noninteractive tzdata
 
 # zshrc 수정. (테마변경, alias 설정)
-RUN sed -i 's/robbyrussell/blinks/g' /root/.zshrc
+RUN sed -i 's/robbyrussell/bureau/g' /root/.zshrc
 RUN echo "alias ll=\"ls -alFh\"" >> /root/.zshrc
 
 USER postgres
 RUN zsh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" 
 RUN echo "alias ll=\"ls -alFh\"" > /var/lib/postgresql/.bashrc
 #WORKDIR /doc
-RUN sed -i 's/robbyrussell/blinks/g' /var/lib/postgresql/.zshrc
+#RUN sed -i 's/robbyrussell/blinks/g' /var/lib/postgresql/.zshrc
+RUN sed -i 's/robbyrussell/bureau/g' /var/lib/postgresql/.zshrc
 RUN echo "alias ll=\"ls -alFh\"" >> /var/lib/postgresql/.zshrc

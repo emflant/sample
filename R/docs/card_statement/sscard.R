@@ -25,7 +25,8 @@ ss_card_result = function(){
            read_html("~/data/card/downloads/samsungcard_20210422.xls"),
            read_html("~/data/card/downloads/samsungcard_20210522.xls"),
            read_html("~/data/card/downloads/samsungcard_20210622.xls"),
-           read_html("~/data/card/downloads/samsungcard_20210722.xls")), ss_card_list) %>% 
+           read_html("~/data/card/downloads/samsungcard_20210722.xls"),
+           read_html("~/data/card/downloads/samsungcard_20210822.xls")), ss_card_list) %>% 
     reduce(union_all) %>% 
     mutate(v71 = as.numeric(str_replace_all(v10, ",", ""))) %>% 
     mutate(v70 = if_else(is.na(v71), 0, v71)) %>%  
