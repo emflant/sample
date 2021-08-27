@@ -10,6 +10,7 @@ app.get('/', function(req, res){
     res.render('home');
 });
 
+console.log('http://localhost:3000');
 app.listen(3000);
 
 

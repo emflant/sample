@@ -13,7 +13,7 @@ const myPlaintextPassword = 'my_password';
 // rounds=15: ~3 sec/hash
 // rounds=25: ~1 hour/hash
 // rounds=31: 2-3 days/hash
-for (let i = 10; i <= 15; i += 1) {
+for (let i = 15; i >= 10; i -= 1) {
     bcrypt.genSalt(i, (err1, salt) => {
         bcrypt.hash(myPlaintextPassword, salt, (err2, hash) => {
             console.log(`${myPlaintextPassword} - ${i} - ${salt} : ${hash}`);
