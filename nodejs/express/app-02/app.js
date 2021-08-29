@@ -41,6 +41,7 @@ app.use(function(err, req, res, next) {
 });
 
 console.log('http://localhost:3000');
+console.log('http://localhost:3000/album');
 console.log();
 
 module.exports = app;
