@@ -1,2 +1,2 @@
-docker rmi node-1
-docker build -t node-1 .
+docker rmi ruby-1
+docker build -t ruby-1 .
