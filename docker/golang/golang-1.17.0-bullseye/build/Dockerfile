@@ -20,5 +20,9 @@ RUN zsh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/ins
 # zshrc 수정. (테마변경, alias 설정)
 RUN sed -i 's/robbyrussell/bureau/g' /root/.zshrc
 RUN echo "alias ll=\"ls -alFh\"" >> /root/.zshrc
+RUN echo "alias gits=\"git status\"" >> /root/.zshrc
+RUN echo "alias gita=\"git add .\""  >> /root/.zshrc
+RUN echo "alias gitc=\"git commit -m .\""  >> /root/.zshrc
+RUN echo "alias gitp=\"git push -u origin master\""  >> /root/.zshrc
 
 RUN apt-get install -y hugo
