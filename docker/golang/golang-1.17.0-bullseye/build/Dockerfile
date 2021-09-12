@@ -24,5 +24,5 @@ RUN echo "alias gits=\"git status\"" >> /root/.zshrc
 RUN echo "alias gita=\"git add .\""  >> /root/.zshrc
 RUN echo "alias gitc=\"git commit -m .\""  >> /root/.zshrc
 RUN echo "alias gitp=\"git push -u origin master\""  >> /root/.zshrc
-
+RUN git config --global user.email "emflant@gmail.com"
 RUN apt-get install -y hugo
