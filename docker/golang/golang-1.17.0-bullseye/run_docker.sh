@@ -1,5 +1,5 @@
 docker run -it --rm --name my-golang \
 	-p 1313:1313 \
-       	-v ~/sample/golang:/go/src/app \
-	-v ~/github:/go/src/site \
-	-w /go/src/site/hugo golang-1 zsh
+	-v ~/github/hugo/app:/go/src/hugo-app \
+	-v ~/github/emflant.github.io/docs:/go/src/docs \
+	-w /go/src/hugo-app golang-1 zsh
