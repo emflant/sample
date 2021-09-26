@@ -20,4 +20,6 @@ RUN zsh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/ins
 # zshrc 수정. (테마변경, alias 설정)
 RUN sed -i 's/robbyrussell/bureau/g' /root/.zshrc
 RUN echo "alias ll=\"ls -alFh\"" >> /root/.zshrc
+RUN echo "alias rr=\"ranger\"" >> /root/.zshrc
+RUN chsh -s /bin/zsh 
 RUN apt-get install -y hugo
