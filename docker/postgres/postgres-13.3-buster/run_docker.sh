@@ -1,6 +1,6 @@
 docker run -d  \
     --name my-postgres \
-    --network mariadb-net \
+    --network my-net \
     -p 5432:5432 \
     -e POSTGRES_PASSWORD=1111 \
     -e PGDATA=/var/lib/postgresql/data/pgdata \

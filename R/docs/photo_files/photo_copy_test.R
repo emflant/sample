@@ -1,5 +1,5 @@
 source("~/github/sample/R/docs/photo_files/photo_compare.R")
-install.packages("exifr")
+
 #=====================================================================================
 
 
