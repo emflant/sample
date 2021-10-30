@@ -20,7 +20,7 @@ RUN ln -sf /usr/share/zoneinfo/Asia/Seoul /etc/localtime
 RUN dpkg-reconfigure -f noninteractive tzdata
 
 # zshrc 수정. (테마변경, alias 설정)
-# RUN sed -i 's/robbyrussell/blinks/g' /root/.zshrc
+RUN sed -i 's/robbyrussell/bureau/g' /root/.zshrc
 RUN echo "alias ll=\"ls -alFh\"" >> /root/.zshrc
 
 # WORKDIR /doc

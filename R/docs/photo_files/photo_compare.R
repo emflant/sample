@@ -3,7 +3,7 @@ library(tools)
 library(lubridate)
 library(furrr)
 library(tictoc)
-library(exifr)
+# library(exifr)
 
 
 # 특정 경로의 파일 리스트 생성. 

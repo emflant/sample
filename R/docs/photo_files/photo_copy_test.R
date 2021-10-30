@@ -39,7 +39,7 @@ re1 = file_compare("/Volumes/seagate/02_photo/2021", "~/Desktop/photo/output")
 # pc에는 있고, seagate 는 없는 디렉토리 목록.
 # 이건 ctrl+c,v 로 복사함.
 re1$path2 %>% 
-  mutate(dir_date = str_sub(dir_name, 1, 43)) %>% 
+  mutate(dir_date = str_sub(dir_name, 1, 44)) %>% 
   distinct(dir_date)
 
 # OUTPUT 폴더에서는 불필요한 raw 파일을 지우기때문에 차이가 나는 케이스가 있음.
