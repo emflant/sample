@@ -1,10 +1,11 @@
 FROM openjdk:11.0-jdk-bullseye
 
+
 RUN sed -i 's/archive.ubuntu.com/mirror.kakao.com/g' /etc/apt/sources.list
 RUN sed -i 's/security.ubuntu.com/mirror.kakao.com/g' /etc/apt/sources.list
 
 RUN apt-get update; \
-		apt-get install -y apt-utils vim zsh curl git locales tzdata ranger;
+		apt-get install -y apt-utils vim zsh curl git locales tzdata ranger maven;
 
 RUN localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
 ENV LANG en_US.utf8
