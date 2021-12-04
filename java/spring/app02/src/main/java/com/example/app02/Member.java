@@ -1,8 +1,12 @@
 package com.example.app02;
 
+import org.springframework.data.annotation.Id;
+
 public class Member {
 
-    private long id;
+    @Id
+    private String id;
+
     private String parentsName; // 부모님 이름
     private String parentsTel;  // 부모님 전화번호
     private String name;    // 이름
@@ -12,6 +16,14 @@ public class Member {
     private String tueClass;
     private String wenClass;
     private String thrClass;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getTueClass() {
         return tueClass;
@@ -35,14 +47,6 @@ public class Member {
 
     public void setThrClass(String thrClass) {
         this.thrClass = thrClass;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public String getParentsName() {
@@ -94,11 +98,18 @@ public class Member {
     }
 
     @Override
-    public String toString(){
-        return String.format(
-                "Customer[id=%d, parentsName='%s', parentsTel='%s', " +
-                        "name='%s', gender='%s', birth='%s', membershipDate='%s', " +
-                        "tueClass='%s', wenClass='%s', thrClass='%s']",
-                id, parentsName, parentsTel, name, gender, birth, membershipDate, tueClass, wenClass, thrClass);
+    public String toString() {
+        return "Member{" +
+                "id='" + id + '\'' +
+                ", parentsName='" + parentsName + '\'' +
+                ", parentsTel='" + parentsTel + '\'' +
+                ", name='" + name + '\'' +
+                ", gender='" + gender + '\'' +
+                ", birth='" + birth + '\'' +
+                ", membershipDate='" + membershipDate + '\'' +
+                ", tueClass='" + tueClass + '\'' +
+                ", wenClass='" + wenClass + '\'' +
+                ", thrClass='" + thrClass + '\'' +
+                '}';
     }
 }

@@ -1,4 +1,5 @@
 docker run -it --rm --name my-openjdk \
+	--network my-net \
 	-p 8080:8080 \
 	-v ~/github/sample/java/spring:/usr/src/app \
 	-v ~/github/sample/java/mymaven:/root/.m2 \
