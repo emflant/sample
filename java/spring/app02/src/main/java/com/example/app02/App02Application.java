@@ -2,6 +2,7 @@ package com.example.app02;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Controller;
@@ -19,6 +20,9 @@ public class App02Application {
     }
     private static final Logger log = LoggerFactory.getLogger(App02Application.class);
 
+    @Autowired
+    private MemberRepository memberRepository;
+
     @GetMapping("/signup")
     public String signupForm(Model model) {
         model.addAttribute("member", new Member());
@@ -28,6 +32,7 @@ public class App02Application {
     @PostMapping("/signup")
     public String signupSubmit(@ModelAttribute Member member, Model model) {
         log.info(member.toString());
+        memberRepository.save(member);
         model.addAttribute("member", member);
         return "member";
     }
