@@ -5,7 +5,7 @@ import org.springframework.data.annotation.Id;
 public class Member {
 
     @Id
-    private String id;
+    public String id;
 
     private String parentsName; // 부모님 이름
     private String parentsTel;  // 부모님 전화번호
@@ -16,6 +16,16 @@ public class Member {
     private String tueClass;
     private String wenClass;
     private String thrClass;
+    private long timeStamp;
+    private String memberId;
+
+    public String getMemberId() {
+        return memberId;
+    }
+
+    public void setMemberId(String memberId) {
+        this.memberId = memberId;
+    }
 
     public String getId() {
         return id;
@@ -23,30 +33,6 @@ public class Member {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public String getTueClass() {
-        return tueClass;
-    }
-
-    public void setTueClass(String tueClass) {
-        this.tueClass = tueClass;
-    }
-
-    public String getWenClass() {
-        return wenClass;
-    }
-
-    public void setWenClass(String wenClass) {
-        this.wenClass = wenClass;
-    }
-
-    public String getThrClass() {
-        return thrClass;
-    }
-
-    public void setThrClass(String thrClass) {
-        this.thrClass = thrClass;
     }
 
     public String getParentsName() {
@@ -97,6 +83,38 @@ public class Member {
         this.membershipDate = membershipDate;
     }
 
+    public String getTueClass() {
+        return tueClass;
+    }
+
+    public void setTueClass(String tueClass) {
+        this.tueClass = tueClass;
+    }
+
+    public String getWenClass() {
+        return wenClass;
+    }
+
+    public void setWenClass(String wenClass) {
+        this.wenClass = wenClass;
+    }
+
+    public String getThrClass() {
+        return thrClass;
+    }
+
+    public void setThrClass(String thrClass) {
+        this.thrClass = thrClass;
+    }
+
+    public long getTimeStamp() {
+        return timeStamp;
+    }
+
+    public void setTimeStamp(long timeStamp) {
+        this.timeStamp = timeStamp;
+    }
+
     @Override
     public String toString() {
         return "Member{" +
@@ -110,6 +128,8 @@ public class Member {
                 ", tueClass='" + tueClass + '\'' +
                 ", wenClass='" + wenClass + '\'' +
                 ", thrClass='" + thrClass + '\'' +
+                ", timeStamp=" + timeStamp +
+                ", memberId='" + memberId + '\'' +
                 '}';
     }
 }
