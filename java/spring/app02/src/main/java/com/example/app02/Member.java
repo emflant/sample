@@ -17,15 +17,6 @@ public class Member {
     private String wenClass;
     private String thrClass;
     private long timeStamp;
-    private String memberId;
-
-    public String getMemberId() {
-        return memberId;
-    }
-
-    public void setMemberId(String memberId) {
-        this.memberId = memberId;
-    }
 
     public String getId() {
         return id;
@@ -117,19 +108,6 @@ public class Member {
 
     @Override
     public String toString() {
-        return "Member{" +
-                "id='" + id + '\'' +
-                ", parentsName='" + parentsName + '\'' +
-                ", parentsTel='" + parentsTel + '\'' +
-                ", name='" + name + '\'' +
-                ", gender='" + gender + '\'' +
-                ", birth='" + birth + '\'' +
-                ", membershipDate='" + membershipDate + '\'' +
-                ", tueClass='" + tueClass + '\'' +
-                ", wenClass='" + wenClass + '\'' +
-                ", thrClass='" + thrClass + '\'' +
-                ", timeStamp=" + timeStamp +
-                ", memberId='" + memberId + '\'' +
-                '}';
+        return "Member{" + "id='" + id + '\'' + ", parentsName='" + parentsName + '\'' + ", parentsTel='" + parentsTel + '\'' + ", name='" + name + '\'' + ", gender='" + gender + '\'' + ", birth='" + birth + '\'' + ", membershipDate='" + membershipDate + '\'' + ", tueClass='" + tueClass + '\'' + ", wenClass='" + wenClass + '\'' + ", thrClass='" + thrClass + '\'' + ", timeStamp=" + timeStamp + '}';
     }
 }
