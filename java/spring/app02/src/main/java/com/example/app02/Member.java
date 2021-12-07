@@ -14,9 +14,13 @@ public class Member {
     private String birth;   // 생년월일
     private String membershipDate; // 가입일자
     private String tueClass;
+    private String tueClassTime;
     private String wenClass;
+    private String wenClassTime;
     private String thrClass;
+    private String thrClassTime;
     private long timeStamp;
+
 
     public String getId() {
         return id;
@@ -82,6 +86,14 @@ public class Member {
         this.tueClass = tueClass;
     }
 
+    public String getTueClassTime() {
+        return tueClassTime;
+    }
+
+    public void setTueClassTime(String tueClassTime) {
+        this.tueClassTime = tueClassTime;
+    }
+
     public String getWenClass() {
         return wenClass;
     }
@@ -90,12 +102,28 @@ public class Member {
         this.wenClass = wenClass;
     }
 
+    public String getWenClassTime() {
+        return wenClassTime;
+    }
+
+    public void setWenClassTime(String wenClassTime) {
+        this.wenClassTime = wenClassTime;
+    }
+
     public String getThrClass() {
         return thrClass;
     }
 
     public void setThrClass(String thrClass) {
         this.thrClass = thrClass;
+    }
+
+    public String getThrClassTime() {
+        return thrClassTime;
+    }
+
+    public void setThrClassTime(String thrClassTime) {
+        this.thrClassTime = thrClassTime;
     }
 
     public long getTimeStamp() {
@@ -108,6 +136,21 @@ public class Member {
 
     @Override
     public String toString() {
-        return "Member{" + "id='" + id + '\'' + ", parentsName='" + parentsName + '\'' + ", parentsTel='" + parentsTel + '\'' + ", name='" + name + '\'' + ", gender='" + gender + '\'' + ", birth='" + birth + '\'' + ", membershipDate='" + membershipDate + '\'' + ", tueClass='" + tueClass + '\'' + ", wenClass='" + wenClass + '\'' + ", thrClass='" + thrClass + '\'' + ", timeStamp=" + timeStamp + '}';
+        return "Member{" +
+                "id='" + id + '\'' +
+                ", parentsName='" + parentsName + '\'' +
+                ", parentsTel='" + parentsTel + '\'' +
+                ", name='" + name + '\'' +
+                ", gender='" + gender + '\'' +
+                ", birth='" + birth + '\'' +
+                ", membershipDate='" + membershipDate + '\'' +
+                ", tueClass='" + tueClass + '\'' +
+                ", tueClassTime='" + tueClassTime + '\'' +
+                ", wenClass='" + wenClass + '\'' +
+                ", wenClassTime='" + wenClassTime + '\'' +
+                ", thrClass='" + thrClass + '\'' +
+                ", thrClassTime='" + thrClassTime + '\'' +
+                ", timeStamp=" + timeStamp +
+                '}';
     }
 }
