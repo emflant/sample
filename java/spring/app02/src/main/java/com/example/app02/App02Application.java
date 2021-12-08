@@ -2,6 +2,7 @@ package com.example.app02;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -25,6 +26,9 @@ public class App02Application {
     @Autowired
     private MemberRepository memberRepository;
 
+    @Autowired
+    private MemberHistoryRepository memberHistoryRepository;
+
     public static void main(String[] args) {
         SpringApplication.run(App02Application.class, args);
     }
@@ -45,9 +49,19 @@ public class App02Application {
         if("".equals(member.getId())){
             member.setId(null);
         }
+
+        // master insert/update
         member.setTimeStamp(System.currentTimeMillis());
-        memberRepository.save(member);
-//        model.addAttribute("member", member);
+        Member result = memberRepository.save(member);
+
+        MemberHistory mh = new MemberHistory();
+        BeanUtils.copyProperties(member, mh);
+
+        // history insert
+        mh.setId(null);
+        mh.setRefId(result.getId());
+        memberHistoryRepository.save(mh);
+
         return new RedirectView("/list");
     }
 

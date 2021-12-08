@@ -5,21 +5,21 @@ import org.springframework.data.annotation.Id;
 public class Member {
 
     @Id
-    public String id;
+    protected String id;
 
-    private String parentsName; // 부모님 이름
-    private String parentsTel;  // 부모님 전화번호
-    private String name;    // 이름
-    private String gender;  // 성별
-    private String birth;   // 생년월일
-    private String membershipDate; // 가입일자
-    private String tueClass;
-    private String tueClassTime;
-    private String wenClass;
-    private String wenClassTime;
-    private String thrClass;
-    private String thrClassTime;
-    private long timeStamp;
+    protected String parentsName; // 부모님 이름
+    protected String parentsTel;  // 부모님 전화번호
+    protected String name;    // 이름
+    protected String gender;  // 성별
+    protected String birth;   // 생년월일
+    protected String membershipDate; // 가입일자
+    protected String tueClass;
+    protected String tueClassTime;
+    protected String wenClass;
+    protected String wenClassTime;
+    protected String thrClass;
+    protected String thrClassTime;
+    protected long timeStamp;
 
 
     public String getId() {

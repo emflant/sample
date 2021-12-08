@@ -1,8 +1,14 @@
 package com.example.app02;
 
-import org.springframework.data.annotation.Id;
-
 public class MemberHistory extends Member {
 
+    private String refId;
 
+    public String getRefId() {
+        return refId;
+    }
+
+    public void setRefId(String refId) {
+        this.refId = refId;
+    }
 }
