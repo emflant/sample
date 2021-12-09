@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.88.1">
+    <title>크리아트 - 회원가입</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/checkout/">
+
+    
+
+    <!-- Bootstrap core CSS -->
+<link href="./css/bootstrap.min.css" rel="stylesheet">
+
+
+
+    
+    <!-- Custom styles for this template -->
+    <link href="./css/form-validation.css" rel="stylesheet">
+
+    <link href='./fullcalendar/main.css' rel='stylesheet' />
+    <script src='./fullcalendar/main.js'></script>
+    <script>
+
+      document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+          initialView: 'dayGridMonth',
+          events: []
+        });
+
+        calendar.render();
+      });
+
+    </script>
+
+    <style>
+a {
+	color: #000;
+	text-decoration: none;
+}
+    </style>
+
+  </head>
+  <body class="bg-light">
+
+<div class="container">
+  <main>
+    <div class="py-5 text-center">
+      <img class="d-block mx-auto mb-4" src="./images/clipboard-check.svg" alt="" width="72" height="57">
+      <h2>수강현황</h2>
+    </div>
+
+    <div class="row g-5">
+        <div id='calendar'></div>
+     </div>
+  </main>
+
+  <footer class="my-5 pt-5 text-muted text-center text-small">
+    <p class="mb-1">&copy; 2021 Creative Art - CREART</p>
+  </footer>
+</div>
+
+
+    <script src="./js/bootstrap.bundle.min.js"></script>
+
+      <script src="./js/form-validation.js"></script>
+  </body>
+</html>

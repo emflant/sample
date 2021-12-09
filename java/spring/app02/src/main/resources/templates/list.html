@@ -61,8 +61,6 @@
           <th>학생이름</th>
           <th>생년월일</th>
           <th>수강시작일</th>
-          <th>학부모이름</th>
-          <th>연락처</th>
           <th>화</th>
           <th>수</th>
           <th>목</th>
@@ -73,8 +71,6 @@
           <td><a th:href="@{/signup(id=${member.id})}"><span th:text="${member.name}" ></span></a></td>
           <td th:text="${member.birth}"></td>
           <td th:text="${member.membershipDate}"></td>
-          <td th:text="${member.parentsName}"></td>
-          <td th:text="${member.parentsTel}"></td>
           <td th:text="${member.tueClass}"></td>
           <td th:text="${member.wenClass}"></td>
           <td th:text="${member.thrClass}"></td>

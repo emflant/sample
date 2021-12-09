@@ -75,6 +75,18 @@ public class App02Application {
         return "list";
     }
 
+
+
+    @GetMapping("/class")
+    public String classCalendar(Model model) {
+
+        List<Member> members = memberRepository.findAll();
+        model.addAttribute("members", members);
+
+        return "class";
+    }
+
+
     private String generateKey(String name) throws NoSuchAlgorithmException {
 
         String key = name + System.currentTimeMillis();
