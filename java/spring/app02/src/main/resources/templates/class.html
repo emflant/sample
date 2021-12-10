@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -25,24 +25,46 @@
     <script src='./fullcalendar/main.js'></script>
     <script>
 
+
       document.addEventListener('DOMContentLoaded', function() {
         var calendarEl = document.getElementById('calendar');
-
         var calendar = new FullCalendar.Calendar(calendarEl, {
           initialView: 'dayGridMonth',
+          selectable: true,
+            dateClick: function(info) {
+                //alert('Clicked on: ' + info.dateStr);
+                var myModalEl = document.getElementById('exampleModal');
+                var myModal = new bootstrap.Modal(myModalEl);
+
+                var classDate = document.getElementById('classDate');
+                classDate.value = info.dateStr;
+
+                myModal.show();
+            },
           events: []
         });
-
         calendar.render();
+
+        var myModalEl = document.getElementById('exampleModal');
+        myModalEl.addEventListener('hidden.bs.modal', function (event) {
+          // do something...
+            calendar.addEvent({
+              title: document.getElementById('name').value,
+              start: document.getElementById('classDate').value,
+              allDay: true
+            });
+        })
       });
+
+
 
     </script>
 
     <style>
-a {
-	color: #000;
-	text-decoration: none;
-}
+        a {
+            color: #000;
+            text-decoration: none;
+        }
     </style>
 
   </head>
@@ -56,8 +78,52 @@ a {
     </div>
 
     <div class="row g-5">
+        <button type="button" class="btn btn-secondary" onclick="aa()">set event</button>
         <div id='calendar'></div>
-     </div>
+    </div>
+
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                      <form action="/class">
+                          <div class="mb-3">
+                              <label for="classDate" class="col-form-label">날짜:</label>
+                              <input type="text" class="form-control" id="classDate">
+                          </div>
+                          <div class="mb-3">
+                              <label for="name" class="col-form-label">학생이름:</label>
+                              <select class="form-select" id="name">
+                                  <option value="">선택...</option>
+                                  <option value="이지호">이지호</option>
+                                  <option value="차민서">차민서</option>
+                              </select>
+                          </div>
+                          <div class="mb-3">
+                              <label for="presentYn" class="col-form-label">출석여부:</label>
+                              <select class="form-select" id="presentYn">
+                                  <option value="">선택...</option>
+                                  <option value="Y">출석</option>
+                                  <option value="N">결석</option>
+                              </select>
+                          </div>
+                          <div class="mb-3">
+                              <label for="message-text" class="col-form-label">Message:</label>
+                              <textarea class="form-control" id="message-text"></textarea>
+                          </div>
+                          <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                              <button type="button" class="btn btn-primary" onclick="aa()">Send message</button>
+                          </div>
+                      </form>
+                  </div>
+              </div>
+          </div>
+      </div>
   </main>
 
   <footer class="my-5 pt-5 text-muted text-center text-small">
@@ -69,5 +135,6 @@ a {
     <script src="./js/bootstrap.bundle.min.js"></script>
 
       <script src="./js/form-validation.js"></script>
+
   </body>
 </html>
