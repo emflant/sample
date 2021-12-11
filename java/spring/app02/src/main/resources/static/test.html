@@ -7,7 +7,7 @@
         "use strict";
 
         async function aa() {
-            let url = 'http://localhost:8080/greeting';
+            let url = '/greeting';
             let response = await fetch(url);
 
             let commits = await response.json(); // read response body and parse as JSON

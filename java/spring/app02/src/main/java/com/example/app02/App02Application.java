@@ -29,6 +29,9 @@ public class App02Application {
     @Autowired
     private MemberHistoryRepository memberHistoryRepository;
 
+    @Autowired
+    private ClassEventRepository eventRepository;
+
     public static void main(String[] args) {
         SpringApplication.run(App02Application.class, args);
     }
@@ -80,8 +83,8 @@ public class App02Application {
     @GetMapping("/class")
     public String classCalendar(Model model) {
 
-        List<Member> members = memberRepository.findAll();
-        model.addAttribute("members", members);
+        List<ClassEvent> events = eventRepository.findAll();
+        model.addAttribute("events", events);
 
         return "class";
     }

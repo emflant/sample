@@ -1,28 +1,48 @@
 <!doctype html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Hugo 0.88.1">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <meta content="" name="description">
+    <meta content="Mark Otto, Jacob Thornton, and Bootstrap contributors" name="author">
+    <meta content="Hugo 0.88.1" name="generator">
     <title>크리아트 - 회원가입</title>
 
-    <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/checkout/">
+    <link href="https://getbootstrap.com/docs/5.1/examples/checkout/" rel="canonical">
 
-    
 
     <!-- Bootstrap core CSS -->
-<link href="./css/bootstrap.min.css" rel="stylesheet">
+    <link href="./css/bootstrap.min.css" rel="stylesheet">
 
 
-
-    
     <!-- Custom styles for this template -->
     <link href="./css/form-validation.css" rel="stylesheet">
 
-    <link href='./fullcalendar/main.css' rel='stylesheet' />
+    <link href='./fullcalendar/main.css' rel='stylesheet'/>
     <script src='./fullcalendar/main.js'></script>
+
+    <script th:inline="javascript" type="text/javascript">
+        //서버에서 view 로 넘긴값을 html의  javascript에 json 형태로 넘김.
+        var domain = /*[[${events}]]*/
+
+        var myEvents = [{
+                  daysOfWeek:  [ '0', '1', '5', '6' ],
+                  display: 'background',
+                  backgroundColor: 'hsla(0,0%,84.3%,.7)'
+              }];
+
+        for(var i = 0; i < domain.length; i++){
+            var obj = new Object();
+            obj.title = domain[i].name;
+            obj.date = domain[i].classDate + 'T' + domain[i].classTime + ':00';
+            myEvents.push(obj);
+        }
+
+
+    </script>
+
+
+
     <script>
 
 
@@ -31,6 +51,7 @@
         var calendar = new FullCalendar.Calendar(calendarEl, {
           initialView: 'dayGridMonth',
           selectable: true,
+          locale: 'ko',
             dateClick: function(info) {
                 //alert('Clicked on: ' + info.dateStr);
                 var myModalEl = document.getElementById('exampleModal');
@@ -41,22 +62,51 @@
 
                 myModal.show();
             },
-          events: []
+          events: myEvents
         });
         calendar.render();
 
+        var mySave = document.getElementById('save-button');
+
+        mySave.onclick = async function(){
+
+            var vName = document.getElementById('name');
+
+            let aa1 = {
+                id: document.getElementById('id').value,
+                classDate: document.getElementById('classDate').value,
+                classTime: document.getElementById('classTime').value,
+                name: vName.options[vName.selectedIndex].text,
+                refId: vName.options[vName.selectedIndex].value,
+                absentYn: document.getElementById('absentYn').checked,
+                message: document.getElementById('message-text').value
+            };
+
+            let response = await fetch('/greeting', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+              },
+              body: JSON.stringify(aa1)
+            });
+
+            let result = await response.json();
+
+            var date = new Date(document.getElementById('classDate').value + 'T' +
+                document.getElementById('classTime').value + ':00'); // will be in local time
+
+            calendar.addEvent({
+              title: vName.options[vName.selectedIndex].text,
+              start: date
+            });
+        };
+
         var myModalEl = document.getElementById('exampleModal');
         myModalEl.addEventListener('hidden.bs.modal', function (event) {
-          // do something...
-            calendar.addEvent({
-              title: document.getElementById('name').value,
-              start: document.getElementById('classDate').value,
-              allDay: true
-            });
-        })
+            document.getElementById("exampleForm").reset();
+        });
+
       });
-
-
 
     </script>
 
@@ -65,76 +115,92 @@
             color: #000;
             text-decoration: none;
         }
+
+
+
+
+
     </style>
 
-  </head>
-  <body class="bg-light">
+</head>
+<body class="bg-light">
 
 <div class="container">
-  <main>
-    <div class="py-5 text-center">
-      <img class="d-block mx-auto mb-4" src="./images/clipboard-check.svg" alt="" width="72" height="57">
-      <h2>수강현황</h2>
-    </div>
+    <main>
+        <div class="py-5 text-center">
+            <img alt="" class="d-block mx-auto mb-4" height="57" src="./images/clipboard-check.svg" width="72">
+            <h2>수강현황</h2>
+        </div>
 
-    <div class="row g-5">
-        <button type="button" class="btn btn-secondary" onclick="aa()">set event</button>
-        <div id='calendar'></div>
-    </div>
+        <div class="row g-5">
+            <div id='calendar'></div>
+        </div>
 
-      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
-              <div class="modal-content">
-                  <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">New message</h5>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body">
-                      <form action="/class">
-                          <div class="mb-3">
-                              <label for="classDate" class="col-form-label">날짜:</label>
-                              <input type="text" class="form-control" id="classDate">
-                          </div>
-                          <div class="mb-3">
-                              <label for="name" class="col-form-label">학생이름:</label>
-                              <select class="form-select" id="name">
-                                  <option value="">선택...</option>
-                                  <option value="이지호">이지호</option>
-                                  <option value="차민서">차민서</option>
-                              </select>
-                          </div>
-                          <div class="mb-3">
-                              <label for="presentYn" class="col-form-label">출석여부:</label>
-                              <select class="form-select" id="presentYn">
-                                  <option value="">선택...</option>
-                                  <option value="Y">출석</option>
-                                  <option value="N">결석</option>
-                              </select>
-                          </div>
-                          <div class="mb-3">
-                              <label for="message-text" class="col-form-label">Message:</label>
-                              <textarea class="form-control" id="message-text"></textarea>
-                          </div>
-                          <div class="modal-footer">
-                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                              <button type="button" class="btn btn-primary" onclick="aa()">Send message</button>
-                          </div>
-                      </form>
-                  </div>
-              </div>
-          </div>
-      </div>
-  </main>
+        <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="exampleModal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+                        <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="/class" id="exampleForm">
+                            <div class="mb-3">
+                                <label class="col-form-label" for="classDate">날짜:</label>
+                                <div class="row">
+                                    <div class="col">
+                                        <input class="form-control" id="classDate" type="text">
+                                    </div>
+                                    <div class="col">
+                                        <input class="form-control" id="classTime" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="col-form-label" for="name">학생이름:</label>
+                                <div class="row">
+                                    <div class="col-9">
+                                        <select class="form-select" id="name">
+                                            <option value="">선택...</option>
+                                            <option value="001">이지호</option>
+                                            <option value="002">차민서</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-3">
+                                        <input class="form-check-input" id="absentYn" type="checkbox" value="">
+                                        <label class="form-check-label" for="absentYn">결석</label>
+                                    </div>
+                                </div>
+                            </div>
 
-  <footer class="my-5 pt-5 text-muted text-center text-small">
-    <p class="mb-1">&copy; 2021 Creative Art - CREART</p>
-  </footer>
+                            <div class="mb-3">
+                                <label class="col-form-label" for="message-text">Message:</label>
+                                <textarea class="form-control" id="message-text" rows="7"></textarea>
+                            </div>
+                            <input type="text" class="invisible" id="id" placeholder="" value="" style="display:none">
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">닫기</button>
+                        <button class="btn btn-primary" id="save-button" data-bs-dismiss="modal" type="button">
+                            저장
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="my-5 pt-5 text-muted text-center text-small">
+        <p class="mb-1">&copy; 2021 Creative Art - CREART</p>
+    </footer>
 </div>
 
 
-    <script src="./js/bootstrap.bundle.min.js"></script>
+<script src="./js/bootstrap.bundle.min.js"></script>
 
-      <script src="./js/form-validation.js"></script>
+<script src="./js/form-validation.js"></script>
 
-  </body>
+</body>
 </html>

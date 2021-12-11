@@ -50,11 +50,6 @@ re1$path2 %>%
   filter(file_ext != "RW2") %>% 
   distinct(dir_date)
 
-# 
-re1$path2 %>% 
-  mutate(dir_date = str_sub(dir_name, 1, 43)) %>% 
-  mutate(file_ext = str_sub(file_name, -3)) %>% 
-  filter(dir_date == "/Users/imac/Desktop/photo/output/2021-07-02") 
 
 
 ##################################################################################
