@@ -33,19 +33,22 @@
 
         for(var i = 0; i < domain.length; i++){
             var obj = new Object();
+
+            if(domain[i].absentYn){
+                obj.backgroundColor = '#fc9f67';
+            }
+
             obj.title = domain[i].name;
-            obj.date = domain[i].classDate + 'T' + domain[i].classTime + ':00';
+            obj.start = new Date(domain[i].classDate + 'T' + domain[i].classTime + ':00');
+            obj.id = domain[i].id;
+            obj.eventInfo = domain[i];
             myEvents.push(obj);
         }
 
-
+        //alert(JSON.stringify(myEvents[2]));
     </script>
 
-
-
     <script>
-
-
       document.addEventListener('DOMContentLoaded', function() {
         var calendarEl = document.getElementById('calendar');
         var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -62,6 +65,21 @@
 
                 myModal.show();
             },
+            eventClick: function(info) {
+                //alert(JSON.stringify(info.event));
+                var myModalEl = document.getElementById('exampleModal');
+                var myModal = new bootstrap.Modal(myModalEl);
+
+                document.getElementById('id').value = info.event.extendedProps.eventInfo.id;
+                document.getElementById('classDate').value = info.event.extendedProps.eventInfo.classDate;
+                document.getElementById('classTime').value = info.event.extendedProps.eventInfo.classTime;
+                document.getElementById('name').value = info.event.extendedProps.eventInfo.refId;
+                document.getElementById('absentYn').checked = info.event.extendedProps.eventInfo.absentYn;
+                document.getElementById('message-text').value = info.event.extendedProps.eventInfo.message;
+                document.getElementById('delYn').checked = info.event.extendedProps.eventInfo.delYn;
+
+                myModal.show();
+            },
           events: myEvents
         });
         calendar.render();
@@ -71,6 +89,7 @@
         mySave.onclick = async function(){
 
             var vName = document.getElementById('name');
+            var vId = document.getElementById('id').value;
 
             let aa1 = {
                 id: document.getElementById('id').value,
@@ -79,7 +98,8 @@
                 name: vName.options[vName.selectedIndex].text,
                 refId: vName.options[vName.selectedIndex].value,
                 absentYn: document.getElementById('absentYn').checked,
-                message: document.getElementById('message-text').value
+                message: document.getElementById('message-text').value,
+                delYn: document.getElementById('delYn').checked,
             };
 
             let response = await fetch('/greeting', {
@@ -92,13 +112,31 @@
 
             let result = await response.json();
 
-            var date = new Date(document.getElementById('classDate').value + 'T' +
-                document.getElementById('classTime').value + ':00'); // will be in local time
+            var vDate = new Date(aa1.classDate + 'T' + aa1.classTime + ':00');
 
-            calendar.addEvent({
-              title: vName.options[vName.selectedIndex].text,
-              start: date
-            });
+            if(aa1.absentYn){
+                vColor = '#fc9f67';
+            } else {
+                vColor = '#3788d8';
+            }
+
+            if(vId == ''){
+                //alert(vId + ' : ' + result.id);
+                aa1.id = result.id;
+                calendar.addEvent({
+                  title: aa1.name,
+                  start: vDate,
+                  id: aa1.id,
+                  backgroundColor: vColor,
+                  eventInfo: aa1
+                });
+            } else {
+                var vEvent = calendar.getEventById(vId);
+                vEvent.setProp('title', aa1.name);
+                vEvent.setStart(vDate);
+                vEvent.setExtendedProp('eventInfo', aa1);
+                vEvent.setProp('backgroundColor', vColor);
+            }
         };
 
         var myModalEl = document.getElementById('exampleModal');
@@ -115,11 +153,6 @@
             color: #000;
             text-decoration: none;
         }
-
-
-
-
-
     </style>
 
 </head>
@@ -176,6 +209,10 @@
                             <div class="mb-3">
                                 <label class="col-form-label" for="message-text">Message:</label>
                                 <textarea class="form-control" id="message-text" rows="7"></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <input class="form-check-input" id="delYn" type="checkbox" value="">
+                                <label class="form-check-label" for="delYn">이 일정을 삭제하고 싶으시면 체크 해주세요.</label>
                             </div>
                             <input type="text" class="invisible" id="id" placeholder="" value="" style="display:none">
                         </form>

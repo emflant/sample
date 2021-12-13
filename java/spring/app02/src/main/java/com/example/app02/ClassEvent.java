@@ -13,6 +13,7 @@ public class ClassEvent {
     private String refId;
     private boolean absentYn;
     private String message;
+    private boolean delYn;
 
     public String getId() {
         return id;
@@ -72,6 +73,13 @@ public class ClassEvent {
         this.absentYn = absentYn;
     }
 
+    public boolean isDelYn() {
+        return delYn;
+    }
+
+    public void setDelYn(boolean delYn) {
+        this.delYn = delYn;
+    }
 
     @Override
     public String toString() {
@@ -83,6 +91,7 @@ public class ClassEvent {
                 ", refId='" + refId + '\'' +
                 ", absentYn=" + absentYn +
                 ", message='" + message + '\'' +
+                ", delYn=" + delYn +
                 '}';
     }
 }

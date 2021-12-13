@@ -29,8 +29,8 @@ public class GreetingController {
             event.setId(null);
         }
 
-        eventRepository.save(event);
+        ClassEvent result = eventRepository.save(event);
 
-        return new ClassEvent();
+        return result;
     }
 }

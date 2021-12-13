@@ -3,15 +3,6 @@ source("~/github/sample/R/docs/photo_files/photo_compare.R")
 #=====================================================================================
 
 
-read_exif("~/Desktop/photo/output/2021-03-13/RW2/P1120477.RW2") %>% View
-# install.packages("exifr")
-# ISO, PanasonicImageWidth, PanasonicImageHeight, FNumber, ExposureTime, FocalLength, LensType, ImageWidth, ImageHeight, Make, Model, 
-
-read_exif("~/Desktop/photo/output/2021-03-13/RW2/P1120477.RW2") %>% 
-  select(ISO, FNumber, ExposureTime, FocalLength, LensType, ImageWidth, ImageHeight, Make, Model)
-#=====================================================================================
-
-
 # 파일체크 (파일명, 파일사이즈 기준)
 file_compare("~/Desktop/photo/input", "~/Desktop/photo/output") 
 
@@ -129,3 +120,12 @@ flist = file_list(path = "/Volumes/seagate/02_photo/")
 
 flist %>% 
   filter(file_name == "DSC06296.JPG")
+#=====================================================================================
+
+
+read_exif("~/Desktop/photo/output/2021-03-13/RW2/P1120477.RW2") %>% View
+# install.packages("exifr")
+# ISO, PanasonicImageWidth, PanasonicImageHeight, FNumber, ExposureTime, FocalLength, LensType, ImageWidth, ImageHeight, Make, Model, 
+
+read_exif("~/Desktop/photo/output/2021-03-13/RW2/P1120477.RW2") %>% 
+  select(ISO, FNumber, ExposureTime, FocalLength, LensType, ImageWidth, ImageHeight, Make, Model)
