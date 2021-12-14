@@ -83,7 +83,7 @@ public class App02Application {
     @GetMapping("/class")
     public String classCalendar(Model model) {
 
-        List<ClassEvent> events = eventRepository.findAll();
+        List<ClassEvent> events = eventRepository.findByDelYn(false);
         model.addAttribute("events", events);
 
         return "class";
