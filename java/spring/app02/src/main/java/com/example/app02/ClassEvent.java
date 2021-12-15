@@ -9,7 +9,7 @@ public class ClassEvent {
 
     private String classDate;
     private String classTime;
-    private String name;
+    private String title;
     private String refId;
     private boolean absentYn;
     private String message;
@@ -39,12 +39,12 @@ public class ClassEvent {
         this.classTime = classTime;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getRefId() {
@@ -55,7 +55,13 @@ public class ClassEvent {
         this.refId = refId;
     }
 
+    public boolean isAbsentYn() {
+        return absentYn;
+    }
 
+    public void setAbsentYn(boolean absentYn) {
+        this.absentYn = absentYn;
+    }
 
     public String getMessage() {
         return message;
@@ -63,14 +69,6 @@ public class ClassEvent {
 
     public void setMessage(String message) {
         this.message = message;
-    }
-
-    public boolean isAbsentYn() {
-        return absentYn;
-    }
-
-    public void setAbsentYn(boolean absentYn) {
-        this.absentYn = absentYn;
     }
 
     public boolean isDelYn() {
@@ -87,7 +85,7 @@ public class ClassEvent {
                 "id='" + id + '\'' +
                 ", classDate='" + classDate + '\'' +
                 ", classTime='" + classTime + '\'' +
-                ", name='" + name + '\'' +
+                ", title='" + title + '\'' +
                 ", refId='" + refId + '\'' +
                 ", absentYn=" + absentYn +
                 ", message='" + message + '\'' +

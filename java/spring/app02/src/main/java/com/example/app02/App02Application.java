@@ -86,6 +86,9 @@ public class App02Application {
         List<ClassEvent> events = eventRepository.findByDelYn(false);
         model.addAttribute("events", events);
 
+        List<Member> members = memberRepository.findAll();
+        model.addAttribute("members", members);
+
         return "class";
     }
 
