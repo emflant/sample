@@ -39,7 +39,14 @@
             }
 
             obj.title = domain[i].title;
-            obj.start = new Date(domain[i].classDate + 'T' + domain[i].classTime + ':00');
+
+            if(domain[i].classTime == ''){
+                obj.start = new Date(domain[i].classDate);
+                obj.allDay = true;
+            } else {
+                obj.start = new Date(domain[i].classDate + 'T' + domain[i].classTime + ':00');
+            }
+
             obj.id = domain[i].id;
             obj.eventInfo = domain[i];
             myEvents.push(obj);
@@ -128,8 +135,13 @@
             });
 
             let result = await response.json();
-
             var vDate = new Date(aa1.classDate + 'T' + aa1.classTime + ':00');
+            var vAllDay = false;
+
+            if(aa1.classTime == ''){
+                vDate = new Date(aa1.classDate);
+                vAllDay = true;
+            }
 
             if(aa1.absentYn){
                 vColor = '#fc9f67';
@@ -142,10 +154,12 @@
 
                 if(!aa1.delYn){
                     aa1.id = result.id;
+
                     calendar.addEvent({
                       title: aa1.title,
                       start: vDate,
                       id: aa1.id,
+                      allDay: vAllDay,
                       backgroundColor: vColor,
                       eventInfo: aa1
                     });
@@ -153,9 +167,10 @@
 
             } else {
                 var vEvent = calendar.getEventById(vId);
-
+                
                 if(!aa1.delYn){
                     vEvent.setProp('title', aa1.title);
+                    vEvent.setAllDay(vAllDay);
                     vEvent.setStart(vDate);
                     vEvent.setExtendedProp('eventInfo', aa1);
                     vEvent.setProp('backgroundColor', vColor);
@@ -225,6 +240,7 @@
                                     <div class="col-9">
                                         <select class="form-select" id="name">
                                             <option value="">선택...</option>
+                                            <option value="reservation">상담예약</option>
                                             <option th:each="member : ${members}" th:value="${member.id}" th:text="${member.name}"></option>
                                         </select>
                                     </div>

@@ -15,6 +15,7 @@ public class ClassEvent {
     private String message;
     private boolean delYn;
 
+
     public String getId() {
         return id;
     }
@@ -92,4 +93,5 @@ public class ClassEvent {
                 ", delYn=" + delYn +
                 '}';
     }
+
 }
