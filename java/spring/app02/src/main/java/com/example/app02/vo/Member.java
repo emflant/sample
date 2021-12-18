@@ -1,4 +1,4 @@
-package com.example.app02;
+package com.example.app02.vo;
 
 import org.springframework.data.annotation.Id;
 

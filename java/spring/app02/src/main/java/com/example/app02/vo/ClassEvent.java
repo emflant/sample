@@ -1,19 +1,21 @@
-package com.example.app02;
+package com.example.app02.vo;
 
 import org.springframework.data.annotation.Id;
 
 public class ClassEvent {
 
     @Id
-    private String id;
+    protected String id;
 
-    private String classDate;
-    private String classTime;
-    private String title;
-    private String refId;
-    private boolean absentYn;
-    private String message;
-    private boolean delYn;
+    protected String classDate;
+    protected String classTime;
+    protected String title;
+    protected String memberId;
+    protected String classCount;
+    protected boolean absentYn;
+    protected String message;
+    protected boolean delYn;
+    protected long timeStamp;
 
 
     public String getId() {
@@ -48,12 +50,20 @@ public class ClassEvent {
         this.title = title;
     }
 
-    public String getRefId() {
-        return refId;
+    public String getMemberId() {
+        return memberId;
     }
 
-    public void setRefId(String refId) {
-        this.refId = refId;
+    public void setMemberId(String memberId) {
+        this.memberId = memberId;
+    }
+
+    public String getClassCount() {
+        return classCount;
+    }
+
+    public void setClassCount(String classCount) {
+        this.classCount = classCount;
     }
 
     public boolean isAbsentYn() {
@@ -80,6 +90,14 @@ public class ClassEvent {
         this.delYn = delYn;
     }
 
+    public long getTimeStamp() {
+        return timeStamp;
+    }
+
+    public void setTimeStamp(long timeStamp) {
+        this.timeStamp = timeStamp;
+    }
+
     @Override
     public String toString() {
         return "ClassEvent{" +
@@ -87,11 +105,12 @@ public class ClassEvent {
                 ", classDate='" + classDate + '\'' +
                 ", classTime='" + classTime + '\'' +
                 ", title='" + title + '\'' +
-                ", refId='" + refId + '\'' +
+                ", memberId='" + memberId + '\'' +
+                ", classCount='" + classCount + '\'' +
                 ", absentYn=" + absentYn +
                 ", message='" + message + '\'' +
                 ", delYn=" + delYn +
+                ", timeStamp=" + timeStamp +
                 '}';
     }
-
 }

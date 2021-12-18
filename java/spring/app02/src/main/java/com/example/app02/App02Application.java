@@ -1,5 +1,13 @@
 package com.example.app02;
 
+import com.example.app02.repository.ClassEventHistoryRepository;
+import com.example.app02.repository.ClassEventRepository;
+import com.example.app02.repository.MemberHistoryRepository;
+import com.example.app02.repository.MemberRepository;
+import com.example.app02.vo.ClassEvent;
+import com.example.app02.vo.ClassEventHistory;
+import com.example.app02.vo.Member;
+import com.example.app02.vo.MemberHistory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -32,6 +40,9 @@ public class App02Application {
     @Autowired
     private ClassEventRepository eventRepository;
 
+    @Autowired
+    private ClassEventHistoryRepository eventHistoryRepository;
+
     public static void main(String[] args) {
         SpringApplication.run(App02Application.class, args);
     }
@@ -62,7 +73,7 @@ public class App02Application {
 
         // history insert
         mh.setId(null);
-        mh.setRefId(result.getId());
+        mh.setMemberId(result.getId());
         memberHistoryRepository.save(mh);
 
         return new RedirectView("/list");
@@ -81,17 +92,62 @@ public class App02Application {
 
 
     @GetMapping("/class")
-    public String classCalendar(Model model) {
+    public String classCalendar(@RequestParam(value = "date", defaultValue = "") String date, Model model) {
 
         List<ClassEvent> events = eventRepository.findByDelYn(false);
         model.addAttribute("events", events);
 
+        ClassEvent event = new ClassEvent();
+        model.addAttribute("event", event);
+
         List<Member> members = memberRepository.findAll();
         model.addAttribute("members", members);
+
+        if("".equals(date)){
+            date = null;
+        }
+
+        model.addAttribute("initialDate", date);
 
         return "class";
     }
 
+    @PostMapping("/class")
+    public RedirectView classCalendar(@ModelAttribute ClassEvent event, Model model) {
+
+        event.setTimeStamp(System.currentTimeMillis());
+
+        if("".equals(event.getId())){
+            event.setId(null);
+        }
+
+        if("reservation".equals(event.getMemberId())){
+            event.setTitle("상담예약");
+        } else {
+
+            Member member = memberRepository.findById(event.getMemberId()).orElse(new Member());
+
+            if(event.isAbsentYn()){
+                event.setTitle(member.getName() + "(결석)");
+            } else if("9".equals(event.getClassCount())){
+                event.setTitle(member.getName() + "(보강)");
+            } else {
+                event.setTitle(member.getName() + "(" + event.getClassCount() + "회)");
+            }
+
+        }
+
+        log.info(event.toString());
+        ClassEvent result = eventRepository.save(event);
+
+        ClassEventHistory classEventHistory = new ClassEventHistory();
+        BeanUtils.copyProperties(event, classEventHistory);
+        classEventHistory.setId(null);
+        classEventHistory.setClassEventId(result.getId());
+        eventHistoryRepository.insert(classEventHistory);
+
+        return new RedirectView("/class?date="+event.getClassDate());
+    }
 
     private String generateKey(String name) throws NoSuchAlgorithmException {
 

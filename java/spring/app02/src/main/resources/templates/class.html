@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1" name="viewport">
@@ -14,184 +14,20 @@
     <!-- Bootstrap core CSS -->
     <link href="./css/bootstrap.min.css" rel="stylesheet">
 
-
     <!-- Custom styles for this template -->
     <link href="./css/form-validation.css" rel="stylesheet">
 
     <link href='./fullcalendar/main.css' rel='stylesheet'/>
     <script src='./fullcalendar/main.js'></script>
 
-    <script th:inline="javascript" type="text/javascript">
+    <script th:inline="javascript">
         //서버에서 view 로 넘긴값을 html의  javascript에 json 형태로 넘김.
+        var vInitialDate = /*[[${initialDate}]]*/
         var domain = /*[[${events}]]*/
-
-        var myEvents = [{
-                  daysOfWeek:  [ '0', '1', '5', '6' ],
-                  display: 'background',
-                  backgroundColor: 'hsla(0,0%,84.3%,.7)'
-              }];
-
-        for(var i = 0; i < domain.length; i++){
-            var obj = new Object();
-
-            if(domain[i].absentYn){
-                obj.backgroundColor = '#fc9f67';
-            }
-
-            obj.title = domain[i].title;
-
-            if(domain[i].classTime == ''){
-                obj.start = new Date(domain[i].classDate);
-                obj.allDay = true;
-            } else {
-                obj.start = new Date(domain[i].classDate + 'T' + domain[i].classTime + ':00');
-            }
-
-            obj.id = domain[i].id;
-            obj.eventInfo = domain[i];
-            myEvents.push(obj);
-        }
-
-        //alert(JSON.stringify(myEvents[2]));
     </script>
 
-    <script>
 
-
-        function delYn_onclick() {
-            if(document.getElementById('delYn').checked){
-                //class="btn btn-primary" id="save-button"
-                document.getElementById('save-button').classList.add('btn-danger');
-                document.getElementById('save-button').classList.remove('btn-primary');
-                document.getElementById('save-button').innerText = "삭제";
-            } else {
-                document.getElementById('save-button').classList.add('btn-primary');
-                document.getElementById('save-button').classList.remove('btn-danger');
-                document.getElementById('save-button').innerText = "저장";
-            }
-        }
-
-      document.addEventListener('DOMContentLoaded', function() {
-        var calendarEl = document.getElementById('calendar');
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-          initialView: 'dayGridMonth',
-          selectable: true,
-          locale: 'ko',
-            dateClick: function(info) {
-                //alert('Clicked on: ' + info.dateStr);
-                var myModalEl = document.getElementById('exampleModal');
-                var myModal = new bootstrap.Modal(myModalEl);
-
-                var classDate = document.getElementById('classDate');
-                classDate.value = info.dateStr;
-
-                delYn_onclick();
-                myModal.show();
-            },
-            eventClick: function(info) {
-                //alert(JSON.stringify(info.event));
-                var myModalEl = document.getElementById('exampleModal');
-                var myModal = new bootstrap.Modal(myModalEl);
-
-                document.getElementById('id').value = info.event.extendedProps.eventInfo.id;
-                document.getElementById('classDate').value = info.event.extendedProps.eventInfo.classDate;
-                document.getElementById('classTime').value = info.event.extendedProps.eventInfo.classTime;
-                document.getElementById('name').value = info.event.extendedProps.eventInfo.refId;
-                document.getElementById('absentYn').checked = info.event.extendedProps.eventInfo.absentYn;
-                document.getElementById('message-text').value = info.event.extendedProps.eventInfo.message;
-                document.getElementById('delYn').checked = info.event.extendedProps.eventInfo.delYn;
-
-                delYn_onclick();
-                myModal.show();
-            },
-          events: myEvents
-        });
-        calendar.render();
-
-        var mySave = document.getElementById('save-button');
-
-        mySave.onclick = async function(){
-
-            var vName = document.getElementById('name');
-            var vId = document.getElementById('id').value;
-
-            let aa1 = {
-                id: document.getElementById('id').value,
-                classDate: document.getElementById('classDate').value,
-                classTime: document.getElementById('classTime').value,
-                title: vName.options[vName.selectedIndex].text,
-                refId: vName.options[vName.selectedIndex].value,
-                absentYn: document.getElementById('absentYn').checked,
-                message: document.getElementById('message-text').value,
-                delYn: document.getElementById('delYn').checked
-            };
-
-            let response = await fetch('/greeting', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json;charset=utf-8'
-              },
-              body: JSON.stringify(aa1)
-            });
-
-            let result = await response.json();
-            var vDate = new Date(aa1.classDate + 'T' + aa1.classTime + ':00');
-            var vAllDay = false;
-
-            if(aa1.classTime == ''){
-                vDate = new Date(aa1.classDate);
-                vAllDay = true;
-            }
-
-            if(aa1.absentYn){
-                vColor = '#fc9f67';
-            } else {
-                vColor = '#3788d8';
-            }
-
-            if(vId == ''){
-                //alert(vId + ' : ' + result.id);
-
-                if(!aa1.delYn){
-                    aa1.id = result.id;
-
-                    calendar.addEvent({
-                      title: aa1.title,
-                      start: vDate,
-                      id: aa1.id,
-                      allDay: vAllDay,
-                      backgroundColor: vColor,
-                      eventInfo: aa1
-                    });
-                }
-
-            } else {
-                var vEvent = calendar.getEventById(vId);
-                
-                if(!aa1.delYn){
-                    vEvent.setProp('title', aa1.title);
-                    vEvent.setAllDay(vAllDay);
-                    vEvent.setStart(vDate);
-                    vEvent.setExtendedProp('eventInfo', aa1);
-                    vEvent.setProp('backgroundColor', vColor);
-                } else {
-                    vEvent.remove();
-                }
-
-
-            }
-        };
-
-        var myModalEl = document.getElementById('exampleModal');
-        myModalEl.addEventListener('hidden.bs.modal', function (event) {
-            document.getElementById("exampleForm").reset();
-        });
-
-        document.getElementById('delYn').onclick = delYn_onclick;
-
-      });
-
-    </script>
+    <script src='./fullcalendar/myscript.js'></script>
 
     <style>
         a {
@@ -222,30 +58,53 @@
                         <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
                     </div>
                     <div class="modal-body">
-                        <form action="/class" id="exampleForm">
+                        <form class="needs-validation" novalidate id="exampleForm"
+                              action="#" th:action="@{/class}" th:object="${event}" method="post">
                             <div class="mb-3">
                                 <label class="col-form-label" for="classDate">날짜:</label>
                                 <div class="row">
                                     <div class="col">
-                                        <input class="form-control" id="classDate" type="text">
+                                        <input class="form-control" id="classDate" type="text" value="" pattern="\d{4}-\d{2}-\d{2}" th:field="*{classDate}" required>
+                                        <div class="invalid-feedback">
+                                            날짜 형식을 확인해주세요(YYYY-MM-DD)
+                                        </div>
                                     </div>
                                     <div class="col">
-                                        <input class="form-control" id="classTime" type="text">
+                                        <input class="form-control" id="classTime" type="text" placeholder="" pattern="\d{2}:\d{2}" th:field="*{classTime}" required>
+                                        <div class="invalid-feedback">
+                                            시간 형식을 확인해주세요(예시 15:30)
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="mb-3">
-                                <label class="col-form-label" for="name">학생이름:</label>
+                                <label class="col-form-label" for="memberId">학생이름:</label>
                                 <div class="row">
-                                    <div class="col-9">
-                                        <select class="form-select" id="name">
+                                    <div class="col-6">
+                                        <select class="form-select" id="memberId" th:field="*{memberId}" required onchange="memberId_onchange()">
                                             <option value="">선택...</option>
                                             <option value="reservation">상담예약</option>
                                             <option th:each="member : ${members}" th:value="${member.id}" th:text="${member.name}"></option>
                                         </select>
+                                        <div class="invalid-feedback">
+                                            선택해주세요.
+                                        </div>
                                     </div>
-                                    <div class="col-3">
-                                        <input class="form-check-input" id="absentYn" type="checkbox" value="">
+                                    <div class="col-4">
+                                        <select class="form-select" id="classCount" th:field="*{classCount}" required>
+                                            <option value="">선택...</option>
+                                            <option value="1">1회</option>
+                                            <option value="2">2회</option>
+                                            <option value="3">3회</option>
+                                            <option value="4">4회</option>
+                                            <option value="9">보강</option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            선택해주세요.
+                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <input class="form-check-input" id="absentYn" type="checkbox" value="" th:field="*{absentYn}" onchange="absentYn_onchange()">
                                         <label class="form-check-label" for="absentYn">결석</label>
                                     </div>
                                 </div>
@@ -253,21 +112,22 @@
 
                             <div class="mb-3">
                                 <label class="col-form-label" for="message-text">Message:</label>
-                                <textarea class="form-control" id="message-text" rows="7"></textarea>
+                                <textarea class="form-control" id="message-text" rows="7" th:field="*{message}"></textarea>
                             </div>
                             <div class="mb-3">
-                                <input class="form-check-input" id="delYn" type="checkbox" value="">
+                                <input class="form-check-input" id="delYn" type="checkbox" value="" onchange="delYn_onchange()" th:field="*{delYn}">
                                 <label class="form-check-label" for="delYn">이 일정을 삭제하고 싶으시면 체크 해주세요.</label>
                             </div>
-                            <input type="text" class="invisible" id="id" placeholder="" value="" style="display:none">
+                            <div class="modal-footer">
+                                <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">닫기</button>
+                                <button class="btn btn-primary" id="save-button" type="submit">
+                                    저장
+                                </button>
+                            </div>
+                            <input type="text" class="invisible" id="id" placeholder="" value="" style="display:none" th:field="*{id}">
                         </form>
                     </div>
-                    <div class="modal-footer">
-                        <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">닫기</button>
-                        <button class="btn btn-primary" id="save-button" data-bs-dismiss="modal" type="button">
-                            저장
-                        </button>
-                    </div>
+
                 </div>
             </div>
         </div>
@@ -279,10 +139,7 @@
     </footer>
 </div>
 
-
 <script src="./js/bootstrap.bundle.min.js"></script>
-
 <script src="./js/form-validation.js"></script>
-
 </body>
 </html>

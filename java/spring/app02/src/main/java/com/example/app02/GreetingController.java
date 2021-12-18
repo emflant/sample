@@ -1,11 +1,11 @@
 package com.example.app02;
 
+import com.example.app02.repository.ClassEventRepository;
+import com.example.app02.vo.ClassEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.concurrent.atomic.AtomicLong;
 
