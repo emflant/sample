@@ -71,7 +71,14 @@
                         <form class="needs-validation" novalidate id="exampleForm"
                               action="#" th:action="@{/class}" th:object="${event}" method="post">
                             <div class="mb-3">
-                                <label class="col-form-label" for="classDate">날짜:</label>
+                                <div class="row">
+                                    <div class="col">
+                                        <label class="col-form-label" for="classDate">날짜</label>
+                                    </div>
+                                    <div class="col">
+                                        <label class="col-form-label" for="classTime">시간</label>
+                                    </div>
+                                </div>
                                 <div class="row">
                                     <div class="col">
                                         <input class="form-control" id="classDate" type="text" value="" pattern="\d{4}-\d{2}-\d{2}" th:field="*{classDate}" required>
@@ -88,7 +95,14 @@
                                 </div>
                             </div>
                             <div class="mb-3">
-                                <label class="col-form-label" for="memberId">학생이름:</label>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <label class="col-form-label" for="memberId">학생이름</label>
+                                    </div>
+                                    <div class="col-6">
+                                        <label class="col-form-label" for="memberId">수업회차</label>
+                                    </div>
+                                </div>
                                 <div class="row">
                                     <div class="col-6">
                                         <select class="form-select" id="memberId" th:field="*{memberId}" required onchange="memberId_onchange()">

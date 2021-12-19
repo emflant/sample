@@ -10,7 +10,11 @@ for(var i = 0; i < domain.length; i++){
     var obj = new Object();
 
     if(domain[i].absentYn){
-        obj.backgroundColor = '#fc9f67';
+        obj.backgroundColor = '#FF5E57';
+    }
+
+    if(domain[i].memberId == 'reservation'){
+        obj.backgroundColor = '#82E359';
     }
 
     obj.title = domain[i].title;
@@ -69,6 +73,31 @@ function absentYn_onchange(){
     }
 }
 
+
+
+function init_component(){
+
+    var vMemberId = document.getElementById('memberId');
+    // 결석 비활성화
+    // 1. 상담예약일때,
+    if(vMemberId.options[vMemberId.selectedIndex].value == 'reservation'){
+        document.getElementById('absentYn').disabled = true;
+    } else {
+        document.getElementById('absentYn').disabled = false;
+    }
+
+    // 수업회차 비활성화
+    // 1. 상담예약일때,
+    // 2. 결석 일때,
+    if(vMemberId.options[vMemberId.selectedIndex].value == 'reservation' ||
+            document.getElementById('absentYn').checked){
+        document.getElementById('classCount').disabled = true;
+    } else {
+        document.getElementById('classCount').disabled = false;
+    }
+
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
     var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -86,9 +115,7 @@ document.addEventListener('DOMContentLoaded', function() {
             var classDate = document.getElementById('classDate');
             classDate.value = info.dateStr;
 
-            delYn_onchange();
-            memberId_onchange();
-            //absentYn_onchange();
+            init_component();
             myModal.show();
         },
         eventClick: function(info) {
@@ -105,9 +132,8 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('message-text').value = info.event.extendedProps.eventInfo.message;
             document.getElementById('delYn').checked = info.event.extendedProps.eventInfo.delYn;
 
-            delYn_onchange();
-            memberId_onchange();
-            //absentYn_onchange();
+
+            init_component();
             myModal.show();
         },
         events: myEvents
