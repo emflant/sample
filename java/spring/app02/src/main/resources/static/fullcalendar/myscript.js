@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             delYn_onchange();
             memberId_onchange();
-            absentYn_onchange();
+            //absentYn_onchange();
             myModal.show();
         },
         eventClick: function(info) {
@@ -107,7 +107,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             delYn_onchange();
             memberId_onchange();
-            absentYn_onchange();
+            //absentYn_onchange();
             myModal.show();
         },
         events: myEvents
