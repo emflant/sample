@@ -107,7 +107,7 @@
                                     <div class="col-6">
                                         <select class="form-select" id="memberId" th:field="*{memberId}" required onchange="memberId_onchange()">
                                             <option value="">선택...</option>
-                                            <option value="reservation">상담예약</option>
+                                            <option value="reservation">[상담예약]</option>
                                             <option th:each="member : ${members}" th:value="${member.id}" th:text="${member.name}"></option>
                                         </select>
                                         <div class="invalid-feedback">
@@ -121,7 +121,8 @@
                                             <option value="2">2회</option>
                                             <option value="3">3회</option>
                                             <option value="4">4회</option>
-                                            <option value="9">보강</option>
+                                            <option value="8">[체험수업]</option>
+                                            <option value="9">[보강수업]</option>
                                         </select>
                                         <div class="invalid-feedback">
                                             선택해주세요.

@@ -84,6 +84,7 @@ public class App02Application {
     public String memberList(Model model) {
 
         List<Member> members = memberRepository.findAll();
+
         model.addAttribute("members", members);
 
         return "list";
@@ -129,6 +130,8 @@ public class App02Application {
 
             if(event.isAbsentYn()){
                 event.setTitle(member.getName() + "(결석)");
+            } else if("8".equals(event.getClassCount())){
+                event.setTitle(member.getName() + "(체험)");
             } else if("9".equals(event.getClassCount())){
                 event.setTitle(member.getName() + "(보강)");
             } else {
