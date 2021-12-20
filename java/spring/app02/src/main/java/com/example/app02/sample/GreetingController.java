@@ -1,4 +1,4 @@
-package com.example.app02;
+package com.example.app02.sample;
 
 import com.example.app02.repository.ClassEventRepository;
 import com.example.app02.vo.ClassEvent;

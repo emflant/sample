@@ -1,4 +1,4 @@
-package com.example.app02;
+package com.example.app02.sample;
 
 public class Greeting {
 
