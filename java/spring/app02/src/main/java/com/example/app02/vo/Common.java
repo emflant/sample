@@ -4,6 +4,9 @@ import org.springframework.data.annotation.Id;
 
 public class Common {
 
+    @Id
+    protected String id;
+
     protected boolean delYn;
     protected long timeStamp;
 

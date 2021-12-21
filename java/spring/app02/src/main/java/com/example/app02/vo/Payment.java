@@ -6,15 +6,12 @@ import java.math.BigDecimal;
 
 public class Payment extends Common {
 
-    @Id
-    protected String id;
-
     protected String memberId;
     protected String paymentDate;
     protected BigDecimal amount;
     protected String paymentType;
     protected boolean cashReceiptYn;
-    protected String messages;
+    protected String message;
 
     public Payment(){
         super();
@@ -28,7 +25,7 @@ public class Payment extends Common {
         this.amount = payment.amount;
         this.paymentType = payment.paymentType;
         this.cashReceiptYn = payment.cashReceiptYn;
-        this.messages = payment.messages;
+        this.message = payment.message;
     }
 
     public String getId() {
@@ -79,12 +76,12 @@ public class Payment extends Common {
         this.cashReceiptYn = cashReceiptYn;
     }
 
-    public String getMessages() {
-        return messages;
+    public String getMessage() {
+        return message;
     }
 
-    public void setMessages(String messages) {
-        this.messages = messages;
+    public void setMessage(String messages) {
+        this.message = messages;
     }
 
     @Override
@@ -98,7 +95,7 @@ public class Payment extends Common {
                 ", amount=" + amount +
                 ", paymentType='" + paymentType + '\'' +
                 ", cashReceiptYn=" + cashReceiptYn +
-                ", messages='" + messages + '\'' +
+                ", messages='" + message + '\'' +
                 '}';
     }
 }

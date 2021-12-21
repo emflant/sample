@@ -21,15 +21,15 @@ public class PaymentHistory extends Payment {
     @Override
     public String toString() {
         return "PaymentHistory{" +
-                "delYn=" + delYn +
+                "id='" + id + '\'' +
+                ", delYn=" + delYn +
                 ", timeStamp=" + timeStamp +
-                ", id='" + id + '\'' +
                 ", memberId='" + memberId + '\'' +
                 ", paymentDate='" + paymentDate + '\'' +
                 ", amount=" + amount +
                 ", paymentType='" + paymentType + '\'' +
                 ", cashReceiptYn=" + cashReceiptYn +
-                ", messages='" + messages + '\'' +
+                ", message='" + message + '\'' +
                 ", paymentId='" + paymentId + '\'' +
                 '}';
     }

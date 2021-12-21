@@ -1,6 +1,7 @@
 package com.example.app02.controller;
 
 import com.example.app02.App02Application;
+import com.example.app02.vo.ClassEvent;
 import com.example.app02.vo.Member;
 import com.example.app02.vo.Payment;
 import com.example.app02.vo.PaymentHistory;
@@ -27,7 +28,7 @@ public class PaymentController {
         p.setAmount(new BigDecimal("123"));
         p.setPaymentDate("2012-11-01");
         p.setPaymentType("9");
-        p.setMessages("message");
+        p.setMessage("message");
         p.setCashReceiptYn(false);
         p.setDelYn(true);
         p.setTimeStamp(123456);
@@ -38,9 +39,11 @@ public class PaymentController {
 
         log.info(hist.toString());
 
-        List<Member> members = new ArrayList<Member>();
-        model.addAttribute("payments", members);
+        model.addAttribute("members", new ArrayList<Member>());
+        model.addAttribute("event", new ClassEvent());
+        model.addAttribute("payment", new Payment());
+        model.addAttribute("payments", new ArrayList<Payment>());
 
-        return "list";
+        return "paylist";
     }
 }
