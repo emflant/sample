@@ -73,22 +73,20 @@
             <table class="display" id="table_id">
                 <thead>
                 <tr>
+                    <th>결제일</th>
                     <th>학생이름</th>
-                    <th>생년월일</th>
-                    <th>수강시작일</th>
-                    <th>화</th>
-                    <th>수</th>
-                    <th>목</th>
+                    <th>결제수단</th>
+                    <th>결제금액</th>
+                    <th>비고</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="member : ${members}">
-                    <td><a th:href="@{/signup(id=${member.id})}"><span th:text="${member.name}"></span></a></td>
-                    <td th:text="${member.birth}"></td>
-                    <td th:text="${member.membershipDate}"></td>
-                    <td th:text="${member.tueClass}"></td>
-                    <td th:text="${member.wenClass}"></td>
-                    <td th:text="${member.thrClass}"></td>
+                <tr th:each="payment : ${payments}">
+                    <td th:text="${payment.paymentDate}"></td>
+                    <td th:text="${payment.memberId}"></td>
+                    <td th:text="${payment.paymentType}"></td>
+                    <td th:text="${payment.amount}"></td>
+                    <td th:text="${payment.message}"></td>
                 </tr>
                 </tbody>
             </table>
@@ -99,11 +97,7 @@
                         결제등록
                     </button>
                 </div>
-
             </div>
-
-            <!-- Button trigger modal -->
-
         </div>
 
 
@@ -119,43 +113,32 @@
                               action="#" th:action="@{/payment}" th:object="${payment}" method="post">
                             <div class="mb-3">
                                 <div class="row">
-                                    <div class="col-6">
-                                        <label class="col-form-label" for="memberId">학생이름</label>
-                                    </div>
                                     <div class="col">
                                         <label class="col-form-label" for="paymentDate">결제일</label>
                                     </div>
+                                    <div class="col">
+                                        <label class="col-form-label" for="memberId">학생이름</label>
+                                    </div>
+                                    <div class="col">
+                                        <label class="col-form-label" for="paymentDate">결제수단</label>
+                                    </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col">
-                                        <select class="form-select" id="memberId" th:field="*{memberId}" required onchange="memberId_onchange()">
-                                            <option value="">선택...</option>
-                                            <option value="reservation">[상담예약]</option>
-                                            <option th:each="member : ${members}" th:value="${member.id}" th:text="${member.name}"></option>
-                                        </select>
-                                        <div class="invalid-feedback">
-                                            선택해주세요.
-                                        </div>
-                                    </div>
                                     <div class="col">
                                         <input class="form-control" id="paymentDate" type="text" value="" pattern="\d{4}-\d{2}-\d{2}" th:field="*{paymentDate}" required>
                                         <div class="invalid-feedback">
                                             날짜 형식을 확인해주세요(YYYY-MM-DD)
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <div class="row">
                                     <div class="col">
-                                        <label class="col-form-label" for="paymentType">결제수단</label>
+                                        <select class="form-select" id="memberId" th:field="*{memberId}" onchange="memberId_onchange()" required>
+                                            <option value="">선택...</option>
+                                            <option th:each="member : ${members}" th:value="${member.id}" th:text="${member.name}"></option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            선택해주세요.
+                                        </div>
                                     </div>
-                                    <div class="col">
-                                        <label class="col-form-label" for="amount">금액</label>
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-
                                     <div class="col">
                                         <select class="form-select" id="paymentType" th:field="*{paymentType}" required>
                                             <option value="">선택...</option>
@@ -167,10 +150,41 @@
                                             선택해주세요.
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="row">
                                     <div class="col">
-                                        <input class="form-control" id="amount" type="text" value="" pattern="\d{4}-\d{2}-\d{2}" th:field="*{amount}" required>
-                                        <div class="invalid-feedback">
-                                            날짜 형식을 확인해주세요(YYYY-MM-DD)
+                                        <label class="col-form-label" for="paymentType">수강정보</label>
+                                    </div>
+                                    <div class="col">
+                                        <label class="col-form-label" for="amount">수업료</label>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-7">
+                                        <div class="input-group">
+                                            <select class="form-select" id="classesPerWeek" th:field="*{classesPerWeek}" required>
+                                                <option value="">선택...</option>
+                                                <option value="1">주1회</option>
+                                                <option value="2">주2회</option>
+                                            </select>
+                                            <select class="form-select" id="minutesPerSession" th:field="*{minutesPerSession}" required>
+                                                <option value="">선택...</option>
+                                                <option value="50">50분</option>
+                                                <option value="80">80분</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-5">
+                                        <div class="input-group">
+                                            <div class="input-group-text">
+                                                <input class="form-check-input mt-0" id="amountModifyYn" type="checkbox" value="" th:field="*{amountModifyYn}">
+                                            </div>
+                                            <input type="text" id="amount" class="form-control" pattern="\d{4,}" th:field="*{amount}" required>
+                                            <div class="invalid-feedback">
+                                                4자리이상 숫자만 입력하세요.
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -180,7 +194,6 @@
                                         <label class="form-check-label" for="cashReceiptYn">현금영수증발행</label>
                                     </div>
                                 </div>
-
                             </div>
 
                             <div class="mb-3">

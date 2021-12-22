@@ -8,33 +8,13 @@ public class Payment extends Common {
 
     protected String memberId;
     protected String paymentDate;
-    protected BigDecimal amount;
+    protected String classesPerWeek;
+    protected String minutesPerSession;
+    protected boolean amountModifyYn;
+    protected int amount;
     protected String paymentType;
     protected boolean cashReceiptYn;
     protected String message;
-
-    public Payment(){
-        super();
-    }
-
-    public Payment(Payment payment) {
-        super(payment.delYn, payment.timeStamp);
-        this.id = payment.id;
-        this.memberId = payment.memberId;
-        this.paymentDate = payment.paymentDate;
-        this.amount = payment.amount;
-        this.paymentType = payment.paymentType;
-        this.cashReceiptYn = payment.cashReceiptYn;
-        this.message = payment.message;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public String getMemberId() {
         return memberId;
@@ -52,11 +32,35 @@ public class Payment extends Common {
         this.paymentDate = paymentDate;
     }
 
-    public BigDecimal getAmount() {
+    public String getClassesPerWeek() {
+        return classesPerWeek;
+    }
+
+    public void setClassesPerWeek(String classesPerWeek) {
+        this.classesPerWeek = classesPerWeek;
+    }
+
+    public String getMinutesPerSession() {
+        return minutesPerSession;
+    }
+
+    public void setMinutesPerSession(String minutesPerSession) {
+        this.minutesPerSession = minutesPerSession;
+    }
+
+    public boolean isAmountModifyYn() {
+        return amountModifyYn;
+    }
+
+    public void setAmountModifyYn(boolean amountModifyYn) {
+        this.amountModifyYn = amountModifyYn;
+    }
+
+    public int getAmount() {
         return amount;
     }
 
-    public void setAmount(BigDecimal amount) {
+    public void setAmount(int amount) {
         this.amount = amount;
     }
 
@@ -80,22 +84,25 @@ public class Payment extends Common {
         return message;
     }
 
-    public void setMessage(String messages) {
-        this.message = messages;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     @Override
     public String toString() {
         return "Payment{" +
-                "delYn=" + delYn +
+                "id='" + id + '\'' +
+                ", delYn=" + delYn +
                 ", timeStamp=" + timeStamp +
-                ", id='" + id + '\'' +
                 ", memberId='" + memberId + '\'' +
                 ", paymentDate='" + paymentDate + '\'' +
+                ", classesPerWeek='" + classesPerWeek + '\'' +
+                ", minutesPerSession='" + minutesPerSession + '\'' +
+                ", amountModifyYn=" + amountModifyYn +
                 ", amount=" + amount +
                 ", paymentType='" + paymentType + '\'' +
                 ", cashReceiptYn=" + cashReceiptYn +
-                ", messages='" + message + '\'' +
+                ", message='" + message + '\'' +
                 '}';
     }
 }

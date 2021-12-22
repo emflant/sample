@@ -10,12 +10,12 @@ public class Common {
     protected boolean delYn;
     protected long timeStamp;
 
-    public Common() {
+    public String getId() {
+        return id;
     }
 
-    public Common(boolean delYn, long timeStamp) {
-        this.delYn = delYn;
-        this.timeStamp = timeStamp;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public boolean isDelYn() {
