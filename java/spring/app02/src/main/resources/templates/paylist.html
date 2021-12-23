@@ -83,8 +83,8 @@
                 <tbody>
                 <tr th:each="payment : ${payments}">
                     <td th:text="${payment.paymentDate}"></td>
-                    <td th:text="${payment.memberId}"></td>
-                    <td th:text="${payment.paymentType}"></td>
+                    <td th:text="${payment.member.name}"></td>
+                    <td th:text="${payment.paymentTypeCode.name}"></td>
                     <td th:text="${payment.amount}"></td>
                     <td th:text="${payment.message}"></td>
                 </tr>
@@ -142,9 +142,7 @@
                                     <div class="col">
                                         <select class="form-select" id="paymentType" th:field="*{paymentType}" required>
                                             <option value="">선택...</option>
-                                            <option value="1">현금</option>
-                                            <option value="2">제로페이</option>
-                                            <option value="3">신용카드</option>
+                                            <option th:each="paymentTypeCode : ${paymentTypeCodes}" th:value="${paymentTypeCode.code}" th:text="${paymentTypeCode.name}"></option>
                                         </select>
                                         <div class="invalid-feedback">
                                             선택해주세요.
@@ -154,10 +152,10 @@
                             </div>
                             <div class="mb-3">
                                 <div class="row">
-                                    <div class="col">
+                                    <div class="col-7">
                                         <label class="col-form-label" for="paymentType">수강정보</label>
                                     </div>
-                                    <div class="col">
+                                    <div class="col-5">
                                         <label class="col-form-label" for="amount">수업료</label>
                                     </div>
                                 </div>

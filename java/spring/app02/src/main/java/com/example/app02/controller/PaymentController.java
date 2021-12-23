@@ -1,6 +1,6 @@
 package com.example.app02.controller;
 
-import com.example.app02.App02Application;
+import com.example.app02.repository.CodeRepository;
 import com.example.app02.repository.MemberRepository;
 import com.example.app02.repository.PaymentHistoryRepository;
 import com.example.app02.repository.PaymentRepository;
@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.view.RedirectView;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,12 +32,20 @@ public class PaymentController {
     @Autowired
     private PaymentHistoryRepository paymentHistoryRepository;
 
+    @Autowired
+    private CodeRepository codeRepository;
+
     @GetMapping("/payment")
     public String memberList(Model model) {
+
+        if(codeRepository.count() == 0){
+            insertCode();
+        }
 
         model.addAttribute("members", memberRepository.findAll());
         model.addAttribute("payment", new Payment());
         model.addAttribute("payments", paymentRepository.findAll());
+        model.addAttribute("paymentTypeCodes", codeRepository.findByCodeTypeAndDelYn("paymentType", false));
 
         return "paylist";
     }
@@ -47,6 +54,12 @@ public class PaymentController {
     public RedirectView memberList(@ModelAttribute Payment payment, Model model) {
 
         this.preProcess(payment);
+        Member member = memberRepository.findById(payment.getMemberId()).orElse(new Member());
+        payment.setMember(member);
+
+        Code resultCode = codeRepository.findByCodeTypeAndCode("paymentType", payment.getPaymentType());
+        payment.setPaymentTypeCode(resultCode);
+
         log.info(payment.toString());
 
         Payment result = paymentRepository.save(payment);
@@ -61,5 +74,15 @@ public class PaymentController {
         if("".equals(common.getId())){
             common.setId(null);
         }
+    }
+
+    private void insertCode(){
+        List<Code> codes = new ArrayList<Code>();
+
+        codes.add(new Code("paymentType", "1", "현금"));
+        codes.add(new Code("paymentType", "2", "제로페이"));
+        codes.add(new Code("paymentType", "3", "신용카드"));
+
+        codeRepository.insert(codes);
     }
 }

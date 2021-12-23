@@ -1,9 +1,5 @@
 package com.example.app02.vo;
 
-import org.springframework.data.annotation.Id;
-
-import java.math.BigDecimal;
-
 public class Payment extends Common {
 
     protected String memberId;
@@ -13,8 +9,10 @@ public class Payment extends Common {
     protected boolean amountModifyYn;
     protected int amount;
     protected String paymentType;
+    protected Code paymentTypeCode;
     protected boolean cashReceiptYn;
     protected String message;
+    protected Member member;
 
     public String getMemberId() {
         return memberId;
@@ -72,6 +70,14 @@ public class Payment extends Common {
         this.paymentType = paymentType;
     }
 
+    public Code getPaymentTypeCode() {
+        return paymentTypeCode;
+    }
+
+    public void setPaymentTypeCode(Code paymentTypeCode) {
+        this.paymentTypeCode = paymentTypeCode;
+    }
+
     public boolean isCashReceiptYn() {
         return cashReceiptYn;
     }
@@ -88,6 +94,14 @@ public class Payment extends Common {
         this.message = message;
     }
 
+    public Member getMember() {
+        return member;
+    }
+
+    public void setMember(Member member) {
+        this.member = member;
+    }
+
     @Override
     public String toString() {
         return "Payment{" +
@@ -101,8 +115,10 @@ public class Payment extends Common {
                 ", amountModifyYn=" + amountModifyYn +
                 ", amount=" + amount +
                 ", paymentType='" + paymentType + '\'' +
+                ", paymentTypeCode=" + paymentTypeCode +
                 ", cashReceiptYn=" + cashReceiptYn +
                 ", message='" + message + '\'' +
+                ", member=" + member +
                 '}';
     }
 }
