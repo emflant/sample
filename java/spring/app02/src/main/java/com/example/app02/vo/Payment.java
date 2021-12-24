@@ -9,10 +9,11 @@ public class Payment extends Common {
     protected boolean amountModifyYn;
     protected int amount;
     protected String paymentType;
-    protected Code paymentTypeCode;
+    protected Code paymentTypeInfo;
     protected boolean cashReceiptYn;
     protected String message;
-    protected Member member;
+    protected Member memberIdInfo;
+
 
     public String getMemberId() {
         return memberId;
@@ -70,12 +71,12 @@ public class Payment extends Common {
         this.paymentType = paymentType;
     }
 
-    public Code getPaymentTypeCode() {
-        return paymentTypeCode;
+    public Code getPaymentTypeInfo() {
+        return paymentTypeInfo;
     }
 
-    public void setPaymentTypeCode(Code paymentTypeCode) {
-        this.paymentTypeCode = paymentTypeCode;
+    public void setPaymentTypeInfo(Code paymentTypeInfo) {
+        this.paymentTypeInfo = paymentTypeInfo;
     }
 
     public boolean isCashReceiptYn() {
@@ -94,12 +95,12 @@ public class Payment extends Common {
         this.message = message;
     }
 
-    public Member getMember() {
-        return member;
+    public Member getMemberIdInfo() {
+        return memberIdInfo;
     }
 
-    public void setMember(Member member) {
-        this.member = member;
+    public void setMemberIdInfo(Member memberIdInfo) {
+        this.memberIdInfo = memberIdInfo;
     }
 
     @Override
@@ -115,10 +116,10 @@ public class Payment extends Common {
                 ", amountModifyYn=" + amountModifyYn +
                 ", amount=" + amount +
                 ", paymentType='" + paymentType + '\'' +
-                ", paymentTypeCode=" + paymentTypeCode +
+                ", paymentTypeInfo=" + paymentTypeInfo +
                 ", cashReceiptYn=" + cashReceiptYn +
                 ", message='" + message + '\'' +
-                ", member=" + member +
+                ", memberIdInfo=" + memberIdInfo +
                 '}';
     }
 }

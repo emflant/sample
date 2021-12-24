@@ -18,6 +18,8 @@ public class PaymentHistory extends Payment {
         this.cashReceiptYn = payment.isCashReceiptYn();
         this.message = payment.getMessage();
         this.paymentId = paymentId;
+        this.paymentTypeInfo = payment.getPaymentTypeInfo();
+        this.memberIdInfo = payment.getMemberIdInfo();
     }
     public String getPaymentId() {
         return paymentId;
@@ -40,8 +42,10 @@ public class PaymentHistory extends Payment {
                 ", amountModifyYn=" + amountModifyYn +
                 ", amount=" + amount +
                 ", paymentType='" + paymentType + '\'' +
+                ", paymentTypeInfo=" + paymentTypeInfo +
                 ", cashReceiptYn=" + cashReceiptYn +
                 ", message='" + message + '\'' +
+                ", memberIdInfo=" + memberIdInfo +
                 ", paymentId='" + paymentId + '\'' +
                 '}';
     }

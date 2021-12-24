@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.ArrayList;
@@ -43,8 +44,9 @@ public class PaymentController {
         }
 
         model.addAttribute("members", memberRepository.findAll());
-        model.addAttribute("payment", new Payment());
-        model.addAttribute("payments", paymentRepository.findAll());
+        model.addAttribute("paymentOne", new Payment());//rest 거래시 사용
+        model.addAttribute("payment", new Payment());// form 에 바인딩시 사용
+        model.addAttribute("payments", paymentRepository.findByDelYn(false));
         model.addAttribute("paymentTypeCodes", codeRepository.findByCodeTypeAndDelYn("paymentType", false));
 
         return "paylist";
@@ -55,10 +57,10 @@ public class PaymentController {
 
         this.preProcess(payment);
         Member member = memberRepository.findById(payment.getMemberId()).orElse(new Member());
-        payment.setMember(member);
+        payment.setMemberIdInfo(member);
 
         Code resultCode = codeRepository.findByCodeTypeAndCode("paymentType", payment.getPaymentType());
-        payment.setPaymentTypeCode(resultCode);
+        payment.setPaymentTypeInfo(resultCode);
 
         log.info(payment.toString());
 
