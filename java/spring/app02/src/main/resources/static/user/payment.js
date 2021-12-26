@@ -1,18 +1,22 @@
 
+var s1;
+
 document.addEventListener('DOMContentLoaded', function() {
-    var myModalEl = document.getElementById('exampleModal');
+    var myModalEl = entId('exampleModal');
     myModalEl.addEventListener('hidden.bs.modal', function (event) {
-        document.getElementById("exampleForm").reset();
+        entId("exampleForm").reset();
     });
+
+    s1 = document.querySelectorAll('#exampleForm input[id],select[id],textarea[id]');
 });
 
 function btnRegister_onclick(){
 
-    document.getElementById('paymentDate').value = new Date().toISOString().slice(0,10);
-    document.getElementById('paymentType').value = '1';
-    document.getElementById('classesPerWeek').value = '1';
-    document.getElementById('minutesPerSession').value = '50';
-    document.getElementById('amount').value = 80000;
+    entId('paymentDate').value = new Date().toISOString().slice(0,10);
+    entId('paymentType').value = '1';
+    entId('classesPerWeek').value = '1';
+    entId('minutesPerSession').value = '50';
+    entId('amount').value = 80000;
 
     init_component();
 }
@@ -27,41 +31,41 @@ function minutesPerSession_onchange(){
 
 function calculate_amount(){
 
-    if(document.getElementById('amountModifyYn').checked){
+    if(entId('amountModifyYn').checked){
         return;
     }
 
-    var vClassesPerWeek = document.getElementById('classesPerWeek').value;
-    var vMinutesPerSession = document.getElementById('minutesPerSession').value;
+    var vClassesPerWeek = entId('classesPerWeek').value;
+    var vMinutesPerSession = entId('minutesPerSession').value;
 
 //    alert(vClassesPerWeek + ',' + vMinutesPerSession);
 
     if(vClassesPerWeek == '1' && vMinutesPerSession == '50'){
-        document.getElementById('amount').value = 80000;
+        entId('amount').value = 80000;
     } else if(vClassesPerWeek == '1' && vMinutesPerSession == '80'){
-        document.getElementById('amount').value = 100000;
+        entId('amount').value = 120000;
     } else if(vClassesPerWeek == '2' && vMinutesPerSession == '50'){
-        document.getElementById('amount').value = 160000;
+        entId('amount').value = 160000;
     } else if(vClassesPerWeek == '2' && vMinutesPerSession == '80'){
-        document.getElementById('amount').value = 200000;
+        entId('amount').value = 240000;
     }
 }
 
 function paymentType_onchange(){
-    if(document.getElementById('paymentType').value == '1'){
-        document.getElementById('cashReceiptYn').disabled = false;
+    if(entId('paymentType').value == '1'){
+        entId('cashReceiptYn').disabled = false;
     } else {
-        document.getElementById('cashReceiptYn').disabled = true;
-        document.getElementById('cashReceiptYn').checked = false;
+        entId('cashReceiptYn').disabled = true;
+        entId('cashReceiptYn').checked = false;
     }
 }
 
 function amountModifyYn_onchange(){
-    if(document.getElementById('amountModifyYn').checked){
-        document.getElementById('amount').readOnly = false;
-        document.getElementById('amount').value = 0;
+    if(entId('amountModifyYn').checked){
+        entId('amount').readOnly = false;
+        entId('amount').value = 0;
     } else {
-        document.getElementById('amount').readOnly = true;
+        entId('amount').readOnly = true;
         calculate_amount();
     }
 }
@@ -70,32 +74,22 @@ async function paymentDate_onclick(paymentId){
 
     paymentOne.id = paymentId;
 
-    let response = await fetch('/paymentRest', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json;charset=utf-8'
-        },
-        body: JSON.stringify(paymentOne)
-    });
+    let result = entCall('/paymentRest', paymentOne);
 
-    let result = await response.json();
-
-//    alert(JSON.stringify(result));
-
-    var myModalEl = document.getElementById('exampleModal');
+    var myModalEl = entId('exampleModal');
     var myModal = new bootstrap.Modal(myModalEl);
 
-    document.getElementById('id').value = result.id;
-    document.getElementById('paymentDate').value = result.paymentDate;
-    document.getElementById('memberId').value = result.memberId;
-    document.getElementById('paymentType').value = result.paymentType;
-    document.getElementById('classesPerWeek').value = result.classesPerWeek;
-    document.getElementById('minutesPerSession').value = result.minutesPerSession;
-    document.getElementById('amountModifyYn').checked = result.amountModifyYn;
-    document.getElementById('amount').value = result.amount;
-    document.getElementById('cashReceiptYn').checked = result.cashReceiptYn;
-    document.getElementById('message-text').value = result.message;
-    document.getElementById('delYn').checked = result.delYn;
+    entId('id').value = result.id;
+    entId('paymentDate').value = result.paymentDate;
+    entId('memberId').value = result.memberId;
+    entId('paymentType').value = result.paymentType;
+    entId('classesPerWeek').value = result.classesPerWeek;
+    entId('minutesPerSession').value = result.minutesPerSession;
+    entId('amountModifyYn').checked = result.amountModifyYn;
+    entId('amount').value = result.amount;
+    entId('cashReceiptYn').checked = result.cashReceiptYn;
+    entId('message-text').value = result.message;
+    entId('delYn').checked = result.delYn;
 
     init_component();
     myModal.show();
@@ -103,27 +97,27 @@ async function paymentDate_onclick(paymentId){
 
 function init_component(){
 
-    if(document.getElementById('amountModifyYn').checked){
-        document.getElementById('amount').readOnly = false;
+    if(entId('amountModifyYn').checked){
+        entId('amount').readOnly = false;
     } else {
-        document.getElementById('amount').readOnly = true;
+        entId('amount').readOnly = true;
     }
 
-    if(document.getElementById('paymentType').value == '1'){
-        document.getElementById('cashReceiptYn').disabled = false;
+    if(entId('paymentType').value == '1'){
+        entId('cashReceiptYn').disabled = false;
     } else {
-        document.getElementById('cashReceiptYn').disabled = true;
+        entId('cashReceiptYn').disabled = true;
     }
 }
 
 function delYn_onchange() {
-    if(document.getElementById('delYn').checked){
-        document.getElementById('save-button').classList.add('btn-danger');
-        document.getElementById('save-button').classList.remove('btn-primary');
-        document.getElementById('save-button').innerText = "삭제";
+    if(entId('delYn').checked){
+        entId('save-button').classList.add('btn-danger');
+        entId('save-button').classList.remove('btn-primary');
+        entId('save-button').innerText = "삭제";
     } else {
-        document.getElementById('save-button').classList.add('btn-primary');
-        document.getElementById('save-button').classList.remove('btn-danger');
-        document.getElementById('save-button').innerText = "저장";
+        entId('save-button').classList.add('btn-primary');
+        entId('save-button').classList.remove('btn-danger');
+        entId('save-button').innerText = "저장";
     }
 }
