@@ -18,6 +18,9 @@ public class PaymentRestController {
 
     @PostMapping("/paymentRest")
     public Payment greeting(@RequestBody Payment payment) {
-        return paymentRepository.findById(payment.getId()).orElse(new Payment());
+
+        Payment result = paymentRepository.findById(payment.getId()).orElse(new Payment());
+//        log.info(result.toString());
+        return result;
     }
 }

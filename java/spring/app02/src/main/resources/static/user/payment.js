@@ -70,28 +70,18 @@ function amountModifyYn_onchange(){
     }
 }
 
-async function paymentDate_onclick(paymentId){
-
+function paymentDate_onclick(paymentId){
     paymentOne.id = paymentId;
+    entCall('/paymentRest', paymentOne, postProcess);
+}
 
-    let result = entCall('/paymentRest', paymentOne);
+function postProcess(result){
 
-    var myModalEl = entId('exampleModal');
-    var myModal = new bootstrap.Modal(myModalEl);
 
-    entId('id').value = result.id;
-    entId('paymentDate').value = result.paymentDate;
-    entId('memberId').value = result.memberId;
-    entId('paymentType').value = result.paymentType;
-    entId('classesPerWeek').value = result.classesPerWeek;
-    entId('minutesPerSession').value = result.minutesPerSession;
-    entId('amountModifyYn').checked = result.amountModifyYn;
-    entId('amount').value = result.amount;
-    entId('cashReceiptYn').checked = result.cashReceiptYn;
-    entId('message-text').value = result.message;
-    entId('delYn').checked = result.delYn;
 
     init_component();
+    var myModalEl = entId('exampleModal');
+    var myModal = new bootstrap.Modal(myModalEl);
     myModal.show();
 }
 
