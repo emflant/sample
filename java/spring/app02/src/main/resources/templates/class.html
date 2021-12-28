@@ -26,7 +26,7 @@
         var domain = /*[[${events}]]*/
     </script>
 
-
+    <script src="./user/common.js"></script>
     <script src='./user/class.js'></script>
 
     <style>
@@ -137,8 +137,8 @@
                             </div>
 
                             <div class="mb-3">
-                                <label class="col-form-label" for="message-text">Message:</label>
-                                <textarea class="form-control" id="message-text" rows="7" th:field="*{message}"></textarea>
+                                <label class="col-form-label" for="message">Message:</label>
+                                <textarea class="form-control" id="message" rows="7" th:field="*{message}"></textarea>
                             </div>
                             <div class="mb-3">
                                 <input class="form-check-input" id="delYn" type="checkbox" value="" onchange="delYn_onchange()" th:field="*{delYn}">

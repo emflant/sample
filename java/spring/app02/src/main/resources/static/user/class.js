@@ -119,21 +119,13 @@ document.addEventListener('DOMContentLoaded', function() {
             myModal.show();
         },
         eventClick: function(info) {
-            //alert(JSON.stringify(info.event));
-            var myModalEl = document.getElementById('exampleModal');
-            var myModal = new bootstrap.Modal(myModalEl);
 
-            document.getElementById('id').value = info.event.extendedProps.eventInfo.id;
-            document.getElementById('classDate').value = info.event.extendedProps.eventInfo.classDate;
-            document.getElementById('classTime').value = info.event.extendedProps.eventInfo.classTime;
-            document.getElementById('memberId').value = info.event.extendedProps.eventInfo.memberId;
-            document.getElementById('classCount').value = info.event.extendedProps.eventInfo.classCount;
-            document.getElementById('absentYn').checked = info.event.extendedProps.eventInfo.absentYn;
-            document.getElementById('message-text').value = info.event.extendedProps.eventInfo.message;
-            document.getElementById('delYn').checked = info.event.extendedProps.eventInfo.delYn;
-
+            entSetValues('exampleModal', info.event.extendedProps.eventInfo);
 
             init_component();
+
+            var myModalEl = document.getElementById('exampleModal');
+            var myModal = new bootstrap.Modal(myModalEl);
             myModal.show();
         },
         events: myEvents
