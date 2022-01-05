@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <meta content="" name="description">
+    <meta content="Mark Otto, Jacob Thornton, and Bootstrap contributors" name="author">
+    <meta content="Hugo 0.88.1" name="generator">
+    <title>크리아트 - 일정관리</title>
+
+    <link href="https://getbootstrap.com/docs/5.1/examples/checkout/" rel="canonical">
+
+
+    <!-- Bootstrap core CSS -->
+    <link href="./css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="./css/form-validation.css" rel="stylesheet">
+
+    <link href='./fullcalendar/main.css' rel='stylesheet'/>
+    <script src='./fullcalendar/main.js'></script>
+
+    <script th:inline="javascript">
+        //서버에서 view 로 넘긴값을 html의  javascript에 json 형태로 넘김.
+        var vInitialDate = /*[[${initialDate}]]*/
+        var domain = /*[[${events}]]*/
+    </script>
+
+    <script src="./user/common.js"></script>
+    <script src='./user/class.js'></script>
+
+    <style>
+        a {
+            color: #000;
+            text-decoration: none;
+        }
+    </style>
+
+</head>
+<body class="bg-light">
+
+
+<div class="container">
+
+    <header class="d-flex justify-content-center py-3">
+        <ul class="nav nav-pills">
+            <li class="nav-item"><a href="/signup" class="nav-link">신규가입</a></li>
+            <li class="nav-item"><a href="/list" class="nav-link">회원관리</a></li>
+            <li class="nav-item"><a href="/class" class="nav-link active" aria-current="page">일정관리</a></li>
+            <li class="nav-item"><a href="/payment" class="nav-link">결제관리</a></li>
+        </ul>
+    </header>
+
+    <main>
+        <div class="py-5 text-center">
+            <img alt="" class="d-block mx-auto mb-4" height="57" src="./images/clipboard-check.svg" width="72">
+            <h2>일정관리</h2>
+        </div>
+
+        <div class="row g-5">
+            <div id='calendar'></div>
+        </div>
+
+        <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="exampleModal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+                        <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="needs-validation" novalidate id="exampleForm"
+                              action="#" th:action="@{/class}" th:object="${event}" method="post">
+                            <div class="mb-3">
+                                <div class="row">
+                                    <div class="col">
+                                        <label class="col-form-label" for="classDate">날짜</label>
+                                    </div>
+                                    <div class="col">
+                                        <label class="col-form-label" for="classTime">시간</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <input class="form-control" id="classDate" type="text" value="" pattern="\d{4}-\d{2}-\d{2}" th:field="*{classDate}" required>
+                                        <div class="invalid-feedback">
+                                            날짜 형식을 확인해주세요(YYYY-MM-DD)
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <input class="form-control" id="classTime" type="text" placeholder="" pattern="\d{2}:\d{2}" th:field="*{classTime}" required>
+                                        <div class="invalid-feedback">
+                                            시간 형식을 확인해주세요(예시 15:30)
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <label class="col-form-label" for="memberId">학생이름</label>
+                                    </div>
+                                    <div class="col-6">
+                                        <label class="col-form-label" for="memberId">수업회차</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <select class="form-select" id="memberId" th:field="*{memberId}" required onchange="memberId_onchange()">
+                                            <option value="">선택...</option>
+                                            <option value="reservation">[상담예약]</option>
+                                            <option th:each="member : ${members}" th:value="${member.id}" th:text="${member.name}"></option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            선택해주세요.
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <select class="form-select" id="classCount" th:field="*{classCount}" required>
+                                            <option value="">선택...</option>
+                                            <option value="1">1회</option>
+                                            <option value="2">2회</option>
+                                            <option value="3">3회</option>
+                                            <option value="4">4회</option>
+                                            <option value="8">[체험수업]</option>
+                                            <option value="9">[보강수업]</option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            선택해주세요.
+                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <input class="form-check-input" id="absentYn" type="checkbox" value="" th:field="*{absentYn}" onchange="absentYn_onchange()">
+                                        <label class="form-check-label" for="absentYn">결석</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="col-form-label" for="message">Message:</label>
+                                <textarea class="form-control" id="message" rows="7" th:field="*{message}"></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <input class="form-check-input" id="delYn" type="checkbox" value="" onchange="delYn_onchange()" th:field="*{delYn}">
+                                <label class="form-check-label" for="delYn">이 일정을 삭제하고 싶으시면 체크 해주세요.</label>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">닫기</button>
+                                <button class="btn btn-primary" id="save-button" type="submit">
+                                    저장
+                                </button>
+                            </div>
+                            <input type="text" class="invisible" id="id" placeholder="" value="" style="display:none" th:field="*{id}">
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="my-5 pt-5 text-muted text-center text-small">
+        <p class="mb-1">&copy; 2021 Creative Art - CREART</p>
+    </footer>
+</div>
+
+<script src="./js/bootstrap.bundle.min.js"></script>
+<script src="./js/form-validation.js"></script>
+</body>
+</html>
