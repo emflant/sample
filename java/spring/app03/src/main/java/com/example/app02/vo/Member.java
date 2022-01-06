@@ -1,11 +1,17 @@
 package com.example.app02.vo;
 
-import org.springframework.data.annotation.Id;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Member {
 
     @Id
-    protected String id;
+    @GeneratedValue(strategy= GenerationType.AUTO)
+    protected Integer id;
 
     protected String parentsName; // 부모님 이름
     protected String parentsTel;  // 부모님 전화번호
@@ -22,11 +28,11 @@ public class Member {
     protected long timeStamp;
 
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

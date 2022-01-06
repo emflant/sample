@@ -1,8 +1,8 @@
 package com.example.app02.repository;
 
 import com.example.app02.vo.Member;
-import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.repository.CrudRepository;
 
-public interface MemberRepository extends MongoRepository<Member, String> {
+public interface MemberRepository extends CrudRepository<Member, Integer> {
     
 }
