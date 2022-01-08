@@ -1,3 +1,4 @@
+docker start my-postgres
 docker start my-mongo
 docker run -it --rm --name my-openjdk \
 	--network my-net \

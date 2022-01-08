@@ -8,6 +8,12 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     s1 = document.querySelectorAll('#exampleForm input[id],select[id],textarea[id]');
+
+  const myChart = new Chart(
+    document.getElementById('myChart'),
+    config
+  );
+
 });
 
 function btnRegister_onclick(){

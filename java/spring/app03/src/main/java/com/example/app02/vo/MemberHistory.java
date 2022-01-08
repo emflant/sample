@@ -6,11 +6,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Member {
+public class MemberHistory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    private Long memberId;
     private String parentsName; // 부모님 이름
     private String parentsTel;  // 부모님 전화번호
     private String name;    // 이름
@@ -31,6 +32,14 @@ public class Member {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getMemberId() {
+        return memberId;
+    }
+
+    public void setMemberId(Long memberId) {
+        this.memberId = memberId;
     }
 
     public String getParentsName() {
@@ -136,4 +145,5 @@ public class Member {
     public void setTimeStamp(long timeStamp) {
         this.timeStamp = timeStamp;
     }
+
 }
