@@ -8,6 +8,9 @@ import com.example.app02.vo.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoOperations;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.SimpleMongoClientDbFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,7 +40,10 @@ public class PaymentController {
     private CodeRepository codeRepository;
 
     @GetMapping("/payment")
-    public String memberList(Model model) {
+    public String paymentList(Model model) {
+
+        List<Payment> payments = paymentRepository.findByDelYn(false);
+
 
         if(codeRepository.count() == 0){
             insertCode();
@@ -53,7 +59,7 @@ public class PaymentController {
     }
 
     @PostMapping("/payment")
-    public RedirectView memberList(@ModelAttribute Payment payment, Model model) {
+    public RedirectView paymentList(@ModelAttribute Payment payment, Model model) {
 
         this.preProcess(payment);
         Member member = memberRepository.findById(payment.getMemberId()).orElse(new Member());

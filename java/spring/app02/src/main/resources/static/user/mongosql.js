@@ -25,3 +25,6 @@ db.payment.aggregate(
         { $group: { _id: "$paymentMonth", sumAmount: { $sum: "$amount" } } }
     ]
 )
+
+
+{ $match: { delYn: false } }, { $project: { paymentMonth: { $substr: [ "$paymentDate", 0, 7 ] }, amount : 1 } }, { $group: { _id: "$paymentMonth", sumAmount: { $sum: "$amount" } } }
