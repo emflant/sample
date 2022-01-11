@@ -4,7 +4,8 @@ import org.springframework.data.annotation.Id;
 
 public class PaymentAggregate {
 
-    private @Id String paymentMonth;
+    @Id
+    private String paymentMonth;
     private Long sumAmount;
 
     public String getPaymentMonth() {

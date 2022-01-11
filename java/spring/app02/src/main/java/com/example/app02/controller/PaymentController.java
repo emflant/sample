@@ -42,13 +42,11 @@ public class PaymentController {
     @GetMapping("/payment")
     public String paymentList(Model model) {
 
-        List<Payment> payments = paymentRepository.findByDelYn(false);
-
-
         if(codeRepository.count() == 0){
             insertCode();
         }
 
+        model.addAttribute("paymentMonth", paymentRepository.groupByPaymentMonth());
         model.addAttribute("members", memberRepository.findAll());
         model.addAttribute("paymentOne", new Payment());//rest 거래시 사용
         model.addAttribute("payment", new Payment());// form 에 바인딩시 사용
