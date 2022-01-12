@@ -23,43 +23,8 @@
     <script th:inline="javascript">
         //서버에서 view 로 넘긴값을 html의  javascript에 json 형태로 넘김.
         var paymentOne = /*[[${paymentOne}]]*/
-        var paymentMonth = /*[[${paymentMonth}]]*/
+        var paymentMonths = /*[[${paymentMonth}]]*/
     </script>
-
-
-<script>
-  const labels = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-  ];
-
-  const data = {
-    labels: labels,
-    datasets: [{
-      label: 'My First dataset',
-      backgroundColor: 'rgb(255, 99, 132)',
-      borderColor: 'rgb(255, 99, 132)',
-      data: [0, 10, 5, 2, 20, 30, 45],
-      //cubicInterpolationMode: 'monotone',
-      tension: 0.3
-    }]
-  };
-
-  const config = {
-    type: 'line',
-    data: data,
-    options: {
-        interaction: {
-          intersect: false,
-          mode: 'index',
-        }
-    }
-  };
-</script>
 
     <script>
         $(document).ready( function () {

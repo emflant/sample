@@ -117,3 +117,66 @@ function delYn_onchange() {
         entId('save-button').innerText = "저장";
     }
 }
+
+let labels = ['2021-10', '2021-11'];
+let amounts = [0,0];
+let members = [0,0];
+
+for(let pm of paymentMonths){
+    labels.push(pm.paymentMonth);
+    amounts.push(pm.sumAmount);
+    members.push(pm.cntMember);
+}
+
+const data = {
+    labels: labels,
+    datasets: [
+        {
+            label: '수강료',
+            data: amounts,
+            borderColor: '#61C3FF',
+            backgroundColor: '#61C3FF',
+            yAxisID: 'y',
+            tension: 0.3
+        },
+        {
+            label: '학생수',
+            data: members,
+            borderColor: '#FC5A3A',
+            backgroundColor: '#FC5A3A',
+            yAxisID: 'y1',
+            tension: 0.3
+        }
+    ]
+};
+
+const config = {
+    type: 'line',
+    data: data,
+    options: {
+        interaction: {
+            intersect: false,
+            mode: 'index',
+        },
+
+        scales: {
+            y: {
+                type: 'linear',
+                display: true,
+                position: 'left',
+            },
+            y1: {
+                type: 'linear',
+                display: true,
+                position: 'right',
+                min: 0,
+                max: 10,
+                // grid line settings
+                grid: {
+                    // only want the grid lines for one axis to show up
+                    drawOnChartArea: false,
+                }
+            }
+        }
+    }
+};

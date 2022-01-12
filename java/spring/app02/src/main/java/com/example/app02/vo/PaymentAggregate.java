@@ -7,6 +7,7 @@ public class PaymentAggregate {
     @Id
     private String paymentMonth;
     private Long sumAmount;
+    private Long cntMember;
 
     public String getPaymentMonth() {
         return paymentMonth;
@@ -24,11 +25,20 @@ public class PaymentAggregate {
         this.sumAmount = sumAmount;
     }
 
+    public Long getCntMember() {
+        return cntMember;
+    }
+
+    public void setCntMember(Long cntMember) {
+        this.cntMember = cntMember;
+    }
+
     @Override
     public String toString() {
         return "PaymentAggregate{" +
                 "paymentMonth='" + paymentMonth + '\'' +
                 ", sumAmount=" + sumAmount +
+                ", cntMember=" + cntMember +
                 '}';
     }
 }
