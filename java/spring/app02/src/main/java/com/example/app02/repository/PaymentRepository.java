@@ -12,9 +12,17 @@ public interface PaymentRepository extends MongoRepository<Payment, String> {
 
 
     //https://stackoverflow.com/questions/59697496/how-to-do-a-mongo-aggregation-query-in-spring-data
+    @Deprecated
     @Aggregation(pipeline = {"{ $match: { delYn: false } }",
     "{ $project: { paymentMonth: { $substr: [ $paymentDate, 0, 7 ] }, amount : 1 } }",
     "{ $group: { _id: $paymentMonth, sumAmount: { $sum: $amount }, cntMember: { $sum : 1 } } }",
     "{ $sort : { _id: 1 } }"})
+    public List<PaymentAggregate> groupByPaymentMonth1();
+
+    @Aggregation(pipeline = {"{ $match: { delYn: false } }",
+            "{ $project: { paymentMonth: { $substr: [ \"$paymentDate\", 0, 7 ] }, memberId : 1, amount : 1 } }",
+            "{ $group: { _id: { paymentMonth : \"$paymentMonth\", memberId : \"$memberId\" }, amount: { $sum: \"$amount\" } } }",
+            "{ $group: { _id: \"$_id.paymentMonth\", sumAmount: { $sum: \"$amount\" }, cntMember: { $sum : 1 } } }",
+            "{ $sort : { _id: 1 } }"})
     public List<PaymentAggregate> groupByPaymentMonth();
 }
