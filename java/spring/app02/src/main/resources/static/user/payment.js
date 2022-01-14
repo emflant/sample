@@ -118,9 +118,13 @@ function delYn_onchange() {
     }
 }
 
-let labels = ['2021-10', '2021-11'];
-let amounts = [0,0];
-let members = [0,0];
+//let labels = ['2021-10', '2021-11'];
+//let amounts = [0,0];
+//let members = [0,0];
+
+let labels = ['2021-11'];
+let amounts = [0];
+let members = [0];
 
 for(let pm of paymentMonths){
     labels.push(pm.paymentMonth);
@@ -134,18 +138,18 @@ const data = {
         {
             label: '수강료',
             data: amounts,
-            borderColor: '#61C3FF',
-            backgroundColor: '#61C3FF',
+            borderColor: '#36a2eb',
+            backgroundColor: '#36a2eb',
             yAxisID: 'y',
             tension: 0.3
         },
         {
             label: '학생수',
             data: members,
-            borderColor: '#FC5A3A',
-            backgroundColor: '#FC5A3A',
+            borderColor: '#ffb0c1',
+            backgroundColor: '#ffb0c1',
             yAxisID: 'y1',
-            tension: 0.3
+            type: 'bar'
         }
     ]
 };
@@ -164,13 +168,15 @@ const config = {
                 type: 'linear',
                 display: true,
                 position: 'left',
+                suggestedMin: 0,
+                suggestedMax: 1000000,
             },
             y1: {
                 type: 'linear',
                 display: true,
                 position: 'right',
-                min: 0,
-                max: 10,
+                suggestedMin: 0,
+                suggestedMax: 20,
                 // grid line settings
                 grid: {
                     // only want the grid lines for one axis to show up

@@ -83,7 +83,7 @@
             <table class="display" id="table_id">
                 <thead>
                 <tr>
-                    <th>결제일</th>
+                    <th>결제월</th>
                     <th>학생이름</th>
                     <th>결제수단</th>
                     <th>결제금액</th>
@@ -94,7 +94,8 @@
                 <tr th:each="payment : ${payments}">
                     <td>
                         <a href="#" th:onclick="paymentDate_onclick([[${payment.id}]])">
-                            <span th:text="${payment.paymentDate}" ></span>
+<!--                            <span th:text="${payment.paymentDate}" ></span>-->
+                            <span th:text="${#strings.substring(payment.paymentDate,0,7)}" ></span>
                         </a>
                     </td>
                     <td th:text="${payment.memberIdInfo.name}"></td>
