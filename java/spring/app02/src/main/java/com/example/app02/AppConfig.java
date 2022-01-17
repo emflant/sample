@@ -17,7 +17,7 @@ public class AppConfig {
         return MongoClients.create("mongodb://my-mongo:27017");
     }
 
-    public @Bean MongoTemplate mongoTemplate() {
-        return new MongoTemplate(MongoClients.create("mongodb://my-mongo:27017"), "test");
-    }
+//    public @Bean MongoTemplate mongoTemplate() {
+//        return new MongoTemplate(MongoClients.create("mongodb://my-mongo:27017"), "test");
+//    }
 }
