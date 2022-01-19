@@ -113,3 +113,25 @@ db.payment.aggregate([
 { $group: { _id: "$_id.paymentMonth", sumAmount: { $sum: "$amount" }, cntMember: { $sum : 1 } } },
 { $sort : { _id: 1 } }
 ])
+
+
+
+
+db.classEvent.aggregate(
+    [
+        { $match: { memberId : { $ne: "reservation" },  delYn: false } },
+        { $group:
+            {
+                _id: "$classTime"
+            }
+        },
+        { $sort : { _id: 1 } }
+    ]
+)
+
+
+db.classEvent.aggregate([
+{ $match: { memberId : { $ne: "reservation" },  delYn: false } },
+{ $group: { _id: "$classTime" } },
+{ $sort : { _id: 1 } }
+])

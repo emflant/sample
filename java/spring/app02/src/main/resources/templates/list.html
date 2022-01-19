@@ -18,7 +18,9 @@
 
   <script>
     $(document).ready( function () {
-        $('#table_id').DataTable();
+        $('#table_id').DataTable({
+          responsive: true
+        });
     } );
 </script>
 
@@ -64,7 +66,8 @@
     </div>
 
     <div class="row g-5">
-      <table id="table_id" class="display">
+      <div class="table-responsive">
+      <table id="table_id" class="display nowrap">
         <thead>
         <tr>
           <th>학생이름</th>
@@ -86,6 +89,7 @@
         </tr>
         </tbody>
       </table>
+      </div>
     </div>
   </main>
 

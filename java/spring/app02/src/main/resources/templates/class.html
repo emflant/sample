@@ -88,7 +88,10 @@
                                         </div>
                                     </div>
                                     <div class="col">
-                                        <input class="form-control" id="classTime" type="text" placeholder="" pattern="\d{2}:\d{2}" th:field="*{classTime}" required>
+                                        <input class="form-control" list="datalistOptions" id="classTime" type="text" placeholder="" pattern="\d{2}:\d{2}" th:field="*{classTime}" required>
+                                        <datalist id="datalistOptions">
+                                            <option th:each="ct : ${classTimes}" th:value="${ct.classTime}"></option>
+                                        </datalist>
                                         <div class="invalid-feedback">
                                             시간 형식을 확인해주세요(예시 15:30)
                                         </div>

@@ -49,15 +49,8 @@ public class ClassController {
         List<Member> members = memberRepository.findAll();
         model.addAttribute("members", members);
 
-//        Datalists 를 이용해서 편리하게 classTime 선택할 수 있도록 하기.
-//        test> db.classEvent.distinct("classTime");
-//        [
-//                '13:00', '15:00',
-//                        '15:10', '15:20',
-//                        '15:23', '16:00',
-//                        '16:20', '16:30',
-//                        '17:40', '18:30'
-//        ]
+        //Datalists 를 이용해서 편리하게 classTime 선택할 수 있도록 하기.
+        model.addAttribute("classTimes", eventRepository.groupByClassTime());
 
         String strDate;
 
