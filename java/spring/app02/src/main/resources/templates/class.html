@@ -65,39 +65,13 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">일정</h5>
                         <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
                     </div>
                     <div class="modal-body">
                         <form class="needs-validation" novalidate id="exampleForm"
                               action="#" th:action="@{/class}" th:object="${event}" method="post">
-                            <div class="mb-3">
-                                <div class="row">
-                                    <div class="col">
-                                        <label class="col-form-label" for="classDate">날짜</label>
-                                    </div>
-                                    <div class="col">
-                                        <label class="col-form-label" for="classTime">시간</label>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col">
-                                        <input class="form-control" id="classDate" type="text" value="" pattern="\d{4}-\d{2}-\d{2}" th:field="*{classDate}" required>
-                                        <div class="invalid-feedback">
-                                            날짜 형식을 확인해주세요(YYYY-MM-DD)
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <input class="form-control" list="datalistOptions" id="classTime" type="text" placeholder="" pattern="\d{2}:\d{2}" th:field="*{classTime}" required>
-                                        <datalist id="datalistOptions">
-                                            <option th:each="ct : ${classTimes}" th:value="${ct.classTime}"></option>
-                                        </datalist>
-                                        <div class="invalid-feedback">
-                                            시간 형식을 확인해주세요(예시 15:30)
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+
                             <div class="mb-3">
                                 <div class="row">
                                     <div class="col-6">
@@ -138,10 +112,36 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div class="mb-3">
-                                <label class="col-form-label" for="message">Message:</label>
-                                <textarea class="form-control" id="message" rows="7" th:field="*{message}"></textarea>
+                                <div class="row">
+                                    <div class="col">
+                                        <label class="col-form-label" for="classDate">날짜</label>
+                                    </div>
+                                    <div class="col">
+                                        <label class="col-form-label" for="classTime">시간</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <input class="form-control" id="classDate" type="text" value="" pattern="\d{4}-\d{2}-\d{2}" th:field="*{classDate}" required>
+                                        <div class="invalid-feedback">
+                                            날짜 형식을 확인해주세요(YYYY-MM-DD)
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <input class="form-control" list="datalistOptions" id="classTime" type="text" placeholder="" pattern="\d{2}:\d{2}" th:field="*{classTime}" required>
+                                        <datalist id="datalistOptions">
+                                            <option th:each="ct : ${classTimes}" th:value="${ct.classTime}"></option>
+                                        </datalist>
+                                        <div class="invalid-feedback">
+                                            시간 형식을 확인해주세요(예시 15:30)
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="col-form-label" for="message">비고</label>
+                                <textarea class="form-control" id="message" rows="5" th:field="*{message}"></textarea>
                             </div>
                             <div class="mb-3">
                                 <input class="form-check-input" id="delYn" type="checkbox" value="" onchange="delYn_onchange()" th:field="*{delYn}">
