@@ -72,20 +72,26 @@
         <tr>
           <th>학생이름</th>
           <th>생년월일</th>
-          <th>수강시작일</th>
+          <th>월</th>
           <th>화</th>
           <th>수</th>
           <th>목</th>
+          <th>금</th>
+          <th>토</th>
+          <th>수강시작일</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="member : ${members}">
           <td><a th:href="@{/signup(id=${member.id})}"><span th:text="${member.name}" ></span></a></td>
           <td th:text="${member.birth}"></td>
-          <td th:text="${member.membershipDate}"></td>
+          <td th:text="${member.monClass}"></td>
           <td th:text="${member.tueClass}"></td>
           <td th:text="${member.wenClass}"></td>
           <td th:text="${member.thrClass}"></td>
+          <td th:text="${member.friClass}"></td>
+          <td th:text="${member.satClass}"></td>
+          <td th:text="${member.membershipDate}"></td>
         </tr>
         </tbody>
       </table>

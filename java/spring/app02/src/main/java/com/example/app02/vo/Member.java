@@ -13,12 +13,18 @@ public class Member {
     protected String gender;  // 성별
     protected String birth;   // 생년월일
     protected String membershipDate; // 가입일자
+    protected String monClass;
+    protected String monClassTime;
     protected String tueClass;
     protected String tueClassTime;
     protected String wenClass;
     protected String wenClassTime;
     protected String thrClass;
     protected String thrClassTime;
+    protected String friClass;
+    protected String friClassTime;
+    protected String satClass;
+    protected String satClassTime;
     protected long timeStamp;
 
 
@@ -78,6 +84,22 @@ public class Member {
         this.membershipDate = membershipDate;
     }
 
+    public String getMonClass() {
+        return monClass;
+    }
+
+    public void setMonClass(String monClass) {
+        this.monClass = monClass;
+    }
+
+    public String getMonClassTime() {
+        return monClassTime;
+    }
+
+    public void setMonClassTime(String monClassTime) {
+        this.monClassTime = monClassTime;
+    }
+
     public String getTueClass() {
         return tueClass;
     }
@@ -126,6 +148,38 @@ public class Member {
         this.thrClassTime = thrClassTime;
     }
 
+    public String getFriClass() {
+        return friClass;
+    }
+
+    public void setFriClass(String friClass) {
+        this.friClass = friClass;
+    }
+
+    public String getFriClassTime() {
+        return friClassTime;
+    }
+
+    public void setFriClassTime(String friClassTime) {
+        this.friClassTime = friClassTime;
+    }
+
+    public String getSatClass() {
+        return satClass;
+    }
+
+    public void setSatClass(String satClass) {
+        this.satClass = satClass;
+    }
+
+    public String getSatClassTime() {
+        return satClassTime;
+    }
+
+    public void setSatClassTime(String satClassTime) {
+        this.satClassTime = satClassTime;
+    }
+
     public long getTimeStamp() {
         return timeStamp;
     }
@@ -144,12 +198,18 @@ public class Member {
                 ", gender='" + gender + '\'' +
                 ", birth='" + birth + '\'' +
                 ", membershipDate='" + membershipDate + '\'' +
+                ", monClass='" + monClass + '\'' +
+                ", monClassTime='" + monClassTime + '\'' +
                 ", tueClass='" + tueClass + '\'' +
                 ", tueClassTime='" + tueClassTime + '\'' +
                 ", wenClass='" + wenClass + '\'' +
                 ", wenClassTime='" + wenClassTime + '\'' +
                 ", thrClass='" + thrClass + '\'' +
                 ", thrClassTime='" + thrClassTime + '\'' +
+                ", friClass='" + friClass + '\'' +
+                ", friClassTime='" + friClassTime + '\'' +
+                ", satClass='" + satClass + '\'' +
+                ", satClassTime='" + satClassTime + '\'' +
                 ", timeStamp=" + timeStamp +
                 '}';
     }

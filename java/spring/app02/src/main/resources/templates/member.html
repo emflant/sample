@@ -1,19 +1,18 @@
 <!doctype html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
-  <head>
+<head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Hugo 0.88.1">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <meta content="" name="description">
+    <meta content="Mark Otto, Jacob Thornton, and Bootstrap contributors" name="author">
+    <meta content="Hugo 0.88.1" name="generator">
     <title>크리아트 - 신규가입</title>
 
-    <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/checkout/">
+    <link href="https://getbootstrap.com/docs/5.1/examples/checkout/" rel="canonical">
 
-    
 
     <!-- Bootstrap core CSS -->
-<link href="./css/bootstrap.min.css" rel="stylesheet">
+    <link href="./css/bootstrap.min.css" rel="stylesheet">
 
     <style>
       .bd-placeholder-img {
@@ -29,220 +28,304 @@
           font-size: 3.5rem;
         }
       }
+
     </style>
 
-    
+
     <!-- Custom styles for this template -->
     <link href="./css/form-validation.css" rel="stylesheet">
-  </head>
-  <body class="bg-light">
+</head>
+<body class="bg-light">
 
 <div class="container">
 
-  <header class="d-flex justify-content-center py-3">
-    <ul class="nav nav-pills">
-      <li class="nav-item"><a href="/signup" class="nav-link active">신규가입</a></li>
-      <li class="nav-item"><a href="/list" class="nav-link">회원관리</a></li>
-      <li class="nav-item"><a href="/class" class="nav-link">일정관리</a></li>
-      <li class="nav-item"><a href="/payment" class="nav-link">결제관리</a></li>
-    </ul>
-  </header>
-  <main>
-    <div class="py-5 text-center">
-      <img class="d-block mx-auto mb-4" src="./images/clipboard-check.svg" alt="" width="72" height="57">
-      <h2>신규가입</h2>
-    </div>
-
-    <div class="row g-5">
-      <div class="col-md-5 col-lg-4 order-md-last">
-        <h4 class="d-flex justify-content-between align-items-center mb-3">
-          <span class="text-primary">클래스</span>
-          <span class="badge bg-primary rounded-pill">3</span>
-        </h4>
-        <ul class="list-group mb-3">
-          <li class="list-group-item d-flex justify-content-between lh-sm">
-            <div>
-              <h6 class="my-0">밤비니(5세)</h6>
-              <small class="text-muted">주1회</small>
-            </div>
-            <span class="text-muted">월 80,000원</span>
-          </li>
-          <li class="list-group-item d-flex justify-content-between lh-sm">
-            <div>
-              <h6 class="my-0">클레인(6세)</h6>
-              <small class="text-muted">주1회</small>
-            </div>
-            <span class="text-muted">월 80,000원</span>
-          </li>
-          <li class="list-group-item d-flex justify-content-between lh-sm">
-            <div>
-              <h6 class="my-0">킨더(7세)</h6>
-              <small class="text-muted">주1회</small>
-            </div>
-            <span class="text-muted">월 80,000원</span>
-          </li>
+    <header class="d-flex justify-content-center py-3">
+        <ul class="nav nav-pills">
+            <li class="nav-item"><a class="nav-link active" href="/signup">신규가입</a></li>
+            <li class="nav-item"><a class="nav-link" href="/list">회원관리</a></li>
+            <li class="nav-item"><a class="nav-link" href="/class">일정관리</a></li>
+            <li class="nav-item"><a class="nav-link" href="/payment">결제관리</a></li>
         </ul>
-      </div>
-      <div class="col-md-7 col-lg-8">
-        <h4 class="mb-3">회원 기본정보</h4>
-        <form class="needs-validation" novalidate
-              action="#" th:action="@{/signup}" th:object="${member}" method="post">
-          <div class="row g-3">
-            <div class="col-sm-6">
-              <label for="name" class="form-label">학생 이름</label>
-              <input type="text" class="form-control" id="name" placeholder="" value="" required th:field="*{name}" th:readonly="*{id != null}">
-              <div class="invalid-feedback">
-                학생 이름을 입력해주세요.
-              </div>
+    </header>
+    <main>
+        <div class="py-5 text-center">
+            <img alt="" class="d-block mx-auto mb-4" height="57" src="./images/clipboard-check.svg" width="72">
+            <h2>신규가입</h2>
+        </div>
+
+        <div class="row g-5">
+            <div class="col-md-5 col-lg-4 order-md-last">
+                <h4 class="d-flex justify-content-between align-items-center mb-3">
+                    <span class="text-primary">클래스</span>
+                    <span class="badge bg-primary rounded-pill">3</span>
+                </h4>
+                <ul class="list-group mb-3">
+                    <li class="list-group-item d-flex justify-content-between lh-sm">
+                        <div>
+                            <h6 class="my-0">밤비니(5세)</h6>
+                            <small class="text-muted">주1회</small>
+                        </div>
+                        <span class="text-muted">월 80,000원</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between lh-sm">
+                        <div>
+                            <h6 class="my-0">클레인(6세)</h6>
+                            <small class="text-muted">주1회</small>
+                        </div>
+                        <span class="text-muted">월 80,000원</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between lh-sm">
+                        <div>
+                            <h6 class="my-0">킨더(7세)</h6>
+                            <small class="text-muted">주1회</small>
+                        </div>
+                        <span class="text-muted">월 80,000원</span>
+                    </li>
+                </ul>
             </div>
-            <div class="col-sm-6">
-              <label for="birth" class="form-label">학생 생년월일</label>
-              <input type="text" class="form-control" id="birth" pattern="\d{4}-\d{2}-\d{2}" placeholder="" value="" required th:field="*{birth}">
-              <div class="invalid-feedback">
-                학생 생년월일을 입력해주세요.(예시 2021-01-01)
-              </div>
+            <div class="col-md-7 col-lg-8">
+                <h4 class="mb-3">회원 기본정보</h4>
+                <form action="#" class="needs-validation"
+                      method="post" novalidate th:action="@{/signup}" th:object="${member}">
+                    <div class="row g-3">
+                        <div class="col-sm-6">
+                            <label class="form-label" for="name">학생 이름</label>
+                            <input class="form-control" id="name" placeholder="" required th:field="*{name}" th:readonly="*{id != null}"
+                                   type="text" value="">
+                            <div class="invalid-feedback">
+                                학생 이름을 입력해주세요.
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <label class="form-label" for="birth">학생 생년월일</label>
+                            <input class="form-control" id="birth" pattern="\d{4}-\d{2}-\d{2}" placeholder=""
+                                   required th:field="*{birth}" type="text" value="">
+                            <div class="invalid-feedback">
+                                학생 생년월일을 입력해주세요.(예시 2021-01-01)
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <label class="form-label" for="gender">학생 성별</label>
+                            <select class="form-select" id="gender" required th:field="*{gender}">
+                                <option value="">-</option>
+                                <option value="M">남자</option>
+                                <option value="F">여자</option>
+                            </select>
+                            <div class="invalid-feedback">
+                                학생 성별을 선택해주세요.
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <label class="form-label" for="membershipDate">가입일</label>
+                            <input class="form-control" id="membershipDate" pattern="\d{4}-\d{2}-\d{2}" placeholder=""
+                                   required th:field="*{membershipDate}" type="text" value="">
+                            <div class="invalid-feedback">
+                                가입일을 입력해주세요.(예시 2021-01-01)
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <label class="form-label" for="parentsName">부모님 성함</label>
+                            <input class="form-control" id="parentsName" placeholder="" required th:field="*{parentsName}" type="text"
+                                   value="">
+                            <div class="invalid-feedback">
+                                부모님 성함을 입력해주세요.
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <label class="form-label" for="parentsTel">부모님 연락처</label>
+                            <input class="form-control" id="parentsTel" pattern="\d{3}-\d{4}-\d{4}" placeholder=""
+                                   required th:field="*{parentsTel}" type="text" value="">
+                            <div class="invalid-feedback">
+                                부모님 연락처를 입력해주세요.(예시 010-1234-0658)
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <hr class="my-4">
+                    <h4 class="mb-3">수강 정보</h4>
+
+                    <div class="row g-3">
+                        <div class="col-sm-6">
+                            <label class="form-label" for="monClass">월</label>
+                            <div class="input-group">
+                                <select class="form-select" id="monClass" th:field="*{monClass}">
+                                    <option value="">-</option>
+                                    <option value="15:00">15:00</option>
+                                    <option value="15:10">15:10</option>
+                                    <option value="15:20">15:20</option>
+                                    <option value="15:30">15:30</option>
+                                    <option value="15:40">15:40</option>
+                                    <option value="15:50">15:50</option>
+                                    <option value="16:00">16:00</option>
+                                    <option value="16:10">16:10</option>
+                                    <option value="16:20">16:20</option>
+                                    <option value="16:30">16:30</option>
+                                    <option value="16:40">16:40</option>
+                                    <option value="16:50">16:50</option>
+                                    <option value="17:00">17:00</option>
+                                </select>
+                                <select class="form-select" id="monClassTime" th:field="*{monClassTime}">
+                                    <option value="">-</option>
+                                    <option value="50">50분</option>
+                                    <option value="80">80분</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <label class="form-label" for="tueClass">화</label>
+                            <div class="input-group">
+                                <select class="form-select" id="tueClass" th:field="*{tueClass}">
+                                    <option value="">-</option>
+                                    <option value="15:00">15:00</option>
+                                    <option value="15:10">15:10</option>
+                                    <option value="15:20">15:20</option>
+                                    <option value="15:30">15:30</option>
+                                    <option value="15:40">15:40</option>
+                                    <option value="15:50">15:50</option>
+                                    <option value="16:00">16:00</option>
+                                    <option value="16:10">16:10</option>
+                                    <option value="16:20">16:20</option>
+                                    <option value="16:30">16:30</option>
+                                    <option value="16:40">16:40</option>
+                                    <option value="16:50">16:50</option>
+                                    <option value="17:00">17:00</option>
+                                </select>
+                                <select class="form-select" id="tueClassTime" th:field="*{tueClassTime}">
+                                    <option value="">-</option>
+                                    <option value="50">50분</option>
+                                    <option value="80">80분</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <label class="form-label" for="wenClass">수</label>
+                            <div class="input-group">
+                                <select class="form-select" id="wenClass" th:field="*{wenClass}">
+                                    <option value="">-</option>
+                                    <option value="15:00">15:00</option>
+                                    <option value="15:10">15:10</option>
+                                    <option value="15:20">15:20</option>
+                                    <option value="15:30">15:30</option>
+                                    <option value="15:40">15:40</option>
+                                    <option value="15:50">15:50</option>
+                                    <option value="16:00">16:00</option>
+                                    <option value="16:10">16:10</option>
+                                    <option value="16:20">16:20</option>
+                                    <option value="16:30">16:30</option>
+                                    <option value="16:40">16:40</option>
+                                    <option value="16:50">16:50</option>
+                                    <option value="17:00">17:00</option>
+                                </select>
+                                <select class="form-select" id="wenClassTime" th:field="*{wenClassTime}">
+                                    <option value="">-</option>
+                                    <option value="50">50분</option>
+                                    <option value="80">80분</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <label class="form-label" for="thrClass">목</label>
+                            <div class="input-group">
+                                <select class="form-select" id="thrClass" th:field="*{thrClass}">
+                                    <option value="">-</option>
+                                    <option value="15:00">15:00</option>
+                                    <option value="15:10">15:10</option>
+                                    <option value="15:20">15:20</option>
+                                    <option value="15:30">15:30</option>
+                                    <option value="15:40">15:40</option>
+                                    <option value="15:50">15:50</option>
+                                    <option value="16:00">16:00</option>
+                                    <option value="16:10">16:10</option>
+                                    <option value="16:20">16:20</option>
+                                    <option value="16:30">16:30</option>
+                                    <option value="16:40">16:40</option>
+                                    <option value="16:50">16:50</option>
+                                    <option value="17:00">17:00</option>
+                                </select>
+                                <select class="form-select" id="thrClassTime" th:field="*{thrClassTime}">
+                                    <option value="">-</option>
+                                    <option value="50">50분</option>
+                                    <option value="80">80분</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <label class="form-label" for="friClass">금</label>
+                            <div class="input-group">
+                                <select class="form-select" id="friClass" th:field="*{friClass}">
+                                    <option value="">-</option>
+                                    <option value="15:00">15:00</option>
+                                    <option value="15:10">15:10</option>
+                                    <option value="15:20">15:20</option>
+                                    <option value="15:30">15:30</option>
+                                    <option value="15:40">15:40</option>
+                                    <option value="15:50">15:50</option>
+                                    <option value="16:00">16:00</option>
+                                    <option value="16:10">16:10</option>
+                                    <option value="16:20">16:20</option>
+                                    <option value="16:30">16:30</option>
+                                    <option value="16:40">16:40</option>
+                                    <option value="16:50">16:50</option>
+                                    <option value="17:00">17:00</option>
+                                </select>
+                                <select class="form-select" id="friClassTime" th:field="*{friClassTime}">
+                                    <option value="">-</option>
+                                    <option value="50">50분</option>
+                                    <option value="80">80분</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <label class="form-label" for="satClass">토</label>
+                            <div class="input-group">
+                                <select class="form-select" id="satClass" th:field="*{satClass}">
+                                    <option value="">-</option>
+                                    <option value="15:00">15:00</option>
+                                    <option value="15:10">15:10</option>
+                                    <option value="15:20">15:20</option>
+                                    <option value="15:30">15:30</option>
+                                    <option value="15:40">15:40</option>
+                                    <option value="15:50">15:50</option>
+                                    <option value="16:00">16:00</option>
+                                    <option value="16:10">16:10</option>
+                                    <option value="16:20">16:20</option>
+                                    <option value="16:30">16:30</option>
+                                    <option value="16:40">16:40</option>
+                                    <option value="16:50">16:50</option>
+                                    <option value="17:00">17:00</option>
+                                </select>
+                                <select class="form-select" id="satClassTime" th:field="*{satClassTime}">
+                                    <option value="">-</option>
+                                    <option value="50">50분</option>
+                                    <option value="80">80분</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr class="my-4">
+                    <button class="w-100 btn btn-primary btn-lg" type="submit">작성 완료</button>
+                    <input class="invisible" id="id" placeholder="" style="display:none" th:field="*{id}" type="text"
+                           value="">
+                </form>
             </div>
+        </div>
+    </main>
 
-            <div class="col-sm-6">
-              <label for="gender" class="form-label">학생 성별</label>
-              <select class="form-select" id="gender" required th:field="*{gender}">
-                <option value="">선택...</option>
-                <option value="M">남자</option>
-                <option value="F">여자</option>
-              </select>
-              <div class="invalid-feedback">
-                학생 성별을 선택해주세요.
-              </div>
-            </div>
-
-            <div class="col-sm-6">
-              <label for="membershipDate" class="form-label">가입일</label>
-              <input type="text" class="form-control" id="membershipDate" pattern="\d{4}-\d{2}-\d{2}" placeholder="" value="" required th:field="*{membershipDate}">
-              <div class="invalid-feedback">
-                가입일을 입력해주세요.(예시 2021-01-01)
-              </div>
-            </div>
-
-            <div class="col-sm-6">
-              <label for="parentsName" class="form-label">부모님 성함</label>
-              <input type="text" class="form-control" id="parentsName" placeholder="" value="" required th:field="*{parentsName}">
-              <div class="invalid-feedback">
-                부모님 성함을 입력해주세요.
-              </div>
-            </div>
-
-            <div class="col-sm-6">
-              <label for="parentsTel" class="form-label">부모님 연락처</label>
-              <input type="text" class="form-control" id="parentsTel" pattern="\d{3}-\d{4}-\d{4}" placeholder="" value="" required th:field="*{parentsTel}">
-              <div class="invalid-feedback">
-                부모님 연락처를 입력해주세요.(예시 010-1234-0658)
-              </div>
-            </div>
-
-          </div>
-
-          <hr class="my-4">
-          <h4 class="mb-3">수강 정보</h4>
-
-          <div class="row g-3">
-            <div class="col-sm-4">
-              <label for="tueClass" class="form-label">화</label>
-              <div class="input-group">
-                <select class="form-select" id="tueClass" th:field="*{tueClass}">
-                  <option value="">선택...</option>
-                  <option value="15:00">15:00</option>
-                  <option value="15:10">15:10</option>
-                  <option value="15:20">15:20</option>
-                  <option value="15:30">15:30</option>
-                  <option value="15:40">15:40</option>
-                  <option value="15:50">15:50</option>
-                  <option value="16:00">16:00</option>
-                  <option value="16:10">16:10</option>
-                  <option value="16:20">16:20</option>
-                  <option value="16:30">16:30</option>
-                  <option value="16:40">16:40</option>
-                  <option value="16:50">16:50</option>
-                  <option value="17:00">17:00</option>
-                </select>
-                <select class="form-select" id="tueClassTime" th:field="*{tueClassTime}">
-                  <option value="">선택...</option>
-                  <option value="50">50분</option>
-                  <option value="80">80분</option>
-                </select>
-              </div>
-
-            </div>
-
-            <div class="col-sm-4">
-              <label for="wenClass" class="form-label">수</label>
-              <div class="input-group">
-                <select class="form-select" id="wenClass" th:field="*{wenClass}">
-                  <option value="">선택...</option>
-                  <option value="15:00">15:00</option>
-                  <option value="15:10">15:10</option>
-                  <option value="15:20">15:20</option>
-                  <option value="15:30">15:30</option>
-                  <option value="15:40">15:40</option>
-                  <option value="15:50">15:50</option>
-                  <option value="16:00">16:00</option>
-                  <option value="16:10">16:10</option>
-                  <option value="16:20">16:20</option>
-                  <option value="16:30">16:30</option>
-                  <option value="16:40">16:40</option>
-                  <option value="16:50">16:50</option>
-                  <option value="17:00">17:00</option>
-                </select>
-                <select class="form-select" id="wenClassTime" th:field="*{wenClassTime}">
-                  <option value="">선택...</option>
-                  <option value="50">50분</option>
-                  <option value="80">80분</option>
-                </select>
-              </div>
-            </div>
-            <div class="col-sm-4">
-              <label for="thrClass" class="form-label">목</label>
-              <div class="input-group">
-                <select class="form-select" id="thrClass" th:field="*{thrClass}">
-                  <option value="">선택...</option>
-                  <option value="15:00">15:00</option>
-                  <option value="15:10">15:10</option>
-                  <option value="15:20">15:20</option>
-                  <option value="15:30">15:30</option>
-                  <option value="15:40">15:40</option>
-                  <option value="15:50">15:50</option>
-                  <option value="16:00">16:00</option>
-                  <option value="16:10">16:10</option>
-                  <option value="16:20">16:20</option>
-                  <option value="16:30">16:30</option>
-                  <option value="16:40">16:40</option>
-                  <option value="16:50">16:50</option>
-                  <option value="17:00">17:00</option>
-                </select>
-                <select class="form-select" id="thrClassTime" th:field="*{thrClassTime}">
-                  <option value="">선택...</option>
-                  <option value="50">50분</option>
-                  <option value="80">80분</option>
-                </select>
-              </div>
-            </div>
-          </div>
-
-          <hr class="my-4">
-          <button class="w-100 btn btn-primary btn-lg" type="submit">작성 완료</button>
-          <input type="text" class="invisible" id="id" placeholder="" value="" th:field="*{id}" style="display:none">
-        </form>
-      </div>
-    </div>
-  </main>
-
-  <footer class="my-5 pt-5 text-muted text-center text-small">
-    <p class="mb-1">&copy; 2021 Creative Art - CREART</p>
-  </footer>
+    <footer class="my-5 pt-5 text-muted text-center text-small">
+        <p class="mb-1">&copy; 2021 Creative Art - CREART</p>
+    </footer>
 </div>
 
 
-    <script src="./js/bootstrap.bundle.min.js"></script>
+<script src="./js/bootstrap.bundle.min.js"></script>
 
-      <script src="./js/form-validation.js"></script>
-  </body>
+<script src="./js/form-validation.js"></script>
+</body>
 </html>

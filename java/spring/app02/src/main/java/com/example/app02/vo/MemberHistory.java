@@ -22,12 +22,18 @@ public class MemberHistory extends Member {
                 ", gender='" + gender + '\'' +
                 ", birth='" + birth + '\'' +
                 ", membershipDate='" + membershipDate + '\'' +
+                ", monClass='" + monClass + '\'' +
+                ", monClassTime='" + monClassTime + '\'' +
                 ", tueClass='" + tueClass + '\'' +
                 ", tueClassTime='" + tueClassTime + '\'' +
                 ", wenClass='" + wenClass + '\'' +
                 ", wenClassTime='" + wenClassTime + '\'' +
                 ", thrClass='" + thrClass + '\'' +
                 ", thrClassTime='" + thrClassTime + '\'' +
+                ", friClass='" + friClass + '\'' +
+                ", friClassTime='" + friClassTime + '\'' +
+                ", satClass='" + satClass + '\'' +
+                ", satClassTime='" + satClassTime + '\'' +
                 ", timeStamp=" + timeStamp +
                 ", memberId='" + memberId + '\'' +
                 '}';
