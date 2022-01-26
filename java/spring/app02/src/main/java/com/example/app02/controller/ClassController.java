@@ -52,6 +52,8 @@ public class ClassController {
         //Datalists 를 이용해서 편리하게 classTime 선택할 수 있도록 하기.
         model.addAttribute("classTimes", eventRepository.groupByClassTime());
 
+        model.addAttribute("memberClassTime", new Member());
+
         String strDate;
 
         if("".equals(date)){

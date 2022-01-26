@@ -44,7 +44,9 @@ function delYn_onchange() {
     }
 }
 
-function memberId_onchange(){
+async function memberId_onchange(){
+
+//    alert(111);
     var vMemberId = document.getElementById('memberId');
     var vClassCount = document.getElementById('classCount');
     var vAbsentYn = document.getElementById('absentYn');
@@ -57,6 +59,42 @@ function memberId_onchange(){
     } else {
         vClassCount.disabled = false;
         vAbsentYn.disabled = false;
+
+        // 학생을 선택하면 날짜에 맞추어 수강시간을 비동기로 가져온다.
+        memberClassTime.id = document.getElementById('memberId').value;
+
+        let response = await fetch('/getClassTime', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify(memberClassTime)
+        });
+
+        let result = await response.json();
+
+        //alert(JSON.stringify(result));
+
+
+        var vClassdate = document.getElementById('classDate').value;
+        var vDay = new Date(vClassdate).getDay();
+        //alert(new Date(vClassdate).getDay());
+
+        // 없을때만 읽어서 가져온다.
+        if(vDay == '1'){
+            document.getElementById('classTime').value = result.monClass;
+        } else if(vDay == '2'){
+            document.getElementById('classTime').value = result.tueClass;
+        } else if(vDay == '3'){
+            document.getElementById('classTime').value = result.wenClass;
+        } else if(vDay == '4'){
+            document.getElementById('classTime').value = result.thrClass;
+        } else if(vDay == '5'){
+            document.getElementById('classTime').value = result.friClass;
+        } else if(vDay == '6'){
+            document.getElementById('classTime').value = result.satClass;
+        }
+
     }
 }
 
