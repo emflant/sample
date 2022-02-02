@@ -1,5 +1,6 @@
 package com.example.app02.controller;
 
+import com.example.app02.biz.ClassEventBiz;
 import com.example.app02.repository.ClassEventHistoryRepository;
 import com.example.app02.repository.ClassEventRepository;
 import com.example.app02.repository.MemberRepository;
@@ -37,6 +38,7 @@ public class ClassController {
     private ClassEventHistoryRepository eventHistoryRepository;
 
 
+
     @GetMapping("/class")
     public String classCalendar(@RequestParam(value = "date", defaultValue = "") String date, Model model) {
 
@@ -67,8 +69,15 @@ public class ClassController {
         return "class";
     }
 
+    @GetMapping("/class2")
+    public String classCalendar2(@RequestParam(value = "date", defaultValue = "") String date, Model model) {
+
+        model.addAllAttributes(new ClassEventBiz().select(date));
+        return "class";
+    }
+
     @PostMapping("/class")
-    public RedirectView classCalendar(@ModelAttribute ClassEvent event, Model model) {
+    public RedirectView classCalendar(@ModelAttribute ClassEvent event) {
 
         event.setTimeStamp(System.currentTimeMillis());
 

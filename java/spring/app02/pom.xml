@@ -10,12 +10,13 @@
 	</parent>
 	<groupId>com.example</groupId>
 	<artifactId>app02</artifactId>
-	<version>0.0.6-SNAPSHOT</version>
+	<version>0.0.7-SNAPSHOT</version>
 	<name>app02</name>
 	<description>
 		0.0.3 - 결제관리 추가
 		0.0.5 - chartjs 추가
 		0.0.6 - Datalists 를 이용해서 편리하게 classTime 선택하도록 개선
+		0.0.7 - 일정등록시 학생정보,요일정보 읽어서 스케줄 시간 자동 셋팅기능 추가.
 	</description>
 	<properties>
 		<java.version>11</java.version>
