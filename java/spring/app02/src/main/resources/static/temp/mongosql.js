@@ -131,7 +131,39 @@ db.classEvent.aggregate(
 
 
 db.classEvent.aggregate([
-{ $match: { memberId : { $ne: "reservation" },  delYn: false } },
+{ $match: { memberId : { $ne: "reservation" },  classTime : { $ne: null }, delYn: false } },
 { $group: { _id: "$classTime" } },
+{ $sort : { _id: 1 } }
+])
+
+db.classEvent.aggregate([
+{ $match: { memberId : { $ne: "reservation" },  classTime : { $ne: null }, delYn: false } },
+{ $group: { _id: "$classTime", count: { $sum : 1 } } },
+{ $match: { count: { $gte : 3 } } },
+{ $sort : { _id: 1 } }
+])
+
+db.classEvent.aggregate([
+{ $match: { memberId : { $ne: "reservation" },  classTime : { $ne: null }, delYn: false } },
+{ $group: { _id: "$classTime", count: { $sum : 1 } } },
+{ $sort : { count: -1 } },
+{ $limit : 5 },
+{ $sort : { _id: 1 } }
+])
+
+//최근 5회 수업정보의 시간을 distinct 해서 보여준다.
+db.classEvent.aggregate([
+{ $match: { memberId: '61d6d0c438d7bc4f024d48ee',  classTime : { $ne: null }, delYn: false } },
+{ $sort : { classDate: -1 } },
+{ $limit : 5 },
+{ $group: { _id: "$classTime", count: { $sum : 1 } } },
+{ $sort : { _id: 1 } }
+])
+
+db.classEvent.aggregate([
+{ $match: { memberId : { $ne: "reservation" },  classTime : { $ne: null }, delYn: false } },
+{ $sort : { classDate: -1 } },
+{ $limit : 20 },
+{ $group: { _id: "$classTime", count: { $sum : 1 } } },
 { $sort : { _id: 1 } }
 ])

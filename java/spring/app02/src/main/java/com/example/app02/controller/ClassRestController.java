@@ -19,9 +19,6 @@ public class ClassRestController {
 
     @PostMapping("/getClassTime")
     public Member greeting(@RequestBody Member member) {
-
-        Member result = memberRepository.findById(member.getId()).orElse(new Member());
-//        log.info(result.toString());
-        return result;
+        return memberRepository.findById(member.getId()).orElse(new Member());
     }
 }
