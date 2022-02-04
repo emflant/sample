@@ -46,7 +46,7 @@ public class PaymentController {
         model.addAttribute("members", memberRepository.findAll());
         model.addAttribute("paymentOne", new Payment());//rest 거래시 사용
         model.addAttribute("payment", new Payment());// form 에 바인딩시 사용
-        model.addAttribute("payments", paymentRepository.findByDelYnOrderByPaymentDateDesc(false));
+        model.addAttribute("payments", paymentRepository.findByDelYnNotOrderByPaymentDateDesc(true));
         model.addAttribute("paymentTypeCodes", codeRepository.findByCodeTypeAndDelYn("paymentType", false));
 
         return "paylist";
