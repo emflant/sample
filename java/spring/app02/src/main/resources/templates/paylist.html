@@ -29,7 +29,6 @@
     <script>
         $(document).ready( function () {
             $('#table_id').DataTable({
-
                 columnDefs:
                 [
                     {
@@ -37,7 +36,10 @@
                         className: 'dt-body-right',
                         render: $.fn.dataTable.render.number(',', '.', 0, '')
                     }
-                ]
+                ],
+                "ordering": false // datatable 에서 자동 order 하는 로직을 비활성화함. 이미 DB에서 order 처리함.
+                // order: [ [ 0, 'desc'] ] 만약하고 싶으면 해당 명령어로 조작가능함.
+
 
             });
         } );

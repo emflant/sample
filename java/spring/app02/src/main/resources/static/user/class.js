@@ -144,6 +144,7 @@ document.addEventListener('DOMContentLoaded', function() {
         locale: 'ko',
         initialDate: vInitialDate,
         hiddenDays: [ 0,6 ],
+        contentHeight:"auto",
         dateClick: function(info) {
             //alert('Clicked on: ' + info.dateStr);
             document.getElementById("exampleForm").reset();

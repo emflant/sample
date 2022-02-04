@@ -122,9 +122,9 @@ function delYn_onchange() {
 //let amounts = [0,0];
 //let members = [0,0];
 
-let labels = ['2021-11'];
-let amounts = [0];
-let members = [0];
+let labels = [];
+let amounts = [];
+let members = [];
 
 for(let pm of paymentMonths){
     labels.push(pm.paymentMonth);
