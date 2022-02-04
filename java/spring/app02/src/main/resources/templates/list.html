@@ -19,7 +19,6 @@
   <script>
     $(document).ready( function () {
         $('#table_id').DataTable({
-          responsive: true
         });
     } );
 </script>
@@ -67,34 +66,40 @@
 
     <div class="row g-5">
       <div class="table-responsive">
-      <table id="table_id" class="display nowrap">
-        <thead>
-        <tr>
-          <th>학생이름</th>
-          <th>생년월일</th>
-          <th>월</th>
-          <th>화</th>
-          <th>수</th>
-          <th>목</th>
-          <th>금</th>
-          <th>토</th>
-          <th>수강시작일</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="member : ${members}">
-          <td><a th:href="@{/signup(id=${member.id})}"><span th:text="${member.name}" ></span></a></td>
-          <td th:text="${member.birth}"></td>
-          <td th:text="${member.monClass}"></td>
-          <td th:text="${member.tueClass}"></td>
-          <td th:text="${member.wenClass}"></td>
-          <td th:text="${member.thrClass}"></td>
-          <td th:text="${member.friClass}"></td>
-          <td th:text="${member.satClass}"></td>
-          <td th:text="${member.membershipDate}"></td>
-        </tr>
-        </tbody>
-      </table>
+        <table id="table_id" class="stripe row-border hover">
+          <thead>
+          <tr>
+            <th class="dt-head-center">학생이름</th>
+            <th class="dt-head-center">나이</th>
+            <th class="dt-head-center">생일</th>
+            <th>월</th>
+            <th>화</th>
+            <th>수</th>
+            <th>목</th>
+            <th>금</th>
+            <th>토</th>
+            <th>수강시작일</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr th:each="member : ${members}">
+            <td class="dt-body-center">
+              <a th:href="@{/signup(id=${member.id})}">
+                <span th:text="${member.name}" ></span>
+              </a>
+            </td>
+            <td class="dt-body-center" th:text="${#dates.year(#dates.createToday()) } -  ${#numbers.formatInteger(#strings.substring(member.birth,0,4), 0) } + 1 + '세'"></td>
+            <td class="dt-body-center" th:text="${#strings.replace(#strings.substring(member.birth,5,10), '-', '/') }"></td>
+            <td th:text="${member.monClass}"></td>
+            <td th:text="${member.tueClass}"></td>
+            <td th:text="${member.wenClass}"></td>
+            <td th:text="${member.thrClass}"></td>
+            <td th:text="${member.friClass}"></td>
+            <td th:text="${member.satClass}"></td>
+            <td th:text="${member.membershipDate}"></td>
+          </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </main>

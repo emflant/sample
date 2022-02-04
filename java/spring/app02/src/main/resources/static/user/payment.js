@@ -82,9 +82,6 @@ function paymentDate_onclick(paymentId){
 }
 
 function postProcess(result){
-
-
-
     init_component();
     var myModalEl = entId('exampleModal');
     var myModal = new bootstrap.Modal(myModalEl);

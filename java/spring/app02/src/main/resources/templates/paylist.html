@@ -37,8 +37,8 @@
                         render: $.fn.dataTable.render.number(',', '.', 0, '')
                     }
                 ],
-                "ordering": false // datatable 에서 자동 order 하는 로직을 비활성화함. 이미 DB에서 order 처리함.
-                // order: [ [ 0, 'desc'] ] 만약하고 싶으면 해당 명령어로 조작가능함.
+                // "ordering": false // datatable 에서 자동 order 하는 로직을 비활성화함. 이미 DB에서 order 처리함.
+                order: [ [ 0, 'desc'] ]
 
 
             });
@@ -93,11 +93,11 @@
         </div>
 
         <div class="row g-5">
-            <table class="display" id="table_id">
+            <table class="stripe row-border hover" id="table_id">
                 <thead>
                 <tr>
-                    <th>결제월</th>
-                    <th>학생이름</th>
+                    <th class="dt-head-center">결제월</th>
+                    <th class="dt-head-center">학생이름</th>
                     <th>결제수단</th>
                     <th>결제금액</th>
                     <th>비고</th>
@@ -105,12 +105,12 @@
                 </thead>
                 <tbody>
                 <tr th:each="payment : ${payments}">
-                    <td>
+                    <td class="dt-body-center">
                         <a href="#" th:onclick="paymentDate_onclick([[${payment.id}]])">
                             <span th:text="${#strings.substring(payment.paymentDate,0,7)}" ></span>
                         </a>
                     </td>
-                    <td th:text="${payment.memberIdInfo.name}"></td>
+                    <td class="dt-body-center" th:text="${payment.memberIdInfo.name}"></td>
                     <td th:text="${payment.paymentTypeInfo.name}"></td>
                     <td th:text="${payment.amount}"></td>
                     <td th:text="${payment.message}"></td>
@@ -231,6 +231,7 @@
                                 <label class="col-form-label" for="message">비고</label>
                                 <textarea class="form-control" id="message" rows="3" th:field="*{message}"></textarea>
                             </div>
+
                             <div class="mb-3">
                                 <input class="form-check-input" id="delYn" type="checkbox" value="" onchange="delYn_onchange()" th:field="*{delYn}">
                                 <label class="form-check-label" for="delYn">삭제하고 싶으시면 체크 해주세요.</label>
