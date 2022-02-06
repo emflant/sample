@@ -1,3 +1,6 @@
+## mongo atlas 접속정보때문에 제외.
+AppConfig.java
+
 HELP.md
 target/
 !.mvn/wrapper/maven-wrapper.jar
