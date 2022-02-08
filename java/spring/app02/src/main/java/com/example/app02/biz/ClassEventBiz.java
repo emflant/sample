@@ -25,7 +25,7 @@ public class ClassEventBiz {
     @Autowired
     private ClassEventHistoryRepository classEventHistoryRepository;
 
-    public Map<String, Object> select(String date){
+    public Map<String, Object> select(String date, String searchMemberId){
 
         String strDate;
 
@@ -37,12 +37,18 @@ public class ClassEventBiz {
 
         Map<String, Object> result = new HashMap<String, Object>();
         result.put("event", new ClassEvent());
-        result.put("events", classEventRepository.findByDelYn(false));
+
+        if("".equals(searchMemberId)){
+            result.put("events", classEventRepository.findByDelYn(false));
+        } else {
+            result.put("events", classEventRepository.findByMemberIdAndDelYn(searchMemberId, false));
+        }
 
         result.put("members", memberRepository.findAll());
         result.put("classTimes", classEventRepository.groupByClassTime());
         result.put("memberClassTime", new Member());
         result.put("initialDate", strDate);
+        result.put("searchMemberId", searchMemberId);
 
         return result;
     }

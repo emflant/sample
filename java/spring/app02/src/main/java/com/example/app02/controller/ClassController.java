@@ -22,8 +22,8 @@ public class ClassController {
     private ClassEventBiz classEventBiz;
 
     @GetMapping("/class")
-    public String classCalendar(@RequestParam(value = "date", defaultValue = "") String date, Model model) {
-        model.addAllAttributes(classEventBiz.select(date));
+    public String classCalendar(@RequestParam(value = "date", defaultValue = "") String date, @RequestParam(value = "searchMemberId", defaultValue = "") String searchMemberId, Model model) {
+        model.addAllAttributes(classEventBiz.select(date, searchMemberId));
         return "class";
     }
 

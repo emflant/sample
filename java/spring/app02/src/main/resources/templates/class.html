@@ -23,6 +23,7 @@
     <script th:inline="javascript">
         //서버에서 view 로 넘긴값을 html의  javascript에 json 형태로 넘김.
         var vInitialDate = /*[[${initialDate}]]*/
+        var vSearchMemberId = /*[[${searchMemberId}]]*/
         var domain = /*[[${events}]]*/
 
         var memberClassTime = /*[[${memberClassTime}]]*/
@@ -57,6 +58,17 @@
         <div class="py-5 text-center">
             <img alt="" class="d-block mx-auto mb-4" height="57" src="./images/clipboard-check.svg" width="72">
             <h2>일정관리</h2>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-9"></div>
+            <div class="col-3">
+                <select class="form-select" id="searchMemberId" onchange="memberId_onchange1()">
+                    <option value="">모든일정</option>
+                    <option value="reservation">[상담예약]</option>
+                    <option th:each="member : ${members}" th:value="${member.id}" th:text="${member.name}"></option>
+                </select>
+            </div>
         </div>
 
         <div class="row g-5">

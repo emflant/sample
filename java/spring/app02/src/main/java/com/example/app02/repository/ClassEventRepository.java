@@ -10,6 +10,8 @@ import java.util.List;
 public interface ClassEventRepository extends MongoRepository<ClassEvent, String> {
     public List<ClassEvent> findByDelYn(boolean delYn);
 
+    public List<ClassEvent> findByMemberIdAndDelYn(String memberId, boolean delYn);
+
     @Deprecated
     @Aggregation(pipeline = {"{ $match: { memberId : { $ne: \"reservation\" },  delYn: false } }",
             "{ $group: { _id: \"$classTime\" } }",

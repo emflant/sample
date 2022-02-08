@@ -144,7 +144,7 @@ document.addEventListener('DOMContentLoaded', function() {
         locale: 'ko',
         initialDate: vInitialDate,
         hiddenDays: [ 0,6 ],
-        contentHeight:"auto",
+        contentHeight: "auto",
         dateClick: function(info) {
             //alert('Clicked on: ' + info.dateStr);
             document.getElementById("exampleForm").reset();
@@ -171,6 +171,16 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     calendar.render();
 
+    entId('searchMemberId').value = vSearchMemberId;
 });
 
 
+function memberId_onchange1(){
+
+    var strDate = '';
+    if(vInitialDate != null){
+        strDate = vInitialDate;
+    }
+
+    window.location.href = '/class?date=' + strDate + '&searchMemberId='+entId("searchMemberId").value;
+}
