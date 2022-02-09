@@ -26,7 +26,9 @@ async function entCall(serviceName, paramJson, callback){
 ******************************************/
 function entSetValues(formId, paramJson){
 
-    let elements = document.querySelectorAll('#' + formId + ' input[id],select[id],textarea[id]');
+    let elements = document.querySelectorAll('#' + formId + ' input[id], #' + formId + ' select[id], #' + formId + ' textarea[id]');
+
+//    alert(JSON.stringify(elements));
 
     for(let elem of elements){
         if(elem.type == 'checkbox') {
