@@ -61,7 +61,7 @@ public class MemberController {
     @GetMapping("/list")
     public String memberList(Model model) {
 
-        List<Member> members = memberRepository.findAllByOrderByNameAsc();
+        List<Member> members = memberRepository.findAllByOrderByMembershipDateDesc();
 
         model.addAttribute("members", members);
 

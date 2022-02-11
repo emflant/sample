@@ -44,14 +44,19 @@ function delYn_onchange() {
 
 async function memberId_onchange(){
 
+//    alert(111);
     var vMemberId = document.getElementById('memberId');
     var vClassCount = document.getElementById('classCount');
     var vAbsentYn = document.getElementById('absentYn');
 
     if(vMemberId.options[vMemberId.selectedIndex].value == 'reservation'){
         vClassCount.value = '';
+        vClassCount.disabled = true;
         vAbsentYn.checked = false;
+        vAbsentYn.disabled = true;
     } else {
+        vClassCount.disabled = false;
+        vAbsentYn.disabled = false;
 
         // 학생을 선택하면 날짜에 맞추어 수강시간을 비동기로 가져온다.
         memberClassTime.id = document.getElementById('memberId').value;
@@ -65,11 +70,13 @@ async function memberId_onchange(){
         });
 
         let result = await response.json();
+
         //alert(JSON.stringify(result));
 
 
         var vClassdate = document.getElementById('classDate').value;
         var vDay = new Date(vClassdate).getDay();
+        //alert(new Date(vClassdate).getDay());
 
         // 없을때만 읽어서 가져온다.
         if(vDay == '1'){
@@ -87,8 +94,6 @@ async function memberId_onchange(){
         }
 
     }
-
-    init_component();
 }
 
 
@@ -96,13 +101,15 @@ function absentYn_onchange(){
     var vClassCount = document.getElementById('classCount');
     var vAbsentYn = document.getElementById('absentYn');
 
-    vClassCount.value = '';
-
     if(vAbsentYn.checked){
+        vClassCount.value = '';
+        vClassCount.disabled = true;
+        entId('classTime').disabled = true;
         entId('classTime').value = '';
+    } else {
+        vClassCount.disabled = false;
+        entId('classTime').disabled = false;
     }
-
-    init_component();
 }
 
 

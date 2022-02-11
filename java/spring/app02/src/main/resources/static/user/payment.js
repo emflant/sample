@@ -58,22 +58,19 @@ function calculate_amount(){
 }
 
 function paymentType_onchange(){
-    if(entId('paymentType').value == '1'){
-        entId('cashReceiptYn').disabled = false;
-    } else {
-        entId('cashReceiptYn').disabled = true;
+    if(entId('paymentType').value != '1'){
         entId('cashReceiptYn').checked = false;
     }
+    init_component();
 }
 
 function amountModifyYn_onchange(){
     if(entId('amountModifyYn').checked){
-        entId('amount').readOnly = false;
         entId('amount').value = 0;
     } else {
-        entId('amount').readOnly = true;
         calculate_amount();
     }
+    init_component();
 }
 
 function paymentDate_onclick(paymentId){
@@ -137,8 +134,8 @@ const data = {
             data: amounts,
             borderColor: '#36a2eb',
             backgroundColor: '#36a2eb',
-            yAxisID: 'y',
-            tension: 0.3
+            yAxisID: 'y'
+//            tension: 0.3
         },
         {
             label: '학생수',
