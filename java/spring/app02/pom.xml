@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.example</groupId>
 	<artifactId>app02</artifactId>
-	<version>0.0.10-SNAPSHOT</version>
+	<version>0.0.11-SNAPSHOT</version>
 	<name>app02</name>
 	<description>
 		0.0.3  - 결제관리 추가
@@ -20,6 +20,7 @@
 		0.0.8  - datatables 옵션 개선.
 		0.0.9  - mongo atlas 로 변경.
 		0.0.10 - 일정에서 회원별로 조회되도록 기능 추가.
+		0.0.11 - 결석 색상변경.
 	</description>
 	<properties>
 		<java.version>11</java.version>

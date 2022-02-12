@@ -4,12 +4,29 @@ var myEvents = [{
           backgroundColor: 'hsla(0,0%,84.3%,.7)'
       }];
 
+var myCalendar;
+
 for(var i = 0; i < domain.length; i++){
     var obj = new Object();
 
     if(domain[i].absentYn){
-        obj.backgroundColor = '#c24148'; //'#b92327'; //'#FF5E57';
+
+        // Sandstone 테마
+        // 레드 '#b84743' '#c24148'
+        // 오렌지 '#f47c3c'
+        // 민트 '#2391be'
+        // 그린 '#93c54b'
+        // 남색 '#2b4f74'
+        var vEventColor = '#f47c3c';
+        obj.backgroundColor = vEventColor;
+        obj.borderColor = vEventColor;
     }
+
+//    if(domain[i].id == '61f8ebcbb9543170663e8056'){
+//        var vEventColor = '#2391be';
+//                obj.backgroundColor = vEventColor;
+//                obj.borderColor = vEventColor;
+//    }
 
     if(domain[i].memberId == 'reservation'){
         obj.backgroundColor = '#82E359';
@@ -157,7 +174,7 @@ document.addEventListener('DOMContentLoaded', function() {
             myModal.show();
         },
         eventClick: function(info) {
-
+//            alert(calendar.getDate());
             entSetValues('exampleModal', info.event.extendedProps.eventInfo);
 
             init_component();
@@ -169,16 +186,20 @@ document.addEventListener('DOMContentLoaded', function() {
         events: myEvents
     });
     calendar.render();
-
+    myCalendar = calendar;
     entId('searchMemberId').value = vSearchMemberId;
 });
 
 
 function memberId_onchange1(){
 
-    var strDate = '';
-    if(vInitialDate != null){
-        strDate = vInitialDate;
+    var strDate;
+    var strMonth = myCalendar.getDate().getMonth() + 1;
+
+    if(strMonth >= 10){
+        strDate = myCalendar.getDate().getFullYear() + '-' + strMonth + '-01'
+    } else {
+        strDate = myCalendar.getDate().getFullYear() + '-0' + strMonth + '-01'
     }
 
     window.location.href = '/class?date=' + strDate + '&searchMemberId='+entId("searchMemberId").value;
