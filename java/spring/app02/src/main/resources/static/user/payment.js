@@ -1,5 +1,6 @@
 
 var s1;
+var fp;
 
 document.addEventListener('DOMContentLoaded', function() {
     var myModalEl = entId('exampleModal');
@@ -23,6 +24,8 @@ function btnRegister_onclick(){
     entId('classesPerWeek').value = '1';
     entId('minutesPerSession').value = '50';
     entId('amount').value = 80000;
+
+    fp.setDate(entId('paymentDate').value);
 
     init_component();
 }
@@ -80,6 +83,11 @@ function paymentDate_onclick(paymentId){
 
 function postProcess(result){
     init_component();
+    fp.parseDate()
+//    alert(result.paymentDate);
+//    fp.setDate(new Date(2022,1,18));
+//    fp.setDate(result.paymentDate, 'YYYY-mm-dd');
+    fp.setDate(result.paymentDate);
     var myModalEl = entId('exampleModal');
     var myModal = new bootstrap.Modal(myModalEl);
     myModal.show();
@@ -180,3 +188,13 @@ const config = {
         }
     }
 };
+
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    fp = flatpickr(entId("paymentDate"), {
+        "locale": "ko"  // locale for this instance only
+//        defaultDate : new Date(2022,1,10)
+    });
+});

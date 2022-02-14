@@ -24,6 +24,11 @@
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.js"></script>
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://npmcdn.com/flatpickr/dist/flatpickr.min.js"></script>
+    <script src="https://npmcdn.com/flatpickr/dist/l10n/ko.js"></script>
+
     <script th:inline="javascript">
         //서버에서 view 로 넘긴값을 html의  javascript에 json 형태로 넘김.
         var paymentOne = /*[[${paymentOne}]]*/
@@ -47,6 +52,7 @@
 
             });
         } );
+
     </script>
 
     <script src="./user/common.js"></script>
