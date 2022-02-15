@@ -13,21 +13,17 @@
     <script crossorigin="anonymous"
             integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
             src="https://code.jquery.com/jquery-3.6.0.js"></script>
-<!--    <link href="https://cdn.datatables.net/1.11.4/css/dataTables.bootstrap5.min.css" rel="stylesheet" type="text/css">-->
     <link href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.css" rel="stylesheet" type="text/css">
-
-<!--    <script charset="utf8" src="https://cdn.datatables.net/1.11.4/js/dataTables.bootstrap5.min.js"-->
-<!--            type="text/javascript"></script>-->
-
     <script charset="utf8" src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.js"
             type="text/javascript"></script>
-
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.js"></script>
 
+    <!-- start flatpickr lib -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" type="text/css" href="https://npmcdn.com/flatpickr/dist/themes/material_orange.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    <script src="https://npmcdn.com/flatpickr/dist/flatpickr.min.js"></script>
     <script src="https://npmcdn.com/flatpickr/dist/l10n/ko.js"></script>
+    <!-- end flatpickr lib -->
 
     <script th:inline="javascript">
         //서버에서 view 로 넘긴값을 html의  javascript에 json 형태로 넘김.
@@ -35,51 +31,13 @@
         var paymentMonths = /*[[${paymentMonth}]]*/
     </script>
 
-    <script>
-        $(document).ready( function () {
-            $('#table_id').DataTable({
-                columnDefs:
-                [
-                    {
-                        targets: 3,
-                        className: 'dt-body-right',
-                        render: $.fn.dataTable.render.number(',', '.', 0, '')
-                    }
-                ],
-                // "ordering": false // datatable 에서 자동 order 하는 로직을 비활성화함. 이미 DB에서 order 처리함.
-                order: [ [ 0, 'desc'] ]
-
-
-            });
-        } );
-
-    </script>
-
+    <!-- start user js file -->
     <script src="./user/common.js"></script>
     <script src="./user/payment.js"></script>
-
-
+    <!-- end user js file -->
 
     <!-- Bootstrap core CSS -->
     <link href="./css/bootstrap.min.css" rel="stylesheet">
-
-    <style>
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        user-select: none;
-      }
-
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-      }
-
-    </style>
-
 
     <!-- Custom styles for this template -->
     <link href="./css/form-validation.css" rel="stylesheet">

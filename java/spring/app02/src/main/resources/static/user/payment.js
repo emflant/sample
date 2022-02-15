@@ -9,12 +9,25 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     s1 = document.querySelectorAll('#exampleForm input[id],select[id],textarea[id]');
+    const myChart = new Chart(entId('myChart'), config);
 
-  const myChart = new Chart(
-    document.getElementById('myChart'),
-    config
-  );
+    fp = flatpickr(entId("paymentDate"), {
+        'monthSelectorType' : 'static',
+        "locale": "ko"  // locale for this instance only
+    });
 
+    $('#table_id').DataTable({
+        columnDefs:
+        [
+            {
+                targets: 3,
+                className: 'dt-body-right',
+                render: $.fn.dataTable.render.number(',', '.', 0, '')
+            }
+        ],
+        // "ordering": false // datatable 에서 자동 order 하는 로직을 비활성화함. 이미 DB에서 order 처리함.
+        order: [ [ 0, 'desc'] ]
+    });
 });
 
 function btnRegister_onclick(){
@@ -191,10 +204,3 @@ const config = {
 
 
 
-
-document.addEventListener('DOMContentLoaded', function() {
-    fp = flatpickr(entId("paymentDate"), {
-        "locale": "ko"  // locale for this instance only
-//        defaultDate : new Date(2022,1,10)
-    });
-});
