@@ -13,3 +13,5 @@ data/
 backup/
 target
 *.class
+.ipynb_checkpoints
+.idea
