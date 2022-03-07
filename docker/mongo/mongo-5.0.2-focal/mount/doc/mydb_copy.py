@@ -15,13 +15,13 @@ v_path = config["mongo"]["archive.path"]
 
 v_archive_file = f'{v_path}test.{v_today}.archive'
 v_prod_uri = config["mongo"]["prod.uri"]
-v_test_uri = config["mongo"]["test.uri"] 
+v_test_uri = config["mongo"]["mydb.uri"] 
 
 v_command1 = f'mongodump --db=test --archive={v_archive_file} --uri="{v_prod_uri}"'
 print(f'--------------------------------------------------------')
 print(f'{v_command1}')
 print(f'--------------------------------------------------------')
-os.system(v_command1)
+# os.system(v_command1)
 
 
 v_command2 = f'mongo {v_test_uri} --eval "db.dropDatabase()"'
@@ -31,7 +31,7 @@ print(f'--------------------------------------------------------')
 os.system(v_command2)
 
 
-v_command3 = f'mongorestore --archive={v_archive_file} --uri="{v_test_uri}"'
+v_command3 = f'mongorestore --archive={v_archive_file} --uri="{v_test_uri}" --nsInclude="test.*" --nsFrom="test.*" --nsTo="mydb.*"'
 print(f'--------------------------------------------------------')
 print(f'{v_command3}')
 print(f'--------------------------------------------------------')
