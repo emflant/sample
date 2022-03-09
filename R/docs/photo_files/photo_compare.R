@@ -3,6 +3,7 @@ library(tools)
 library(lubridate)
 library(furrr)
 library(tictoc)
+library(mongolite)
 # library(exifr)
 
 
