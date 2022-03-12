@@ -1,1 +1,1 @@
-mongosh
+mongosh mydb

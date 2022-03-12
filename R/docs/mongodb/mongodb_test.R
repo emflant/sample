@@ -43,3 +43,7 @@ p %>% anti_join(c, by=c("paymentMonth" = "classMonth","memberId"))
 c %>% anti_join(p, by=c("classMonth" = "paymentMonth","memberId"))
 
 
+classEvent$find() %>% 
+  str
+
+
