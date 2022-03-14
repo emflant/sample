@@ -15,6 +15,8 @@ classEvent = mongo("classEvent", db = "mydb", url = mongo_uri)
 payment$find() %>% 
   as_tibble()
 
+classEvent$find() %>% 
+  as_tibble()
 
 
 p = payment$find() %>% 

@@ -25,13 +25,14 @@ tibble(a,b)
 
 # 파일체크 (파일명, 파일사이즈 기준)
 # output 폴더와 외장하드 디스크 비교.
-re1 = file_compare("/Volumes/seagate/02_photo/2021", "~/Desktop/photo/output") 
+re1 = file_compare("/Volumes/seagate/02_photo/2022", "~/Desktop/photo/output") 
 
 # pc에는 있고, seagate 는 없는 디렉토리 목록.
 # 이건 ctrl+c,v 로 복사함.
 re1$path2 %>% 
   mutate(dir_date = str_sub(dir_name, 1, 44)) %>% 
-  distinct(dir_date)
+  distinct(dir_date) %>% 
+  print(n = Inf)
 
 # OUTPUT 폴더에서는 불필요한 raw 파일을 지우기때문에 차이가 나는 케이스가 있음.
 # 이런 건은 다시 복사할 필요가 없는 날짜 폴더이므로 제외한다.
