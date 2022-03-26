@@ -12,6 +12,7 @@ mongo_uri = "mongodb://test22:testpw22@localhost:27017/mydb"
 
 payment = mongo("payment", db = "mydb", url = mongo_uri)
 classEvent = mongo("classEvent", db = "mydb", url = mongo_uri)
+
 payment$find() %>% 
   as_tibble()
 

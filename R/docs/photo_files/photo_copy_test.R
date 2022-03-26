@@ -55,12 +55,16 @@ re1$path1 %>%
   mutate(dir_date = str_sub(dir_name, 1, 50)) %>% 
   distinct(dir_date)
 
+re1$path1 %>% 
+  mutate(dir_date = str_sub(dir_name, 1, 42)) %>% 
+  distinct(dir_date)
+
 # 파일비교2 (파일경로, 파일명 기준)
-re2 = file_compare2("/Volumes/seagate/02_photo", "/Volumes/SAMSUNG/02_photo") 
+re2 = file_compare2("/Volumes/seagate/02_photo/2022", "/Volumes/SAMSUNG/02_photo/2022") 
 re2
 
 # 2개 폴더 동기화. 서로 없는거 copy
-copy_sync("/Volumes/seagate/02_photo/2021", "/Volumes/SAMSUNG/02_photo/2021")
+copy_sync("/Volumes/seagate/02_photo/2022", "/Volumes/SAMSUNG/02_photo/2022")
 ##################################################################################
 
 
