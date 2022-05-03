@@ -1,5 +1,5 @@
 docker run --name my-mariadb \
-	--network mariadb-net \
+	--network my-net \
 	-p 3306:3306 \
 	-e MYSQL_ROOT_PASSWORD=root_pw \
 	-e MYSQL_DATABASE=test \

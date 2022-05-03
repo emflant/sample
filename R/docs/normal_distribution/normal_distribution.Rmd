@@ -29,5 +29,6 @@ qnorm(0.99) # 2.326348
 qnorm(0.999) # 3.090232
 qnorm(0.3)
 
-norm_graph(lb = 4, ub = -0.5244005)
+# norm_graph(lb = 4, ub = -0.5244005)
+norm_graph(lb = -0.5244005, ub = 4)
 ```
