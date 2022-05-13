@@ -1,7 +1,7 @@
 library(tidyverse)
 library(gcookbook)
 uspopchange
-
+# install.packages("gcookbook")
 upc = uspopchange %>% arrange(desc(Change)) %>% 
   slice(1:10)
 upc

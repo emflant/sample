@@ -451,3 +451,179 @@ norm_graph <- function (sd = 1, mean = 0, lb=NA, ub=NA, xpos = -0.02){
   }
   
 }
+
+as.character(2015:2026)
+
+diff(c(51014, 51245, 51446, 51635, 51811, 51973, 
+  52123, 52261, 52388, 52504, 52609, 52704))
+
+t1 = tibble(x = as.character(2015:2026),
+       y = c(51014, 51245, 51446, 51635, 51811, 51973, 
+             52123, 52261, 52388, 52504, 52609, 52704))
+t1
+ggplot(t1, aes(x, y)) + geom_line()
+
+
+# x라는 벡터의 객체들의 조건에 따라 y라는 벡터에 객체를 저장하고 싶습니다.
+# 예를 들어서 x의 첫 번째 객체가 90 이상이면 y의 첫 번째 객체가 S로 저장되었으면 합니다.
+# 이미 벡터 y에는 NA라는 객체가 저장되어 있습니다.
+# 
+# 이 경우 코드를 어떻게 짜야 할까요?
+
+x = c(145,223,36)
+y = c(NA)
+if(x[1] > 90){
+  y[1] = x[1]
+}
+print(y)
+# [1] 145
+
+
+
+# 이렇게 작성하고 coffee를 확인하면 
+# 아 어 오
+# 10 3020 30
+
+coffee<-c(10,20,30)
+names(coffee)<-c("아","어","오")
+coffee[2]<-coffee[2]+3000
+coffee
+
+
+is.numeric("111")
+is.numeric("aa")
+as.numeric("aa")
+
+a = c(10,10,10, 'a', 'b', 'c', 20, 30, 'd')
+# [1] "10" "10" "10" "a"  "b"  "c"  "20" "30" "d"
+
+as.numeric(a)
+# [1] 10 10 10 NA NA NA 20 30 NA
+
+is.na(as.numeric(a))
+# [1] FALSE FALSE FALSE  TRUE  TRUE  TRUE FALSE FALSE  TRUE
+
+a[is.na(as.numeric(a))]
+# [1] "a" "b" "c" "d"
+
+
+df = data.frame(keyword = c(10,10,10, 'a', 'b', 'c', 20, 30, 'd'))
+df
+grep("[a-z]", df$keyword)
+grepl("\\d+", df$keyword)
+df$num = as.numeric(df$keyword)
+df
+is.na(df$num)
+df[is.na(df$num),]
+
+
+grep("\\d+", df$keyword)
+# [1] 1 2 3 7 8
+
+grep("\\d+", df$keyword, value = T)
+# [1] "10" "10" "10" "20" "30"
+
+df[grep("\\d+", df$keyword), ]
+
+grepl("\\d+", df$keyword)
+# [1]  TRUE  TRUE  TRUE FALSE FALSE FALSE  TRUE  TRUE FALSE
+
+df$keyword[]
+
+df[grepl("\\d+", df$keyword), ]
+# [1] "10" "10" "10" "20" "30"
+
+gregexec("\\d+", df$keyword)
+
+enframe(c(0,10,10, 'a', 'b', 'c', 20, 30, 'd'), name = NULL) %>% 
+  mutate(num = grepl("\\d+", value)) %>% 
+  filter(num == T)
+
+
+grepl("\\d+", value)
+
+enframe(c(0,10,10, 'a', 'b', 'c', 20, 30, 'd'), name = NULL) %>% 
+  mutate(num = as.numeric(value)) %>% 
+  filter(is.na(num))
+
+install.packages("KoNLP")
+library(tidytext)
+library(dplyr)
+library(janeaustenr)
+# 새 데이터프레임 <- 기존데이터프레임 %>% 
+#   unnest_tokens(input = value, output = word, token = extractNoun)
+# If a function, should take a character vector and 
+# return a list of character vectors of the same length.
+unnest_tokens
+d <- tibble(txt = prideprejudice)
+d
+d %>%
+  unnest_tokens(word, txt)
+d %>% 
+  unnest_tokens(output = word, input = txt, token = "words")
+d %>%
+  unnest_tokens(sentence, txt, token = "sentences")
+
+d %>%
+  unnest_tokens(word, txt, token = str_c, pattern = " ")
+
+stringr::str_split(c('alkj b slkdjf', 'skljf b slfffskdjf'), pattern = ' ')
+
+stringr::str_c(c('alkj b slkdjf', 'skljf b slfffskdjf'), pattern = ' ')
+d
+list(1,2,c(1,2))
+
+
+
+d <- matrix(1:9, ncol=3)
+d[2,1] = NA
+d[3,3] = NA
+d
+
+
+
+set.seed(2022)
+week
+days_of_the_week <- c("Sunday", "Monday", "Tuesday", "Wednesday", 
+                      "Thursday", "Friday", "Saturday")
+sales <- data.frame("dayOfMonth" = rep(1:28, 12),
+                    "month" = rep(month.name, each = 28),
+                    "weekday" = rep(days_of_the_week, 12*4),
+                    "paintings" = round(rnorm(28*12, c(sample(1:28, 7)))))
+
+head(sales, 7)
+
+sales %>%
+  group_by(weekday) %>%
+  summarise(weekdaySales = mean(paintings)) %>%
+  ggplot() +
+  labs(title = "Mean Weekly Painting Sales by Day of the Week",
+       x = "Day of the Week",
+       y = "Mean Painting Sales") + 
+  scale_fill_brewer(palette = "Set2") +
+  geom_bar(aes(x = factor(weekday, days_of_the_week), y = weekdaySales, 
+               fill = weekday), stat = "identity", show.legend = FALSE)
+
+
+Oxboys
+data(Oxboys, package = "nlme")
+head(Oxboys)
+
+?Oxboys
+Oxboys %>% 
+  ggplot(aes(age, height, group = Subject)) +
+  geom_line()
+
+
+ggplot(Oxboys, aes(age, height, group = Subject)) +
+  geom_line() +
+  geom_smooth(method = "lm", se = F)
+
+ggplot(Oxboys, aes(age, height)) +
+  geom_line(aes(group = Subject)) +
+  geom_smooth(method = "lm", se = F, size = 3)
+
+head(Oxboys)
+ggplot(Oxboys, aes(x = Occasion, y = height)) +
+  geom_boxplot() +
+  geom_line(aes(group = Subject), colour = "#3366FF", alpha = 0.5)
