@@ -1,10 +1,17 @@
+
 matA=matrix(data=c(0,0.05,0.6,0.8,0.8,0,0,0,0,0.9,0,0,0,0,0.95,0), 
             ncol=4, nrow=4, byrow=T);
 
 N0=matrix(data=c(50,50,50,50), nrow=4);
 
+m1
+m3 = m1 %*% t(m1)
+m3
+solve(m1, m3)
 matA %*% N0
 
+m1 = matrix(1:16, ncol = 4)
+m1 / 10
 
 m1 = matrix(1:12, ncol = 4)
 m1
@@ -73,9 +80,9 @@ tibble(a) %>%
          a9 = ifelse(a >= 9, "A", "")) %>% 
   mutate(result = str_sub(str_c(a9, a5, a0), 0, 1))
 
-b = tibble(x = c(1,2,3), y = c("A", "B", "C"))
+b = tibble(x = c(1,2,3), y = c("C", "B", "A"))
 
-tibble(a) %>% 
+c = tibble(a) %>% 
   mutate(a0 = ifelse(a >= 0, 1, 0), 
          a5 = ifelse(a >= 5, 1, 0), 
          a9 = ifelse(a >= 9, 1, 0)) %>% 
@@ -83,10 +90,11 @@ tibble(a) %>%
   left_join(b, by = c("a_sum" = "x"))
 
 
-
 for(i in c(0,5,9)){
   b[a >= i] = rep()
 }
+
+
 
 which(a >= 7)
 which(LETTERS == "R")
@@ -97,4 +105,27 @@ if(a>=8){
 }else{
   print("C")
 }
+
+table(sample(1:2, 100, replace = T))
+
+table(b)
+
+library(stats)
+rpois(100, 5)
+
+
+tidyr::uni
+separate_rows
+
+tibble(x = c(2022, 2022, 2022, 2021, 2021),
+       y = c("텔레비전", "티비", "휴대폰", "휴대폰", "마우스"),
+       z = y) %>% 
+  pivot_wider(names_from = y, values_from = z) %>% 
+  unite(-x, col = "zz", na.rm = T, sep = ",")
   
+
+x = 1:10
+x
+x > 5
+
+x[c(T, FALSE, T)]

@@ -26,3 +26,5 @@ ggplot(upc, aes(Abb, Change, fill=Region))+
   scale_y_continuous(expand = c(0,0), breaks = seq(0, 40, 3)) +
   scale_x_discrete(expand = c(0,0.7)) +xlab("State") 
 
+
+
