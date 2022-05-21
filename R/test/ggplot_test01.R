@@ -292,6 +292,9 @@ ggplot(ce, aes(x = Date, y = Weight,fill = Cultivar)) +
   theme_minimal() +
   scale_fill_brewer(palette = "Blues")
 
+z = c(2,35,4)
+
+reorder(z)
 
 tb = 데이터 %>%
   group_by(topic) %>% 
