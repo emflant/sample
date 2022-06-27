@@ -1,13 +1,8 @@
 library(tidyverse)
 library(gcookbook)
-uspopchange
-# install.packages("gcookbook")
+
 upc = uspopchange %>% arrange(desc(Change)) %>% 
   slice(1:10)
-upc
-
-ggplot(upc, aes(Abb, Change, fill=Region))+
-  geom_col() + theme_minimal()
 
 ggplot(upc, aes(Abb, Change, fill=Region))+
   geom_col() + theme_minimal()+

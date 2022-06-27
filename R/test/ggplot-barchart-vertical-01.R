@@ -14,3 +14,6 @@ ggplot(ce, aes(x = Date, y = Weight,fill = Cultivar)) +
   ylim(0, max(ce$label_2) * 1.1) + 
   theme_minimal() +
   scale_fill_brewer(palette = "Blues")
+
+ggsave("./test/ggplot/save_ggplot_barchart_vertical.png", width = 6, height = 4, dpi = 320, units = "in",
+       bg = "white")
