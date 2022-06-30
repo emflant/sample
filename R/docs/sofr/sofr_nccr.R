@@ -1,10 +1,8 @@
 library(tidyverse)
 library(lubridate)
 library(readxl)
-# as.Date(19137, origin = "1970-01-01")
-# start_date = as.Date("2022-05-31")
-# end_date = as.Date("2022-06-12")
 
+remove(list = ls())
 ##########################################################
 # https://www.newyorkfed.org/markets/reference-rates/sofr
 # 에서 엑셀로 다운로드 한다.
@@ -39,12 +37,15 @@ sofr_rate %>% print(n = Inf)
 ##########################################################
 
 v_loan_amount = 25364062.44
-v_start_date = "2022-03-31"
-v_end_date = "2022-04-21"
+v_prev_interest_date = "2022-03-31" # 이전 이자징수일.
+v_next_interest_date = "2022-04-22" # 다음 이자징수일.
+# v_start_date = "2022-03-31"
+# v_end_date = "2022-04-21"
 
 
 
-tb_nccr = tibble(seq = 1, date = seq.Date(as.Date(v_start_date), as.Date(v_end_date), by = "day"),
+tb_nccr = tibble(seq = 1, date = seq.Date(as.Date(v_prev_interest_date), 
+                                          as.Date(v_next_interest_date) - 1, by = "day"),
                  wday = wday(date, label = T)) %>% 
   left_join(sofr_rate, by = c("date")) %>% 
   fill(effective_date, rate_type, rate) %>% 
@@ -62,10 +63,17 @@ tb_nccr = tibble(seq = 1, date = seq.Date(as.Date(v_start_date), as.Date(v_end_d
   mutate(prev_ccr_day = lag(ccr_day, 1, default = 0)) %>% 
   mutate(nccr_day = ccr_day - prev_ccr_day) %>% 
   mutate(nccr_interest = round(v_loan_amount * nccr_day, 2)) %>% 
+  select(seq:rate, n3, n4, rate_day, ccr_year, ccr_day, nccr_day, nccr_interest) %>% 
   print(n = Inf)
-tb_nccr2
+tb_nccr
+# tb_nccr %>% 
+#   write_excel_csv(file = "~/data/result_nccr.csv")
+
 tb_nccr %>% 
-  write_excel_csv(file = "~/data/result_nccr.csv")
+  select(seq:rate, n3, n4, rate_day, ccr_year, ccr_day, nccr_day, nccr_interest) %>% 
+  mutate(across(rate_day:nccr_day, num, digits = 7)) %>%
+  mutate(nccr_interest = num(nccr_interest, digits = 2)) %>%
+  print(n = Inf)
 
 ##########################################################
 
