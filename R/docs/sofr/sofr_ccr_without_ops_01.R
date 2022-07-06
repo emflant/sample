@@ -6,6 +6,15 @@ remove(list = ls())
 # as.Date(19137, origin = "1970-01-01")
 v_prev_interest_date = "2022-05-23" # 이전 이자징수일.
 v_next_interest_date = "2022-06-05" # 다음 이자징수일.
+
+difftime(v_next_interest_date, v_prev_interest_date, units = "days")
+ymd(v_next_interest_date) - ymd(v_prev_interest_date)
+ymd(v_prev_interest_date)
+
+interval(ymd(v_next_interest_date), ymd(v_prev_interest_date))
+
+as.integer(as.Date(v_next_interest_date) - as.Date(v_prev_interest_date))
+
 # v_start_date = "2022-05-23"
 # v_end_date = "2022-06-05"
 v_spread_rate = 0.009
@@ -20,16 +29,16 @@ sofr_rate = read_excel("~/data/sofr_rate.xlsx") %>%
   filter(!is.na(effective_date)) %>% 
   arrange(effective_date) %>% 
   mutate(date = lead(effective_date, 5))
-sofr_rate %>% print(n = Inf)
+# sofr_rate %>% print(n = Inf)
 ##########################################################
 
 sofr_ccr_1 = tibble(date = seq.Date(as.Date(v_prev_interest_date), 
                                     as.Date(v_next_interest_date) - 1, by = "day"),
                     wday = wday(date, label = T)) %>% 
   left_join(sofr_rate, by = c("date"), keep = T)  %>% 
-  select(date = date.x, wday, weighted_date = date.y, effective_date, rate_type, rate) %>% 
-  fill(weighted_date:rate) %>% 
-  group_by(weighted_date) %>% 
+  select(date = date.x, wday, effective_date, rate_type, rate) %>% 
+  fill(effective_date:rate) %>% 
+  group_by(effective_date) %>% 
   mutate(n1 = n(), # 비영업일 가중치
          n2 = row_number()) %>% 
   ungroup() %>% 
@@ -46,4 +55,11 @@ sofr_ccr_1 = tibble(date = seq.Date(as.Date(v_prev_interest_date),
 sofr_ccr_1 %>% 
   mutate(across(rate_day:interests_rate, num, digits = 7)) %>% 
   print(n = Inf)
+
+# A tibble: 14 × 13
+# date       wday  effective_date rate_type   rate    n1    n2    n3    n4  rate_day   ccr_day  ccr_year interest_rate
+# <date>     <ord> <date>         <chr>      <dbl> <int> <int> <dbl> <dbl> <num:.7!> <num:.7!> <num:.7!>     <num:.7!>
+# 1 2022-05-23 Mon   2022-05-23     SOFR      0.0078     1     1     1     1 0.0000217 0.0000217 0.0078000     0.0168000
+# 2 2022-05-24 Tue   2022-05-24     SOFR      0.0078     1     1     1     2 0.0000217 0.0000433 0.0078001     0.0168001
+# 3 2022-05-25 Wed   2022-05-25     SOFR      0.0078     1     1     1     3 0.0000217 0.0000650 0.0078002     0.0168002
   

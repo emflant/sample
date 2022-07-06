@@ -8,6 +8,10 @@ v_prev_interest_date = "2022-05-31" # 이전 이자징수일.
 v_next_interest_date = "2022-06-13" # 다음 이자징수일.
 # v_end_date = as.Date(v_next_interest_date) - 1 # 이자계산종료일
 
+
+difftime('2022-06-01', v_prev_interest_date, units = "days")
+difftime(v_next_interest_date, v_prev_interest_date, units = "days")
+
 # v_start_date = "2022-05-31" # 이자계산시작일.
 
 v_spread_rate = 0.009
@@ -22,7 +26,7 @@ tb_sofr_rate = read_excel("~/data/sofr_rate.xlsx") %>%
   filter(!is.na(effective_date)) %>% 
   arrange(effective_date) %>% 
   mutate(date = lead(effective_date, 5))
-tb_sofr_rate %>% print(n = Inf)
+# tb_sofr_rate %>% print(n = Inf)
 ##########################################################
 
 tb_lookback = tibble(date = seq.Date(as.Date(v_prev_interest_date), as.Date(v_next_interest_date), by = "day"),
@@ -30,7 +34,7 @@ tb_lookback = tibble(date = seq.Date(as.Date(v_prev_interest_date), as.Date(v_ne
   left_join(tb_sofr_rate, by = c("date"), keep = T)  %>% 
   select(effective_date) 
   
-tb_lookback
+# tb_lookback
 v_lookback_prev_interest_date = tb_lookback %>% head(1) %>% pull(effective_date)
 v_lookback_next_interest_date = tb_lookback %>% tail(1) %>% pull(effective_date)
 
@@ -38,10 +42,10 @@ sofr_ccr_with_ops1 = tibble(date = seq.Date(as.Date(v_lookback_prev_interest_dat
                                             as.Date(v_lookback_next_interest_date) - 1, by = "day"),
                             wday = wday(date, label = T)) %>% 
   left_join(tb_sofr_rate, by = c("date" = "effective_date"), keep = T) %>% 
-  mutate(weighted_date = effective_date, .after = wday) %>% 
+  # mutate(weighted_date = effective_date, .after = wday) %>% 
   select(date = date.x, wday:rate) %>% 
-  fill(weighted_date:rate) %>% 
-  group_by(weighted_date) %>% 
+  fill(effective_date:rate) %>% 
+  group_by(effective_date) %>% 
   mutate(n1 = n(), # 비영업일 가중치
          n2 = row_number()) %>% 
   ungroup() %>% 
@@ -55,8 +59,17 @@ sofr_ccr_with_ops1 = tibble(date = seq.Date(as.Date(v_lookback_prev_interest_dat
 
 
 ##########################################################
-
+sofr_ccr_with_ops1
 sofr_ccr_with_ops1 %>% 
   mutate(across(rate_day:interest_rate, num, digits = 7)) %>% 
   print(n = Inf)
+
+v_interest_rate = sofr_ccr_with_ops1 %>% pull(interest_rate) %>% tail(1)
+v_interest_days = sofr_ccr_with_ops1 %>% nrow()
+v_principal_amount = 100000000
+  
+
+v_principal_amount * v_interest_rate * v_interest_days / 360
+
+
 

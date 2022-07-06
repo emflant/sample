@@ -2,6 +2,10 @@ library(tidyverse)
 library(lubridate)
 library(readxl)
 
+
+# a = as.double(Sys.time())
+# Sys.time()
+# as_datetime(a, tz = "Asia/Seoul")
 remove(list = ls())
 ##########################################################
 # https://www.newyorkfed.org/markets/reference-rates/sofr
@@ -44,7 +48,7 @@ v_next_interest_date = "2022-04-22" # 다음 이자징수일.
 
 
 
-tb_nccr = tibble(seq = 1, date = seq.Date(as.Date(v_prev_interest_date), 
+tb_nccr = tibble(seq = as.integer(Sys.time()), date = seq.Date(as.Date(v_prev_interest_date), 
                                           as.Date(v_next_interest_date) - 1, by = "day"),
                  wday = wday(date, label = T)) %>% 
   left_join(sofr_rate, by = c("date")) %>% 
@@ -63,11 +67,13 @@ tb_nccr = tibble(seq = 1, date = seq.Date(as.Date(v_prev_interest_date),
   mutate(prev_ccr_day = lag(ccr_day, 1, default = 0)) %>% 
   mutate(nccr_day = ccr_day - prev_ccr_day) %>% 
   mutate(nccr_interest = round(v_loan_amount * nccr_day, 2)) %>% 
-  select(seq:rate, n3, n4, rate_day, ccr_year, ccr_day, nccr_day, nccr_interest) %>% 
+  # select(seq:rate, n1:rate_day, ccr_year, ccr_day, nccr_day, nccr_interest) %>% 
   print(n = Inf)
 tb_nccr
 # tb_nccr %>% 
 #   write_excel_csv(file = "~/data/result_nccr.csv")
+
+
 
 tb_nccr %>% 
   select(seq:rate, n3, n4, rate_day, ccr_year, ccr_day, nccr_day, nccr_interest) %>% 
@@ -101,15 +107,17 @@ sofr_rate1 = sofr_rate %>%
   mutate(rate = round(rate, digits = 4))  
 
 sofr_rate1 %>% print(n = Inf)
+dbRemoveTable(con, "sofr_rate")
 dbWriteTable(con, "sofr_rate", sofr_rate1)
+
 dbRemoveTable(con, "sofr_nccr")
 dbRemoveTable(con, "sofr_nccr_inr")
 
 dbReadTable(con, "sofr_rate") %>% 
   as_tibble()
 
-dbWriteTable(con, "sofr_nccr", tb_nccr2)
-dbWriteTable(con, "sofr_nccr_inr", tb_nccr2)
+dbWriteTable(con, "sofr_nccr", tb_nccr)
+dbWriteTable(con, "sofr_nccr_inr", tb_nccr)
 
 
 ##########################################################
@@ -174,3 +182,6 @@ v_end_date = "2022-04-21"
 # 2022-04-21
 # (22 rows)
 
+
+
+as.double(Sys.time())
