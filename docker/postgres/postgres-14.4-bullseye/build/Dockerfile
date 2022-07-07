@@ -1,8 +1,5 @@
 FROM postgres:14.4-bullseye
 
-RUN sed -i 's/archive.ubuntu.com/mirror.kakao.com/g' /etc/apt/sources.list
-RUN sed -i 's/security.ubuntu.com/mirror.kakao.com/g' /etc/apt/sources.list
-
 RUN apt-get update; \
 		apt-get install -y apt-utils vim zsh curl git locales tzdata; \
 		zsh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" 
@@ -26,5 +23,4 @@ USER postgres
 RUN zsh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" 
 RUN sed -i 's/robbyrussell/bureau/g' /var/lib/postgresql/.zshrc
 RUN echo "alias ll=\"ls -alFh\"" >> /var/lib/postgresql/.zshrc
-
 USER root

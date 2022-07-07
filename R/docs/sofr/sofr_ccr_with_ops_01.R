@@ -9,8 +9,8 @@ v_next_interest_date = "2022-06-13" # 다음 이자징수일.
 # v_end_date = as.Date(v_next_interest_date) - 1 # 이자계산종료일
 
 
-difftime('2022-06-01', v_prev_interest_date, units = "days")
-difftime(v_next_interest_date, v_prev_interest_date, units = "days")
+# difftime('2022-06-01', v_prev_interest_date, units = "days")
+# difftime(v_next_interest_date, v_prev_interest_date, units = "days")
 
 # v_start_date = "2022-05-31" # 이자계산시작일.
 
@@ -71,5 +71,16 @@ v_principal_amount = 100000000
 
 v_principal_amount * v_interest_rate * v_interest_days / 360
 
+##########################################################
 
+library(dbplyr)
+library(RPostgres)
+library(DBI)
 
+con <- dbConnect(RPostgres::Postgres(),dbname = 'mydb', 
+                 host = 'localhost', 
+                 port = 5433, # or any other port specified by your DBA
+                 user = 'postgres',
+                 password = '1111')
+
+dbListTables(con)
