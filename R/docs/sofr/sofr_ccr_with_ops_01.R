@@ -84,3 +84,7 @@ con <- dbConnect(RPostgres::Postgres(),dbname = 'mydb',
                  password = '1111')
 
 dbListTables(con)
+
+
+dbWriteTable(con, "sofr_ccr", sofr_ccr_with_ops1)
+dbReadTable(con, "sofr_nccr")
