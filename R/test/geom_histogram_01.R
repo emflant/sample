@@ -32,21 +32,21 @@ rent_sanfrancisco1
 ggplot(rent_sanfrancisco1) +
   geom_histogram(aes(year, fill = ..count..), 
                  binwidth = 1, show.legend = F,) +
-  stat_bin(geom = "text", aes(year, label = ifelse(..count.. == max(..count..), ..count.., "")),
-           binwidth = 1, colour = "#73A9AD", vjust = -0.5,
-           family = "AppleSDGothicNeo-ExtraBold", size = 5) +
+  # stat_bin(geom = "text", aes(year, label = ifelse(..count.. == max(..count..), ..count.., "")),
+  #          binwidth = 1, colour = "#73A9AD", vjust = -0.5,
+  #          family = "AppleSDGothicNeo-ExtraBold", size = 5) +
   # stat_bin(geom = "text", aes(year),
   #          binwidth = 5,
   #          label = c(NA,2,3,NA,5),
   #          colour = "#73A9AD",
   #          vjust = -0.5) +
   # scale_color_manual(values = c(NULL,"#73A9AD")) +
-  # scale_fill_gradient(low = "#9FE8FA", high = "#26BAEE" ) +
-  scale_fill_gradient(low = "#C4DFAA", high = "#73A9AD" ) +
-  # scale_x_continuous(breaks = c(2000, 2004, 2018)) +
+  scale_fill_gradient(low = "#9FE8FA", high = "#26BAEE" ) +
+  # scale_fill_gradient(low = "#C4DFAA", high = "#73A9AD" ) +
+  scale_x_continuous(breaks = c(2000, 2004, 2018)) +
   scale_y_continuous(expand = expansion(c(0, 0.15))) +
   theme_void(base_family = "AppleSDGothicNeo-ExtraBold", base_size = 13) +
-  # labs(x = "") +
+  labs(caption = "twi") +
   # annotate(geom = "text", x = 2004, y = max(..density..), label = "19,654건",
   #          size = 4.5, vjust = -.7,
   #          family = "AppleSDGothicNeo-ExtraBold") +
@@ -54,9 +54,10 @@ ggplot(rent_sanfrancisco1) +
     legend.position = "none",
     axis.text.x = element_text(margin = margin(0.2,0,0,0,"cm"), size = 10),
     plot.margin = margin(0.5,1,1,1,"cm"),
-    plot.background = element_rect(fill = "#F1F0EA", color = "#F1F0EA"), ##FBF1E6
-    # axis.title.x = element_text(margin = margin(1,0,0,0,"cm"), )
+    plot.background = element_rect(fill = "#F1F0EA", color = "#F1F0EA")
   )
+
+in_binwidth = 1
 
 ggplot(rent_sanfrancisco1) +
   geom_histogram(aes(year, fill = ..count..), 

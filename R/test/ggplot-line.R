@@ -1,13 +1,14 @@
 rent <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2022/2022-07-05/rent.csv')
   
 
-rent_sanfrancisco = rent %>% 
-  filter(city == 'san francisco') %>% 
+rent %>% distinct(city) %>% print(n = 300)
+rent_berkeley = rent %>% 
+  filter(city == 'marin') %>% 
   group_by(year) %>% 
   summarise(count = n()) %>% 
   arrange(year)
 
-rent_sanfrancisco
+rent_berkeley
 
 # ggplot(rent_sanfrancisco, aes(year, count, fill = count)) +
 #   geom_col() +
@@ -21,16 +22,16 @@ rent_sanfrancisco
 #   scale_y_continuous(limits = c(0, max(rent_sanfrancisco$count) * 1.1)) +
 #   theme(legend.position = "none")
 
-ggplot(rent_sanfrancisco, aes(year, count, fill = count)) +
+ggplot(rent_berkeley, aes(year, count, fill = count)) +
   geom_col() +
-  scale_x_continuous(breaks = c(2000, 2004, 2018)) +
-  scale_y_continuous(limits = c(0, max(rent_sanfrancisco$count) * 1.2),
+  scale_x_continuous(breaks = c(2000, 2012, 2018)) +
+  scale_y_continuous(limits = c(0, max(rent_berkeley$count) * 1.2),
                      expand = expansion(c(0.00,0))) +
   # scale_fill_gradient(low = "#FFC4C4", high = "#A10035" ) +
-  # scale_fill_gradient(low = "#E8F9FD", high = "#0AA1DD" ) +
+  scale_fill_gradient(low = "#E8F9FD", high = "#0AA1DD" ) +
   # scale_fill_gradient(low = "#85F4FF", high = "#42C2FF" ) +
   # scale_fill_gradient(low = "#C8C6C6", high = "#4B6587" ) +
-  scale_fill_gradient(low = "#FAD9A1", high = "#F37878" ) +
+  # scale_fill_gradient(low = "#FAD9A1", high = "#F37878" ) +
   theme_void(base_family = "AppleSDGothicNeo-ExtraBold", base_size = 13) +
   # labs(x = "") +
   annotate(geom = "text", x = 2004, y = 19654, label = "19,654건", 

@@ -10,7 +10,6 @@ file_compare("~/Desktop/photo/input", "~/Desktop/photo/output")
 copy_photo_files("~/Desktop/photo/input", "~/Desktop/photo/output")
 # par_copy_photo_files("~/Desktop/photo/input", "~/Desktop/photo/output")
 
-
 a = c('이케아코리아 유한회사 고양지점', '롯데물산(주)', '나다2')
 b = c(100, 20, 50000)
 
