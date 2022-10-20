@@ -21,4 +21,7 @@ RUN sed -i 's/robbyrussell/bureau/g' /root/.zshrc
 RUN echo "alias ll=\"ls -alFh\"" >> /root/.zshrc
 RUN echo "alias rr=\"ranger\"" >> /root/.zshrc
 RUN chsh -s /bin/zsh 
-RUN apt-get install -y hugo
+
+COPY packages /myfiles
+RUN dpkg -i /myfiles/hugo_0.104.3_linux-arm64.deb
+# RUN apt-get install -y hugo
