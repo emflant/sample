@@ -19,6 +19,18 @@ sofr_rate = read_excel("~/data/sofr_rate.xlsx") %>%
   arrange(effective_date) %>% 
   mutate(date = lead(effective_date, 5))
 sofr_rate %>% print(n = Inf)
+
+sofr_rate %>% head(10)
+
+read_csv("~/data/sofr_rate.csv") %>% 
+  janitor::clean_names() %>% 
+  mutate(effective_date = as.Date(effective_date, format = "%m/%d/%Y"),
+         rate = rate_percent / 100) %>% 
+  select(effective_date, rate_type, rate) %>% 
+  filter(!is.na(effective_date)) %>% 
+  arrange(effective_date) %>% 
+  mutate(date = lead(effective_date, 5))
+
 ##########################################################
 # c(1,2, NA) %>% is.na()
 # 

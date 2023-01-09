@@ -26,14 +26,16 @@ tb_sofr_rate = read_excel("~/data/sofr_rate.xlsx") %>%
   filter(!is.na(effective_date)) %>% 
   arrange(effective_date) %>% 
   mutate(date = lead(effective_date, 5))
-# tb_sofr_rate %>% print(n = Inf)
+tb_sofr_rate %>% print(n = Inf)
 ##########################################################
 
-tb_lookback = tibble(date = seq.Date(as.Date(v_prev_interest_date), as.Date(v_next_interest_date), by = "day"),
+tb_lookback = tibble(date = seq.Date(as.Date(v_prev_interest_date), 
+                                     as.Date(v_next_interest_date), by = "day"),
        wday = wday(date, label = T)) %>% 
   left_join(tb_sofr_rate, by = c("date"), keep = T)  %>% 
-  select(effective_date) 
+  select(effective_date, date.x) 
   
+tb_lookback
 # tb_lookback
 v_lookback_prev_interest_date = tb_lookback %>% head(1) %>% pull(effective_date)
 v_lookback_next_interest_date = tb_lookback %>% tail(1) %>% pull(effective_date)

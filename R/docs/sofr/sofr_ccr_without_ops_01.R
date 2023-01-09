@@ -4,20 +4,18 @@ library(readxl)
 
 remove(list = ls())
 # as.Date(19137, origin = "1970-01-01")
-v_prev_interest_date = "2022-05-23" # 이전 이자징수일.
-v_next_interest_date = "2022-06-05" # 다음 이자징수일.
+v_prev_interest_date = "2022-06-16" # 이전 이자징수일.
+v_next_interest_date = "2022-06-22" # 다음 이자징수일.
 
-difftime(v_next_interest_date, v_prev_interest_date, units = "days")
-ymd(v_next_interest_date) - ymd(v_prev_interest_date)
-ymd(v_prev_interest_date)
-
-interval(ymd(v_next_interest_date), ymd(v_prev_interest_date))
-
-as.integer(as.Date(v_next_interest_date) - as.Date(v_prev_interest_date))
+# difftime(v_next_interest_date, v_prev_interest_date, units = "days")
+# ymd(v_next_interest_date) - ymd(v_prev_interest_date)
+# ymd(v_prev_interest_date)
+# interval(ymd(v_next_interest_date), ymd(v_prev_interest_date))
+# as.integer(as.Date(v_next_interest_date) - as.Date(v_prev_interest_date))
 
 # v_start_date = "2022-05-23"
 # v_end_date = "2022-06-05"
-v_spread_rate = 0.009
+v_spread_rate = 0.009 # 가산금리
 ##########################################################
 # https://www.newyorkfed.org/markets/reference-rates/sofr
 # 에서 엑셀로 다운로드 한다.
@@ -29,7 +27,9 @@ sofr_rate = read_excel("~/data/sofr_rate.xlsx") %>%
   filter(!is.na(effective_date)) %>% 
   arrange(effective_date) %>% 
   mutate(date = lead(effective_date, 5))
-# sofr_rate %>% print(n = Inf)
+
+
+sofr_rate %>% print(n = Inf)
 ##########################################################
 
 sofr_ccr_1 = tibble(date = seq.Date(as.Date(v_prev_interest_date), 
@@ -50,11 +50,12 @@ sofr_ccr_1 = tibble(date = seq.Date(as.Date(v_prev_interest_date),
   mutate(interests_rate = ccr_year + v_spread_rate)  # 가산율이 0.9% 일때,
 
 
+sofr_ccr_1
 ##########################################################
 
 sofr_ccr_1 %>% 
   mutate(across(rate_day:interests_rate, num, digits = 7)) %>% 
-  print(n = Inf)
+  select(date, wday, effective_date, rate, interests_rate)
 
 # A tibble: 14 × 13
 # date       wday  effective_date rate_type   rate    n1    n2    n3    n4  rate_day   ccr_day  ccr_year interest_rate
