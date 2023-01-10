@@ -1,0 +1,25 @@
+db.classEvent.updateMany(
+	{ classCount : '8' },
+	{ $set: { classCount : 'B'} }
+);
+
+
+
+db.classEvent.find({ classCount : '9' });
+
+
+db.classEvent.find({ classCount : '9', classDate: '2022-12-30' });
+db.classEvent.find({ classDate: '2022-12-30' });
+
+// 9-보강수업을 A코드로 일괄변경.
+db.classEvent.updateMany(
+	{ classDate: '2022-12-30', classCount : '9' },
+	{ $set: { classCount : 'A'} }
+);
+
+
+// 9-보강수업을 A코드로 일괄변경.
+db.classEvent.updateMany(
+	{ classCount : '9' },
+	{ $set: { classCount : 'A'} }
+);
