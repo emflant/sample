@@ -79,14 +79,22 @@ library(dbplyr)
 library(RPostgres)
 library(DBI)
 
-con <- dbConnect(RPostgres::Postgres(),dbname = 'mydb', 
+con <- dbConnect(RPostgres::Postgres(),
+                 dbname = 'creart-01', 
                  host = 'localhost', 
-                 port = 5433, # or any other port specified by your DBA
+                 port = 5432, 
                  user = 'postgres',
                  password = '1111')
 
 dbListTables(con)
 
+Id(sch)
+
+dbWriteTable(con, 
+             Id(schema = "app01", table = "sofr_rate"), 
+             value = tb_sofr_rate)
+
+dbReadTable(con, Id(schema = "app01", table = "sofr_rate"))
 
 dbWriteTable(con, "sofr_ccr", sofr_ccr_with_ops1)
 dbReadTable(con, "sofr_nccr")
