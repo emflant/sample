@@ -91,10 +91,14 @@ dbListTables(con)
 Id(sch)
 
 dbWriteTable(con, 
+             "sofr_rate", 
+             value = tb_sofr_rate)
+
+dbWriteTable(con, 
              Id(schema = "app01", table = "sofr_rate"), 
              value = tb_sofr_rate)
 
 dbReadTable(con, Id(schema = "app01", table = "sofr_rate"))
 
 dbWriteTable(con, "sofr_ccr", sofr_ccr_with_ops1)
-dbReadTable(con, "sofr_nccr")
+dbReadTable(con, "sofr_rate")
