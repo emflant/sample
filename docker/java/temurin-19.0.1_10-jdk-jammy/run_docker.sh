@@ -1,3 +1,4 @@
+docker start my-postgres
 docker run -it --rm --name my-temurin-19 \
 	--network my-net \
 	-p 8081:8081 \

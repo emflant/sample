@@ -13,8 +13,35 @@ mongo_uri = "mongodb://test22:testpw22@localhost:27017/mydb"
 payment = mongo("payment", db = "mydb", url = mongo_uri)
 classEvent = mongo("classEvent", db = "mydb", url = mongo_uri)
 
-payment$find() %>% 
+tb_payment = payment$find() %>% 
   as_tibble()
+tb_payment %>% str
+# paymentType 1.현금 2.제로페이 3.신용카드
+
+th_payment_cd = tibble(paymentType = c('1','2','3'),
+                       paymentTypeNm = c('현금', '제로페이', '신용카드'))
+th_payment_cd
+
+tb_member = tb_payment %>% 
+  pull(memberIdInfo) %>% as_tibble() %>% 
+  select(memberId = '_id', name) %>% 
+  distinct(memberId, name)
+  
+tb_payment2 = tb_payment %>% 
+  filter(delYn == F) %>% 
+  left_join(tb_member) %>% 
+  left_join(th_payment_cd) %>% 
+  mutate(paymentDate = ymd(paymentDate)) %>% 
+  select(name, paymentDate, paymentTypeNm, cashReceiptYn, amount) %>% 
+  filter(paymentDate >= ymd('2022-01-01'), paymentDate < ymd('2023-01-01')) %>% 
+  arrange(paymentDate) 
+  
+
+tb_payment2 %>% 
+  filter(cashReceiptYn == T | paymentTypeNm == '제로페이') %>% 
+  write_excel_csv(file="~/data/creart_2022.csv")
+
+
 
 classEvent$find() %>% 
   as_tibble()
