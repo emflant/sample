@@ -38,7 +38,6 @@ tb_payment2 = tb_payment %>%
   
 
 tb_payment2 %>% 
-  filter(cashReceiptYn == T | paymentTypeNm == '제로페이') %>% 
   write_excel_csv(file="~/data/creart_2022.csv")
 
 
