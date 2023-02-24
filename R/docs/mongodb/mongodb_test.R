@@ -40,11 +40,17 @@ tb_payment2 = tb_payment %>%
 tb_payment2 %>% 
   write_excel_csv(file="~/data/creart_2022.csv")
 
+tb_payment2 %>% 
+  filter(paymentTypeNm == "제로페이") %>% 
+  mutate(sum = sum(amount))
 
-
-classEvent$find() %>% 
-  as_tibble()
-
+tb_payment2
+tb_payment2 %>% 
+  mutate(mm = month(paymentDate)) %>% 
+  filter(paymentTypeNm == "현금", cashReceiptYn == T) %>% 
+  group_by(mm) %>% 
+  summarise(sum = sum(amount)) %>% 
+  mutate(cs = cumsum(sum))
 
 p = payment$find() %>% 
   as_tibble() %>% 

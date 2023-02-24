@@ -1,5 +1,5 @@
 docker run -d --name my-firefox \
-	--network selenium-net \
+	--network my-net \
 	-p 4444:4444 \
 	-p 7900:7900 \
 	-v ~/data:/home/seluser/data \
