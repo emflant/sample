@@ -4,7 +4,7 @@ RUN sed -i 's/archive.ubuntu.com/mirror.kakao.com/g' /etc/apt/sources.list
 RUN sed -i 's/security.ubuntu.com/mirror.kakao.com/g' /etc/apt/sources.list
 
 RUN apt-get update; \
-		apt-get install -y apt-utils vim zsh curl git locales tzdata; \
+		apt-get install -y apt-utils vim zsh curl git locales tzdata python3; \
 		zsh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" 
 
 # LOCALE 설정
