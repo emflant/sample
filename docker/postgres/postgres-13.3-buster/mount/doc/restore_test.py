@@ -4,8 +4,9 @@ import os
 import configparser
 from pathlib import Path
 from datetime import date
+import datetime
 
-v_today = date.today().strftime("%Y%m%d")
+v_today = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
 
 # 운영(prod) 데이터의 백업파일을 만든다.
 v_command1= f'pg_dump prod > ./dumpfile/dumpfile_{v_today}'
