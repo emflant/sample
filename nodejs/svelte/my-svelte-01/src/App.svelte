@@ -1,30 +1,42 @@
 <script>
-	export let name;
+	import Nested1 from './Nested.svelte'
+	let name = 'Svelte';
+	let string = `this string contains some <strong>HTML!!!</strong>`;
+	let count = 0;
+	$: doubled = count * 3;
+	$: if(count < 10){
+		console.log(`the count is ${count}`)
+	}
+
+	function increment(){
+		count += 1;
+	}
+
+
+	let numbers = [1,2,3,4];
+	function add_number(){
+		numbers.push(numbers.length + 1);
+		numbers = numbers;
+	}
 </script>
 
 <main>
-	<h1>Hello {name}!</h1>
-	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
+	<h1>Hello {name.toUpperCase()}!!</h1>
+	<p>{@html string}</p>
+	<button class="btn btn-primary" on:click={increment}>Clicked {count} 
+	{count === 1 ? 'time' : 'times'}</button>
+	<p>3 x {count} = {doubled}</p>
+
+	<button class="btn btn-primary" on:click={add_number}>Add number</button>
+	<p>{numbers.join('+')}</p>
+
+	<Nested1 answer={421} />
+	<Nested1></Nested1>
+
+	{#if count > 10}
+	<p>{count} is greater then 10</p>
+	{/if}
 </main>
 
 <style>
-	main {
-		text-align: center;
-		padding: 1em;
-		max-width: 240px;
-		margin: 0 auto;
-	}
-
-	h1 {
-		color: #ff3e00;
-		text-transform: uppercase;
-		font-size: 4em;
-		font-weight: 100;
-	}
-
-	@media (min-width: 640px) {
-		main {
-			max-width: none;
-		}
-	}
 </style>
