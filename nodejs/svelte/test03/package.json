@@ -1,5 +1,5 @@
 {
-	"name": "my-svelte-02",
+	"name": "test03",
 	"version": "0.0.1",
 	"scripts": {
 		"dev": "vite dev --host 0.0.0.0",
