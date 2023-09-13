@@ -9,27 +9,21 @@
 	<meta name="description" content="Svelte demo app" />
 </svelte:head>
 
-<section>
-	<h1>
-		<!-- <span class="welcome">
-			<picture>
-				<source srcset={welcome} type="image/webp" />
-				<img src={welcome_fallback} alt="Welcome" />
-			</picture>
-		</span> -->
 
+<div class="row">
+	<h1>
 		to your new<br />SvelteKit app
 	</h1>
-
+	
 	<h2>
 		try editing <strong>src/routes/+page.svelte</strong>
 	</h2>
+	
+</div>
 
-	<Counter />
-</section>
 
 <style>
-	section {
+	/* section {
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
@@ -39,5 +33,5 @@
 
 	h1 {
 		width: 100%;
-	}
+	} */
 </style>

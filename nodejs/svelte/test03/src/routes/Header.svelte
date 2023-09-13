@@ -4,74 +4,22 @@
 	// import github from '$lib/images/github.svg';
 </script>
 
-<header>  
-	<!-- <div class="corner">
-		<a href="https://kit.svelte.dev">
-			<img src={logo} alt="SvelteKit" />
-		</a>
-	</div> -->
+<header class="d-flex justify-content-center">  
 	<ul class="nav nav-pills">
 		<li class="nav-item">
-		  <a class= {$page.url.pathname === '/' ? 'nav-link active' : 'nav-link'}
-		  aria-current={$page.url.pathname === '/' ? 'page' : undefined} href="/">Home</a>
+			<a class= {$page.url.pathname === '/' ? 'nav-link active' : 'nav-link'}
+			aria-current={$page.url.pathname === '/' ? 'page' : undefined} href="/">실적</a>
 		</li>
 		<li class="nav-item">
-		  <a class= {$page.url.pathname === '/about' ? 'nav-link active' : 'nav-link'} 
-		  aria-current={$page.url.pathname === '/about' ? 'page' : undefined} href="/about">About</a>
+			<a class= {$page.url.pathname === '/member' ? 'nav-link active' : 'nav-link'}
+			aria-current={$page.url.pathname === '/member' ? 'page' : undefined} href="/member">회원</a>
 		</li>
-	  </ul>
-
-	<!-- <div class="corner">
-		<a href="https://github.com/sveltejs/kit">
-			<img src={github} alt="GitHub" />
-		</a>
-	</div> -->
+		<li class="nav-item">
+			<a class= {$page.url.pathname === '/class' ? 'nav-link active' : 'nav-link'}
+			aria-current={$page.url.pathname === '/class' ? 'page' : undefined} href="/class">일정</a>
+		</li>
+		<li class="nav-item">
+			<a class= {$page.url.pathname === '/income' ? 'nav-link active' : 'nav-link'}
+			aria-current={$page.url.pathname === '/income' ? 'page' : undefined} href="/income">수입</a>
+		</li>
 </header>
-
-<!-- <style>
-	header {
-		display: flex;
-		justify-content: space-between;
-	}
-
-	/* .corner {
-		width: 3em;
-		height: 3em;
-	}
-
-	.corner a {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		width: 100%;
-		height: 100%;
-	}
-
-	.corner img {
-		width: 2em;
-		height: 2em;
-		object-fit: contain;
-	} */
-
-
-	ul {
-		position: relative;
-		padding: 0;
-		margin: 0;
-		height: 3em;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		list-style: none;
-		background: var(--background);
-		background-size: contain;
-	}
-
-	li {
-		position: relative;
-		height: 100%;
-	}
-	/* a:hover {
-		color: var(--color-theme-1);
-	} */
-</style> -->
