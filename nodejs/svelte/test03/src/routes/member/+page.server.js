@@ -1,12 +1,19 @@
-import { posts } from './data.js';
-import { mongos } from './mongo.js';
+// import { posts } from './data.js';
+import db from "$lib/database/db"
 
-export function load() {
-	console.log(mongos);
+export async function load() {
+	const sample01 = db.collection('sample01');
+
+    const query = { type : 'posts' };
+    const posts = await sample01.findOne(query);
+
+	// console.log(posts);
+
 	return {
-		summaries: posts.map((post) => ({
+		summaries: posts.values.map((post) => ({
 			slug: post.slug,
-			title: post.title
+			title: post.title,
+			text: post.content
 		}))
 	};
 }
