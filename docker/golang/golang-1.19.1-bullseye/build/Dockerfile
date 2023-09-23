@@ -3,7 +3,7 @@ FROM golang:1.19.1-bullseye
 # RUN sed -i 's/security.ubuntu.com/mirror.kakao.com/g' /etc/apt/sources.list
 
 RUN apt-get update; \
-		apt-get install -y apt-utils vim zsh curl git locales tzdata ranger;
+		apt-get install -y apt-utils vim zsh curl git locales tzdata ranger tree;
 
 RUN localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
 ENV LANG en_US.utf8
