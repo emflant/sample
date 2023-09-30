@@ -1,19 +1,19 @@
-// import { posts } from './data.js';
-import db from "$lib/database/db"
+import db from "$lib/database/mydb"
 
 export async function load() {
-	const sample01 = db.collection('sample01');
+	const sample01 = db.collection('member');
 
-    const query = { type : 'posts' };
-    const posts = await sample01.findOne(query);
+    // const query = { name : '정현진' };
+    const cursor = await sample01.find({}, { projection: { _id : 0 } }).limit(5);
+	const allValues = await cursor.toArray();
 
-	// console.log(posts);
+	return { summaries : allValues };
 
-	return {
-		summaries: posts.values.map((post) => ({
-			slug: post.slug,
-			title: post.title,
-			text: post.content
-		}))
-	};
+	// return {
+	// 	summaries: posts.values.map((post) => ({
+	// 		slug: post.slug,
+	// 		title: post.title,
+	// 		text: post.content
+	// 	}))
+	// };
 }

@@ -1,1 +1,1 @@
-mongosh test03
+mongosh mydb
