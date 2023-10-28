@@ -1,4 +1,6 @@
 import db from "$lib/database/mydb"
+import { redirect } from '@sveltejs/kit'
+import validation from '$lib/js/form-validation.js'
 
 export async function load() {
 	const sample01 = db.collection('member');
@@ -17,3 +19,12 @@ export async function load() {
 	// 	}))
 	// };
 }
+
+export const actions = {
+	default: async ({ request }) => {
+		const data = await request.formData();
+		// db.createTodo(cookies.get('userid'), data.get('description'));
+		console.log(data);
+		// throw redirect(303, '/');
+	}
+};
