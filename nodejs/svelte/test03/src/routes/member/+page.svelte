@@ -2,11 +2,9 @@
 
     import InputText from '../@/InputText.svelte'
     import Select from '../@/Select.svelte'
-    // import Validation from '../@/Validation.svelte'
-    import validation from '$lib/js/form-validation.js'
-    // import test1 from '$lib/js/test1.js'
+    // import validation from '$lib/js/form-validation.js'
+    import test2 from '$lib/js/test2.js'
 
-    console.log('1');
     export let data;
 
     let active_item = 0;
@@ -26,26 +24,39 @@
         contents = result;
 	}
 
-    function bb(){
-        const forms = document.querySelectorAll('.needs-validation');
-        
-        Array.from(forms).forEach(form => {
-            if (!form.checkValidity()) {
-                console.log('input need!!');
-                // form.classList.add('was-validated');
-            } else {
-                // form.classList.remove('was-validated');
-            }
-            // console.log(form.classList);
-
-            // bootstrap 에서 was-validated 추가를 하면 form 내의 css 로직과 연결되어 필수체크 스타일이 발생한다.
-            // add 된다고해서 무조건 추가되는 건 아니고, Set 데이터구조와 동일하게 있는건 추가가 되지 않음.
-            form.classList.add('was-validated')
-        })
-    }
-
     // validation();
     // test1('테스트');
+
+    function chk2(event){
+
+        const form = event.target;
+
+        if (!form.checkValidity()) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+            
+    }
+
+    function chk(){
+    
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        const forms = document.querySelectorAll('.needs-validation')
+        
+        // Loop over them and prevent submission
+        Array.from(forms).forEach(form => {
+        form.addEventListener('submit', event => {
+            if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+            }
+
+            form.classList.add('was-validated')
+        }, false)
+        })
+        
+    }
 
 </script>
 
@@ -58,7 +69,7 @@
                 </a>
             {/each}
         </div>
-        <button on:click={bb}>bb()</button>
+        <button on:click={chk}>bb()</button>
     </div>
     <div class="col">
         <div class="row">
@@ -67,7 +78,7 @@
                 <textarea class="form-control" id="exampleFormControlTextarea1" rows="5">{JSON.stringify(contents, null, 2)}</textarea>
             </div>
             <div class="col-6">
-                <form method="POST" class="needs-validation" novalidate>
+                <form method="POST" class="needs-validation" novalidate on:submit={test2}>
                     <div class="mb-2">
                         <InputText id = "name" title="이름" bind:val={contents.name} />
                     </div>
@@ -77,7 +88,8 @@
                     <button class="btn btn-primary" type="submit">submit</button>
                 </form>
             </div>
+
         </div>
     </div>
 </div>
-<!-- <Validation /> -->
+<!-- <svelte:window on:load={validation} /> -->

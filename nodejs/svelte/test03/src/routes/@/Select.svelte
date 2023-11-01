@@ -3,7 +3,6 @@
     export let id;
     export let val;
     export let cdSet;
-    console.log('Select');
 </script>
 
 <label for="{id}" class="form-label">{title}</label>

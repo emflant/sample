@@ -2,7 +2,6 @@
     export let title = "제목";
     export let id;
     export let val;
-    console.log('InputText');
 </script>
 
 <label for="{id}" class="form-label">{title}</label>
