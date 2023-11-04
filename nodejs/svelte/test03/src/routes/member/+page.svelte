@@ -2,8 +2,7 @@
 
     import InputText from '../@/InputText.svelte'
     import Select from '../@/Select.svelte'
-    // import validation from '$lib/js/form-validation.js'
-    import test2 from '$lib/js/test2.js'
+    import { validateForm, resetAllForm } from '$lib/js/formValidation.js'
 
     export let data;
 
@@ -11,7 +10,6 @@
     let contents = {};
     let cdGender = [ { id : null, name : '-'}, { id : 'M', name : '남' }, { id : 'F', name : '여'}];
 
-    // console.log(data);
     function aa(name, i){
         active_item = i;
         roll(name);
@@ -22,41 +20,9 @@
 		const result = await response.json();
         // console.log(result);
         contents = result;
+
+        resetAllForm();
 	}
-
-    // validation();
-    // test1('테스트');
-
-    function chk2(event){
-
-        const form = event.target;
-
-        if (!form.checkValidity()) {
-            event.preventDefault();
-            event.stopPropagation();
-        }
-        form.classList.add('was-validated');
-            
-    }
-
-    function chk(){
-    
-        // Fetch all the forms we want to apply custom Bootstrap validation styles to
-        const forms = document.querySelectorAll('.needs-validation')
-        
-        // Loop over them and prevent submission
-        Array.from(forms).forEach(form => {
-        form.addEventListener('submit', event => {
-            if (!form.checkValidity()) {
-            event.preventDefault()
-            event.stopPropagation()
-            }
-
-            form.classList.add('was-validated')
-        }, false)
-        })
-        
-    }
 
 </script>
 
@@ -69,7 +35,6 @@
                 </a>
             {/each}
         </div>
-        <button on:click={chk}>bb()</button>
     </div>
     <div class="col">
         <div class="row">
@@ -78,12 +43,12 @@
                 <textarea class="form-control" id="exampleFormControlTextarea1" rows="5">{JSON.stringify(contents, null, 2)}</textarea>
             </div>
             <div class="col-6">
-                <form method="POST" class="needs-validation" novalidate on:submit={test2}>
+                <form method="POST" class="needs-validation" novalidate on:submit={validateForm}>
                     <div class="mb-2">
                         <InputText id = "name" title="이름" bind:val={contents.name} />
                     </div>
                     <div class="mb-2">
-                        <Select id="gender" bind:val={contents.gender} cdSet={cdGender} />
+                        <Select id="gender" bind:val={contents.gender} cdSet={cdGender} validationYn={false}/>
                     </div>
                     <button class="btn btn-primary" type="submit">submit</button>
                 </form>
@@ -92,4 +57,3 @@
         </div>
     </div>
 </div>
-<!-- <svelte:window on:load={validation} /> -->
