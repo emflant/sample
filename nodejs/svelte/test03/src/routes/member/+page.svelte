@@ -38,17 +38,17 @@
     </div>
     <div class="col">
         <div class="row">
-            <div class="col-6">
+            <div class="col-md">
                 <label for="exampleFormControlTextarea1" class="form-label">결과</label>
                 <textarea class="form-control" id="exampleFormControlTextarea1" rows="5">{JSON.stringify(contents, null, 2)}</textarea>
             </div>
-            <div class="col-6">
+            <div class="col">
                 <form method="POST" class="needs-validation" novalidate on:submit={validateForm}>
                     <div class="mb-2">
                         <InputText id = "name" title="이름" bind:val={contents.name} />
                     </div>
                     <div class="mb-2">
-                        <Select id="gender" bind:val={contents.gender} cdSet={cdGender} validationYn={false}/>
+                        <Select id="gender" bind:val={contents.gender} cdSet={cdGender} validateYn={true}/>
                     </div>
                     <button class="btn btn-primary" type="submit">submit</button>
                 </form>
