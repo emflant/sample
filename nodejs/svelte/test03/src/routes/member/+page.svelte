@@ -28,7 +28,7 @@
 
 <div><h2>회원관리</h2></div>
 <div class="row">
-    <div class="col-3">
+    <div class="col-md-3">
         <div class="list-group">
             {#each data.summaries as member, i}
                 <a href="#" class="list-group-item list-group-item-action { active_item === i ? 'active' : '' }" on:click={ () => aa(member.name, i) }>{member.name}
