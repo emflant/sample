@@ -3,8 +3,8 @@ library(tools)
 library(lubridate)
 library(furrr)
 library(tictoc)
-library(mongolite)
-library(gcookbook)
+# library(mongolite)
+# library(gcookbook)
 # library(exifr)
 
 
