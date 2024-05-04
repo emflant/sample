@@ -21,5 +21,5 @@ RUN echo "alias rr=\"ranger\"" >> /root/.zshrc
 RUN chsh -s /bin/zsh 
 
 COPY packages /myfiles
-RUN dpkg -i /myfiles/hugo_0.125.1_linux-arm64.deb
+RUN dpkg -i /myfiles/hugo_0.125.4_linux-arm64.deb
 # RUN apt-get install -y hugo
