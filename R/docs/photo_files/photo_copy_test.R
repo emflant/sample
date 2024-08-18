@@ -10,17 +10,13 @@ file_compare("~/Desktop/photo/input", "~/Desktop/photo/output")
 copy_photo_files("~/Desktop/photo/input", "~/Desktop/photo/output")
 # par_copy_photo_files("~/Desktop/photo/input", "~/Desktop/photo/output")
 
-a = c('이케아코리아 유한회사 고양지점', '롯데물산(주)', '나다2')
-b = c(100, 20, 50000)
-
-tibble(a,b)
-
-
 # 파일비교2 (파일경로, 파일명 기준)
-# file_compare2("/Users/imac/Desktop/photo/test_compare/disk1", "/Users/imac/Desktop/photo/test_compare/disk2")
+# file_compare2("/Users/imac/Desktop/photo/test_compare/disk1", 
+# "/Users/imac/Desktop/photo/test_compare/disk2")
 
 # 2개 폴더 동기화. 서로 없는거 copy
-# copy_sync("/Users/imac/Desktop/photo/test_compare/disk1", "/Users/imac/Desktop/photo/test_compare/disk2")
+# copy_sync("/Users/imac/Desktop/photo/test_compare/disk1", 
+# "/Users/imac/Desktop/photo/test_compare/disk2")
 
 # 파일체크 (파일명, 파일사이즈 기준)
 # output 폴더와 외장하드 디스크 비교.
@@ -129,7 +125,8 @@ flist %>%
 
 read_exif("~/Desktop/photo/output/2021-03-13/RW2/P1120477.RW2") %>% View
 # install.packages("exifr")
-# ISO, PanasonicImageWidth, PanasonicImageHeight, FNumber, ExposureTime, FocalLength, LensType, ImageWidth, ImageHeight, Make, Model, 
+# ISO, PanasonicImageWidth, PanasonicImageHeight, FNumber, ExposureTime, FocalLength, 
+# LensType, ImageWidth, ImageHeight, Make, Model, 
 
 read_exif("~/Desktop/photo/output/2021-03-13/RW2/P1120477.RW2") %>% 
   select(ISO, FNumber, ExposureTime, FocalLength, LensType, ImageWidth, ImageHeight, Make, Model)
