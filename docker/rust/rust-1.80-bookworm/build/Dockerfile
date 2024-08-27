@@ -3,7 +3,8 @@ FROM rust:1.80-bookworm
 RUN apt-get update; \
 		apt-get install -y apt-utils vim zsh curl git locales tzdata tree;
 
-RUN localedef -i ko_KR -c -f UTF-8 -A /usr/share/locale/locale.alias ko_KR.UTF-8
+# RUN localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
+RUN localedef -i en_US -c -f UTF-8 en_US.UTF-8
 ENV LANG en_US.UTF-8
 # ENV LANG ko_KR.UTF-8
 # ENV LANGUAGE en_US.UTF-8
