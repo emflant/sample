@@ -10,7 +10,7 @@ tb_sofr_rate = read_excel("~/data/sofr_rate.xlsx") %>%
   filter(!is.na(effective_date)) %>% 
   arrange(effective_date) 
 # tb_sofr_rate %>% print(n = Inf)
-
+tb_sofr_rate
 
 ##########################################################
 
@@ -22,7 +22,7 @@ library(DBI)
 con <- dbConnect(RPostgres::Postgres(),
                  dbname = 'mydb', 
                  host = 'localhost', 
-                 port = 5432, 
+                 port = 5433, 
                  user = 'postgres',
                  password = '1111')
 

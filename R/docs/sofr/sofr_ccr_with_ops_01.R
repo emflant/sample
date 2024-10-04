@@ -96,7 +96,7 @@ dbWriteTable(con,
 
 dbWriteTable(con, 
              Id(schema = "app01", table = "sofr_rate"), 
-             value = tb_sofr_rate)
+             value = tb_sofr_rate)f
 
 dbReadTable(con, Id(schema = "app01", table = "sofr_rate"))
 
