@@ -4,15 +4,10 @@ RUN apt-get update; \
 		apt-get install -y apt-utils vim zsh curl git locales tzdata; \
 		zsh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 RUN pip install jupyterlab
-# LOCALE 설정
-#RUN locale-gen ko_KR.UTF-8
-#ENV LC_ALL=ko_KR.UTF-8
+RUN pip install langchain-ollama
 
 RUN localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
 ENV LANG en_US.utf8
-
-#RUN localedef -i ko_KR -c -f UTF-8 -A /usr/share/locale/locale.alias ko_KR.UTF-8
-#ENV LANG ko_KR.utf8
 
 # localtime 에 링크할 시간대를 링크.
 RUN ln -sf /usr/share/zoneinfo/Asia/Seoul /etc/localtime
