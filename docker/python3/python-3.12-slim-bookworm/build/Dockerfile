@@ -4,7 +4,7 @@ RUN apt-get update; \
 		apt-get install -y apt-utils vim zsh curl git locales tzdata; \
 		zsh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 RUN pip install jupyterlab
-RUN pip install langchain
+#RUN pip install langchain
 RUN pip install langchain-ollama
 RUN pip install langchain-chroma
 

@@ -3,4 +3,4 @@ docker run -it --rm --name my-python-12 \
 	-p 11434:11434 \
 	-v ~/github/sample/python3/docs/llm:/myfiles/docs \
 	-w /myfiles/ \
-	python-3.12-slim-bookworm zsh
+	python-3.12 zsh
