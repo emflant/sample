@@ -7,7 +7,8 @@ RUN pip install jupyterlab
 RUN pip install langchain-ollama
 RUN pip install langchain-chroma
 RUN pip install langchain-community
-RUN pip install pypdf
+RUN pip install pypdf # PDF 파일 read 할 때 필요.
+RUN pip install "unstructured[md]" nltk # 마크다운 read 할때 필요.
 
 RUN localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
 ENV LANG en_US.utf8
