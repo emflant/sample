@@ -2,6 +2,7 @@ FROM python:3.12-slim-bookworm
 
 RUN apt-get update; \
 		apt-get install -y apt-utils vim zsh curl git locales tzdata; \
+		apt-get install -y libcap2-bin; \
 		zsh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 RUN pip install jupyterlab
 RUN pip install langchain-ollama
@@ -10,6 +11,7 @@ RUN pip install langchain-community
 RUN pip install pypdf # PDF 파일 read 할 때 필요.
 RUN pip install "unstructured[md]" nltk # 마크다운 read 할때 필요.
 RUN pip install openai
+RUN pip install easyocr
 
 RUN localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
 ENV LANG en_US.utf8
